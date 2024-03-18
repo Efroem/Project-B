@@ -1,3 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-Console.WriteLine(Testascii.text);
+﻿using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Lorum Ipsum");
+        Console.WriteLine(Testascii.text);
+    }
+}
