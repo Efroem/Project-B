@@ -4,40 +4,50 @@ class Program
 {
     static void Main()
     {
-        Console.WriteLine(Testascii.text);
-        Thread.Sleep(3000);
-        Console.Clear();
+    Console.WriteLine(Testascii.text);
+    Thread.Sleep(3000);
+    Console.Clear();
 
-        string answer = "";
+    Console.WriteLine("Welcome to MegaBios!");
 
-        Console.WriteLine("Welcome to MegaBios!");
-
+    string answer;
         do
         {
             Console.WriteLine("1. Show the movies\n2. Log in\n3. Show reservations\n4. Quit");
             answer = (Console.ReadLine() ?? "").ToLower();
 
-            if (answer == "1" || answer == "show the movies" || answer == "movies")
+            switch (answer)
             {
-                Console.WriteLine("movies");
+                case "1":
+                case "show the movies":
+                case "movies":
+                    Console.WriteLine("movies");
+                    break;
+
+                case "2":
+                case "log in":
+                case "login":
+                    Console.WriteLine("Log in");
+                    break;
+
+                case "3":
+                case "show reservations":
+                case "reservations":
+                    Console.WriteLine("Reservations");
+                    break;
+
+                case "4":
+                case "quit":
+                case "q":
+                    Environment.Exit(0);
+                    break;
+
+                default:
+                    Console.WriteLine("Wrong input");
+                    break;
             }
-            else if (answer == "2" || answer == "log in" || answer == "login")
-            {
-                Console.WriteLine("Log in");
-            }
-            else if (answer == "3" || answer == "show reservations" || answer == "reservations")
-            {
-                Console.WriteLine("Reservations");
-            }
-            else if (answer == "4" || answer == "quit" || answer == "q")
-            {
-                Environment.Exit(0);
-            }
-            else
-            {
-                Console.WriteLine("Wrong input");
-            }
-        }while(answer != "4" || answer != "q" || answer != "quit");
+        } while (answer != "4" && answer != "q" && answer != "quit");
+
         Environment.Exit(0);
     }
 }
