@@ -1,6 +1,6 @@
 class Testascii
 {
-    
+    public static string  movie = "movie";
     public static string text = @"
     ___  ___                  ______ _                                 
     |  \/  |                  | ___ (_)                                
@@ -16,7 +16,7 @@ class Testascii
                                                     |                                                               |
                                                     |  Popular Movies to Watch:                                     |
                                                     |  ----------------------------------------------               |
-                                                    |  | 1. Stranger Things                        |                |
+                                                    |  | 1. " + movie + @"                         |                |
                                                     |  | 2. The Crown                              |                |
                                                     |  | 3. Money Heist                            |                |
                                                     |  | 4. Black Mirror                           |                |
@@ -39,8 +39,8 @@ class Testascii
                 |_____________________________________________________________|
                 ";
     
-    public static void Main()
-    {
-        Console.WriteLine(text);
-    }    
+    // public static void Main()
+    // {
+    //     Console.WriteLine(text);
+    // }    
 }
