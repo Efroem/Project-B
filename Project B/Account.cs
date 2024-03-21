@@ -1,17 +1,17 @@
 class Account {
-    public string email;
-    private string password;
-    public string firstName;
-    public string lastName;
-    public string birthdate;
-    public string phoneNumber;
+    public string email {get; set;}
+    public string password {get; set;}
+    public string firstName {get; set;}
+    public string lastName {get; set;}
+    public string birthDate {get; set;}
+    public string phoneNumber {get; set;}
 
-    public Account(string email, string password, string firstName, string lastName, string birthdate, string phoneNumber) {
+    public Account(string email, string password, string firstName, string lastName, string birthDate, string phoneNumber) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthdate = birthdate;
+        this.birthDate = birthDate;
         this.phoneNumber = phoneNumber;
     }
     
