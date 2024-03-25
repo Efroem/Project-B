@@ -4,10 +4,9 @@ class Program
 {
     static void Main()
     {
-    Console.WriteLine(Testascii.text);
-    Thread.Sleep(3000);
-    Console.Clear();
-
+    //System.Console.WriteLine(Testascii.text);
+    string allposters = TestPosters.text1 + TestPosters.text2 + TestPosters.text3;
+    System.Console.WriteLine(allposters);
     Console.WriteLine("Welcome to MegaBios!");
 
     string answer;
