@@ -4,5 +4,11 @@
 */bin/Debug/net8.0/Project B.exe
 */bin/Debug/net8.0/Project B.pdb
 */bin/Debug/net8.0/Project B.runtimeconfig.json
+*/bin/Debug/net7.0/Project B.deps.json
+*/bin/Debug/net7.0/Project B.dll
+*/bin/Debug/net7.0/Project B.exe
+*/bin/Debug/net7.0/Project B.pdb
+*/bin/Debug/net7.0/Project B.runtimeconfig.json
 */obj
 */.vscode
+*.sln
