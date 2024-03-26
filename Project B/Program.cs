@@ -12,7 +12,10 @@ class Program
     string answer;
         do
         {
-            Console.WriteLine("1. Show the movies\n2. Log in\n3. Show reservations\n4. Quit");
+            if (Authentication.User == null)
+                Console.WriteLine("1. Show the movies\n2. Log in\n3. Show reservations\n4. Quit");
+            else
+                Console.WriteLine("1. Show the movies\n2. Profile\n3. Show reservations\n4. Quit");
             answer = (Console.ReadLine() ?? "").ToLower();
 
             switch (answer)
@@ -26,6 +29,7 @@ class Program
                 case "2":
                 case "log in":
                 case "login":
+                case "profile":
                     Console.WriteLine("Log in");
                     if (Authentication.User == null)
                         Authentication.Start();
