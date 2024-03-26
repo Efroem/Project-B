@@ -46,8 +46,7 @@ static class Authentication {
     }
 
     public static Account Register() {
-        Console.WriteLine("Email:");
-        string email = Console.ReadLine() ?? "";
+        string email = RegisterEmail();
 
         string password = RegisterConfirmPassword();
         
@@ -89,6 +88,22 @@ static class Authentication {
         User = null;
     }
 
+    private static string RegisterEmail() {
+        while (true) {
+            try {
+                Console.WriteLine("Email:");
+                string email = Console.ReadLine() ?? "";
+                if (IsValidEmail(email) && GetAccountByEmail(email) == null)
+                    return email;
+                else
+                    throw new Exception("Email invalid or already in use");
+            } catch (Exception e) {
+                Console.WriteLine(e.Message);
+            }
+
+        }
+    }
+
     private static string RegisterConfirmPassword() {
         while (true) {
             try {
@@ -112,7 +127,7 @@ static class Authentication {
                 Console.WriteLine("birthdate (day-month-year):");
                 string birthdate = Console.ReadLine() ?? "";
                 DateTime birthdatetime;
-                if (!DateTime.TryParseExact(birthdate, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime))
+                if (!DateTime.TryParseExact(birthdate, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "d-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "d-M-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "dd-M-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime))
                     throw new Exception("Invalid birthday");
                 else
                     return birthdate;
