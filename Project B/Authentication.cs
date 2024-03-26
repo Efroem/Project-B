@@ -72,7 +72,9 @@ static class Authentication {
 
     public static void ViewProfile() {
         while (true) {
-            Console.WriteLine($"{User.ToString()}");
+            if (User != null)
+                Console.WriteLine($"{User.ToString()}");
+
             Console.WriteLine("1. Logout\n2. Go Back");
             string userAction = Console.ReadLine() ?? "";
             if (userAction == "1" || userAction.ToLower() == "logout") {
