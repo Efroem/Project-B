@@ -27,6 +27,10 @@ class Program
                 case "log in":
                 case "login":
                     Console.WriteLine("Log in");
+                    if (Authentication.User == null)
+                        Authentication.Start();
+                    else
+                        Authentication.ViewProfile();
                     break;
 
                 case "3":
