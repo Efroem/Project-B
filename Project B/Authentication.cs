@@ -155,7 +155,8 @@ static class Authentication {
     }
 
     private static void SaveAccounts(List<Account> AccountList) {
-        string jsonString = JsonSerializer.Serialize(AccountList);
+        JsonSerializerOptions options = new() {WriteIndented = true};
+        string jsonString = JsonSerializer.Serialize(AccountList, options);
         File.WriteAllText("accounts.json", jsonString);
     }
 
