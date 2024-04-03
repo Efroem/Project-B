@@ -6,6 +6,7 @@ using System.Text;
 static class Authentication {
     public static Account? User {get; private set;}
 
+    // Starts the authentication process
     public static Account? Start() {
         while (true) {
             Console.WriteLine("1. Login\n2. Register");
@@ -29,24 +30,33 @@ static class Authentication {
             return null;
         }
     }
+
+    // Starts the Login process
     public static Account Login() {
         Console.WriteLine("E-mail:");
         string email = Console.ReadLine() ?? "";
         Console.WriteLine("Password:");
         string password = ReadPassword();
 
+        // Searches for account that has the correct email
         Account? foundAccount = GetAccountByEmail(email) ?? throw new Exception("Invalid credentials");
+
+        // checks the password hash on the found account
         if (!foundAccount.TestPassword(HashPassword(password)))
             throw new Exception("Invalid credentials");
 
+        // sets User property and returns User
         User = foundAccount;
         return foundAccount;
         
     }
 
+    // Starts the registration process
     public static Account Register() {
+        // calls email checker
         string email = RegisterEmail();
 
+        // hashes returned string of the confirm password process function
         string password = HashPassword(RegisterConfirmPassword());
         
         Console.WriteLine("First name:");
@@ -60,14 +70,16 @@ static class Authentication {
         Console.WriteLine("Phone number:");
         string phoneNumber = Console.ReadLine() ?? "";
         
+        // Creates new object
         Account account = new(email, password, firstName, lastName, birthdate, phoneNumber);
-        List<Account> AccountList = GetSavedAccounts();
-        AccountList.Add(account);
-        SaveAccounts(AccountList);
+        SaveNewAccount(account);
+
+        // save account to property and return account
         User = account;
         return account;
     }
 
+    // View the information of currently logged in account
     public static void ViewProfile() {
         while (true) {
             if (User != null)
@@ -83,10 +95,12 @@ static class Authentication {
         }
     }
 
+    // resets User property
     public static void Logout() {
         User = null;
     }
 
+    // Reads the password input while not showing the typed characters by visually replacing them with *
     private static string ReadPassword() {
         string password = "";
         ConsoleKeyInfo key;
@@ -116,6 +130,7 @@ static class Authentication {
         return password;
     }
 
+    // Checks if the email is valid
     private static string RegisterEmail() {
         while (true) {
             try {
@@ -132,6 +147,7 @@ static class Authentication {
         }
     }
 
+    // asks for password twice and checks if they match
     private static string RegisterConfirmPassword() {
         while (true) {
             try {
@@ -149,7 +165,8 @@ static class Authentication {
         }
     }
 
-    public static string HashPassword(string password)
+    // returns hash of string
+    private static string HashPassword(string password)
     {
         byte[] hashedBytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
 
@@ -162,6 +179,7 @@ static class Authentication {
         return builder.ToString();
     }
 
+    // Checks if birthday is valid date
     private static string RegisterBirthdate() {
         while (true) {
             try {
@@ -178,6 +196,7 @@ static class Authentication {
         }
     }
 
+    // checks if email is a valid adress
     private static bool IsValidEmail(string email) {
         try {
             MailAddress mailadress = new(email);
@@ -187,6 +206,7 @@ static class Authentication {
         }
     }
     
+    // retrieves all accounts from accounts.json
     private static List<Account> GetSavedAccounts() {
         // Read the JSON file as a string
         string jsonString = File.ReadAllText("accounts.json");
@@ -195,12 +215,24 @@ static class Authentication {
         return JsonSerializer.Deserialize<List<Account>>(jsonString) ?? new();
     }
 
+    // Saves new account in JSON
+    private static void SaveNewAccount(Account account) {
+        // Retrieves existing accounts
+        List<Account> AccountList = GetSavedAccounts();
+        // Adds the new account
+        AccountList.Add(account);
+        //saves accounts
+        SaveAccounts(AccountList);
+    }
+
+    // Saves Accounts
     private static void SaveAccounts(List<Account> AccountList) {
         JsonSerializerOptions options = new() {WriteIndented = true};
         string jsonString = JsonSerializer.Serialize(AccountList, options);
         File.WriteAllText("accounts.json", jsonString);
     }
 
+    // Search for an account based on email
     private static Account? GetAccountByEmail(string email) {
         List<Account> AccountList = GetSavedAccounts();
         return AccountList?.Find(account => account.email == email);
