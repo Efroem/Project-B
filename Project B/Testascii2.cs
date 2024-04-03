@@ -14,7 +14,7 @@ public class TestPosters
                                |___/                                         |_|  
     ";
     public static string text2 = @"
-     
+                                      THE TERMINATOR 1984
                                           <((((((\\\
                                           /      . }\
                                           ;--..--._|}
@@ -30,7 +30,8 @@ public class TestPosters
                               \  \       \ |     | /        /
                                \  \      \        /
         ";
-    public static string text3 = @"                                                                  
+    public static string text3 = @"   
+                            STAR WARS THE FORCE AWAKENS 2015                                                               
                     ___________________________________________________
                     |                                                 |                    
                     |                  __                             |

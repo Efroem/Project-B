@@ -10,15 +10,15 @@ static class Authentication {
     // Starts the authentication process
     public static Account? Start() {
         while (true) {
-            Console.WriteLine("1. Login\n2. Register");
+            Console.WriteLine("1. Inloggen\n2. Registreren");
             string userAction = (Console.ReadLine() ?? "").ToLower();
-            if (userAction == "1" || userAction == "log in" || userAction == "login")
+            if (userAction == "1" || userAction == "Inloggen" || userAction == "inloggen")
                 try {
                     return Login();
                 } catch (Exception e) {
                     Console.WriteLine(e.Message);
                 }
-            else if (userAction == "2" || userAction == "register") {
+            else if (userAction == "2" || userAction == "Registreren" || userAction == "registreren") {
                 try {
                     return Register();
                 } catch (Exception e) {
@@ -34,17 +34,17 @@ static class Authentication {
 
     // Starts the Login process
     public static Account Login() {
-        Console.WriteLine("E-mail:");
+        Console.WriteLine("E-mailadres:");
         string email = Console.ReadLine() ?? "";
-        Console.WriteLine("Password:");
+        Console.WriteLine("Wachtwoord:");
         string password = ReadPassword();
 
         // Searches for account that has the correct email
-        Account? foundAccount = GetAccountByEmail(email) ?? throw new Exception("Invalid credentials");
+        Account? foundAccount = GetAccountByEmail(email) ?? throw new Exception("Ongeldige aanmeldgegevens");
 
         // checks the password hash on the found account
         if (!foundAccount.TestPassword(HashPassword(password)))
-            throw new Exception("Invalid credentials");
+            throw new Exception("Ongeldige aanmeldgegevens");
 
         // sets User property and returns User
         User = foundAccount;
@@ -60,15 +60,15 @@ static class Authentication {
         // hashes returned string of the confirm password process function
         string password = HashPassword(RegisterConfirmPassword());
         
-        Console.WriteLine("First name:");
+        Console.WriteLine("Voornaam:");
         string firstName = Console.ReadLine() ?? "";
-        Console.WriteLine("Last name:");
+        Console.WriteLine("Achternaam:");
         string lastName = Console.ReadLine() ?? "";
 
         string birthdate = RegisterBirthdate();
         
         
-        Console.WriteLine("Phone number:");
+        Console.WriteLine("Telefoonnummer:");
         string phoneNumber = RegisterPhoneNumber();
         
         // Creates new object
@@ -86,12 +86,12 @@ static class Authentication {
             if (User != null)
                 Console.WriteLine($"{User.ToString()}");
 
-            Console.WriteLine("1. Logout\n2. Go Back");
+            Console.WriteLine("1. Uitloggen\n2. Ga terug");
             string userAction = Console.ReadLine() ?? "";
-            if (userAction == "1" || userAction.ToLower() == "logout") {
+            if (userAction == "1" || userAction.ToLower() == "uitloggen") {
                 Logout();
                 break;
-            } else if (userAction == "2" || userAction.ToLower() == "go back" || userAction.ToLower() == "back")
+            } else if (userAction == "2" || userAction.ToLower() == "ga terug" || userAction.ToLower() == "terug")
                 break;
         }
     }
@@ -135,12 +135,12 @@ static class Authentication {
     private static string RegisterEmail() {
         while (true) {
             try {
-                Console.WriteLine("Email:");
+                Console.WriteLine("E-mailadres:");
                 string email = Console.ReadLine() ?? "";
                 if (IsValidEmail(email) && GetAccountByEmail(email) == null)
                     return email;
                 else
-                    throw new Exception("Email invalid or already in use");
+                    throw new Exception("E-mailadres ongeldig of al in gebruik");
             } catch (Exception e) {
                 Console.WriteLine(e.Message);
             }
@@ -152,12 +152,12 @@ static class Authentication {
     private static string RegisterConfirmPassword() {
         while (true) {
             try {
-                Console.WriteLine("Password:");
+                Console.WriteLine("Wachtwoord:");
                 string password = ReadPassword();
-                Console.WriteLine("Confirm password:");
+                Console.WriteLine("Bevestig wachtwoord:");
                 string passwordConfirm = ReadPassword();
                 if (password != passwordConfirm)
-                    throw new Exception("Passwords don't match");
+                    throw new Exception("Wachtwoorden komen niet overeen");
                 else
                     return password;
             } catch (Exception e) {
@@ -184,11 +184,11 @@ static class Authentication {
     private static string RegisterBirthdate() {
         while (true) {
             try {
-                Console.WriteLine("birthdate (day-month-year):");
+                Console.WriteLine("Geboortedatum (dag-maand-jaar):");
                 string birthdate = Console.ReadLine() ?? "";
                 DateTime birthdatetime;
                 if (!DateTime.TryParseExact(birthdate, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "d-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "d-M-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "dd-M-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime))
-                    throw new Exception("Invalid birthday");
+                    throw new Exception("Ongeldige geboortedatum");
                 else
                     return birthdate;
             } catch (Exception e) {
@@ -201,10 +201,9 @@ static class Authentication {
         string pattern = @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
         while (true) {
             try {
-                Console.WriteLine("Phone number:");
                 string phoneNumber = Console.ReadLine() ?? "";
                 if (!Regex.IsMatch(phoneNumber, pattern))
-                    throw new Exception("Invalid phone number");
+                    throw new Exception("Ongeldige telefoonnummer");
                 else
                     return phoneNumber;
             } catch (Exception e) {
