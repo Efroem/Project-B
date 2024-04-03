@@ -33,7 +33,7 @@ static class Authentication {
         Console.WriteLine("E-mail:");
         string email = Console.ReadLine() ?? "";
         Console.WriteLine("Password:");
-        string password = Console.ReadLine() ?? "";
+        string password = ReadPassword();
 
         Account? foundAccount = GetAccountByEmail(email) ?? throw new Exception("Invalid credentials");
         if (!foundAccount.TestPassword(HashPassword(password)))
@@ -87,6 +87,35 @@ static class Authentication {
         User = null;
     }
 
+    private static string ReadPassword() {
+        string password = "";
+        ConsoleKeyInfo key;
+
+        do
+        {
+            key = Console.ReadKey(true);
+
+            // Ignore any key that's not a printable character or Enter
+            if (char.IsControl(key.KeyChar) && key.Key != ConsoleKey.Enter)
+                continue;
+
+            // Handle backspace
+            if (key.Key == ConsoleKey.Backspace && password.Length > 0)
+            {
+                password = password.Substring(0, password.Length - 1);
+                Console.Write("\b \b"); // Erase the character from the screen
+            }
+            else if (key.Key != ConsoleKey.Enter) // Print asterisks for all other characters
+            {
+                password += key.KeyChar;
+                Console.Write("*");
+            }
+        } while (key.Key != ConsoleKey.Enter);
+
+        Console.WriteLine(); // Move to the next line after user presses Enter
+        return password;
+    }
+
     private static string RegisterEmail() {
         while (true) {
             try {
@@ -107,9 +136,9 @@ static class Authentication {
         while (true) {
             try {
                 Console.WriteLine("Password:");
-                string password = Console.ReadLine() ?? "";
+                string password = ReadPassword();
                 Console.WriteLine("Confirm password:");
-                string passwordConfirm = Console.ReadLine() ?? "";
+                string passwordConfirm = ReadPassword();
                 if (password != passwordConfirm)
                     throw new Exception("Passwords don't match");
                 else
