@@ -2,6 +2,7 @@ using System.Net.Mail;
 using System.Text.Json;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 static class Authentication {
     public static Account? User {get; private set;}
@@ -68,7 +69,7 @@ static class Authentication {
         
         
         Console.WriteLine("Phone number:");
-        string phoneNumber = Console.ReadLine() ?? "";
+        string phoneNumber = RegisterPhoneNumber();
         
         // Creates new object
         Account account = new(email, password, firstName, lastName, birthdate, phoneNumber);
@@ -190,6 +191,22 @@ static class Authentication {
                     throw new Exception("Invalid birthday");
                 else
                     return birthdate;
+            } catch (Exception e) {
+                Console.WriteLine(e.Message);
+            }
+        }
+    }
+    // Validates phone number and returns if it's true
+    private static string RegisterPhoneNumber() {
+        string pattern = @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
+        while (true) {
+            try {
+                Console.WriteLine("Phone number:");
+                string phoneNumber = Console.ReadLine() ?? "";
+                if (!Regex.IsMatch(phoneNumber, pattern))
+                    throw new Exception("Invalid phone number");
+                else
+                    return phoneNumber;
             } catch (Exception e) {
                 Console.WriteLine(e.Message);
             }
