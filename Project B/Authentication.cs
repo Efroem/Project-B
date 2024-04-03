@@ -252,6 +252,6 @@ static class Authentication {
     // Search for an account based on email
     private static Account? GetAccountByEmail(string email) {
         List<Account> AccountList = GetSavedAccounts();
-        return AccountList?.Find(account => account.email == email);
+        return AccountList?.Find(account => account.Email == email);
     }
 }
