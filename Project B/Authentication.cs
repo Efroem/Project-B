@@ -1,5 +1,7 @@
 using System.Net.Mail;
 using System.Text.Json;
+using System.Security.Cryptography;
+using System.Text;
 
 static class Authentication {
     public static Account? User {get; private set;}
@@ -8,13 +10,13 @@ static class Authentication {
         while (true) {
             Console.WriteLine("1. Login\n2. Register");
             string userAction = (Console.ReadLine() ?? "").ToLower();
-            if (userAction == "1")
+            if (userAction == "1" || userAction == "log in" || userAction == "login")
                 try {
                     return Login();
                 } catch (Exception e) {
                     Console.WriteLine(e.Message);
                 }
-            else if (userAction == "2") {
+            else if (userAction == "2" || userAction == "register") {
                 try {
                     return Register();
                 } catch (Exception e) {
@@ -33,11 +35,8 @@ static class Authentication {
         Console.WriteLine("Password:");
         string password = Console.ReadLine() ?? "";
 
-        Account? foundAccount = GetAccountByEmail(email);
-        if (foundAccount == null)
-            throw new Exception("Invalid credentials");
-        
-        if (!foundAccount.TestPassword(password))
+        Account? foundAccount = GetAccountByEmail(email) ?? throw new Exception("Invalid credentials");
+        if (!foundAccount.TestPassword(HashPassword(password)))
             throw new Exception("Invalid credentials");
 
         User = foundAccount;
@@ -48,7 +47,7 @@ static class Authentication {
     public static Account Register() {
         string email = RegisterEmail();
 
-        string password = RegisterConfirmPassword();
+        string password = HashPassword(RegisterConfirmPassword());
         
         Console.WriteLine("First name:");
         string firstName = Console.ReadLine() ?? "";
@@ -119,6 +118,19 @@ static class Authentication {
                 Console.WriteLine(e.Message);
             }
         }
+    }
+
+    public static string HashPassword(string password)
+    {
+        byte[] hashedBytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
+
+        // Convert the byte array to a hexadecimal string
+        StringBuilder builder = new();
+        for (int i = 0; i < hashedBytes.Length; i++)
+        {
+            builder.Append(hashedBytes[i].ToString("x2"));
+        }
+        return builder.ToString();
     }
 
     private static string RegisterBirthdate() {

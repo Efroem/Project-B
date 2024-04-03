@@ -1,10 +1,26 @@
 [
-    {
-        "email": "admin@test.nl",
-        "password": "test",
-        "firstName": "admin",
-        "lastName": "Smith",
-        "birthDate": "18-03-2024",
-        "phoneNumber": "0655555555"
-    }
+  {
+    "email": "admin@test.nl",
+    "password": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+    "firstName": "admin",
+    "lastName": "Smith",
+    "birthDate": "18-03-2024",
+    "phoneNumber": "0655555555"
+  },
+  {
+    "email": "admin@admin.nl",
+    "password": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+    "firstName": "admin",
+    "lastName": "test",
+    "birthDate": "1-1-5555",
+    "phoneNumber": "4444656565"
+  },
+  {
+    "email": "test@test.n",
+    "password": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+    "firstName": "test",
+    "lastName": "test",
+    "birthDate": "1-1-4234",
+    "phoneNumber": "14"
+  }
 ]
