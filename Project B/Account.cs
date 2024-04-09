@@ -18,6 +18,6 @@ class Account {
     
     public bool TestPassword(string password) => _password == password;
 
-    public override string ToString() => $"Email: {Email}" + "\n" + $"First name: {FirstName}" + "\n" + $"Last name: {LastName}" + 
-        "\n" + $"Date of birth: {BirthDate}" + "\n" + $"Phone number: {PhoneNumber}";
+    public override string ToString() => $"Email: {Email}" + "\n" + $"Voornaam: {FirstName}" + "\n" + $"Achternaam: {LastName}" + 
+        "\n" + $"Geboortedatum: {BirthDate}" + "\n" + $"Telefoonnummer: {PhoneNumber}";
 }

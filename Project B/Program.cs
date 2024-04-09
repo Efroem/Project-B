@@ -1,18 +1,20 @@
 ﻿using System;
+using System.IO;
+using System.Text.Json;
 
 class Program
 {
     static void Main()
     {
-    // Testascii asciiArt = new Testascii();
-    // asciiArt.PrintMovies("movies.json");
-    // string posters1 = Testascii.text;
-    // Console.WriteLine(posters1);
-     string allposters = TestPosters.text1 + TestPosters.text2 + TestPosters.text3;
-     System.Console.WriteLine(allposters);
-     Console.WriteLine("Welkom bij MegaBios!");
+        // Testascii asciiArt = new Testascii();
+        // asciiArt.PrintMovies("movies.json");
+        // string posters1 = Testascii.text;
+        // Console.WriteLine(posters1);
+        string allposters = TestPosters.text1 + TestPosters.text2 + TestPosters.text3;
+        Console.WriteLine(allposters);
+        Console.WriteLine("Welkom bij MegaBios!");
 
-    string answer;
+        string answer;
         do
         {
             if (Authentication.User == null)
@@ -24,14 +26,13 @@ class Program
             switch (answer)
             {
                 case "1":
-                case "Bekijk films":
                 case "bekijk films":
                 case "movies":
-                    Console.WriteLine("movies");
+                    Console.WriteLine("Bekijk films:");
+                    PrintMovieTitles("movies.json");
                     break;
 
                 case "2":
-                case "Inloggen":
                 case "inloggen":
                 case "profiel":
                     Console.WriteLine("Log in");
@@ -42,15 +43,12 @@ class Program
                     break;
 
                 case "3":
-                case "Bekijk reserveringen":
                 case "bekijk reserveringen":
-                case "bekijk Reserveringen":
                 case "reserveringen":
                     Console.WriteLine("Reserveringen");
                     break;
 
                 case "4":
-                case "Verlaat pagina":
                 case "verlaat pagina":
                 case "q":
                     Console.WriteLine("Tot ziens!");
@@ -61,8 +59,34 @@ class Program
                     Console.WriteLine("Ongeldige invoer");
                     break;
             }
-        } while (answer != "4" && answer != "verlaat pagina" && answer != "Verlaat pagina");
+        } while (answer != "4" && answer != "verlaat pagina" && answer != "q");
 
         Environment.Exit(0);
+    }
+
+    static void PrintMovieTitles(string jsonFilePath)
+    {
+        // Read the JSON file
+        string jsonString = File.ReadAllText(jsonFilePath);
+
+        // Deserialize the JSON to a JsonDocument
+        using (JsonDocument document = JsonDocument.Parse(jsonString))
+        {
+            // Access root element
+            JsonElement root = document.RootElement;
+
+            // Check if the root element is an array
+            if (root.ValueKind == JsonValueKind.Array)
+            {
+                Console.WriteLine("+" + new string('-', 32) + "+");
+                foreach (JsonElement movie in root.EnumerateArray())
+                {
+                    // Print the title of each movie with box
+                    string title = movie.GetProperty("Title").GetString();
+                    Console.WriteLine("|" + title.PadRight(32) + "|");
+                }
+                Console.WriteLine("+" + new string('-', 32) + "+");
+            }
+        }
     }
 }

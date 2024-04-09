@@ -30,5 +30,13 @@
     "LastName": "vincent",
     "BirthDate": "12-12-1201",
     "PhoneNumber": "0612341321"
+  },
+  {
+    "Email": "hallo123@gmail.com",
+    "Password": "d3751d33f9cd5049c4af2b462735457e4d3baf130bcbb87f389e349fbaeb20b9",
+    "FirstName": "Vincent",
+    "LastName": "Stoel",
+    "BirthDate": "15-06-2006",
+    "PhoneNumber": "0643271721"
   }
 ]
