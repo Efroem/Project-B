@@ -1,29 +1,26 @@
 [
     {
-        "name" : "Xmax",
-        "rows" : "10",
-        "collum" : "10",
-        "serial number" : "01"
+        "name": "Xmax",
+        "rows": "10",
+        "colums": "10",
+        "serial number": "1"
     },
     {
-    
-        "name" : "Super Xmax",
-        "rows" : "20",
-        "collum" : "20",
-        "serial number" : "02"
+        "name": "Super Xmax",
+        "rows": "20",
+        "colums": "20",
+        "serial number": "2"
     },
     {
-    
-        "name" : "Little Xmax",
-        "rows" : "7",
-        "collum" : "8",
-        "serial number" : "03"
+        "name": "Little Xmax",
+        "rows": "7",
+        "colums": "8",
+        "serial number": "3"
     },
     {
-    
-        "name" : "Imax",
-        "rows" : "15",
-        "collum" : "8",
-        "serial number" : "04"
+        "name": "Imax",
+        "rows": "15",
+        "colums": "8",
+        "serial number": "4"
     }
 ]

@@ -4,34 +4,33 @@ class Program
 {
     static void Main()
     {
-    // Testascii asciiArt = new Testascii();
-    // asciiArt.PrintMovies("movies.json");
-    // string posters1 = Testascii.text;
-    // Console.WriteLine(posters1);
-     string allposters = TestPosters.text1 + TestPosters.text2 + TestPosters.text3;
-     System.Console.WriteLine(allposters);
-     Console.WriteLine("Welkom bij MegaBios!");
+        // Testascii asciiArt = new Testascii();
+        // asciiArt.PrintMovies("movies.json");
+        // string posters1 = Testascii.text;
+        // Console.WriteLine(posters1);
+        string allposters = TestPosters.text1 + TestPosters.text2 + TestPosters.text3;
+        System.Console.WriteLine(allposters);
+        Console.WriteLine("Welkom bij MegaBios!");
 
-    string answer;
+        string answer;
         do
         {
             if (Authentication.User == null)
-                Console.WriteLine("1. Bekijk films\n2. Inloggen\n3. Bekijk reserveringen\n4. Verlaat pagina");
+                Console.WriteLine("1. Bekijk films\n2. Inloggen\n3. Bekijk reserveringen\n4. Verlaat pagina\n5. Lijst zalen");
             else
-                Console.WriteLine("1. Bekijk films\n2. profiel\n3. Bekijk reserveringen\n4. Verlaat pagina");
+                Console.WriteLine("1. Bekijk films\n2. profiel\n3. Bekijk reserveringen\n4. Verlaat pagina\n5. Lijst zalen");
             answer = (Console.ReadLine() ?? "").ToLower();
 
             switch (answer)
             {
                 case "1":
-                case "Bekijk films":
                 case "bekijk films":
+                case "bekijk":
                 case "movies":
                     Console.WriteLine("movies");
                     break;
 
                 case "2":
-                case "Inloggen":
                 case "inloggen":
                 case "profiel":
                     Console.WriteLine("Log in");
@@ -42,19 +41,22 @@ class Program
                     break;
 
                 case "3":
-                case "Bekijk reserveringen":
                 case "bekijk reserveringen":
-                case "bekijk Reserveringen":
                 case "reserveringen":
                     Console.WriteLine("Reserveringen");
                     break;
 
                 case "4":
-                case "Verlaat pagina":
                 case "verlaat pagina":
                 case "q":
                     Console.WriteLine("Tot ziens!");
                     Environment.Exit(0);
+                    break;
+
+                case "5":
+                case "lijst zalen":
+                    Console.WriteLine("Lijst Zalen");
+                    Zaal.ReadFromZaal();
                     break;
 
                 default:
