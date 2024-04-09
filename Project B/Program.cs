@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Text.Json;
 
 class Program
 {
@@ -27,7 +29,8 @@ class Program
                 case "bekijk films":
                 case "bekijk":
                 case "movies":
-                    Console.WriteLine("movies");
+                    Console.WriteLine("Bekijk films:");
+                    PrintMovieTitles("movies.json");
                     break;
 
                 case "2":
@@ -63,8 +66,34 @@ class Program
                     Console.WriteLine("Ongeldige invoer");
                     break;
             }
-        } while (answer != "4" && answer != "verlaat pagina" && answer != "Verlaat pagina");
+        } while (answer != "4" && answer != "verlaat pagina" && answer != "q");
 
         Environment.Exit(0);
+    }
+
+    static void PrintMovieTitles(string jsonFilePath)
+    {
+        // Read the JSON file
+        string jsonString = File.ReadAllText(jsonFilePath);
+
+        // Deserialize the JSON to a JsonDocument
+        using (JsonDocument document = JsonDocument.Parse(jsonString))
+        {
+            // Access root element
+            JsonElement root = document.RootElement;
+
+            // Check if the root element is an array
+            if (root.ValueKind == JsonValueKind.Array)
+            {
+                Console.WriteLine("+" + new string('-', 32) + "+");
+                foreach (JsonElement movie in root.EnumerateArray())
+                {
+                    // Print the title of each movie with box
+                    string title = movie.GetProperty("Title").GetString();
+                    Console.WriteLine("|" + title.PadRight(32) + "|");
+                }
+                Console.WriteLine("+" + new string('-', 32) + "+");
+            }
+        }
     }
 }
