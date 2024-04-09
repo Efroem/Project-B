@@ -89,8 +89,8 @@ class Program
                 foreach (JsonElement movie in root.EnumerateArray())
                 {
                     // Print the title of each movie with box
-                    string title = movie.GetProperty("Title").GetString();
-                    Console.WriteLine("|" + title.PadRight(32) + "|");
+                    string? title = movie.GetProperty("Title").GetString();
+                    Console.WriteLine("|" + title?.PadRight(32) + "|");
                 }
                 Console.WriteLine("+" + new string('-', 32) + "+");
             }
