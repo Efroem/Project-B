@@ -1,15 +1,15 @@
-using Newtonsoft.Json;
+using System.Text.Json;
 using System.Collections.Generic;
 using System.IO;
 
-public class Zaal
+public class CinemaHall
 {
     public string Name { get; set; }
     public int Rows { get; set; }
     public int Columns { get; set; }
     public int SerialNumber { get; set; }
 
-    public Zaal(string name, int rows, int columns, int serialNumber)
+    public CinemaHall(string name, int rows, int columns, int serialNumber)
     {
         Name = name;
         Rows = rows;
@@ -18,33 +18,105 @@ public class Zaal
     }
 
 
-    public void WriteToZaal(List<Zaal> zalen)
+    public void WriteToCinemaHall(string name, string rows, string columns, string serialNumber)
     {
-        string directory = Directory.GetCurrentDirectory();
-        string filePath = Path.Combine(directory, "zaal.json");
-        string json = JsonConvert.SerializeObject(zalen, Formatting.Indented);
+        int parsedRows = int.Parse(rows);
+        int parsedColumns = int.Parse(columns);
+        int parsedSerialNumber = int.Parse(serialNumber);
 
+        // Create a new CinemaHall object
+        CinemaHall newCinemaHall = new CinemaHall(name, parsedRows, parsedColumns, parsedSerialNumber);
+
+        string directory = Directory.GetCurrentDirectory();
+        string filePath = Path.Combine(directory, "cinemaHall.json");
+
+        // Serialize the CinemaHall object to JSON
+        string json = JsonSerializer.Serialize(newCinemaHall, new JsonSerializerOptions { WriteIndented = true });
+
+        // Write the JSON string to the file
         File.AppendAllText(filePath, json);
+        Console.WriteLine("CinemaHall toegevoegd");
     }
 
-    public static void ReadFromZaal()
+    public static void AddNewCinemaHall()
+    {
+        Console.WriteLine("Voeg nieuwe zaal toe");
+
+        Console.Write("Zaal naam: ");
+        string? name = Console.ReadLine() ?? "";
+
+        Console.Write("Aantal rijen: ");
+        int rows = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Aantal kolommen: ");
+        int columns = Convert.ToInt32(Console.ReadLine());
+
+        // Calculate the next serial number
+        int maxSerialNumber = FindMaxSerialNumber();
+        int serialNumber = maxSerialNumber + 1;
+
+        // Convert integer values to strings
+        string rowsString = rows.ToString();
+        string columnsString = columns.ToString();
+        string serialNumberString = serialNumber.ToString();
+
+        CinemaHall cinemaHall = new CinemaHall(name, rows, columns, serialNumber);
+        cinemaHall.WriteToCinemaHall(name, rowsString, columnsString, serialNumberString);
+    }
+
+
+    static int FindMaxSerialNumber()
+    {
+        // Read existing CinemaHalls from the JSON file
+        List<CinemaHall> cinemaHalls = ReadFromCinemaHall();
+
+        // If there are no existing CinemaHalls, return 0
+        if (cinemaHalls.Count == 0)
+        {
+            return 0;
+        }
+
+        // Find the maximum serial number among existing CinemaHalls
+        int maxSerialNumber = cinemaHalls.Max(cinemaHall => cinemaHall.SerialNumber);
+        return maxSerialNumber;
+    }
+
+
+    public static List<CinemaHall> ReadFromCinemaHall()
     {
         string directory = Directory.GetCurrentDirectory();
-        string filePath = Path.Combine(directory, "zaal.json");
-        string json = File.ReadAllText(filePath);
+        string filePath = Path.Combine(directory, "cinemaHall.json");
 
-        List<Zaal>? zalen = JsonConvert.DeserializeObject<List<Zaal>>(json);
-        if (zalen != null)
+        try
         {
-            foreach (var zaal in zalen)
+            // Read the JSON content from the file
+            string json = File.ReadAllText(filePath);
+
+            // Deserialize the JSON content to a list of CinemaHall objects
+            List<CinemaHall>? cinemaHalls = JsonSerializer.Deserialize<List<CinemaHall>>(json);
+            if (cinemaHalls.Count > 0)
             {
-                Console.WriteLine($"Name: {zaal.Name}, Rows: {zaal.Rows}, Columns: {zaal.Columns}, SerialNumber: {zaal.SerialNumber}");
+                foreach (var cinemaHall in cinemaHalls)
+                {
+                    Console.WriteLine($"Name: {cinemaHall.Name}, Rows: {cinemaHall.Rows}, Columns: {cinemaHall.Columns}, SerialNumber: {cinemaHall.SerialNumber}");
+                }
             }
+            else
+            {
+                Console.WriteLine("No cinema halls found.");
+            }
+
+            return cinemaHalls;
         }
-        else
+        catch (FileNotFoundException)
         {
-            Console.WriteLine("Failed to load JSON file or file is empty.");
+            Console.WriteLine("File not found.");
+        }
+        catch (JsonException)
+        {
+            Console.WriteLine("Failed to parse JSON.");
         }
 
+        return new List<CinemaHall>();
     }
 }

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Xmax",
+        "rows": "10",
+        "colums": "10",
+        "serial number": 1
+    },
+    {
+        "name": "Super Xmax",
+        "rows": 20,
+        "colums": 20,
+        "serial number": 2
+    },
+    {
+        "name": "Little Xmax",
+        "rows": 7,
+        "colums": 8,
+        "serial number": 3
+    },
+    {
+        "name": "Imax",
+        "rows": 15,
+        "colums": 8,
+        "serial number": 4
+    }
+]

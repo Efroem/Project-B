@@ -18,9 +18,9 @@ class Program
         do
         {
             if (Authentication.User == null)
-                Console.WriteLine("1. Bekijk films\n2. Inloggen\n3. Bekijk reserveringen\n4. Verlaat pagina\n5. Lijst zalen");
+                Console.WriteLine("1. Bekijk films\n2. Inloggen\n3. Bekijk reserveringen\n4. Verlaat pagina\n5. Lijst zalen\n6. CinemaHall toevoegen");
             else
-                Console.WriteLine("1. Bekijk films\n2. profiel\n3. Bekijk reserveringen\n4. Verlaat pagina\n5. Lijst zalen");
+                Console.WriteLine("1. Bekijk films\n2. profiel\n3. Bekijk reserveringen\n4. Verlaat pagina\n5. Lijst zalen\n6. CinemaHall toevoegen");
             answer = (Console.ReadLine() ?? "").ToLower();
 
             switch (answer)
@@ -59,7 +59,7 @@ class Program
                 case "5":
                 case "lijst zalen":
                     Console.WriteLine("Lijst Zalen");
-                    Zaal.ReadFromZaal();
+                    CinemaHall.ReadFromCinemaHall();
                     break;
 
                 default:
@@ -97,3 +97,12 @@ class Program
         }
     }
 }
+
+/*
+                case "6":
+                case "cinemaHall toevoegen":
+                    Console.WriteLine("CinemaHall toevoegen");
+
+                    CinemaHall.AddNewCinemaHall();
+                    break;
+*/
