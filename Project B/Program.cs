@@ -62,6 +62,12 @@ class Program
                     CinemaHall.ReadFromCinemaHall();
                     break;
 
+                case "6":
+                case "cinemaHall toevoegen":
+                    Console.WriteLine("CinemaHall toevoegen");
+                    CinemaHall.AddNewCinemaHall();
+                    break;
+
                 default:
                     Console.WriteLine("Ongeldige invoer");
                     break;
@@ -98,11 +104,3 @@ class Program
     }
 }
 
-/*
-                case "6":
-                case "cinemaHall toevoegen":
-                    Console.WriteLine("CinemaHall toevoegen");
-
-                    CinemaHall.AddNewCinemaHall();
-                    break;
-*/

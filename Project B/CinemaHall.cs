@@ -1,12 +1,20 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Collections.Generic;
 using System.IO;
 
 public class CinemaHall
 {
+    [JsonPropertyName("name")]
     public string Name { get; set; }
+
+    [JsonPropertyName("rows")]
     public int Rows { get; set; }
+
+    [JsonPropertyName("columns")]
     public int Columns { get; set; }
+
+    [JsonPropertyName("serial number")]
     public int SerialNumber { get; set; }
 
     public CinemaHall(string name, int rows, int columns, int serialNumber)
@@ -89,24 +97,22 @@ public class CinemaHall
 
         try
         {
-            // Read the JSON content from the file
             string json = File.ReadAllText(filePath);
 
-            // Deserialize the JSON content to a list of CinemaHall objects
             List<CinemaHall>? cinemaHalls = JsonSerializer.Deserialize<List<CinemaHall>>(json);
-            if (cinemaHalls.Count > 0)
+
+            if (cinemaHalls != null && cinemaHalls.Count > 0)
             {
                 foreach (var cinemaHall in cinemaHalls)
                 {
                     Console.WriteLine($"Name: {cinemaHall.Name}, Rows: {cinemaHall.Rows}, Columns: {cinemaHall.Columns}, SerialNumber: {cinemaHall.SerialNumber}");
                 }
+                return cinemaHalls;
             }
             else
             {
-                Console.WriteLine("No cinema halls found.");
+                Console.WriteLine("No cinema halls found or failed to parse JSON.");
             }
-
-            return cinemaHalls;
         }
         catch (FileNotFoundException)
         {
@@ -116,7 +122,7 @@ public class CinemaHall
         {
             Console.WriteLine("Failed to parse JSON.");
         }
-
         return new List<CinemaHall>();
     }
+
 }
