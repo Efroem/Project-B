@@ -38,13 +38,33 @@ public class CinemaHall
         string directory = Directory.GetCurrentDirectory();
         string filePath = Path.Combine(directory, "cinemaHall.json");
 
-        // Serialize the CinemaHall object to JSON
-        string json = JsonSerializer.Serialize(newCinemaHall, new JsonSerializerOptions { WriteIndented = true });
+        try
+        {
+            // Read existing cinema halls from the JSON file
+            string json = File.ReadAllText(filePath);
+            List<CinemaHall> cinemaHalls = JsonSerializer.Deserialize<List<CinemaHall>>(json) ?? new List<CinemaHall>();
 
-        // Write the JSON string to the file
-        File.AppendAllText(filePath, json);
-        Console.WriteLine("CinemaHall toegevoegd");
+            // Add the new cinema hall to the list
+            cinemaHalls.Add(newCinemaHall);
+
+            // Serialize the updated list to JSON
+            string updatedJson = JsonSerializer.Serialize(cinemaHalls, new JsonSerializerOptions { WriteIndented = true });
+
+            // Write the JSON string back to the file
+            File.WriteAllText(filePath, updatedJson);
+
+            Console.WriteLine("CinemaHall toegevoegd");
+        }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine("File not found.");
+        }
+        catch (JsonException)
+        {
+            Console.WriteLine("Failed to parse JSON.");
+        }
     }
+
 
     public static void AddNewCinemaHall()
     {
