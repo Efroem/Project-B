@@ -2,6 +2,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 
 public class CinemaHall
 {
@@ -25,6 +26,10 @@ public class CinemaHall
         SerialNumber = serialNumber;
     }
 
+    private static bool IsWord(string value)
+    {
+        return !string.IsNullOrEmpty(value) && Regex.IsMatch(value, @"^[a-zA-Z]+$");
+    }
 
     public void WriteToCinemaHall(string name, string rows, string columns, string serialNumber)
     {
@@ -32,7 +37,6 @@ public class CinemaHall
         int parsedColumns = int.Parse(columns);
         int parsedSerialNumber = int.Parse(serialNumber);
 
-        // Create a new CinemaHall object
         CinemaHall newCinemaHall = new CinemaHall(name, parsedRows, parsedColumns, parsedSerialNumber);
 
         string directory = Directory.GetCurrentDirectory();
@@ -40,17 +44,13 @@ public class CinemaHall
 
         try
         {
-            // Read existing cinema halls from the JSON file
             string json = File.ReadAllText(filePath);
             List<CinemaHall> cinemaHalls = JsonSerializer.Deserialize<List<CinemaHall>>(json) ?? new List<CinemaHall>();
 
-            // Add the new cinema hall to the list
             cinemaHalls.Add(newCinemaHall);
 
-            // Serialize the updated list to JSON
             string updatedJson = JsonSerializer.Serialize(cinemaHalls, new JsonSerializerOptions { WriteIndented = true });
 
-            // Write the JSON string back to the file
             File.WriteAllText(filePath, updatedJson);
 
             Console.WriteLine("CinemaHall toegevoegd");
@@ -65,25 +65,47 @@ public class CinemaHall
         }
     }
 
-
     public static void AddNewCinemaHall()
     {
         Console.WriteLine("Voeg nieuwe zaal toe");
 
-        Console.Write("Zaal naam: ");
-        string? name = Console.ReadLine() ?? "";
+        string name;
+        do
+        {
+            Console.Write("Zaal naam: ");
+            name = Console.ReadLine() ?? "";
+            if (!IsWord(name))
+            {
+                Console.WriteLine("Ongeldige zaal naam. Probeer opnieuw.");
+            }
+            name = char.ToUpper(name[0]) + name.Substring(1);
+        } while (!IsWord(name));
 
-        Console.Write("Aantal rijen: ");
-        int rows = Convert.ToInt32(Console.ReadLine());
+        int rows;
+        do
+        {
+            Console.Write("Aantal rijen: ");
+            string? input = Console.ReadLine();
+            if (!int.TryParse(input, out rows) || rows <= 0)
+            {
+                Console.WriteLine("Ongeldig aantal rijen. Voer een positief geheel getal in.");
+            }
+        } while (rows <= 0);
 
-        Console.Write("Aantal kolommen: ");
-        int columns = Convert.ToInt32(Console.ReadLine());
+        int columns;
+        do
+        {
+            Console.Write("Aantal kolommen: ");
+            string? input = Console.ReadLine();
+            if (!int.TryParse(input, out columns) || columns <= 0)
+            {
+                Console.WriteLine("Ongeldig aantal kolommen. Voer een positief geheel getal in.");
+            }
+        } while (columns <= 0);
 
-        // Calculate the next serial number
         int maxSerialNumber = FindMaxSerialNumber();
         int serialNumber = maxSerialNumber + 1;
 
-        // Convert integer values to strings
         string rowsString = rows.ToString();
         string columnsString = columns.ToString();
         string serialNumberString = serialNumber.ToString();
@@ -92,19 +114,15 @@ public class CinemaHall
         cinemaHall.WriteToCinemaHall(name, rowsString, columnsString, serialNumberString);
     }
 
-
     static int FindMaxSerialNumber()
     {
-        // Read existing CinemaHalls from the JSON file
         List<CinemaHall> cinemaHalls = ReadFromCinemaHall();
 
-        // If there are no existing CinemaHalls, return 0
         if (cinemaHalls.Count == 0)
         {
             return 0;
         }
 
-        // Find the maximum serial number among existing CinemaHalls
         int maxSerialNumber = cinemaHalls.Max(cinemaHall => cinemaHall.SerialNumber);
         return maxSerialNumber;
     }

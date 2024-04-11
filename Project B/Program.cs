@@ -29,13 +29,17 @@ class Program
                 case "bekijk films":
                 case "bekijk":
                 case "movies":
+                    Console.Clear();
                     Console.WriteLine("Bekijk films:");
                     PrintMovieTitles("movies.json");
+                    Console.ReadLine();
+                    Console.Clear();
                     break;
 
                 case "2":
                 case "inloggen":
                 case "profiel":
+                    Console.Clear();
                     Console.WriteLine("Log in");
                     if (Authentication.User == null)
                         Authentication.Start();
@@ -46,26 +50,38 @@ class Program
                 case "3":
                 case "bekijk reserveringen":
                 case "reserveringen":
+                    Console.Clear();
                     Console.WriteLine("Reserveringen");
+                    Console.ReadLine();
+                    Console.Clear();
                     break;
 
                 case "4":
                 case "verlaat pagina":
                 case "q":
+                    Console.Clear();
                     Console.WriteLine("Tot ziens!");
                     Environment.Exit(0);
+                    Console.ReadLine();
+                    Console.Clear();
                     break;
 
                 case "5":
                 case "lijst zalen":
+                    Console.Clear();
                     Console.WriteLine("Lijst Zalen");
                     CinemaHall.ReadFromCinemaHall();
+                    Console.ReadLine();
+                    Console.Clear();
                     break;
 
                 case "6":
                 case "cinemaHall toevoegen":
+                    Console.Clear();
                     Console.WriteLine("CinemaHall toevoegen");
                     CinemaHall.AddNewCinemaHall();
+                    Console.ReadLine();
+                    Console.Clear();
                     break;
 
                 default:
