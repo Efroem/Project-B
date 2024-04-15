@@ -1,0 +1,12 @@
+[
+    {
+        "movieTitle" : "Dune Part Two",
+        "cinemaHall" : "4",
+        "date" : "16/04/2024 11:15:00"
+    },
+    {
+        "movieTitle" : "Dune Part One",
+        "cinemaHall" : "4",
+        "date" : "16/04/2024 12:15:00"
+    }
+]
