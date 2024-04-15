@@ -49,11 +49,11 @@ static class Authentication
         string password = ReadPassword();
 
         // Searches for account that has the correct email
-        Account? foundAccount = GetAccountByEmail(email) ?? throw new Exception("Ongeldig aanmeldgegevens");
+        Account? foundAccount = GetAccountByEmail(email) ?? throw new Exception("Ongeldige aanmeldgegevens");
 
         // checks the password hash on the found account
         if (!foundAccount.TestPassword(HashPassword(password)))
-            throw new Exception("Ongeldig aanmeldgegevens");
+            throw new Exception("Ongeldige aanmeldgegevens");
 
         // sets User property and returns User
         User = foundAccount;
@@ -217,7 +217,7 @@ static class Authentication
                 string birthdate = Console.ReadLine() ?? "";
                 DateTime birthdatetime;
                 if (!DateTime.TryParseExact(birthdate, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "d-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "d-M-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "dd-M-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime))
-                    throw new Exception("Ongeldig geboortedatum");
+                    throw new Exception("Ongeldige geboortedatum");
                 else
                     return birthdate;
             }

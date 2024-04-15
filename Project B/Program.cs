@@ -13,7 +13,7 @@ class Program
         string posters = TestPosters.text1;
         Console.WriteLine(posters);
 
-        PrintAscii("movies.json");
+        AsciiArtPrinter.PrintAscii("movies.json");
         Console.WriteLine("Welkom bij MegaBios!");
 
         string answer;
@@ -33,7 +33,7 @@ class Program
                 case "movies":
                     Console.Clear();
                     Console.WriteLine("Bekijk films:");
-                    PrintMovieTitles("movies.json");
+                    AsciiArtPrinter.PrintMovieTitles("movies.json");
                     Console.ReadLine();
                     Console.Clear();
                     break;
@@ -93,55 +93,6 @@ class Program
         } while (answer != "4" && answer != "verlaat pagina" && answer != "q");
 
         Environment.Exit(0);
-    }
-
-    static void PrintMovieTitles(string jsonFilePath)
-    {
-        // Read the JSON file
-        string jsonString = File.ReadAllText(jsonFilePath);
-
-        // Deserialize the JSON to a JsonDocument
-        using (JsonDocument document = JsonDocument.Parse(jsonString))
-        {
-            // Access root element
-            JsonElement root = document.RootElement;
-
-            // Check if the root element is an array
-            if (root.ValueKind == JsonValueKind.Array)
-            {
-                Console.WriteLine("+" + new string('-', 32) + "+");
-                foreach (JsonElement movie in root.EnumerateArray())
-                {
-                    // Print the title of each movie with box
-                    string? title = movie.GetProperty("Title").GetString();
-                    Console.WriteLine("|" + title?.PadRight(32) + "|");
-                }
-                Console.WriteLine("+" + new string('-', 32) + "+");
-            }
-        }
-    }
-    static void PrintAscii(string jsonFilePath)
-    {
-        // Read the JSON file
-        string jsonString = File.ReadAllText(jsonFilePath);
-
-        // Deserialize the JSON to a JsonDocument
-        using (JsonDocument document = JsonDocument.Parse(jsonString))
-        {
-            // Access root element
-            JsonElement root = document.RootElement;
-
-            // Check if the root element is an array
-            if (root.ValueKind == JsonValueKind.Array)
-            {
-                foreach (JsonElement movie in root.EnumerateArray())
-                {
-                    // Print the title of each movie with box
-                    Console.WriteLine(movie.GetProperty("Ascii").GetString());
-                    Console.WriteLine();
-                }
-            }
-        }
-    }
+    }    
 }
 
