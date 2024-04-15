@@ -10,8 +10,10 @@ class Program
         // asciiArt.PrintMovies("movies.json");
         // string posters1 = Testascii.text;
         // Console.WriteLine(posters1);
-        string allposters = TestPosters.text1 + TestPosters.text2 + TestPosters.text3;
-        System.Console.WriteLine(allposters);
+        string posters = TestPosters.text1;
+        Console.WriteLine(posters);
+
+        PrintAscii("movies.json");
         Console.WriteLine("Welkom bij MegaBios!");
 
         string answer;
@@ -93,6 +95,29 @@ class Program
                     Console.WriteLine("|" + title?.PadRight(32) + "|");
                 }
                 Console.WriteLine("+" + new string('-', 32) + "+");
+            }
+        }
+    }
+    static void PrintAscii(string jsonFilePath)
+    {
+        // Read the JSON file
+        string jsonString = File.ReadAllText(jsonFilePath);
+
+        // Deserialize the JSON to a JsonDocument
+        using (JsonDocument document = JsonDocument.Parse(jsonString))
+        {
+            // Access root element
+            JsonElement root = document.RootElement;
+
+            // Check if the root element is an array
+            if (root.ValueKind == JsonValueKind.Array)
+            {
+                foreach (JsonElement movie in root.EnumerateArray())
+                {
+                    // Print the title of each movie with box
+                    Console.WriteLine(movie.GetProperty("Ascii").GetString());
+                    Console.WriteLine();
+                }
             }
         }
     }
