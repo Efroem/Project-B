@@ -18,14 +18,14 @@ public class AsciiArtPrinter
             // Check if the root element is an array
             if (root.ValueKind == JsonValueKind.Array)
             {
-                Console.WriteLine("+" + new string('-', 32) + "+");
+                Console.WriteLine("+" + new string('-', 40) + "+");
                 foreach (JsonElement movie in root.EnumerateArray())
                 {
                     // Print the title of each movie with box
                     string? title = movie.GetProperty("Title").GetString();
-                    Console.WriteLine("|" + title?.PadRight(32) + "|");
+                    Console.WriteLine("|" + title?.PadRight(40) + "|");
                 }
-                Console.WriteLine("+" + new string('-', 32) + "+");
+                Console.WriteLine("+" + new string('-',40) + "+");
             }
         }
     }
@@ -52,6 +52,27 @@ public class AsciiArtPrinter
             }
         }
     }
+    public static void PrintAsciifilms()
+    {
+        Console.WriteLine(@"  _____ ___ _     __  __ ____  
+ |  ___|_ _| |   |  \/  / ___| 
+ | |_   | || |   | |\/| \___ \ 
+ |  _|  | || |___| |  | |___) |
+ |_|   |___|_____|_|  |_|____/ 
+                                ");
+    }
+    public static void Printasciihm()
+    {
+        Console.WriteLine(@"
+  _    _  ____   ____  ______ _____  __  __ ______ _   _ _    _ 
+ | |  | |/ __ \ / __ \|  ____|  __ \|  \/  |  ____| \ | | |  | |
+ | |__| | |  | | |  | | |__  | |  | | \  / | |__  |  \| | |  | |
+ |  __  | |  | | |  | |  __| | |  | | |\/| |  __| | . ` | |  | |
+ | |  | | |__| | |__| | |    | |__| | |  | | |____| |\  | |__| |
+ |_|  |_|\____/ \____/|_|    |_____/|_|  |_|______|_| \_|\____/ 
+");
+    }
+
 }
 
 

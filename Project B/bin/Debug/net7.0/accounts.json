@@ -54,5 +54,37 @@
     "LastName": "Jansen",
     "BirthDate": "09-09-1902",
     "PhoneNumber": "0506060606"
+  },
+  {
+    "Email": "lekker@gmail.com",
+    "Password": "4d883ebd4e285e6e0f33a3bcb872e194bcef129080d5fb611e91dd1cd3d3aadf",
+    "FirstName": "lekker",
+    "LastName": "lekker",
+    "BirthDate": "02-02-1231",
+    "PhoneNumber": "0101100110"
+  },
+  {
+    "Email": "joehoe@gmail.com",
+    "Password": "3072bf82de82ba2f8623b68ca4567647df4f659784830500d5d010a14cec21fc",
+    "FirstName": "Vincent",
+    "LastName": "Stoel",
+    "BirthDate": "02-02-1231",
+    "PhoneNumber": "1212121212"
+  },
+  {
+    "Email": "sdadas@gmail.com",
+    "Password": "494414ded24da13c451b13b424928821351c78fce49f93d9e1b55f102790c206",
+    "FirstName": "Vincent",
+    "LastName": "dasdas",
+    "BirthDate": "02-02-2311",
+    "PhoneNumber": "0101100110"
+  },
+  {
+    "Email": "01323@gmail.com",
+    "Password": "370344c3877fe71c781fd6fb80a66a27e9016d9edc664f5f13e58cea9112aac1",
+    "FirstName": "Lalala",
+    "LastName": "lallala",
+    "BirthDate": "02-02-2131",
+    "PhoneNumber": "0101011001"
   }
 ]

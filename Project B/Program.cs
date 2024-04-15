@@ -10,19 +10,29 @@ class Program
         // asciiArt.PrintMovies("movies.json");
         // string posters1 = Testascii.text;
         // Console.WriteLine(posters1);
+        Console.Clear();
         string posters = TestPosters.text1;
         Console.WriteLine(posters);
 
         AsciiArtPrinter.PrintAscii("movies.json");
-        Console.WriteLine("Welkom bij MegaBios!");
+        Console.WriteLine("Druk op een knop om verder te gaan");
+        Console.ReadKey();
+        Console.Clear();
+        
 
         string answer;
         do
         {
             if (Authentication.User == null)
+            {
+                AsciiArtPrinter.Printasciihm();
                 Console.WriteLine("1. Bekijk films\n2. Inloggen\n3. Bekijk reserveringen\n4. Verlaat pagina\n5. Lijst zalen\n6. CinemaHall toevoegen");
+            }
             else
+            {
+                AsciiArtPrinter.Printasciihm();
                 Console.WriteLine("1. Bekijk films\n2. profiel\n3. Bekijk reserveringen\n4. Verlaat pagina\n5. Lijst zalen\n6. CinemaHall toevoegen");
+            }
             answer = (Console.ReadLine() ?? "").ToLower();
 
             switch (answer)
@@ -32,9 +42,10 @@ class Program
                 case "bekijk":
                 case "movies":
                     Console.Clear();
-                    Console.WriteLine("Bekijk films:");
+                    AsciiArtPrinter.PrintAsciifilms();
                     AsciiArtPrinter.PrintMovieTitles("movies.json");
-                    Console.ReadLine();
+                    Console.WriteLine("Druk op een knop om terug te gaan");
+                    Console.ReadKey();
                     Console.Clear();
                     break;
 

@@ -18,6 +18,7 @@ static class Authentication
             if (userAction == "1" || userAction == "Inloggen" || userAction == "inloggen")
                 try
                 {
+                    Console.Clear();
                     return Login();
                 }
                 catch (Exception e)
@@ -28,6 +29,7 @@ static class Authentication
             {
                 try
                 {
+                    Console.Clear();
                     return Register();
                 }
                 catch (Exception e)
@@ -45,8 +47,10 @@ static class Authentication
     {
         Console.WriteLine("E-mailadres:");
         string email = Console.ReadLine() ?? "";
+        Console.Clear(); // Clear the console after reading email
         Console.WriteLine("Wachtwoord:");
         string password = ReadPassword();
+        Console.Clear();
 
         // Searches for account that has the correct email
         Account? foundAccount = GetAccountByEmail(email) ?? throw new Exception("Ongeldige aanmeldgegevens");
@@ -58,7 +62,6 @@ static class Authentication
         // sets User property and returns User
         User = foundAccount;
         return foundAccount;
-
     }
 
     // Starts the registration process
@@ -66,20 +69,24 @@ static class Authentication
     {
         // calls email checker
         string email = RegisterEmail();
+        Console.Clear(); // Clear the console after reading email
 
         // hashes returned string of the confirm password process function
         string password = HashPassword(RegisterConfirmPassword());
+        Console.Clear(); // Clear the console after confirming password
 
         Console.WriteLine("Voornaam:");
         string firstName = Console.ReadLine() ?? "";
+        Console.Clear();
         Console.WriteLine("Achternaam:");
         string lastName = Console.ReadLine() ?? "";
+        Console.Clear();
 
         string birthdate = RegisterBirthdate();
 
-
         Console.WriteLine("Telefoonnummer:");
         string phoneNumber = RegisterPhoneNumber();
+        Console.Clear();
 
         // Creates new object
         Account account = new(email, password, firstName, lastName, birthdate, phoneNumber);
@@ -102,10 +109,12 @@ static class Authentication
             string userAction = Console.ReadLine() ?? "";
             if (userAction == "1" || userAction.ToLower() == "uitloggen")
             {
+                Console.Clear();
                 Logout();
                 break;
             }
             else if (userAction == "2" || userAction.ToLower() == "Terug naar hoofdmenu" || userAction.ToLower() == "terug")
+                Console.Clear();
                 break;
         }
     }
@@ -215,6 +224,7 @@ static class Authentication
             {
                 Console.WriteLine("Geboortedatum: Voorbeeld:(20-10-1998):");
                 string birthdate = Console.ReadLine() ?? "";
+                Console.Clear();
                 DateTime birthdatetime;
                 if (!DateTime.TryParseExact(birthdate, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "d-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "d-M-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "dd-M-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime))
                     throw new Exception("Ongeldige geboortedatum");
@@ -236,6 +246,7 @@ static class Authentication
             try
             {
                 string phoneNumber = Console.ReadLine() ?? "";
+                Console.Clear();
                 if (!Regex.IsMatch(phoneNumber, pattern))
                     throw new Exception("Ongeldig telefoonnummer");
                 else
