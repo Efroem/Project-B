@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project B", "Project B.csproj", "{4F77BF16-D0AC-4763-BCF3-10CFED5E3518}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrintTitles", "PrintTitles\PrintTitles.csproj", "{9EA0DC4D-8FEF-40F8-8D17-1B3A937C4FDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4F77BF16-D0AC-4763-BCF3-10CFED5E3518}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F77BF16-D0AC-4763-BCF3-10CFED5E3518}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F77BF16-D0AC-4763-BCF3-10CFED5E3518}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EA0DC4D-8FEF-40F8-8D17-1B3A937C4FDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA0DC4D-8FEF-40F8-8D17-1B3A937C4FDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EA0DC4D-8FEF-40F8-8D17-1B3A937C4FDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EA0DC4D-8FEF-40F8-8D17-1B3A937C4FDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -46,5 +46,13 @@
     "LastName": "example",
     "BirthDate": "2-5-1993",
     "PhoneNumber": "0632121212"
+  },
+  {
+    "Email": "Vince@stoel.nl",
+    "Password": "19fb86d9e6c02105f4becdf3b2902e8a47986921d658ca0b624255591ca58c9a",
+    "FirstName": "James",
+    "LastName": "Jansen",
+    "BirthDate": "09-09-1902",
+    "PhoneNumber": "0506060606"
   }
 ]

@@ -4,73 +4,83 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
-static class Authentication {
-    public static Account? User {get; private set;}
+static class Authentication
+{
+    public static Account? User { get; private set; }
 
     // Starts the authentication process
-    public static Account? Start() {
-        while (true) {
+    public static Account? Start()
+    {
+        while (true)
+        {
             Console.WriteLine("1. Inloggen\n2. Registreren");
             string userAction = (Console.ReadLine() ?? "").ToLower();
             if (userAction == "1" || userAction == "Inloggen" || userAction == "inloggen")
-                try {
+                try
+                {
                     return Login();
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     Console.WriteLine(e.Message);
                 }
-            else if (userAction == "2" || userAction == "Registreren" || userAction == "registreren") {
-                try {
+            else if (userAction == "2" || userAction == "Registreren" || userAction == "registreren")
+            {
+                try
+                {
                     return Register();
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     Console.WriteLine(e.Message);
                 }
-                
-            } else {
-                Console.WriteLine("pain");
+
             }
             return null;
         }
     }
 
     // Starts the Login process
-    public static Account Login() {
+    public static Account Login()
+    {
         Console.WriteLine("E-mailadres:");
         string email = Console.ReadLine() ?? "";
         Console.WriteLine("Wachtwoord:");
         string password = ReadPassword();
 
         // Searches for account that has the correct email
-        Account? foundAccount = GetAccountByEmail(email) ?? throw new Exception("Ongeldige aanmeldgegevens");
+        Account? foundAccount = GetAccountByEmail(email) ?? throw new Exception("Ongeldig aanmeldgegevens");
 
         // checks the password hash on the found account
         if (!foundAccount.TestPassword(HashPassword(password)))
-            throw new Exception("Ongeldige aanmeldgegevens");
+            throw new Exception("Ongeldig aanmeldgegevens");
 
         // sets User property and returns User
         User = foundAccount;
         return foundAccount;
-        
+
     }
 
     // Starts the registration process
-    public static Account Register() {
+    public static Account Register()
+    {
         // calls email checker
         string email = RegisterEmail();
 
         // hashes returned string of the confirm password process function
         string password = HashPassword(RegisterConfirmPassword());
-        
+
         Console.WriteLine("Voornaam:");
         string firstName = Console.ReadLine() ?? "";
         Console.WriteLine("Achternaam:");
         string lastName = Console.ReadLine() ?? "";
 
         string birthdate = RegisterBirthdate();
-        
-        
+
+
         Console.WriteLine("Telefoonnummer:");
         string phoneNumber = RegisterPhoneNumber();
-        
+
         // Creates new object
         Account account = new(email, password, firstName, lastName, birthdate, phoneNumber);
         SaveNewAccount(account);
@@ -81,28 +91,34 @@ static class Authentication {
     }
 
     // View the information of currently logged in account
-    public static void ViewProfile() {
-        while (true) {
+    public static void ViewProfile()
+    {
+        while (true)
+        {
             if (User != null)
                 Console.WriteLine($"{User.ToString()}");
 
-            Console.WriteLine("1. Uitloggen\n2. Ga terug");
+            Console.WriteLine("1. Uitloggen\n2. Terug naar hoofdmenu");
             string userAction = Console.ReadLine() ?? "";
-            if (userAction == "1" || userAction.ToLower() == "uitloggen") {
+            if (userAction == "1" || userAction.ToLower() == "uitloggen")
+            {
                 Logout();
                 break;
-            } else if (userAction == "2" || userAction.ToLower() == "ga terug" || userAction.ToLower() == "terug")
+            }
+            else if (userAction == "2" || userAction.ToLower() == "Terug naar hoofdmenu" || userAction.ToLower() == "terug")
                 break;
         }
     }
 
     // resets User property
-    public static void Logout() {
+    public static void Logout()
+    {
         User = null;
     }
 
     // Reads the password input while not showing the typed characters by visually replacing them with *
-    private static string ReadPassword() {
+    private static string ReadPassword()
+    {
         string password = "";
         ConsoleKeyInfo key;
 
@@ -132,16 +148,21 @@ static class Authentication {
     }
 
     // Checks if the email is valid
-    private static string RegisterEmail() {
-        while (true) {
-            try {
+    private static string RegisterEmail()
+    {
+        while (true)
+        {
+            try
+            {
                 Console.WriteLine("E-mailadres:");
                 string email = Console.ReadLine() ?? "";
                 if (IsValidEmail(email) && GetAccountByEmail(email) == null)
                     return email;
                 else
                     throw new Exception("E-mailadres ongeldig of al in gebruik");
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine(e.Message);
             }
 
@@ -149,9 +170,12 @@ static class Authentication {
     }
 
     // asks for password twice and checks if they match
-    private static string RegisterConfirmPassword() {
-        while (true) {
-            try {
+    private static string RegisterConfirmPassword()
+    {
+        while (true)
+        {
+            try
+            {
                 Console.WriteLine("Wachtwoord:");
                 string password = ReadPassword();
                 Console.WriteLine("Bevestig wachtwoord:");
@@ -160,7 +184,9 @@ static class Authentication {
                     throw new Exception("Wachtwoorden komen niet overeen");
                 else
                     return password;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine(e.Message);
             }
         }
@@ -181,49 +207,64 @@ static class Authentication {
     }
 
     // Checks if birthday is valid date
-    private static string RegisterBirthdate() {
-        while (true) {
-            try {
-                Console.WriteLine("Geboortedatum (dag-maand-jaar):");
+    private static string RegisterBirthdate()
+    {
+        while (true)
+        {
+            try
+            {
+                Console.WriteLine("Geboortedatum: Voorbeeld:(20-10-1998):");
                 string birthdate = Console.ReadLine() ?? "";
                 DateTime birthdatetime;
                 if (!DateTime.TryParseExact(birthdate, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "d-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "d-M-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "dd-M-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime))
-                    throw new Exception("Ongeldige geboortedatum");
+                    throw new Exception("Ongeldig geboortedatum");
                 else
                     return birthdate;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine(e.Message);
             }
         }
     }
     // Validates phone number and returns if it's true
-    private static string RegisterPhoneNumber() {
+    private static string RegisterPhoneNumber()
+    {
         string pattern = @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
-        while (true) {
-            try {
+        while (true)
+        {
+            try
+            {
                 string phoneNumber = Console.ReadLine() ?? "";
                 if (!Regex.IsMatch(phoneNumber, pattern))
-                    throw new Exception("Ongeldige telefoonnummer");
+                    throw new Exception("Ongeldig telefoonnummer");
                 else
                     return phoneNumber;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine(e.Message);
             }
         }
     }
 
     // checks if email is a valid adress
-    private static bool IsValidEmail(string email) {
-        try {
+    private static bool IsValidEmail(string email)
+    {
+        try
+        {
             MailAddress mailadress = new(email);
             return true;
-        }catch (FormatException) {
+        }
+        catch (FormatException)
+        {
             return false;
         }
     }
-    
+
     // retrieves all accounts from accounts.json
-    private static List<Account> GetSavedAccounts() {
+    private static List<Account> GetSavedAccounts()
+    {
         // Read the JSON file as a string
         string jsonString = File.ReadAllText("accounts.json");
 
@@ -232,7 +273,8 @@ static class Authentication {
     }
 
     // Saves new account in JSON
-    private static void SaveNewAccount(Account account) {
+    private static void SaveNewAccount(Account account)
+    {
         // Retrieves existing accounts
         List<Account> AccountList = GetSavedAccounts();
         // Adds the new account
@@ -242,14 +284,16 @@ static class Authentication {
     }
 
     // Saves Accounts
-    private static void SaveAccounts(List<Account> AccountList) {
-        JsonSerializerOptions options = new() {WriteIndented = true};
+    private static void SaveAccounts(List<Account> AccountList)
+    {
+        JsonSerializerOptions options = new() { WriteIndented = true };
         string jsonString = JsonSerializer.Serialize(AccountList, options);
         File.WriteAllText("accounts.json", jsonString);
     }
 
     // Search for an account based on email
-    private static Account? GetAccountByEmail(string email) {
+    private static Account? GetAccountByEmail(string email)
+    {
         List<Account> AccountList = GetSavedAccounts();
         return AccountList?.Find(account => account.Email == email);
     }
