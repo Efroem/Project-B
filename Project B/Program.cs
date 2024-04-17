@@ -6,18 +6,16 @@ class Program
 {
     static void Main()
     {
-        // Testascii asciiArt = new Testascii();
-        // asciiArt.PrintMovies("movies.json");
-        // string posters1 = Testascii.text;
-        // Console.WriteLine(posters1);
         Console.Clear();
-        string posters = TestPosters.text1;
-        Console.WriteLine(posters);
-
+        Console.WriteLine(TestPosters.MegaBioscoop());
+        Console.WriteLine("Druk op een knop om verder te gaan");
+        Console.ReadKey();
+        Console.Clear(); 
+        
         AsciiArtPrinter.PrintAscii("movies.json");
         Console.WriteLine("Druk op een knop om verder te gaan");
         Console.ReadKey();
-        Console.Clear();
+        Console.Clear();    
         
 
         string answer;
