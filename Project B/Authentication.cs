@@ -136,7 +136,7 @@ static class Authentication
             key = Console.ReadKey(true);
 
             // Ignore any key that's not a printable character or Enter
-            if (char.IsControl(key.KeyChar) && key.Key != ConsoleKey.Enter)
+            if (char.IsControl(key.KeyChar) && key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.Backspace)
                 continue;
 
             // Handle backspace
