@@ -13,6 +13,7 @@ static class Authentication
     {
         while (true)
         {
+            Console.WriteLine("Kies het volgende: ");
             Console.WriteLine("1. Inloggen\n2. Registreren");
             string userAction = (Console.ReadLine() ?? "").ToLower();
             if (userAction == "1" || userAction == "Inloggen" || userAction == "inloggen")
@@ -45,6 +46,7 @@ static class Authentication
     // Starts the Login process
     public static Account Login()
     {
+        AsciiArtPrinter.PrintAsciiInlog();
         Console.WriteLine("E-mailadres:");
         string email = Console.ReadLine() ?? "";
         Console.Clear(); // Clear the console after reading email
@@ -67,6 +69,7 @@ static class Authentication
     // Starts the registration process
     public static Account Register()
     {
+        AsciiArtPrinter.PrintAsciiRegister();
         // calls email checker
         string email = RegisterEmail();
         Console.Clear(); // Clear the console after reading email
@@ -74,7 +77,6 @@ static class Authentication
         // hashes returned string of the confirm password process function
         string password = HashPassword(RegisterConfirmPassword());
         Console.Clear(); // Clear the console after confirming password
-
         Console.WriteLine("Voornaam:");
         string firstName = Console.ReadLine() ?? "";
         Console.Clear();

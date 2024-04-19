@@ -54,7 +54,7 @@ class Program
                 case "inloggen":
                 case "profiel":
                     Console.Clear();
-                    Console.WriteLine("Log in");
+                    AsciiArtPrinter.PrintAsciilogin();
                     if (Authentication.User == null)
                         Authentication.Start();
                     else

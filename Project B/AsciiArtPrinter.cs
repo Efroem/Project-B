@@ -82,7 +82,7 @@ public class AsciiArtPrinter
  |  _|  | || |___| |  | |___) |
  |_|   |___|_____|_|  |_|____/ 
                                 ";
-        string centeredAsciiArt = "                    " + asciiartfilms.Replace("\n", "\n                                      ");
+        string centeredAsciiArt = "                    " + asciiartfilms.Replace("\n", "\n                                         ");
         Console.WriteLine(centeredAsciiArt);
     }
     public static void Printasciihm()
@@ -135,6 +135,45 @@ public class AsciiArtPrinter
                     └─────────────────────────┘
         ";
         string centeredAsciiArt = "                    " + menuText2.Replace("\n", "\n                  ");
+        Console.WriteLine(centeredAsciiArt);
+    }
+    public static void PrintAsciilogin()
+    {
+        string login = @"
+  _      ____   _____ _____ _   _ 
+ | |    / __ \ / ____|_   _| \ | |
+ | |   | |  | | |  __  | | |  \| |
+ | |   | |  | | | |_ | | | | . ` |
+ | |___| |__| | |__| |_| |_| |\  |
+ |______\____/ \_____|_____|_| \_|
+        ";
+        string centeredAsciiArt = "                    " + login.Replace("\n", "\n                                   ");
+        Console.WriteLine(centeredAsciiArt);
+    }
+    public static void PrintAsciiInlog()
+    {
+        string inlog = @"
+  _____ _   _ _      ____   _____  _____ ______ _   _ 
+ |_   _| \ | | |    / __ \ / ____|/ ____|  ____| \ | |
+   | | |  \| | |   | |  | | |  __| |  __| |__  |  \| |
+   | | | . ` | |   | |  | | | |_ | | |_ |  __| | . ` |
+  _| |_| |\  | |___| |__| | |__| | |__| | |____| |\  |
+ |_____|_| \_|______\____/ \_____|\_____|______|_| \_|                                                                                                                   
+        ";
+        string centeredAsciiArt = "                    " + inlog.Replace("\n", "\n                           ");
+        Console.WriteLine(centeredAsciiArt);
+    }
+    public static void PrintAsciiRegister()
+    {
+        string register = @"        
+  _____  ______ _____ _____  _____ _______ _____  ______ _____  ______ _   _ 
+ |  __ \|  ____/ ____|_   _|/ ____|__   __|  __ \|  ____|  __ \|  ____| \ | |
+ | |__) | |__ | |  __  | | | (___    | |  | |__) | |__  | |__) | |__  |  \| |
+ |  _  /|  __|| | |_ | | |  \___ \   | |  |  _  /|  __| |  _  /|  __| | . ` |
+ | | \ \| |___| |__| |_| |_ ____) |  | |  | | \ \| |____| | \ \| |____| |\  |
+ |_|  \_\______\_____|_____|_____/   |_|  |_|  \_\______|_|  \_\______|_| \_|                                                                                                                                                          
+        ";
+        string centeredAsciiArt = "                    " + register.Replace("\n", "\n                  ");
         Console.WriteLine(centeredAsciiArt);
     }
 
