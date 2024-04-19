@@ -7,16 +7,16 @@ class Program
     static void Main()
     {
         Console.Clear();
-        Console.WriteLine(TestPosters.MegaBioscoop());
+        TestPosters.MegaBioscoop();
         Console.WriteLine("Druk op een knop om verder te gaan");
         Console.ReadKey();
-        Console.Clear(); 
-        
+        Console.Clear();
+
         AsciiArtPrinter.PrintAscii("movies.json");
         Console.WriteLine("Druk op een knop om verder te gaan");
         Console.ReadKey();
-        Console.Clear();    
-        
+        Console.Clear();
+
 
         string answer;
         do
@@ -24,13 +24,16 @@ class Program
             if (Authentication.User == null)
             {
                 AsciiArtPrinter.Printasciihm();
-                Console.WriteLine("1. Bekijk films\n2. Inloggen\n3. Bekijk reserveringen\n4. Verlaat pagina\n5. Lijst zalen\n6. CinemaHall toevoegen");
+                AsciiArtPrinter.PrintAsciiMenu();
+                Console.WriteLine("Selecteer het gewenste nummer om door te gaan.");
             }
             else
             {
                 AsciiArtPrinter.Printasciihm();
-                Console.WriteLine("1. Bekijk films\n2. profiel\n3. Bekijk reserveringen\n4. Verlaat pagina\n5. Lijst zalen\n6. CinemaHall toevoegen");
+                AsciiArtPrinter.PrintAsciiMenu2();
+                Console.WriteLine("Selecteer het gewenste nummer om door te gaan.");
             }
+
             answer = (Console.ReadLine() ?? "").ToLower();
 
             switch (answer)
@@ -102,6 +105,6 @@ class Program
         } while (answer != "4" && answer != "verlaat pagina" && answer != "q");
 
         Environment.Exit(0);
-    }    
+    }
 }
 

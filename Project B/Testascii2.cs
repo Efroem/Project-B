@@ -3,9 +3,9 @@ using System;
 public class TestPosters
 {
    
-    public static string MegaBioscoop()
+    public static void MegaBioscoop()
 {
-    return @"
+    string Asciiartstart = @"
                 
        __          __  _ _                     ____  _ _            
        \ \        / / | | |                   |  _ \(_|_)           
@@ -25,6 +25,9 @@ public class TestPosters
               |___/                                          |_|    
 
     ";
+    string centeredAsciiArt = "                    " + Asciiartstart.Replace("\n", "\n                  ");
+
+    Console.WriteLine(centeredAsciiArt);
 }
 
     public static string text2 = @"
