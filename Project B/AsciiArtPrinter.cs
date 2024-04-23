@@ -69,7 +69,7 @@ public class AsciiArtPrinter
                     {
                         string[] poster1List = root[i].GetProperty("Ascii").GetString().Split("\n");
                         string[] poster2List = root.GetArrayLength()-1 > i ? root[i+1].GetProperty("Ascii").GetString().Split("\n") : new string[] { "", "" };
-                        int poster1MaxLength = poster1List.OrderByDescending( s => s.Length ).First().Length;
+
                         for (int j = 0; j < Math.Max(poster1List.Length, poster2List.Length); j++)
                         {
                             if (poster1List.Length > j && poster2List.Length > j) {
