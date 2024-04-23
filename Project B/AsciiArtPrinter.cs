@@ -74,12 +74,12 @@ public class AsciiArtPrinter
                         {
                             if (poster1List.Length > j && poster2List.Length > j) {
                                 Console.Write($"{poster1List[j]}");
-                                Console.Write(poster2List[j].PadLeft(poster1MaxLength - poster1List[j].Length + poster2List[j].Length, ' '));
+                                Console.Write(poster2List[j].PadLeft(60 + poster2List[j].Length - poster1List[j].Length, ' '));
                                 Console.Write("\n");
                             } else if (poster1List.Length > j)
                                 Console.WriteLine($"{poster1List[j]?? ""}");
                             else {
-                                Console.WriteLine(poster2List[j].PadLeft(poster1MaxLength  + poster2List[j].Length, ' '));
+                                Console.WriteLine(poster2List[j].PadLeft(60 + poster2List[j].Length, ' '));
                             }
                         }
                     }
