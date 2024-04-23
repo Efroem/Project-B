@@ -49,10 +49,10 @@ static class Authentication
         AsciiArtPrinter.PrintAsciiInlog();
         Console.WriteLine("E-mailadres:");
         string email = Console.ReadLine() ?? "";
-         // Clear the console after reading email
+        Console.Clear(); // Clear the console after reading email
         Console.WriteLine("Wachtwoord:");
         string password = ReadPassword();
-        
+        Console.Clear();
 
         // Searches for account that has the correct email
         Account? foundAccount = GetAccountByEmail(email) ?? throw new Exception("Ongeldige aanmeldgegevens");
@@ -72,20 +72,23 @@ static class Authentication
         AsciiArtPrinter.PrintAsciiRegister();
         // calls email checker
         string email = RegisterEmail();
-         // Clear the console after reading email
+        Console.Clear(); // Clear the console after reading email
 
         // hashes returned string of the confirm password process function
         string password = HashPassword(RegisterConfirmPassword());
-         // Clear the console after confirming password
+        Console.Clear(); // Clear the console after confirming password
         Console.WriteLine("Voornaam:");
         string firstName = Console.ReadLine() ?? "";
+        Console.Clear();
         Console.WriteLine("Achternaam:");
         string lastName = Console.ReadLine() ?? "";
+        Console.Clear();
 
         string birthdate = RegisterBirthdate();
 
         Console.WriteLine("Telefoonnummer:");
         string phoneNumber = RegisterPhoneNumber();
+        Console.Clear();
 
         // Creates new object
         Account account = new(email, password, firstName, lastName, birthdate, phoneNumber);
@@ -223,6 +226,7 @@ static class Authentication
             {
                 Console.WriteLine("Geboortedatum: Voorbeeld:(20-10-1998):");
                 string birthdate = Console.ReadLine() ?? "";
+                Console.Clear();
                 DateTime birthdatetime;
                 if (!DateTime.TryParseExact(birthdate, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "d-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "d-M-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime) && !DateTime.TryParseExact(birthdate, "dd-M-yyyy", null, System.Globalization.DateTimeStyles.None, out birthdatetime))
                     throw new Exception("Ongeldige geboortedatum");

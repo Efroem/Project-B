@@ -86,45 +86,5 @@
     "LastName": "lallala",
     "BirthDate": "02-02-2131",
     "PhoneNumber": "0101011001"
-  },
-  {
-    "Email": "vff@gmail.com",
-    "Password": "3072bf82de82ba2f8623b68ca4567647df4f659784830500d5d010a14cec21fc",
-    "FirstName": "vincent",
-    "LastName": "vincent",
-    "BirthDate": "12-12-1231",
-    "PhoneNumber": "0691817162"
-  },
-  {
-    "Email": "msda@gmail.com",
-    "Password": "494414ded24da13c451b13b424928821351c78fce49f93d9e1b55f102790c206",
-    "FirstName": "vincent",
-    "LastName": "asda",
-    "BirthDate": "12-12-1031",
-    "PhoneNumber": "0612121212"
-  },
-  {
-    "Email": "inloginternet@gmail.com",
-    "Password": "c7052310ddf185a6949e650177781a8ca242144a840b8956b3211a5a03bb8a8b",
-    "FirstName": "jasdasd",
-    "LastName": "jndansd",
-    "BirthDate": "12-12-1231",
-    "PhoneNumber": "0631923131"
-  },
-  {
-    "Email": "lucas123@gmail.nl",
-    "Password": "9a2bca3b828e24f91baa5dd22a49919c14d60efa1375cbdf28ac7b6ff585c2b8",
-    "FirstName": "pieter",
-    "LastName": "stoel",
-    "BirthDate": "13-10-1888",
-    "PhoneNumber": "0681538010"
-  },
-  {
-    "Email": "email@gmail.com",
-    "Password": "dc00c903852bb19eb250aeba05e534a6d211629d77d055033806b783bae09937",
-    "FirstName": "Vincent",
-    "LastName": "is lekker",
-    "BirthDate": "12-12-1313",
-    "PhoneNumber": "1212121212"
   }
 ]
