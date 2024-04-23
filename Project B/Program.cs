@@ -9,11 +9,13 @@ class Program
         Console.Clear();
         TestPosters.MegaBioscoop();
         Console.WriteLine("Druk op een knop om verder te gaan");
+        Console.SetCursorPosition(0, 0);
         Console.ReadKey();
         Console.Clear();
 
         AsciiArtPrinter.PrintAscii("movies.json");
         Console.WriteLine("Druk op een knop om verder te gaan");
+        Console.SetCursorPosition(0, 0);
         Console.ReadKey();
         Console.Clear();
 
@@ -99,6 +101,7 @@ class Program
                     break;
 
                 default:
+                    Console.Clear();
                     Console.WriteLine("Ongeldige invoer");
                     break;
             }
