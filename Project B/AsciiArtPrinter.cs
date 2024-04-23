@@ -176,66 +176,8 @@ public class AsciiArtPrinter
         string centeredAsciiArt = "                    " + register.Replace("\n", "\n                  ");
         Console.WriteLine(centeredAsciiArt);
     }
-    public static void Poster1()
-{
-    string panda = @"
-        ,,,         ,,,   
-          ;""   ^;     ;'   
-          ;    s$$$$$$$s     
-          ,  ss$$$$$$$$$$s  ,'
-          ;s$$$$$$$$$$$$$$$
-          $$$$$$$$$$$$$$$$$$
-         $$$$P""Y$$$Y""W$$$$$
-         $$$$  p""$$$""q  $$$$
-         $$$$  .$$$$$.  $$$$
-          $$DcaU$$$$$$$$$$
-            ""Y$$$""*""$$$Y""       
-                ""$b.$$""";
-    
-    string asciiArt = @"
-                                                  
-`7MM""""Yb. `7MMF'   `7MF'`7MN.   `7MF'`7MM""""YMM  
-  MM    `Yb. MM       M    MMN.    M    MM    `7  
-  MM     `Mb MM       M    M YMb   M    MM   d    
-  MM      MM MM       M    M  `MN. M    MMmmMM    
-  MM     ,MP MM       M    M   `MM.M    MM   Y  , 
-  MM    ,dP' YM.     ,M    M     YMM    MM     ,M 
-.JMMmmmdP'    `bmmmmd""'  .JML.    YM  .JMMmmmmMMM 
-                                                  
-                                                   ";
 
-    Console.WriteLine(panda + asciiArt);
-}
-    public static void Poster2()
-{
-    string heart = @"
-           .....
-   ,ad8PPPP88b,     ,d88PPPP8ba,
-  d8P""      ""Y8b, ,d8P""      ""Y8b
- dP'           ""8a8""           `Yd
- 8(              ""              )8
- I8                             8I
-  Yb,                         ,dP
-   ""8a,                     ,a8""
-     ""8a,                 ,a8""
-       ""Yba             adP""                               
-         `Y8a         a8P'
-           `88,     ,88'
-             ""8b   d8""
-              ""8b d8""
-               `888'
-                 """;
 
-    string wonka = @"
-    __________________,.............,    
-   /_/_/_/_/_/_/_/_/,-',  ,. -,-,--/|
-  /_/_/_/_/_/_/_/,-' //  /-| / /--/ /
- /_/_/_/_/_/_/,-' `-''--'  `' '--/ /
-/_/_/_/_/_/_,:................../ /
-|________________________________/
-";
-    Console.WriteLine(heart + wonka);
-}
 }
 
 
