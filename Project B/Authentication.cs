@@ -50,6 +50,7 @@ static class Authentication
         Console.WriteLine("E-mailadres:");
         string email = Console.ReadLine() ?? "";
         Console.Clear(); // Clear the console after reading email
+        AsciiArtPrinter.PrintAsciiInlog();
         Console.WriteLine("Wachtwoord:");
         string password = ReadPassword();
         Console.Clear();
@@ -77,15 +78,17 @@ static class Authentication
         // hashes returned string of the confirm password process function
         string password = HashPassword(RegisterConfirmPassword());
         Console.Clear(); // Clear the console after confirming password
+        AsciiArtPrinter.PrintAsciiRegister();
         Console.WriteLine("Voornaam:");
         string firstName = Console.ReadLine() ?? "";
         Console.Clear();
+        AsciiArtPrinter.PrintAsciiRegister();
         Console.WriteLine("Achternaam:");
         string lastName = Console.ReadLine() ?? "";
         Console.Clear();
 
         string birthdate = RegisterBirthdate();
-
+        AsciiArtPrinter.PrintAsciiRegister();
         Console.WriteLine("Telefoonnummer:");
         string phoneNumber = RegisterPhoneNumber();
         Console.Clear();
@@ -187,6 +190,7 @@ static class Authentication
         {
             try
             {
+                AsciiArtPrinter.PrintAsciiRegister();
                 Console.WriteLine("Wachtwoord:");
                 string password = ReadPassword();
                 Console.WriteLine("Bevestig wachtwoord:");
@@ -224,6 +228,7 @@ static class Authentication
         {
             try
             {
+                AsciiArtPrinter.PrintAsciiRegister();
                 Console.WriteLine("Geboortedatum: Voorbeeld:(20-10-1998):");
                 string birthdate = Console.ReadLine() ?? "";
                 Console.Clear();
