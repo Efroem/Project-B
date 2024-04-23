@@ -101,6 +101,7 @@ class Program
                     break;
 
                 default:
+                    Console.Clear();
                     Console.WriteLine("Ongeldige invoer");
                     break;
             }
