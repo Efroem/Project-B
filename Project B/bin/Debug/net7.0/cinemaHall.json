@@ -1,22 +1,32 @@
 [
-    {
-        "name": "Xmax",
-        "size": 2,
-        "serial number": 1
-    },
-    {
-        "name": "Super Xmax",
-        "size": 3,
-        "serial number": 2
-    },
-    {
-        "name": "Little Xmax",
-        "size": 1,
-        "serial number": 3
-    },
-    {
-        "name": "Imax",
-        "size": 2,
-        "serial number": 4
-    }
+  {
+    "name": "Xmax",
+    "size": 2,
+    "serial number": 1
+  },
+  {
+    "name": "Super Xmax",
+    "size": 3,
+    "serial number": 2
+  },
+  {
+    "name": "Little Xmax",
+    "size": 1,
+    "serial number": 3
+  },
+  {
+    "name": "Imax",
+    "size": 2,
+    "serial number": 4
+  },
+  {
+    "name": "DMAX",
+    "size": 1,
+    "serial number": 5
+  },
+  {
+    "name": "Imax2",
+    "size": 2,
+    "serial number": 6
+  }
 ]

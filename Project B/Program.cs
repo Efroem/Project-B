@@ -84,7 +84,7 @@ class Program
                 case "lijst zalen":
                     Console.Clear();
                     Console.WriteLine("Lijst Zalen");
-                    CinemaHall.ReadFromCinemaHall();
+                    CinemaHall.PrintCinemaHalls();
                     Console.ReadLine();
                     Console.Clear();
                     break;
