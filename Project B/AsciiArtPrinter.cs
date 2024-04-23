@@ -64,22 +64,30 @@ public class AsciiArtPrinter
             // Check if the root element is an array
             if (root.ValueKind == JsonValueKind.Array)
             {
-                if (Console.WindowWidth > 150) {
-                    for (int i = 0; i < root.GetArrayLength(); i+=2)
+                if (Console.WindowWidth > 130) {
+                    List<JsonElement> filteredElements = new List<JsonElement>();
+                    foreach (JsonElement element in root.EnumerateArray())
                     {
-                        string[] poster1List = root[i].GetProperty("Ascii").GetString().Split("\n");
-                        string[] poster2List = root.GetArrayLength()-1 > i ? root[i+1].GetProperty("Ascii").GetString().Split("\n") : new string[] { "", "" };
+                        if (element.GetProperty("Ascii").GetString() != "")
+                        {
+                            filteredElements.Add(element);
+                        }
+                    }
+                    for (int i = 0; i < filteredElements.Count; i+=2)
+                    {
+                        string[] poster1List = filteredElements[i].GetProperty("Ascii").GetString().Split("\n");
+                        string[] poster2List = filteredElements.Count()-1 > i ? filteredElements[i+1].GetProperty("Ascii").GetString().Split("\n") : new string[] { "", "" };
 
                         for (int j = 0; j < Math.Max(poster1List.Length, poster2List.Length); j++)
                         {
                             if (poster1List.Length > j && poster2List.Length > j) {
                                 Console.Write($"{poster1List[j]}");
-                                Console.Write(poster2List[j].PadLeft(60 + poster2List[j].Length - poster1List[j].Length, ' '));
+                                Console.Write(poster2List[j].PadLeft(75 + poster2List[j].Length - poster1List[j].Length, ' '));
                                 Console.Write("\n");
                             } else if (poster1List.Length > j)
                                 Console.WriteLine($"{poster1List[j]?? ""}");
                             else {
-                                Console.WriteLine(poster2List[j].PadLeft(60 + poster2List[j].Length, ' '));
+                                Console.WriteLine(poster2List[j].PadLeft(75 + poster2List[j].Length, ' '));
                             }
                         }
                     }
