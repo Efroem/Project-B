@@ -30,7 +30,7 @@ public class CinemaHall
 
             if (string.IsNullOrWhiteSpace(jsonContent))
             {
-                Console.WriteLine("JSON content is empty.");
+                Console.WriteLine("JSON inhoud is leeg.");
                 return null;
             }
 
@@ -39,17 +39,17 @@ public class CinemaHall
         }
         catch (FileNotFoundException)
         {
-            Console.WriteLine("File not found: cinemaHall.json");
+            Console.WriteLine("Bestand niet gevonden: cinemaHall.json");
             return null;
         }
         catch (JsonException ex)
         {
-            Console.WriteLine($"Error reading JSON content: {ex.Message}");
+            Console.WriteLine($"Error lezen van JSON inhoud: {ex.Message}");
             return null;
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"An error occurred: {ex.Message}");
+            Console.WriteLine($"Error gevonden: {ex.Message}");
             return null;
         }
     }
@@ -62,13 +62,13 @@ public class CinemaHall
 
         if (cinemaHalls == null || cinemaHalls.Count == 0)
         {
-            Console.WriteLine("No cinema halls found.");
+            Console.WriteLine("Geen zalen gevonden.");
             return;
         }
 
         foreach (var hall in cinemaHalls)
         {
-            Console.WriteLine($"Name: {hall.Name}\nSize: {hall.Size}\nSerial Number: {hall.SerialNumber}");
+            Console.WriteLine($"Naam: {hall.Name}\nGrootte: {hall.Size}\nSerial Number: {hall.SerialNumber}");
         }
     }
 
@@ -80,26 +80,26 @@ public class CinemaHall
 
         if (cinemaHalls == null)
         {
-            Console.WriteLine("Failed to read the cinema hall data.");
+            Console.WriteLine("Gefaald lezen van de data.");
             return;
         }
 
-        Console.Write("Enter the name of the new cinema hall: ");
+        Console.Write("Naam van de bioscoopzaal: ");
         string? name = Console.ReadLine();
 
         if (string.IsNullOrWhiteSpace(name))
         {
-            Console.WriteLine("Invalid name. Name cannot be empty.");
+            Console.WriteLine("Verkeerde naam. Voer een juiste naam in.");
             return;
         }
 
         int size;
         do
         {
-            Console.WriteLine("Enter the size of the new cinema hall (1, 2, or 3):");
+            Console.WriteLine($"Kies de grootte van de nieuwe bioscoopzaal\n1 - klein: (55 mensen)\n2 - medium: (86 mensen)\n3 - groot(100 mensen):");
             if (!int.TryParse(Console.ReadLine(), out size) || (size < 1 || size > 3))
             {
-                Console.WriteLine("Invalid input. Size must be 1, 2, or 3.");
+                Console.WriteLine("Verkeerde input. Kies tussen 1, 2, of 3.");
             }
         } while (size < 1 || size > 3);
 
@@ -113,11 +113,11 @@ public class CinemaHall
         {
             string jsonString = JsonSerializer.Serialize(cinemaHalls, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText("cinemaHall.json", jsonString);
-            Console.WriteLine("New cinema hall successfully added.");
+            Console.WriteLine("Nieuwe bioscoopzaal succesvol toegevoegd.");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"An error occurred while saving the cinema hall data: {ex.Message}");
+            Console.WriteLine($"Er is een error ontstaan met het maken van de bioscoopzaal: {ex.Message}");
         }
     }
 }

@@ -28,5 +28,10 @@
     "name": "Imax2",
     "size": 2,
     "serial number": 6
+  },
+  {
+    "name": "MegaBIOS",
+    "size": 1,
+    "serial number": 7
   }
 ]
