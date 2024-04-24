@@ -14,7 +14,7 @@ static class Authentication
         while (true)
         {
             Console.WriteLine("Kies het volgende: ");
-            Console.WriteLine("1. Inloggen\n2. Registreren");
+            Console.WriteLine("1. Inloggen\n2. Registreren\n3. Terug naar hoofdmenu");
             string userAction = (Console.ReadLine() ?? "").ToLower();
             if (userAction == "1" || userAction == "Inloggen" || userAction == "inloggen")
                 try
@@ -39,7 +39,12 @@ static class Authentication
                 }
 
             }
-            return null;
+            else
+            {
+                Console.Clear();
+                return null;
+            }
+            
         }
     }
 
