@@ -94,5 +94,13 @@
     "LastName": "asdas",
     "BirthDate": "12-12-1231",
     "PhoneNumber": "0101010101"
+  },
+  {
+    "Email": "balth@gmail.com",
+    "Password": "9a2bca3b828e24f91baa5dd22a49919c14d60efa1375cbdf28ac7b6ff585c2b8",
+    "FirstName": "Balthazar",
+    "LastName": "hoek",
+    "BirthDate": "12-1-1966",
+    "PhoneNumber": "0640747900"
   }
 ]
