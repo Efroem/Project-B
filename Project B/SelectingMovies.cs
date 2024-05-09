@@ -24,6 +24,7 @@ public class SelectingMovies
                 while (!found)
                 {
                     AsciiArtPrinter.PrintAsciibeschrijving();
+                    AsciiArtPrinter.PrintMovieTitles("movies.json");
                     Console.Write("Voer de gewenste titel in voor meer informatie: ");
                     string title = Console.ReadLine();
 
@@ -32,6 +33,8 @@ public class SelectingMovies
                     {
                         if (movie.Title.Equals(title, StringComparison.OrdinalIgnoreCase))
                         {
+                            Console.Clear();
+                            AsciiArtPrinter.PrintAsciibeschrijving();
                             Console.WriteLine(new string('*', 133));
                             Console.WriteLine($"{"Jaar van uitgave",-10} : {movie.Released}");
                             Console.WriteLine($"{"Leeftijdsgrens",-10} : {movie.AgeRestricted}");
