@@ -45,8 +45,7 @@ class Program
                     Console.Clear();
                     AsciiArtPrinter.PrintAsciifilms();
                     AsciiArtPrinter.PrintMovieTitles("movies.json");
-                    Console.WriteLine("Druk op een knop om terug te gaan");
-                    Console.ReadKey();
+                    SelectingMovies.MoviesSelect();
                     Console.Clear();
                     break;
 

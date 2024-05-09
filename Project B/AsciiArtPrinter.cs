@@ -212,6 +212,19 @@ public class AsciiArtPrinter
         string centeredAsciiArt = "                    " + register.Replace("\n", "\n                  ");
         Console.WriteLine(centeredAsciiArt);
     }
+    public static void PrintAsciibeschrijving()
+    {
+        string beschrijving = @"
 
+  ______ _____ _      __  __      ____  ______  _____  _____ _    _ _____  _____     ___      _______ _   _  _____ 
+ |  ____|_   _| |    |  \/  |    |  _ \|  ____|/ ____|/ ____| |  | |  __ \|_   _|   | \ \    / /_   _| \ | |/ ____|
+ | |__    | | | |    | \  / |    | |_) | |__  | (___ | |    | |__| | |__) | | |     | |\ \  / /  | | |  \| | |  __ 
+ |  __|   | | | |    | |\/| |    |  _ <|  __|  \___ \| |    |  __  |  _  /  | | _   | | \ \/ /   | | | . ` | | |_ |
+ | |     _| |_| |____| |  | |    | |_) | |____ ____) | |____| |  | | | \ \ _| || |__| |  \  /   _| |_| |\  | |__| |
+ |_|    |_____|______|_|  |_|    |____/|______|_____/ \_____|_|  |_|_|  \_\_____\____/    \/   |_____|_| \_|\_____|                                                                                                                                                                                                                               
+        ";
+        string centeredAsciiArt = "                    " + beschrijving.Replace("\n", "\n        ");
+        Console.WriteLine(centeredAsciiArt);
+    }
 
 }
