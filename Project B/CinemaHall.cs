@@ -120,4 +120,66 @@ public class CinemaHall
             Console.WriteLine($"Er is een error ontstaan met het maken van de bioscoopzaal: {ex.Message}");
         }
     }
+
+    public static void RemoveCinemaHall()
+    {
+        List<CinemaHall>? cinemaHalls = ReadFromCinemaHall();
+
+        if (cinemaHalls == null)
+        {
+            Console.WriteLine("Gefaald lezen van de data.");
+            return;
+        }
+
+        Console.WriteLine("De beschikbare bioscoopzalen:");
+
+        int maxNameLength = cinemaHalls.Max(hall => hall.Name.Length);
+
+        foreach (var hall in cinemaHalls)
+        {
+            Console.WriteLine($"- Serial number: {hall.SerialNumber.ToString().PadRight(2)}, Name: {hall.Name.PadRight(maxNameLength)}");
+        }
+
+        Console.WriteLine("\nWelke zaal wilt u verwijderen? Voer het serienummer in:");
+
+        int serialNumber;
+        while (true)
+        {
+            if (!int.TryParse(Console.ReadLine(), out serialNumber))
+            {
+                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld: '3'):");
+                continue;
+            }
+
+            if (cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld: '3'):");
+            }
+        }
+
+        CinemaHall? hallToRemove = cinemaHalls.Find(hall => hall.SerialNumber == serialNumber);
+
+        if (hallToRemove == null)
+        {
+            Console.WriteLine($"Bioscoopzaal met serienummer {serialNumber} niet gevonden.");
+            return;
+        }
+
+        cinemaHalls.Remove(hallToRemove);
+
+        try
+        {
+            string jsonString = JsonSerializer.Serialize(cinemaHalls, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText("cinemaHall.json", jsonString);
+            Console.WriteLine($"Bioscoopzaal met serienummer {serialNumber} succesvol verwijderd.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Er is een error ontstaan met het verwijderen van de bioscoopzaal: {ex.Message}");
+        }
+    }
 }

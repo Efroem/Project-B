@@ -1,37 +1,97 @@
 [
   {
-    "name": "Xmax",
-    "size": 2,
+    "name": "Zaal1",
+    "size": 3,
     "serial number": 1
   },
   {
-    "name": "Super Xmax",
+    "name": "Zaal2",
     "size": 3,
     "serial number": 2
   },
   {
-    "name": "Little Xmax",
-    "size": 1,
+    "name": "Zaal3",
+    "size": 3,
     "serial number": 3
   },
   {
-    "name": "Imax",
-    "size": 2,
+    "name": "Zaal4",
+    "size": 3,
     "serial number": 4
   },
   {
-    "name": "DMAX",
-    "size": 1,
+    "name": "Zaal5",
+    "size": 2,
     "serial number": 5
   },
   {
-    "name": "Imax2",
+    "name": "Zaal6",
     "size": 2,
     "serial number": 6
   },
   {
-    "name": "MegaBIOS",
-    "size": 1,
+    "name": "Zaal7",
+    "size": 2,
     "serial number": 7
+  },
+  {
+    "name": "Zaal8",
+    "size": 2,
+    "serial number": 8
+  },
+  {
+    "name": "Zaal9",
+    "size": 2,
+    "serial number": 9
+  },
+  {
+    "name": "Zaal10",
+    "size": 2,
+    "serial number": 10
+  },
+  {
+    "name": "Zaal11",
+    "size": 2,
+    "serial number": 11
+  },
+  {
+    "name": "Zaal12",
+    "size": 2,
+    "serial number": 12
+  },
+  {
+    "name": "Zaal13",
+    "size": 2,
+    "serial number": 13
+  },
+  {
+    "name": "Zaal14",
+    "size": 2,
+    "serial number": 14
+  },
+  {
+    "name": "Zaal15",
+    "size": 2,
+    "serial number": 15
+  },
+  {
+    "name": "Zaal16",
+    "size": 1,
+    "serial number": 16
+  },
+  {
+    "name": "Zaal17",
+    "size": 1,
+    "serial number": 17
+  },
+  {
+    "name": "Zaal18",
+    "size": 1,
+    "serial number": 18
+  },
+  {
+    "name": "Zaal19",
+    "size": 1,
+    "serial number": 19
   }
 ]
