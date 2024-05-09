@@ -182,4 +182,114 @@ public class CinemaHall
             Console.WriteLine($"Er is een error ontstaan met het verwijderen van de bioscoopzaal: {ex.Message}");
         }
     }
+
+    public static void ChangeCinemaHall()
+    {
+        List<CinemaHall>? cinemaHalls = ReadFromCinemaHall();
+
+        if (cinemaHalls == null)
+        {
+            Console.WriteLine("Gefaald lezen van de data.");
+            return;
+        }
+
+        Console.WriteLine("De beschikbare bioscoopzalen:");
+
+        int maxNameLength = cinemaHalls.Max(hall => hall.Name.Length);
+
+        foreach (var hall in cinemaHalls)
+        {
+            Console.WriteLine($"- Serial number: {hall.SerialNumber.ToString().PadRight(2)}, Name: {hall.Name.PadRight(maxNameLength)}");
+        }
+
+        Console.WriteLine("\nWelke zaal wilt u wijzigen? Voer het serienummer in:");
+
+        int serialNumber;
+        while (true)
+        {
+            if (!int.TryParse(Console.ReadLine(), out serialNumber))
+            {
+                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld '3'):");
+                continue;
+            }
+
+            if (cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld '3'):");
+            }
+        }
+
+        Console.WriteLine("Wat wilt u wijzigen?\n1. Naam\n2. Grootte");
+
+        string? choiceInput;
+        int choice;
+        while (true)
+        {
+            choiceInput = Console.ReadLine()?.ToLower();
+            if (choiceInput == "naam" || choiceInput == "1")
+            {
+                choice = 1;
+                break;
+            }
+            else if (choiceInput == "grootte" || choiceInput == "2")
+            {
+                choice = 2;
+                break;
+            }
+            else
+            {
+                Console.WriteLine($"Ongeldige invoer. Voer 1 ('naam') of 2 ('grootte') in voor uw keuze.");
+            }
+        }
+
+        CinemaHall hallToChange = cinemaHalls.Find(hall => hall.SerialNumber == serialNumber)!;
+
+        switch (choice)
+        {
+            case 1:
+                Console.Write("Voer de nieuwe naam in: ");
+                string? newName = Console.ReadLine();
+                if (newName == null)
+                {
+                    do
+                    {
+                        Console.WriteLine("verkeerde input");
+                    } while (newName == null);
+
+                }
+                else
+                {
+                    hallToChange.Name = newName;
+                }
+                break;
+
+            case 2:
+                int newSize;
+                do
+                {
+                    Console.WriteLine($"Kies de nieuwe grootte van de bioscoopzaal\n1 - klein: (55 mensen)\n2 - medium: (86 mensen)\n3 - groot(100 mensen):");
+                    if (!int.TryParse(Console.ReadLine(), out newSize) || (newSize < 1 || newSize > 3))
+                    {
+                        Console.WriteLine("Verkeerde input. Kies tussen 1, 2 of 3");
+                    }
+                } while (newSize < 1 || newSize > 3);
+                hallToChange.Size = newSize;
+                break;
+        }
+
+        try
+        {
+            string jsonString = JsonSerializer.Serialize(cinemaHalls, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText("cinemaHall.json", jsonString);
+            Console.WriteLine($"Wijziging van bioscoopzaal met serienummer {serialNumber} succesvol doorgevoerd.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Er is een error ontstaan met het wijzigen van de bioscoopzaal: {ex.Message}");
+        }
+    }
 }
