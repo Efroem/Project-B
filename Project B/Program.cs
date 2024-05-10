@@ -96,6 +96,17 @@ class Program
                     Console.ReadLine();
                     Console.Clear();
                     break;
+                
+                case "7":
+                case "checken":
+                    Console.Clear();
+                    CinemaZaal printer = new CinemaZaal();
+                    printer.PrintGridMediumZaal();
+                    printer.NavigateGrid();
+                    Console.ReadLine();
+                    Console.Clear();
+                    break;
+
 
                 default:
                     Console.Clear();
