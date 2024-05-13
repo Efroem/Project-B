@@ -46,8 +46,21 @@ public class SelectingMovies
                             Console.WriteLine($"{"Beschrijving",-10} : {movie.Description}");
                             Console.WriteLine(new string('*', 133));
                             found = true;
-                            Console.WriteLine("Druk op een willekeurige knop om terug te gaan naar het hoofdmenu");
-                            Console.ReadKey(); // True om de ingedrukte toets weer te geven
+                            // Console.WriteLine("Druk op een willekeurige knop om terug te gaan naar het hoofdmenu");
+                            // Console.ReadKey(); // True om de ingedrukte toets weer te geven
+                            Console.WriteLine("1. Bekijk schema van deze film");
+                            Console.WriteLine("2. Terug naar menu");
+                            string userAction = (Console.ReadLine() ?? "").ToLower();
+
+                            switch (userAction) {
+                                case "1":
+                                case "schema":
+                                case "bekijk schema van deze film":
+                                case "bekijk schema":
+                                    Console.Clear();
+                                    Schedule.OpenSpecificMenu(movie.Title);
+                                    break;
+                            }
                             Console.Clear();
                             running = false;
                             break;
