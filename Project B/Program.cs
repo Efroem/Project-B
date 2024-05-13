@@ -92,7 +92,7 @@ class Program
                 case "cinemaHall toevoegen":
                     Console.Clear();
                     Console.WriteLine("CinemaHall toevoegen");
-                    CinemaHall.ChangeCinemaHall();
+                    CinemaHall.AddNewCinemaHall();
                     Console.ReadLine();
                     Console.Clear();
                     break;

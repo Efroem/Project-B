@@ -5,7 +5,7 @@ using System.IO;
 
 public class SelectingMovies
 {
-    private static List<Movies> movies;
+    private static List<Movies> movies = new List<Movies>();
 
     public static void MoviesSelect()
     {
@@ -15,7 +15,7 @@ public class SelectingMovies
         bool running = true;
         while (running)
         {
-            string choice = Console.ReadLine().ToLower();
+            string? choice = Console.ReadLine()?.ToLower();
 
             if (choice == "1" || choice == "film beschrijving" || choice == "beschrijving")
             {
@@ -25,7 +25,7 @@ public class SelectingMovies
                 {
                     AsciiArtPrinter.PrintAsciibeschrijving();
                     Console.Write("Voer de gewenste titel in voor meer informatie: ");
-                    string title = Console.ReadLine();
+                    string? title = Console.ReadLine();
 
                     // Zoek de film op titel
                     foreach (var movie in movies)
@@ -54,7 +54,7 @@ public class SelectingMovies
                     if (!found)
                     {
                         Console.WriteLine("Film niet gevonden. Wil je een andere film proberen? (ja/nee)");
-                        string retryChoice = Console.ReadLine().ToLower();
+                        string? retryChoice = Console.ReadLine()?.ToLower();
                         if (retryChoice != "ja" && retryChoice != "j")
                         {
                             running = false; // Stop de lus als de gebruiker geen andere film wil proberen
@@ -80,11 +80,18 @@ public class SelectingMovies
 
     private static void LoadMovies()
     {
-        // JSON-bestand laden
-        using (StreamReader r = new StreamReader("movies.json"))
+        try
         {
-            string json = r.ReadToEnd();
-            movies = JsonConvert.DeserializeObject<List<Movies>>(json);
+            // JSON-bestand laden
+            using (StreamReader r = new StreamReader("movies.json"))
+            {
+                string json = r.ReadToEnd();
+                movies = JsonConvert.DeserializeObject<List<Movies>>(json);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
         }
     }
 }
