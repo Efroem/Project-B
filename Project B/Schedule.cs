@@ -45,21 +45,31 @@ public class Schedule
 
     public static void OpenGeneralMenu()
     {
-        List<Schedule> schedule = ReadScheduleJson();
-        schedule = schedule.Where(x => x.Date > DateTime.Now).OrderBy(x => x.Date).ToList();
+        List<Schedule> schedules = ReadScheduleJson();
+        schedules = schedules.Where(x => x.Date > DateTime.Now).OrderBy(x => x.Date).ToList();
+        OpenScheduleMenu(schedules);
+    }
+
+    public static void OpenSpecificMenu(string movieTitle) {
+        List<Schedule> schedules = ReadScheduleJson();
+        schedules = schedules.Where(x => x.MovieTitle == movieTitle).Where(x => x.Date > DateTime.Now).OrderBy(x => x.Date).ToList();
+        OpenScheduleMenu(schedules);
+    }
+
+    private static void OpenScheduleMenu(List<Schedule> schedules) {
         int currentIndex = 0;
         const int stepSize = 5;
 
         while (true) {
             if (currentIndex != 0)
                 Console.WriteLine("1. Vorige");
-            for (int i = 0; i < Math.Min(stepSize, schedule.Count - currentIndex); i++)
+            for (int i = 0; i < Math.Min(stepSize, schedules.Count - currentIndex); i++)
             {
-                Console.WriteLine($"{i+2}. {schedule[currentIndex + i].MovieTitle}");
-                Console.WriteLine(schedule[currentIndex + i].Date);
+                Console.WriteLine($"{i+2}. {schedules[currentIndex + i].MovieTitle}");
+                Console.WriteLine(schedules[currentIndex + i].Date);
                 Console.WriteLine();
             }
-            if (currentIndex + 5 < schedule.Count)
+            if (currentIndex + 5 < schedules.Count)
             Console.WriteLine("7. Volgende");
             Console.WriteLine("8. Terug naar menu");
 
@@ -72,9 +82,9 @@ public class Schedule
                     break; 
                 case "7":
                 case "volgende":
-                    currentIndex = schedule.Count - currentIndex > stepSize 
-                        ? currentIndex + stepSize > schedule.Count - currentIndex 
-                            ? schedule.Count - stepSize 
+                    currentIndex = schedules.Count - currentIndex > stepSize 
+                        ? currentIndex + stepSize > schedules.Count - currentIndex 
+                            ? schedules.Count - stepSize 
                             : currentIndex + stepSize 
                         : currentIndex;
                     break;
@@ -85,10 +95,10 @@ public class Schedule
                     return;
             }
 
-            for (int i = 0; i < Math.Min(stepSize, schedule.Count - currentIndex); i++)
+            for (int i = 0; i < Math.Min(stepSize, schedules.Count - currentIndex); i++)
             {
-                if (userAction == Convert.ToString(i+2) || userAction == schedule[currentIndex + i].MovieTitle) {
-                    Console.WriteLine($"You picked {i+2}. {schedule[currentIndex + i].MovieTitle}");
+                if (userAction == Convert.ToString(i+2) || userAction == schedules[currentIndex + i].MovieTitle) {
+                    Console.WriteLine($"You picked {i+2}. {schedules[currentIndex + i].MovieTitle}");
                 }
             }
 
