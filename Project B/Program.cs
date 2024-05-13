@@ -68,8 +68,16 @@ class Program
                     Console.ReadLine();
                     Console.Clear();
                     break;
-
+                
                 case "4":
+                case "schema":
+                case "bekijk schema":
+                    Console.Clear();
+                    Schedule.OpenGeneralMenu();
+                    Console.Clear();
+                    break;
+
+                case "5":
                 case "verlaat pagina":
                 case "q":
                     Console.Clear();
@@ -79,7 +87,7 @@ class Program
                     Console.Clear();
                     break;
 
-                case "5":
+                case "6":
                 case "lijst zalen":
                     Console.Clear();
                     Console.WriteLine("Lijst Zalen");
@@ -88,7 +96,7 @@ class Program
                     Console.Clear();
                     break;
 
-                case "6":
+                case "7":
                 case "cinemaHall toevoegen":
                     Console.Clear();
                     Console.WriteLine("CinemaHall toevoegen");
@@ -96,13 +104,24 @@ class Program
                     Console.ReadLine();
                     Console.Clear();
                     break;
+                
+                case "8":
+                case "checken":
+                    Console.Clear();
+                    CinemaZaal printer = new CinemaZaal();
+                    printer.PrintGridMediumZaal();
+                    printer.NavigateGrid();
+                    Console.ReadLine();
+                    Console.Clear();
+                    break;
+
 
                 default:
                     Console.Clear();
                     Console.WriteLine("Ongeldige invoer");
                     break;
             }
-        } while (answer != "4" && answer != "verlaat pagina" && answer != "q");
+        } while (answer != "5" && answer != "verlaat pagina" && answer != "q");
 
         Environment.Exit(0);
     }
