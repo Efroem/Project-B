@@ -72,9 +72,9 @@ class Program
                 case "4":
                 case "schema":
                 case "bekijk schema":
-                    Console.Clear();
+                    // Console.Clear();
                     Schedule.OpenGeneralMenu();
-                    Console.Clear();
+                    // Console.Clear();
                     break;
 
                 case "5":
@@ -121,7 +121,7 @@ class Program
                     Console.WriteLine("Ongeldige invoer");
                     break;
             }
-        } while (answer != "4" && answer != "verlaat pagina" && answer != "q");
+        } while (answer != "5" && answer != "verlaat pagina" && answer != "q");
 
         Environment.Exit(0);
     }

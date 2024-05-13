@@ -61,6 +61,7 @@ public class Schedule
             }
             if (currentIndex + 5 < schedule.Count)
             Console.WriteLine("7. Volgende");
+            Console.WriteLine("8. Terug naar menu");
 
             string userAction = (Console.ReadLine() ?? "").ToLower();
             switch (userAction)
@@ -79,6 +80,8 @@ public class Schedule
                     break;
                 case "8":
                 case "terug":
+                case "terug naar menu":
+                case "menu":
                     return;
             }
 
@@ -88,6 +91,8 @@ public class Schedule
                     Console.WriteLine($"You picked {i+2}. {schedule[currentIndex + i].MovieTitle}");
                 }
             }
+
+            Console.Clear();
         }
     }
 }
