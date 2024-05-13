@@ -72,9 +72,9 @@ class Program
                 case "4":
                 case "schema":
                 case "bekijk schema":
-                    // Console.Clear();
+                    Console.Clear();
                     Schedule.OpenGeneralMenu();
-                    // Console.Clear();
+                    Console.Clear();
                     break;
 
                 case "5":
