@@ -6,49 +6,49 @@ public class AsciiArtPrinter
 {
     public static void PrintMovieTitles(string jsonFilePath)
     {
-    // Read the JSON file
-    string jsonString = File.ReadAllText(jsonFilePath);
+        // Read the JSON file
+        string jsonString = File.ReadAllText(jsonFilePath);
 
-    // Deserialize the JSON to a JsonDocument
-    using (JsonDocument document = JsonDocument.Parse(jsonString))
-    {
-        // Access root element
-        JsonElement root = document.RootElement;
-
-        // Check if the root element is an array
-        if (root.ValueKind == JsonValueKind.Array)
+        // Deserialize the JSON to a JsonDocument
+        using (JsonDocument document = JsonDocument.Parse(jsonString))
         {
-            // Calculate the width of the terminal
-            int terminalWidth = Console.WindowWidth;
+            // Access root element
+            JsonElement root = document.RootElement;
 
-            // Calculate the maximum width of the movie titles
-            int maxTitleWidth = 0;
-            foreach (JsonElement movie in root.EnumerateArray())
+            // Check if the root element is an array
+            if (root.ValueKind == JsonValueKind.Array)
             {
-                string? title = movie.GetProperty("Title").GetString();
-                if (title != null && title.Length > maxTitleWidth)
+                // Calculate the width of the terminal
+                int terminalWidth = Console.WindowWidth;
+
+                // Calculate the maximum width of the movie titles
+                int maxTitleWidth = 0;
+                foreach (JsonElement movie in root.EnumerateArray())
                 {
-                    maxTitleWidth = title.Length;
+                    string? title = movie.GetProperty("Title").GetString();
+                    if (title != null && title.Length > maxTitleWidth)
+                    {
+                        maxTitleWidth = title.Length;
+                    }
                 }
+
+                // Calculate padding for center alignment
+                int leftPadding = (terminalWidth - maxTitleWidth - 2) / 2; // Subtract 2 for the padding characters '|'
+
+                // Print top border
+                Console.WriteLine("+" + new string('-', terminalWidth - 2) + "+");
+
+                // Print movie titles
+                foreach (JsonElement movie in root.EnumerateArray())
+                {
+                    string? title = movie.GetProperty("Title").GetString();
+                    Console.WriteLine("|" + new string(' ', leftPadding) + title.PadRight(maxTitleWidth) + new string(' ', terminalWidth - leftPadding - maxTitleWidth - 2) + "|");
+                }
+
+                // Print bottom border
+                Console.WriteLine("+" + new string('-', terminalWidth - 2) + "+");
             }
-
-            // Calculate padding for center alignment
-            int leftPadding = (terminalWidth - maxTitleWidth - 2) / 2; // Subtract 2 for the padding characters '|'
-
-            // Print top border
-            Console.WriteLine("+" + new string('-', terminalWidth - 2) + "+");
-
-            // Print movie titles
-            foreach (JsonElement movie in root.EnumerateArray())
-            {
-                string? title = movie.GetProperty("Title").GetString();
-                Console.WriteLine("|" + new string(' ', leftPadding) + title.PadRight(maxTitleWidth) + new string(' ', terminalWidth - leftPadding - maxTitleWidth - 2) + "|");
-            }
-
-            // Print bottom border
-            Console.WriteLine("+" + new string('-', terminalWidth - 2) + "+");
         }
-    }
     }
     public static void PrintAscii(string jsonFilePath)
     {
@@ -64,7 +64,8 @@ public class AsciiArtPrinter
             // Check if the root element is an array
             if (root.ValueKind == JsonValueKind.Array)
             {
-                if (Console.WindowWidth > 130) {
+                if (Console.WindowWidth > 130)
+                {
                     List<JsonElement> filteredElements = new List<JsonElement>();
                     foreach (JsonElement element in root.EnumerateArray())
                     {
@@ -73,25 +74,30 @@ public class AsciiArtPrinter
                             filteredElements.Add(element);
                         }
                     }
-                    for (int i = 0; i < filteredElements.Count; i+=2)
+                    for (int i = 0; i < filteredElements.Count; i += 2)
                     {
                         string[] poster1List = filteredElements[i].GetProperty("Ascii").GetString().Split("\n");
-                        string[] poster2List = filteredElements.Count()-1 > i ? filteredElements[i+1].GetProperty("Ascii").GetString().Split("\n") : new string[] { "", "" };
+                        string[] poster2List = filteredElements.Count() - 1 > i ? filteredElements[i + 1].GetProperty("Ascii").GetString().Split("\n") : new string[] { "", "" };
 
                         for (int j = 0; j < Math.Max(poster1List.Length, poster2List.Length); j++)
                         {
-                            if (poster1List.Length > j && poster2List.Length > j) {
+                            if (poster1List.Length > j && poster2List.Length > j)
+                            {
                                 Console.Write($"{poster1List[j]}");
                                 Console.Write(poster2List[j].PadLeft(75 + poster2List[j].Length - poster1List[j].Length, ' '));
                                 Console.Write("\n");
-                            } else if (poster1List.Length > j)
-                                Console.WriteLine($"{poster1List[j]?? ""}");
-                            else {
+                            }
+                            else if (poster1List.Length > j)
+                                Console.WriteLine($"{poster1List[j] ?? ""}");
+                            else
+                            {
                                 Console.WriteLine(poster2List[j].PadLeft(75 + poster2List[j].Length, ' '));
                             }
                         }
                     }
-                } else {
+                }
+                else
+                {
                     foreach (JsonElement movie in root.EnumerateArray())
                     {
                         // Print the title of each movie with box
@@ -99,7 +105,7 @@ public class AsciiArtPrinter
                         Console.WriteLine();
                     }
                 }
-                
+
             }
         }
     }
@@ -117,7 +123,7 @@ public class AsciiArtPrinter
     }
     public static void Printasciihm()
     {
-    string asciiArthm = @"
+        string asciiArthm = @"
   _    _  ____   ____  ______ _____  __  __ ______ _   _ _    _ 
  | |  | |/ __ \ / __ \|  ____|  __ \|  \/  |  ____| \ | | |  | |
  | |__| | |  | | |  | | |__  | |  | | \  / | |__  |  \| | |  | |
@@ -126,11 +132,11 @@ public class AsciiArtPrinter
  |_|  |_|\____/ \____/|_|    |_____/|_|  |_|______|_| \_|\____/ 
 ";
 
-    // Voeg handmatig het aantal spaties toe om het in het midden te plaatsen
-    string centeredAsciiArt = "                    " + asciiArthm.Replace("\n", "\n                  ");
+        // Voeg handmatig het aantal spaties toe om het in het midden te plaatsen
+        string centeredAsciiArt = "                    " + asciiArthm.Replace("\n", "\n                  ");
 
-    // Print de ASCII art
-    Console.WriteLine(centeredAsciiArt);
+        // Print de ASCII art
+        Console.WriteLine(centeredAsciiArt);
     }
     public static void PrintAsciiMenu()
     {
@@ -149,7 +155,7 @@ public class AsciiArtPrinter
         string centeredAsciiArt = "                    " + menuText.Replace("\n", "\n                  ");
         Console.WriteLine(centeredAsciiArt);
     }
-    
+
     public static void PrintAsciiMenu2()
     {
         string menuText2 = @"
@@ -206,10 +212,19 @@ public class AsciiArtPrinter
         string centeredAsciiArt = "                    " + register.Replace("\n", "\n                  ");
         Console.WriteLine(centeredAsciiArt);
     }
+    public static void PrintAsciibeschrijving()
+    {
+        string beschrijving = @"
 
+  ______ _____ _      __  __      ____  ______  _____  _____ _    _ _____  _____     ___      _______ _   _  _____ 
+ |  ____|_   _| |    |  \/  |    |  _ \|  ____|/ ____|/ ____| |  | |  __ \|_   _|   | \ \    / /_   _| \ | |/ ____|
+ | |__    | | | |    | \  / |    | |_) | |__  | (___ | |    | |__| | |__) | | |     | |\ \  / /  | | |  \| | |  __ 
+ |  __|   | | | |    | |\/| |    |  _ <|  __|  \___ \| |    |  __  |  _  /  | | _   | | \ \/ /   | | | . ` | | |_ |
+ | |     _| |_| |____| |  | |    | |_) | |____ ____) | |____| |  | | | \ \ _| || |__| |  \  /   _| |_| |\  | |__| |
+ |_|    |_____|______|_|  |_|    |____/|______|_____/ \_____|_|  |_|_|  \_\_____\____/    \/   |_____|_| \_|\_____|                                                                                                                                                                                                                               
+        ";
+        string centeredAsciiArt = "                    " + beschrijving.Replace("\n", "\n        ");
+        Console.WriteLine(centeredAsciiArt);
+    }
 
 }
-
-
-
-

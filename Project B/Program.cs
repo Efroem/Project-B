@@ -45,8 +45,7 @@ class Program
                     Console.Clear();
                     AsciiArtPrinter.PrintAsciifilms();
                     AsciiArtPrinter.PrintMovieTitles("movies.json");
-                    Console.WriteLine("Druk op een knop om terug te gaan");
-                    Console.ReadKey();
+                    SelectingMovies.MoviesSelect();
                     Console.Clear();
                     break;
 
@@ -93,10 +92,21 @@ class Program
                 case "cinemaHall toevoegen":
                     Console.Clear();
                     Console.WriteLine("CinemaHall toevoegen");
-                    CinemaHall.AddNewCinemaHall();
+                    CinemaHall.ChangeCinemaHall();
                     Console.ReadLine();
                     Console.Clear();
                     break;
+                
+                case "7":
+                case "checken":
+                    Console.Clear();
+                    CinemaZaal printer = new CinemaZaal();
+                    printer.PrintGridMediumZaal();
+                    printer.NavigateGrid();
+                    Console.ReadLine();
+                    Console.Clear();
+                    break;
+
 
                 default:
                     Console.Clear();

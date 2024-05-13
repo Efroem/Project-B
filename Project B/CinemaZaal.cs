@@ -8,6 +8,40 @@ public  class CinemaZaal
 	private const string EmptyRowSeparator6 = "        |";
 	private const string EmptyRowSeparator7 = "      |";
 
+    private int currentRow = 2; 
+    private int cursorPosition = 5;
+
+    public void NavigateGrid()
+    {
+        while (true)
+        {
+            Console.SetCursorPosition(cursorPosition, currentRow);
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+            if (keyInfo.Key == ConsoleKey.UpArrow && currentRow > 1)
+            {
+                currentRow -= 2;
+            }
+            else if (keyInfo.Key == ConsoleKey.DownArrow && currentRow < 19)
+            {
+                currentRow += 2;
+            }
+            else if (keyInfo.Key == ConsoleKey.LeftArrow && cursorPosition > 5)
+            {
+                cursorPosition -= 3;
+            }
+            else if (keyInfo.Key == ConsoleKey.RightArrow && cursorPosition < 45)
+            {
+                cursorPosition += 3;
+            }
+            else if (keyInfo.Key == ConsoleKey.Escape)
+            {
+                break;
+            }
+        }
+    }
+
 
     public void PrintGridGroteZaal()
     {
@@ -66,7 +100,7 @@ public void PrintGridMediumZaal()
 
         for (char c = 'A'; c <= 'I'; c++)
         {
-            Console.Write("|  " + c + "  ");
+            Console.Write("|  " + c + "");
             int maxSeats = (c - 'A') % 2 == 0 ? 10 : 9;
             for (int i = 1; i <= maxSeats; i++)
             {
