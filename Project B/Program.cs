@@ -97,10 +97,10 @@ class Program
                     break;
 
                 case "7":
-                case "cinemaHall toevoegen":
+                case "cinemaHall verwijderen":
                     Console.Clear();
-                    Console.WriteLine("CinemaHall toevoegen");
-                    CinemaHall.ChangeCinemaHall();
+                    Console.WriteLine("CinemaHall verwijderen");
+                    CinemaHall.RemoveCinemaHall();
                     Console.ReadLine();
                     Console.Clear();
                     break;

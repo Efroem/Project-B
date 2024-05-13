@@ -11,7 +11,7 @@ public class SelectingMovies
     {
         Console.WriteLine("1. Film beschrijving");
         Console.WriteLine("2. Terug naar het hoofdmenu");
-        LoadMovies(); // Laad de films eenmaal aan het begin van het programma
+        LoadMovies();   
         bool running = true;
         while (running)
         {
@@ -26,7 +26,7 @@ public class SelectingMovies
                     AsciiArtPrinter.PrintAsciibeschrijving();
                     AsciiArtPrinter.PrintMovieTitles("movies.json");
                     Console.Write("Voer de gewenste titel in voor meer informatie: ");
-                    string title = Console.ReadLine();
+                    string title = Console.ReadLine().ToLower();
 
                     // Zoek de film op titel
                     foreach (var movie in movies)
@@ -35,7 +35,7 @@ public class SelectingMovies
                         {
                             Console.Clear();
                             AsciiArtPrinter.PrintAsciibeschrijving();
-                            Console.WriteLine(new string('*', 133));
+                            Console.WriteLine(new string('*', Console.WindowWidth - 1));
                             Console.WriteLine($"{"Jaar van uitgave",-10} : {movie.Released}");
                             Console.WriteLine($"{"Leeftijdsgrens",-10} : {movie.AgeRestricted}");
                             Console.WriteLine($"{"Genres",-10} : {string.Join(", ", movie.Genres)}");
@@ -44,7 +44,7 @@ public class SelectingMovies
                             Console.WriteLine($"{"Voertaal",-10} : {movie.Language}");
                             Console.WriteLine($"{"Beoordeling",-10} : {movie.Rating}");
                             Console.WriteLine($"{"Beschrijving",-10} : {movie.Description}");
-                            Console.WriteLine(new string('*', 133));
+                            Console.WriteLine(new string('*', Console.WindowWidth - 1));
                             found = true;
                             Console.WriteLine("Druk op een willekeurige knop om terug te gaan naar het hoofdmenu");
                             Console.ReadKey(); // True om de ingedrukte toets weer te geven
