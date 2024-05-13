@@ -44,7 +44,7 @@ static class Authentication
                 Console.Clear();
                 return null;
             }
-            
+
         }
     }
 
@@ -125,7 +125,7 @@ static class Authentication
             }
             else if (userAction == "2" || userAction.ToLower() == "Terug naar hoofdmenu" || userAction.ToLower() == "terug")
                 Console.Clear();
-                break;
+            break;
         }
     }
 

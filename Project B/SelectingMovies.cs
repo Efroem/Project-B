@@ -5,17 +5,17 @@ using System.IO;
 
 public class SelectingMovies
 {
-    private static List<Movies> movies;
+    private static List<Movies> movies = new List<Movies>();
 
     public static void MoviesSelect()
     {
         Console.WriteLine("1. Film beschrijving");
         Console.WriteLine("2. Terug naar het hoofdmenu");
-        LoadMovies();   
+        LoadMovies(); // Laad de films eenmaal aan het begin van het programma
         bool running = true;
         while (running)
         {
-            string choice = Console.ReadLine().ToLower();
+            string? choice = Console.ReadLine()?.ToLower();
 
             if (choice == "1" || choice == "film beschrijving" || choice == "beschrijving")
             {
@@ -26,7 +26,7 @@ public class SelectingMovies
                     AsciiArtPrinter.PrintAsciibeschrijving();
                     AsciiArtPrinter.PrintMovieTitles("movies.json");
                     Console.Write("Voer de gewenste titel in voor meer informatie: ");
-                    string title = Console.ReadLine().ToLower();
+                    string? title = Console.ReadLine();
 
                     // Zoek de film op titel
                     foreach (var movie in movies)
@@ -35,7 +35,7 @@ public class SelectingMovies
                         {
                             Console.Clear();
                             AsciiArtPrinter.PrintAsciibeschrijving();
-                            Console.WriteLine(new string('*', Console.WindowWidth - 1));
+                            Console.WriteLine(new string('*', 133));
                             Console.WriteLine($"{"Jaar van uitgave",-10} : {movie.Released}");
                             Console.WriteLine($"{"Leeftijdsgrens",-10} : {movie.AgeRestricted}");
                             Console.WriteLine($"{"Genres",-10} : {string.Join(", ", movie.Genres)}");
@@ -44,10 +44,23 @@ public class SelectingMovies
                             Console.WriteLine($"{"Voertaal",-10} : {movie.Language}");
                             Console.WriteLine($"{"Beoordeling",-10} : {movie.Rating}");
                             Console.WriteLine($"{"Beschrijving",-10} : {movie.Description}");
-                            Console.WriteLine(new string('*', Console.WindowWidth - 1));
+                            Console.WriteLine(new string('*', 133));
                             found = true;
-                            Console.WriteLine("Druk op een willekeurige knop om terug te gaan naar het hoofdmenu");
-                            Console.ReadKey(); // True om de ingedrukte toets weer te geven
+                            // Console.WriteLine("Druk op een willekeurige knop om terug te gaan naar het hoofdmenu");
+                            // Console.ReadKey(); // True om de ingedrukte toets weer te geven
+                            Console.WriteLine("1. Bekijk schema van deze film");
+                            Console.WriteLine("2. Terug naar menu");
+                            string userAction = (Console.ReadLine() ?? "").ToLower();
+
+                            switch (userAction) {
+                                case "1":
+                                case "schema":
+                                case "bekijk schema van deze film":
+                                case "bekijk schema":
+                                    Console.Clear();
+                                    Schedule.OpenSpecificMenu(movie.Title);
+                                    break;
+                            }
                             Console.Clear();
                             running = false;
                             break;
@@ -57,7 +70,7 @@ public class SelectingMovies
                     if (!found)
                     {
                         Console.WriteLine("Film niet gevonden. Wil je een andere film proberen? (ja/nee)");
-                        string retryChoice = Console.ReadLine().ToLower();
+                        string? retryChoice = Console.ReadLine()?.ToLower();
                         if (retryChoice != "ja" && retryChoice != "j")
                         {
                             running = false; // Stop de lus als de gebruiker geen andere film wil proberen
@@ -83,11 +96,18 @@ public class SelectingMovies
 
     private static void LoadMovies()
     {
-        // JSON-bestand laden
-        using (StreamReader r = new StreamReader("movies.json"))
+        try
         {
-            string json = r.ReadToEnd();
-            movies = JsonConvert.DeserializeObject<List<Movies>>(json);
+            // JSON-bestand laden
+            using (StreamReader r = new StreamReader("movies.json"))
+            {
+                string json = r.ReadToEnd();
+                movies = JsonConvert.DeserializeObject<List<Movies>>(json);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
         }
     }
 }
