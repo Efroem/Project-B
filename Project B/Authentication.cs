@@ -93,13 +93,10 @@ static class Authentication
         Console.Clear();
 
         string birthdate = RegisterBirthdate();
-        AsciiArtPrinter.PrintAsciiRegister();
-        Console.WriteLine("Telefoonnummer:");
-        string phoneNumber = RegisterPhoneNumber();
         Console.Clear();
 
         // Creates new object
-        Account account = new(email, password, firstName, lastName, birthdate, phoneNumber);
+        Account account = new(email, password, firstName, lastName, birthdate);
         SaveNewAccount(account);
 
         // save account to property and return account
@@ -250,26 +247,7 @@ static class Authentication
         }
     }
     // Validates phone number and returns if it's true
-    private static string RegisterPhoneNumber()
-    {
-        string pattern = @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
-        while (true)
-        {
-            try
-            {
-                string phoneNumber = Console.ReadLine() ?? "";
-                Console.Clear();
-                if (!Regex.IsMatch(phoneNumber, pattern))
-                    throw new Exception("Ongeldig telefoonnummer");
-                else
-                    return phoneNumber;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-    }
+    
 
     // checks if email is a valid adress
     private static bool IsValidEmail(string email)

@@ -6,20 +6,18 @@ class Account
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string BirthDate { get; set; }
-    public string PhoneNumber { get; set; }
 
-    public Account(string email, string password, string firstName, string lastName, string birthDate, string phoneNumber)
+    public Account(string email, string password, string firstName, string lastName, string birthDate)
     {
         Email = email;
         Password = password;
         FirstName = firstName;
         LastName = lastName;
         BirthDate = birthDate;
-        PhoneNumber = phoneNumber;
     }
 
     public bool TestPassword(string password) => _password == password;
 
     public override string ToString() => $"Email: {Email}" + "\n" + $"Voornaam: {FirstName}" + "\n" + $"Achternaam: {LastName}" +
-        "\n" + $"Geboortedatum: {BirthDate}" + "\n" + $"Telefoonnummer: {PhoneNumber}";
+        "\n" + $"Geboortedatum: {BirthDate}" + "\n";
 }

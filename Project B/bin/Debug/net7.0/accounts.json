@@ -4,103 +4,97 @@
     "Password": null,
     "FirstName": null,
     "LastName": null,
-    "BirthDate": null,
-    "PhoneNumber": null
+    "BirthDate": null
   },
   {
     "Email": null,
     "Password": null,
     "FirstName": null,
     "LastName": null,
-    "BirthDate": null,
-    "PhoneNumber": null
+    "BirthDate": null
   },
   {
     "Email": null,
     "Password": null,
     "FirstName": null,
     "LastName": null,
-    "BirthDate": null,
-    "PhoneNumber": null
+    "BirthDate": null
   },
   {
     "Email": "vff@gmail",
     "Password": "3072bf82de82ba2f8623b68ca4567647df4f659784830500d5d010a14cec21fc",
     "FirstName": "vincent",
     "LastName": "vincent",
-    "BirthDate": "12-12-1201",
-    "PhoneNumber": "0612341321"
+    "BirthDate": "12-12-1201"
   },
   {
     "Email": "hallo123@gmail.com",
     "Password": "d3751d33f9cd5049c4af2b462735457e4d3baf130bcbb87f389e349fbaeb20b9",
     "FirstName": "Vincent",
     "LastName": "Stoel",
-    "BirthDate": "15-06-2006",
-    "PhoneNumber": "0643271721"
+    "BirthDate": "15-06-2006"
   },
   {
     "Email": "test@example.nl",
     "Password": "937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244",
     "FirstName": "test",
     "LastName": "example",
-    "BirthDate": "2-5-1993",
-    "PhoneNumber": "0632121212"
+    "BirthDate": "2-5-1993"
   },
   {
     "Email": "Vince@stoel.nl",
     "Password": "19fb86d9e6c02105f4becdf3b2902e8a47986921d658ca0b624255591ca58c9a",
     "FirstName": "James",
     "LastName": "Jansen",
-    "BirthDate": "09-09-1902",
-    "PhoneNumber": "0506060606"
+    "BirthDate": "09-09-1902"
   },
   {
     "Email": "lekker@gmail.com",
     "Password": "4d883ebd4e285e6e0f33a3bcb872e194bcef129080d5fb611e91dd1cd3d3aadf",
     "FirstName": "lekker",
     "LastName": "lekker",
-    "BirthDate": "02-02-1231",
-    "PhoneNumber": "0101100110"
+    "BirthDate": "02-02-1231"
   },
   {
     "Email": "joehoe@gmail.com",
     "Password": "3072bf82de82ba2f8623b68ca4567647df4f659784830500d5d010a14cec21fc",
     "FirstName": "Vincent",
     "LastName": "Stoel",
-    "BirthDate": "02-02-1231",
-    "PhoneNumber": "1212121212"
+    "BirthDate": "02-02-1231"
   },
   {
     "Email": "sdadas@gmail.com",
     "Password": "494414ded24da13c451b13b424928821351c78fce49f93d9e1b55f102790c206",
     "FirstName": "Vincent",
     "LastName": "dasdas",
-    "BirthDate": "02-02-2311",
-    "PhoneNumber": "0101100110"
+    "BirthDate": "02-02-2311"
   },
   {
     "Email": "01323@gmail.com",
     "Password": "370344c3877fe71c781fd6fb80a66a27e9016d9edc664f5f13e58cea9112aac1",
     "FirstName": "Lalala",
     "LastName": "lallala",
-    "BirthDate": "02-02-2131",
-    "PhoneNumber": "0101011001"
+    "BirthDate": "02-02-2131"
   },
   {
     "Email": "sdajsdkas@gmail.com",
     "Password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
     "FirstName": "asdas",
     "LastName": "asdas",
-    "BirthDate": "12-12-1231",
-    "PhoneNumber": "0101010101"
+    "BirthDate": "12-12-1231"
   },
   {
     "Email": "balth@gmail.com",
     "Password": "9a2bca3b828e24f91baa5dd22a49919c14d60efa1375cbdf28ac7b6ff585c2b8",
     "FirstName": "Balthazar",
     "LastName": "hoek",
-    "BirthDate": "12-1-1966",
-    "PhoneNumber": "0640747900"
+    "BirthDate": "12-1-1966"
+  },
+  {
+    "Email": "lala@gmail.com",
+    "Password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "FirstName": "dsad",
+    "LastName": "dasda",
+    "BirthDate": "20-10-1013"
   }
 ]
