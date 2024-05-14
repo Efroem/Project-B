@@ -191,10 +191,33 @@ static class Authentication
         while (true)
         {
             try
-            {
-                AsciiArtPrinter.PrintAsciiRegister();
-                Console.WriteLine("Wachtwoord:");
-                string password = ReadPassword();
+            {   
+                bool allowed = false;
+                string errorMsg = "";
+                string password;
+                do {
+                    AsciiArtPrinter.PrintAsciiRegister();
+                    if (errorMsg != "") {
+                        Console.Write(errorMsg);
+                        errorMsg = "";
+                    }
+                        
+                    Console.WriteLine("Wachtwoord:");
+                    password = ReadPassword();
+                    
+                    if (password.Length < 8)
+                        errorMsg += "Wachtwoord moet 8 of langer karakters zijn.\n";
+                    if (!password.Any(ch => ! char.IsLetterOrDigit(ch)))
+                        errorMsg += "Wachtwoord heeft geen symbolen.\n";
+                    if (!password.Any(char.IsUpper))
+                        errorMsg += "Wachtwoord heeft geen hoofdletters.\n";
+                    if (!password.Any(char.IsNumber))
+                        errorMsg += "Wachtwoord heeft geen cijfers.\n";
+
+                    if (password.Length >= 8 && password.Any(ch => ! char.IsLetterOrDigit(ch)) && password.Any(ch => ! char.IsUpper(ch)) && password.Any(ch => ! char.IsNumber(ch)))
+                        allowed = true;
+                } while (allowed == false);
+                
                 Console.WriteLine("Bevestig wachtwoord:");
                 string passwordConfirm = ReadPassword();
                 if (password != passwordConfirm)
