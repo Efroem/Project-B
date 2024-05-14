@@ -346,14 +346,13 @@ static class Authentication
     }
 
     private static void EditProfile() {
+        Console.Clear();
         if (User == null)
             return;
 
         string password;
         List<Account> savedAccounts = GetSavedAccounts();
         int accountIndex = savedAccounts.FindIndex(x => x.Email == User.Email);
-        Console.WriteLine(accountIndex);
-        Console.ReadLine();
 
         Console.WriteLine($"{User.ToString()}");
         Console.WriteLine("1. Verander email \n2. Verander voornaam \n3. Verander achternaam \n4. Verander geboortedatum \n5. Verander wachtwoord \n6. Terug");
