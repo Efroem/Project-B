@@ -387,8 +387,6 @@ static class Authentication
         string password;
         List<Account> savedAccounts = GetSavedAccounts();
         int accountIndex = savedAccounts.FindIndex(x => x.Email == User.Email);
-        Console.WriteLine(accountIndex);
-        Console.ReadLine();
         Console.WriteLine($"{User.ToString()}");
         Console.WriteLine("1. Verander email \n2. Verander voornaam \n3. Verander achternaam \n4. Verander geboortedatum \n5. Verander wachtwoord \n6. Terug");
         string userAction = (Console.ReadLine() ?? "").ToLower();
@@ -464,6 +462,7 @@ static class Authentication
 
             case "6":
             case "terug":
+                Console.Clear();
                 return;
         }
         savedAccounts[accountIndex] = User;
