@@ -96,5 +96,12 @@
     "FirstName": "dsad",
     "LastName": "dasda",
     "BirthDate": "20-10-1013"
+  },
+  {
+    "Email": "test@test.nl",
+    "Password": "048c8e6aa263b54aebde3f078df3e96c92f09f3aea39bdb11e0ce071d36dcaf0",
+    "FirstName": "test",
+    "LastName": "test",
+    "BirthDate": "20-10-1998"
   }
 ]
