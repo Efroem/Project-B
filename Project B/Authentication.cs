@@ -378,9 +378,9 @@ static class Authentication
         List<Account> AccountList = GetSavedAccounts();
         return AccountList?.Find(account => account.Email == email);
     }
-
     private static void EditProfile()
     {
+        Console.Clear();
         if (User == null)
             return;
 
@@ -389,7 +389,6 @@ static class Authentication
         int accountIndex = savedAccounts.FindIndex(x => x.Email == User.Email);
         Console.WriteLine(accountIndex);
         Console.ReadLine();
-
         Console.WriteLine($"{User.ToString()}");
         Console.WriteLine("1. Verander email \n2. Verander voornaam \n3. Verander achternaam \n4. Verander geboortedatum \n5. Verander wachtwoord \n6. Terug");
         string userAction = (Console.ReadLine() ?? "").ToLower();
