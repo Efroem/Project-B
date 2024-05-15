@@ -117,5 +117,12 @@
     "FirstName": "Floris",
     "LastName": "langenberg",
     "BirthDate": "12-12-1231"
+  },
+  {
+    "Email": "cool@gmail.com",
+    "Password": "b0ee1ad043788e3245288635782ca20de77787a35a10a6ec85db679ad8ad122f",
+    "FirstName": "alsdfkj",
+    "LastName": "alsdkjf",
+    "BirthDate": "20-10-2050"
   }
 ]

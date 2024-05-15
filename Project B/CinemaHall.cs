@@ -68,7 +68,7 @@ public class CinemaHall
 
         foreach (var hall in cinemaHalls)
         {
-            Console.WriteLine($"Naam: {hall.Name}\nGrootte: {hall.Size}\nSerial Number: {hall.SerialNumber}");
+            Console.WriteLine($"Naam: {hall.Name}\nGrootte: {hall.Size}\nSerial Number: {hall.SerialNumber}\n");
         }
     }
 

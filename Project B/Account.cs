@@ -1,3 +1,9 @@
+// public enum UserRole
+// {
+//     User,
+//     Admin
+// }
+
 class Account
 {
     public string Email { get; set; }
@@ -6,6 +12,7 @@ class Account
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string BirthDate { get; set; }
+    // public UserRole Role { get; set; }
 
     public Account(string email, string password, string firstName, string lastName, string birthDate)
     {
