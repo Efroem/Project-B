@@ -61,11 +61,11 @@ static class Authentication
         Console.Clear();
 
         // Searches for account that has the correct email
-        Account? foundAccount = GetAccountByEmail(email) ?? throw new Exception("Ongeldige aanmeldgegevens");
+        Account? foundAccount = GetAccountByEmail(email) ?? throw new Exception("Aanmeldgegevens niet gevonden");
 
         // checks the password hash on the found account
         if (!foundAccount.TestPassword(HashPassword(password)))
-            throw new Exception("Ongeldige aanmeldgegevens");
+            throw new Exception("Aanmeldgegevens niet gevonden");
 
         // sets User property and returns User
         User = foundAccount;
@@ -114,14 +114,15 @@ static class Authentication
 
             Console.WriteLine("1. Uitloggen\n2. Gegevens aanpassen \n3. Terug naar hoofdmenu");
             string userAction = (Console.ReadLine() ?? "").ToLower();
-            switch (userAction) {
+            switch (userAction)
+            {
                 case "1":
                 case "uitloggen":
                 case "log uit":
                     Console.Clear();
                     Logout();
                     return;
-                
+
                 case "2":
                 case "gegevens":
                 case "aanpassen":
@@ -186,6 +187,8 @@ static class Authentication
     }
 
     // Checks if the email is valid
+    // Checks if the email is valid
+    // Checks if the email is valid
     private static string RegisterEmail()
     {
         while (true)
@@ -194,18 +197,46 @@ static class Authentication
             {
                 Console.WriteLine("E-mailadres:");
                 string email = Console.ReadLine() ?? "";
-                if (email != "" && IsValidEmail(email) && GetAccountByEmail(email) == null)
-                    return email;
+                Console.Clear();
+
+                if (email != "" && IsValidEmail(email))
+                {
+                    if (email.Contains("@icloud.com") || email.Contains("@gmail.com") || email.Contains("@gmail.nl") || email.Contains("@yahoo.com"))
+                    {
+                        if (GetAccountByEmail(email) == null)
+                        {
+                            return email;
+                        }
+                        else
+                        {
+                            AsciiArtPrinter.PrintAsciiRegister();
+                            throw new Exception("E-mailadres is al in gebruik");
+                        }
+                    }
+                    else
+                    {
+                        AsciiArtPrinter.PrintAsciiRegister();
+                        throw new Exception("E-mailadres moet een geldig domein bevatten zoals @icloud.com, @gmail.com, @gmail.nl of @yahoo.com");
+                    }
+                }
+                else if (email == "")
+                {
+                    AsciiArtPrinter.PrintAsciiRegister();
+                    throw new Exception("Voer een e-mailadres in");
+                }
                 else
-                    throw new Exception("E-mailadres ongeldig of al in gebruik");
+                {
+                    AsciiArtPrinter.PrintAsciiRegister();
+                    throw new Exception("Ongeldig e-mailadres of domein. Geldige domeinen zijn @icloud.com, @gmail.com, @gmail.nl of @yahoo.com");
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
-
         }
     }
+
 
     // asks for password twice and checks if they match
     private static string RegisterConfirmPassword(bool showArt = true)
@@ -213,34 +244,37 @@ static class Authentication
         while (true)
         {
             try
-            {   
+            {
                 bool allowed = false;
                 string errorMsg = "";
                 string password;
-                do {
+                do
+                {
                     if (showArt)
                         AsciiArtPrinter.PrintAsciiRegister();
-                    if (errorMsg != "") {
+                    if (errorMsg != "")
+                    {
                         Console.Write(errorMsg);
                         errorMsg = "";
                     }
-                        
+
                     Console.WriteLine("Wachtwoord:");
                     password = ReadPassword();
+                    Console.Clear();
 
                     if (password.Length < 8)
                         errorMsg += "Wachtwoord moet 8 of langer karakters zijn.\n";
-                    if (!password.Any(ch => ! char.IsLetterOrDigit(ch)))
+                    if (!password.Any(ch => !char.IsLetterOrDigit(ch)))
                         errorMsg += "Wachtwoord heeft geen symbolen.\n";
                     if (!password.Any(char.IsUpper))
                         errorMsg += "Wachtwoord heeft geen hoofdletters.\n";
                     if (!password.Any(char.IsNumber))
                         errorMsg += "Wachtwoord heeft geen cijfers.\n";
 
-                    if (password.Length >= 8 && password.Any(ch => ! char.IsLetterOrDigit(ch)) && password.Any(ch => ! char.IsUpper(ch)) && password.Any(ch => ! char.IsNumber(ch)))
+                    if (password.Length >= 8 && password.Any(ch => !char.IsLetterOrDigit(ch)) && password.Any(ch => !char.IsUpper(ch)) && password.Any(ch => !char.IsNumber(ch)))
                         allowed = true;
                 } while (allowed == false);
-                
+                AsciiArtPrinter.PrintAsciiRegister();
                 Console.WriteLine("Bevestig wachtwoord:");
                 string passwordConfirm = ReadPassword();
                 if (password != passwordConfirm)
@@ -293,7 +327,7 @@ static class Authentication
         }
     }
     // Validates phone number and returns if it's true
-    
+
 
     // checks if email is a valid adress
     private static bool IsValidEmail(string email)
@@ -344,8 +378,8 @@ static class Authentication
         List<Account> AccountList = GetSavedAccounts();
         return AccountList?.Find(account => account.Email == email);
     }
-
-    private static void EditProfile() {
+    private static void EditProfile()
+    {
         Console.Clear();
         if (User == null)
             return;
@@ -353,11 +387,11 @@ static class Authentication
         string password;
         List<Account> savedAccounts = GetSavedAccounts();
         int accountIndex = savedAccounts.FindIndex(x => x.Email == User.Email);
-
         Console.WriteLine($"{User.ToString()}");
         Console.WriteLine("1. Verander email \n2. Verander voornaam \n3. Verander achternaam \n4. Verander geboortedatum \n5. Verander wachtwoord \n6. Terug");
         string userAction = (Console.ReadLine() ?? "").ToLower();
-        switch (userAction) {
+        switch (userAction)
+        {
             case "1":
             case "email":
             case "verander email":
@@ -365,7 +399,8 @@ static class Authentication
                 Console.WriteLine("Voer uw Wachtwoord opnieuw in:");
                 password = HashPassword(ReadPassword());
                 Console.Clear();
-                if (User.TestPassword(password)) {
+                if (User.TestPassword(password))
+                {
                     User.Email = RegisterEmail();
                 }
                 break;
@@ -377,7 +412,8 @@ static class Authentication
                 Console.WriteLine("Voer uw Wachtwoord opnieuw in:");
                 password = HashPassword(ReadPassword());
                 Console.Clear();
-                if (User.TestPassword(password)) {
+                if (User.TestPassword(password))
+                {
                     Console.WriteLine("Voornaam:");
                     User.FirstName = Console.ReadLine() ?? "";
                 }
@@ -390,12 +426,13 @@ static class Authentication
                 Console.WriteLine("Voer uw Wachtwoord opnieuw in:");
                 password = HashPassword(ReadPassword());
                 Console.Clear();
-                if (User.TestPassword(password)) {
+                if (User.TestPassword(password))
+                {
                     Console.WriteLine("Achternaam:");
                     User.LastName = Console.ReadLine() ?? "";
                 }
                 break;
-            
+
             case "4":
             case "geboortedatum":
             case "verander geboortedatum":
@@ -403,11 +440,12 @@ static class Authentication
                 Console.WriteLine("Voer uw Wachtwoord opnieuw in:");
                 password = HashPassword(ReadPassword());
                 Console.Clear();
-                if (User.TestPassword(password)) {
+                if (User.TestPassword(password))
+                {
                     User.BirthDate = RegisterBirthdate();
                 }
                 break;
-            
+
             case "5":
             case "wachtwoord":
             case "verander wachtwoord":
@@ -415,14 +453,16 @@ static class Authentication
                 Console.WriteLine("Voer uw Wachtwoord opnieuw in:");
                 password = HashPassword(ReadPassword());
                 Console.Clear();
-                if (User.TestPassword(password)) {
+                if (User.TestPassword(password))
+                {
                     Console.WriteLine("Voer uw nieuwe wachtwoord in:");
                     User.Password = HashPassword(RegisterConfirmPassword(false));
                 }
                 break;
-            
+
             case "6":
             case "terug":
+                Console.Clear();
                 return;
         }
         savedAccounts[accountIndex] = User;

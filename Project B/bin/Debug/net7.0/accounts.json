@@ -103,5 +103,26 @@
     "FirstName": "test",
     "LastName": "test",
     "BirthDate": "20-10-1998"
+  },
+  {
+    "Email": "hallo@gmail.com",
+    "Password": "b79457791306b3ff6596f0702de8e9e8445ead55f0bd88fa6ae4f28c0dbad69a",
+    "FirstName": "Vincent",
+    "LastName": "laSL",
+    "BirthDate": "20-10-1231"
+  },
+  {
+    "Email": "vffvincent@gmail.com",
+    "Password": "b79457791306b3ff6596f0702de8e9e8445ead55f0bd88fa6ae4f28c0dbad69a",
+    "FirstName": "Floris",
+    "LastName": "langenberg",
+    "BirthDate": "12-12-1231"
+  },
+  {
+    "Email": "cool@gmail.com",
+    "Password": "b0ee1ad043788e3245288635782ca20de77787a35a10a6ec85db679ad8ad122f",
+    "FirstName": "alsdfkj",
+    "LastName": "alsdkjf",
+    "BirthDate": "20-10-2050"
   }
 ]
