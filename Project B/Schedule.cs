@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Globalization;
 public class Schedule
 {
     [JsonPropertyName("movieTitle")]
@@ -7,7 +8,7 @@ public class Schedule
     [JsonPropertyName("serialNumber")]
     public string JsonSerialNumber { set => SerialNumber = Convert.ToInt32(value); }
     [JsonPropertyName("date")]
-    public string JsonDate { set => Date = DateTime.Parse(value); }
+    public string JsonDate { set => Date = DateTime.ParseExact(value, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture); }
 
 
     public string MovieTitle { get; set; }
