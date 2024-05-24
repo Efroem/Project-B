@@ -37,10 +37,6 @@ public  class CinemaZaal
                     cursorPosition -= 3;
                 }
             }
-            // else if (keyInfo.Key == ConsoleKey.LeftArrow|| currentRow == 4 ||currentRow == 8 || currentRow == 10)// && cursorPosition > 4)
-            // {
-            //     cursorPosition -= 6;
-            // }
             else if (keyInfo.Key == ConsoleKey.RightArrow  && cursorPosition < 45)
             {
                 if(currentRow == 4 ||currentRow == 8 || currentRow == 10|| currentRow == 14 || currentRow == 18 || currentRow == 20)
@@ -59,21 +55,6 @@ public  class CinemaZaal
         }
     }
 
-    // /*
-    // private void SetInitialCursorPosition()
-    // {
-    //     if(!isCursorPositionSet)
-    //         {
-    //         if (currentRow == 4 ||currentRow == 8 || currentRow == 10 )
-    //             {
-    //                 cursorPosition = cursorPosition + 2;
-    //                 isCursorPositionSet = true;
-
-    //             }
-    //         }
-    // }
-    // */
-    //currentRow % 2 == 1
      private void SetInitialCursorPosition()
     {
         
