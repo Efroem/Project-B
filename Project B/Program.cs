@@ -121,7 +121,7 @@ class Program
         }
     }
  
-static int ShowMenuInline(string[] options, string prompt)
+public static int ShowMenuInline(string[] options, string prompt)
 {
     int selectedOption = 0;
  
