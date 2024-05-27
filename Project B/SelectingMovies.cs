@@ -23,7 +23,9 @@ public class SelectingMovies
                 bool found = false;
                 while (!found)
                 {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     AsciiArtPrinter.PrintAsciibeschrijving();
+                    Console.ResetColor();
                     AsciiArtPrinter.PrintMovieTitles("movies.json");
                     Console.Write("Voer de gewenste titel in voor meer informatie: ");
                     string? title = Console.ReadLine();
@@ -34,7 +36,9 @@ public class SelectingMovies
                         if (movie.Title.Equals(title, StringComparison.OrdinalIgnoreCase))
                         {
                             Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             AsciiArtPrinter.PrintAsciibeschrijving();
+                            Console.ResetColor();
                             Console.WriteLine(new string('*', Console.WindowWidth - 1));
                             Console.WriteLine($"{"Jaar van uitgave",-10} : {movie.Released}");
                             Console.WriteLine($"{"Leeftijdsgrens",-10} : {movie.AgeRestricted}");
