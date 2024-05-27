@@ -145,5 +145,12 @@
     "FirstName": "Vincent",
     "LastName": "Stoel",
     "BirthDate": "12-12-1231"
+  },
+  {
+    "Email": "test@gmail.com",
+    "Password": "fae4ee5710378f2aa14e4cf2f6597794cc59263b8546e550e35ec0a845239108",
+    "FirstName": "test",
+    "LastName": "test",
+    "BirthDate": "20-10-1998"
   }
 ]

@@ -80,8 +80,7 @@ class Program
                     else
                     {
                         Console.Clear();
-                        Console.WriteLine("Reserveringen");
-                        Console.ReadLine();
+                        Reservation.OpenReservationMenu(Authentication.User);
                         Console.Clear();
                         break;
                     }
