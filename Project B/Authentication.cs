@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Drawing;
 
 static class Authentication
 {
@@ -51,11 +52,15 @@ static class Authentication
     // Starts the Login process
     public static Account Login()
     {
+        Console.ForegroundColor = ConsoleColor.Yellow;
         AsciiArtPrinter.PrintAsciiInlog();
+        Console.ResetColor();
         Console.WriteLine("E-mailadres:");
         string email = Console.ReadLine() ?? "";
         Console.Clear(); // Clear the console after reading email
+        Console.ForegroundColor = ConsoleColor.Yellow;
         AsciiArtPrinter.PrintAsciiInlog();
+        Console.ResetColor();
         Console.WriteLine("Wachtwoord:");
         string password = ReadPassword();
         Console.Clear();
@@ -75,7 +80,9 @@ static class Authentication
     // Starts the registration process
     public static Account Register()
     {
+        Console.ForegroundColor = ConsoleColor.Yellow;
         AsciiArtPrinter.PrintAsciiRegister();
+        Console.ResetColor();
         // calls email checker
         string email = RegisterEmail();
         Console.Clear(); // Clear the console after reading email
@@ -83,11 +90,15 @@ static class Authentication
         // hashes returned string of the confirm password process function
         string password = HashPassword(RegisterConfirmPassword());
         Console.Clear(); // Clear the console after confirming password
+        Console.ForegroundColor = ConsoleColor.Yellow;
         AsciiArtPrinter.PrintAsciiRegister();
+        Console.ResetColor();
         Console.WriteLine("Voornaam:");
         string firstName = Console.ReadLine() ?? "";
         Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Yellow;
         AsciiArtPrinter.PrintAsciiRegister();
+        Console.ResetColor();
         Console.WriteLine("Achternaam:");
         string lastName = Console.ReadLine() ?? "";
         Console.Clear();
@@ -208,25 +219,32 @@ static class Authentication
                             return email;
                         }
                         else
-                        {
+                        {   Console.ForegroundColor = ConsoleColor.Yellow;
                             AsciiArtPrinter.PrintAsciiRegister();
+                            Console.ResetColor();
                             throw new Exception("E-mailadres is al in gebruik");
                         }
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         AsciiArtPrinter.PrintAsciiRegister();
+                        Console.ResetColor();
                         throw new Exception("E-mailadres moet een geldig domein bevatten zoals @icloud.com, @gmail.com, @gmail.nl of @yahoo.com");
                     }
                 }
                 else if (email == "")
                 {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     AsciiArtPrinter.PrintAsciiRegister();
+                    Console.ResetColor();
                     throw new Exception("Voer een e-mailadres in");
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     AsciiArtPrinter.PrintAsciiRegister();
+                    Console.ResetColor();
                     throw new Exception("Ongeldig e-mailadres of domein. Geldige domeinen zijn @icloud.com, @gmail.com, @gmail.nl of @yahoo.com");
                 }
             }
@@ -251,7 +269,9 @@ static class Authentication
                 do
                 {
                     if (showArt)
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         AsciiArtPrinter.PrintAsciiRegister();
+                        Console.ResetColor();
                     if (errorMsg != "")
                     {
                         Console.Write(errorMsg);
@@ -274,7 +294,9 @@ static class Authentication
                     if (password.Length >= 8 && password.Any(ch => !char.IsLetterOrDigit(ch)) && password.Any(ch => !char.IsUpper(ch)) && password.Any(ch => !char.IsNumber(ch)))
                         allowed = true;
                 } while (allowed == false);
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 AsciiArtPrinter.PrintAsciiRegister();
+                Console.ResetColor();
                 Console.WriteLine("Bevestig wachtwoord:");
                 string passwordConfirm = ReadPassword();
                 if (password != passwordConfirm)
@@ -310,7 +332,9 @@ static class Authentication
         {
             try
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 AsciiArtPrinter.PrintAsciiRegister();
+                Console.ResetColor();
                 Console.WriteLine("Geboortedatum: Voorbeeld:(20-10-1998):");
                 string birthdate = Console.ReadLine() ?? "";
                 Console.Clear();
