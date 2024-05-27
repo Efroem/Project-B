@@ -95,7 +95,7 @@ class Program
                 case 7:
                     Console.Clear();
                     CinemaZaal printer = new CinemaZaal();
-                    printer.PrintGridMediumZaal();
+                    printer.PrintGridGroteZaal();
                     printer.NavigateGrid();
                     Console.ReadLine();
                     Console.Clear();

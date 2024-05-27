@@ -7,16 +7,15 @@ public  class CinemaZaal
     private const string EmptyRowSeparator5 = "|                                   |";
 	private const string EmptyRowSeparator6 = "        |";
 	private const string EmptyRowSeparator7 = "      |";
-
-    private int currentRow = 2; 
+    private int currentRow = 4; 
     private int cursorPosition = 5;
-
     public void NavigateGrid()
     {
         while (true)
-        {
+        {   
+            SetInitialCursorPosition();
+            
             Console.SetCursorPosition(cursorPosition, currentRow);
-
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
             if (keyInfo.Key == ConsoleKey.UpArrow && currentRow > 1)
@@ -27,13 +26,27 @@ public  class CinemaZaal
             {
                 currentRow += 2;
             }
-            else if (keyInfo.Key == ConsoleKey.LeftArrow && cursorPosition > 5)
+            else if (keyInfo.Key == ConsoleKey.LeftArrow && cursorPosition > 4)
             {
-                cursorPosition -= 3;
+                if(currentRow == 4 ||currentRow == 8 || currentRow == 10|| currentRow == 14 || currentRow == 18 || currentRow == 20)
+                {
+                    cursorPosition -= 4;
+                }
+                else
+                {
+                    cursorPosition -= 3;
+                }
             }
-            else if (keyInfo.Key == ConsoleKey.RightArrow && cursorPosition < 45)
+            else if (keyInfo.Key == ConsoleKey.RightArrow  && cursorPosition < 45)
             {
-                cursorPosition += 3;
+                if(currentRow == 4 ||currentRow == 8 || currentRow == 10|| currentRow == 14 || currentRow == 18 || currentRow == 20)
+                {
+                    cursorPosition +=2;
+                }
+                else
+                {
+                    cursorPosition += 6;
+                }
             }
             else if (keyInfo.Key == ConsoleKey.Escape)
             {
@@ -42,7 +55,19 @@ public  class CinemaZaal
         }
     }
 
+     private void SetInitialCursorPosition()
+    {
+        
+        if (currentRow == 4 ||currentRow == 8 || currentRow == 10|| currentRow == 14 || currentRow == 18 || currentRow == 20)
+        {
+            cursorPosition = cursorPosition + 2;
+        }
+        else
+        {
+            cursorPosition = cursorPosition - 2;
+        }
 
+    }
     public void PrintGridGroteZaal()
     {
         Console.WriteLine("_____________________________________________________");
@@ -51,16 +76,16 @@ public  class CinemaZaal
 
         for (char c = 'A'; c <= 'J'; c++)
         {
-            Console.Write("|  " + c + "  ");
-            int maxSeats = (c - 'A') % 2 == 0 ? 11 : 9;
+            Console.Write("|  " + c + "");
+            int maxSeats1 = (c - 'A') % 2 == 0 ? 11 : 9;            
             // hierboven staat een bereking van hoe het wordt berekent 
             // (c - 'A') hier wordt met ascii table gebruikt gemaakt dus character - a.
             // als c B is en B is 2 in ascii table dus het resutlaat zal dan 1 zijn etc.
             // als (c - 'A') % 2 en even getal is zal er een row met 11 stoelen geprint worden en als het oneven is dan een row met 9 stoelen.
             // zelfde is met de andere functies maar dan met andere getallen
-            for (int i = 1; i <= maxSeats; i++)
+            for (int i = 1; i <= maxSeats1; i++)
             {
-                if (i == 1 && maxSeats == 9)
+                if (i == 1 && maxSeats1 == 9)
                 Console.Write("  ["+ i + "] ");
 				
 				else if (i <= 9)
@@ -72,7 +97,7 @@ public  class CinemaZaal
                     Console.Write("[" + i +  "] ");
                 }
             }
-            if (maxSeats == 11)
+            if (maxSeats1 == 11)
             {
                 Console.WriteLine(EmptyRowSeparator2);
             }
@@ -101,10 +126,10 @@ public void PrintGridMediumZaal()
         for (char c = 'A'; c <= 'I'; c++)
         {
             Console.Write("|  " + c + "");
-            int maxSeats = (c - 'A') % 2 == 0 ? 10 : 9;
-            for (int i = 1; i <= maxSeats; i++)
+            int maxSeats2 = (c - 'A') % 2 == 0 ? 10 : 9;
+            for (int i = 1; i <= maxSeats2; i++)
             {
-                if (i == 1 && maxSeats == 9)
+                if (i == 1 && maxSeats2 == 9)
                 Console.Write("  ["+ i + "] ");
 				
 				else if (i <= 9)
@@ -116,7 +141,7 @@ public void PrintGridMediumZaal()
                     Console.Write("[" + i +  "] ");
                 }
             }
-            if (maxSeats == 10)
+            if (maxSeats2 == 10)
             {
                 Console.WriteLine(EmptyRowSeparator4);
             }
@@ -144,15 +169,15 @@ public void PrintGridMediumZaal()
         for (char c = 'A'; c <= 'J'; c++)
         {
             Console.Write("|  " + c + "  ");
-            int maxSeats = (c - 'A') % 2 == 0 ? 6 : 5;
-            for (int i = 1; i <= maxSeats; i++)
+            int maxSeats3 = (c - 'A') % 2 == 0 ? 6 : 5;
+            for (int i = 1; i <= maxSeats3; i++)
             {
-                if (i == 1 && maxSeats == 5)
+                if (i == 1 && maxSeats3 == 5)
                 Console.Write("  ["+ i + "] ");
                 else
                 Console.Write("[" + i + "] ");
             }
-            if (maxSeats == 5)
+            if (maxSeats3 == 5)
             {
                 Console.WriteLine(EmptyRowSeparator6);
             }
