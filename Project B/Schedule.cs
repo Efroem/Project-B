@@ -75,7 +75,7 @@ public class Schedule
             if (currentIndex != 0)
             {
                 previousIndex = 1;
-                Console.WriteLine($"{previousIndex}. Vorige");
+                Console.WriteLine($"{previousIndex}. Vorige\n");
             }
 
             int moviesShownAmount = Math.Min(stepSize, schedules.Count - currentIndex);
