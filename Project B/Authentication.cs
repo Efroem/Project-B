@@ -210,42 +210,34 @@ static class Authentication
                 string email = Console.ReadLine() ?? "";
                 Console.Clear();
 
-                if (email != "" && IsValidEmail(email))
-                {
-                    if (email.Contains("@icloud.com") || email.Contains("@gmail.com") || email.Contains("@gmail.nl") || email.Contains("@yahoo.com"))
-                    {
-                        if (GetAccountByEmail(email) == null)
-                        {
-                            return email;
-                        }
-                        else
-                        {   Console.ForegroundColor = ConsoleColor.Yellow;
-                            AsciiArtPrinter.PrintAsciiRegister();
-                            Console.ResetColor();
-                            throw new Exception("E-mailadres is al in gebruik");
-                        }
-                    }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        AsciiArtPrinter.PrintAsciiRegister();
-                        Console.ResetColor();
-                        throw new Exception("E-mailadres moet een geldig domein bevatten zoals @icloud.com, @gmail.com, @gmail.nl of @yahoo.com");
-                    }
-                }
-                else if (email == "")
+                if (email == "")
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     AsciiArtPrinter.PrintAsciiRegister();
                     Console.ResetColor();
                     throw new Exception("Voer een e-mailadres in");
                 }
+
+                if (IsValidEmail(email))
+                {
+                    if (GetAccountByEmail(email) == null)
+                    {
+                        return email;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        AsciiArtPrinter.PrintAsciiRegister();
+                        Console.ResetColor();
+                        throw new Exception("E-mailadres is al in gebruik");
+                    }
+                }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     AsciiArtPrinter.PrintAsciiRegister();
                     Console.ResetColor();
-                    throw new Exception("Ongeldig e-mailadres of domein. Geldige domeinen zijn @icloud.com, @gmail.com, @gmail.nl of @yahoo.com");
+                    throw new Exception("Ongeldig e-mailadres of domein.");
                 }
             }
             catch (Exception e)
@@ -270,8 +262,8 @@ static class Authentication
                 {
                     if (showArt)
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        AsciiArtPrinter.PrintAsciiRegister();
-                        Console.ResetColor();
+                    AsciiArtPrinter.PrintAsciiRegister();
+                    Console.ResetColor();
                     if (errorMsg != "")
                     {
                         Console.Write(errorMsg);

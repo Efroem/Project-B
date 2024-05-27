@@ -15,7 +15,7 @@ class Program
         TestPosters.MegaBioscoop();
         Console.ResetColor();
         Console.Write("Druk op een ");
-        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.ForegroundColor = ConsoleColor.Magenta;
         Console.Write("knop");
         Console.ResetColor();
         Console.Write(" om verder te gaan");
@@ -23,7 +23,11 @@ class Program
         Console.Clear();
     
         AsciiArtPrinter.PrintAscii("movies.json");
-        Console.WriteLine("Druk op een knop om verder te gaan");
+        Console.Write("Druk op een ");
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.Write("knop");
+        Console.ResetColor();
+        Console.Write(" om verder te gaan");
         Console.ReadKey();
         Console.Clear();
     
@@ -136,13 +140,19 @@ public static int ShowMenuInline(string[] options, string prompt)
 {
     int selectedOption = 0;
  
-    string[] promptParts = prompt.Split(" pijltjestoetsen ");
-    
+    // Deel de prompt op rond de woorden die rood moeten worden
+    string[] promptParts = prompt.Split(new string[] { " pijltjestoetsen ", " Enter" }, StringSplitOptions.None);
+
+    // Schrijf het eerste deel van de prompt
     Console.Write(promptParts[0]);
-    Console.ForegroundColor = ConsoleColor.Magenta; 
+    Console.ForegroundColor = ConsoleColor.Magenta;
     Console.Write(" pijltjestoetsen ");
     Console.ResetColor();
-    Console.WriteLine(promptParts[1]);
+    Console.Write(promptParts[1]);
+    Console.ForegroundColor = ConsoleColor.Magenta;
+    Console.Write(" Enter");
+    Console.ResetColor();
+    Console.WriteLine(promptParts[2]);
     do
     {
         for (int i = 0; i < options.Length; i++)
