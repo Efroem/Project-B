@@ -12,7 +12,11 @@ class Program
     
         Console.Clear();
         TestPosters.MegaBioscoop();
-        Console.WriteLine("Druk op een knop om verder te gaan");
+        Console.Write("Druk op een ");
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write("knop");
+        Console.ResetColor();
+        Console.Write(" om verder te gaan");
         Console.ReadKey();
         Console.Clear();
     
@@ -108,16 +112,28 @@ public static int ShowMenuInline(string[] options, string prompt)
 {
     int selectedOption = 0;
  
-    Console.WriteLine(prompt);
+    string[] promptParts = prompt.Split(" pijltjestoetsen ");
+    
+    Console.Write(promptParts[0]);
+    Console.ForegroundColor = ConsoleColor.Red; 
+    Console.Write(" pijltjestoetsen ");
+    Console.ResetColor();
+    Console.WriteLine(promptParts[1]);
     do
     {
         for (int i = 0; i < options.Length; i++)
         {
-            Console.CursorLeft = 40;
+            Console.CursorLeft = 41;
             if (i == selectedOption)
-                Console.WriteLine($"═➤ {options[i]}");
-            else
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine($"   {options[i]}");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.WriteLine($"   {options[i]}");
+            }
         }
  
         var key = Console.ReadKey(true);
