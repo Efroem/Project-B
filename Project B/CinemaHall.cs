@@ -54,6 +54,23 @@ public class CinemaHall
         }
     }
 
+    public static List<Movie> ReadMoviesFromJson()
+    {
+        string jsonString = File.ReadAllText("movies.json");
+        return JsonSerializer.Deserialize<List<Movie>>(jsonString);
+    }
+
+    private static void WriteSchedulesToJson(List<Schedule> schedules)
+    {
+        JsonSerializerOptions options = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            IgnoreNullValues = true
+        };
+
+        string jsonString = JsonSerializer.Serialize(schedules, options);
+        File.WriteAllText("schedule.json", jsonString);
+    }
 
 
     public static void PrintCinemaHalls()
@@ -291,5 +308,98 @@ public class CinemaHall
         {
             Console.WriteLine($"Er is een error ontstaan met het wijzigen van de bioscoopzaal: {ex.Message}");
         }
+    }
+
+    public static void AddNewMovie()
+    {
+        List<Schedule> schedules = Schedule.ReadScheduleJson();
+        List<CinemaHall>? cinemaHalls = ReadFromCinemaHall();
+
+        if (cinemaHalls == null || cinemaHalls.Count == 0)
+        {
+            Console.WriteLine("Geen zalen beschikbaar om een film toe te voegen.");
+            return;
+        }
+
+        Console.WriteLine("Beschikbare bioscoopzalen:");
+        int maxNameLength = cinemaHalls.Max(hall => hall.Name.Length);
+
+        foreach (var hall in cinemaHalls)
+        {
+            Console.WriteLine($"- Serial number: {hall.SerialNumber.ToString().PadRight(2)}, Name: {hall.Name.PadRight(maxNameLength)}");
+        }
+
+        Console.WriteLine("\nWelke zaal wilt u selecteren? Voer het serienummer in:");
+
+        int serialNumber;
+        while (true)
+        {
+            if (!int.TryParse(Console.ReadLine(), out serialNumber))
+            {
+                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld '3'):");
+                continue;
+            }
+
+            if (cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld '3'):");
+            }
+        }
+
+        Console.WriteLine("Kies een film uit de volgende lijst:\n");
+        List<Movie> movies = ReadMoviesFromJson();
+
+        foreach (var movie in movies)
+        {
+            Console.WriteLine($"- {movie.Title}");
+        }
+
+        Console.Write("Voer de titel van de film in:");
+        string? movieTitle = Console.ReadLine();
+
+        if (string.IsNullOrWhiteSpace(movieTitle))
+        {
+            Console.WriteLine("Titel van de film mag niet leeg zijn.");
+            return;
+        }
+
+        Console.Write("Voer de datum van de film in (dd/MM/yyyy)");
+        string? dateString = Console.ReadLine();
+        DateTime date;
+        while (!DateTime.TryParse(Console.ReadLine(), out date))
+        {
+            Console.WriteLine("Verkeerde format. Voer de datum op een juiste manier in (dd/MM/yyyy)");
+            dateString = Console.ReadLine();
+        }
+
+        Console.WriteLine("Voer het uur in (0-23):");
+        int hour;
+        while (!int.TryParse(Console.ReadLine(), out hour) || hour < 0 || hour > 23)
+        {
+            Console.WriteLine("Verkeerde input. Voer het uur binnen 0 en 23 in");
+        }
+
+        Console.WriteLine("Voer de minuut in (0-59):");
+        int minute;
+        while (!int.TryParse(Console.ReadLine(), out minute) || minute < 0 || minute > 59)
+        {
+            Console.WriteLine("Verkeerde input. Voer de minuut tussen 0 en 59 in");
+        }
+
+        DateTime movieDateTime = new DateTime(date.Year, date.Month, date.Day, hour, minute, 0);
+
+        Schedule newSchedule = new Schedule
+        {
+            MovieTitle = movieTitle,
+            SerialNumber = serialNumber,
+            Date = movieDateTime
+        };
+
+        schedules.Add(newSchedule);
+        WriteSchedulesToJson(schedules);
     }
 }
