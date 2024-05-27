@@ -11,9 +11,11 @@ class Program
         Console.OutputEncoding = System.Text.Encoding.UTF8;
     
         Console.Clear();
+        Console.ForegroundColor = ConsoleColor.White;
         TestPosters.MegaBioscoop();
+        Console.ResetColor();
         Console.Write("Druk op een ");
-        Console.ForegroundColor = ConsoleColor.Red;
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.Write("knop");
         Console.ResetColor();
         Console.Write(" om verder te gaan");
@@ -32,13 +34,13 @@ class Program
             {
                 AsciiArtPrinter.Printasciihm();
                 //AsciiArtPrinter.PrintAsciiMenu();
-                options = new string[] { "1.Bekijk Films", "2.Inloggen", "3.Bekijk Reserveringen", "4.Schema", "5.Verlaat Pagina", "6.Lijst Zalen", "7.CinemaHall Toevoegen", "8.Checken" };
+                options = new string[] { "1.Aanmelden", "2.Bekijk films", "3.Bekijk filmrooster", "4.verlaat pagina"};
             }
             else
             {
                 AsciiArtPrinter.Printasciihm();
                 //AsciiArtPrinter.PrintAsciiMenu2();
-                options = new string[] { "1.Bekijk Films", "2.Profiel", "3.Bekijk Reserveringen", "4.Schema", "5.Verlaat Pagina", "6.Lijst Zalen", "7.CinemaHall Toevoegen", "8.Checken" };
+                options = new string[] { "1.Profiel bekijken", "2.Bekijk films", "3.Bekijk filmrooster", "4.Bekijk reserveringen", "5.Verlaat Pagina"};
             }
     
             //Console.WriteLine("Gebruik de pijltjestoetsen om een optie te selecteren en druk op Enter.");
@@ -48,30 +50,41 @@ class Program
             {
                 case 0:
                     Console.Clear();
-                    AsciiArtPrinter.PrintAsciifilms();
-                    AsciiArtPrinter.PrintMovieTitles("movies.json");
-                    SelectingMovies.MoviesSelect();
-                    Console.Clear();
-                    break;
-                case 1:
-                    Console.Clear();
                     AsciiArtPrinter.PrintAsciilogin();
                     if (Authentication.User == null)
                         Authentication.Start();
                     else
                         Authentication.ViewProfile();
                     break;
-                case 2:
+                case 1:
                     Console.Clear();
-                    Console.WriteLine("Reserveringen");
-                    Console.ReadLine();
+                    AsciiArtPrinter.PrintAsciifilms();
+                    AsciiArtPrinter.PrintMovieTitles("movies.json");
+                    SelectingMovies.MoviesSelect();
                     Console.Clear();
                     break;
-                case 3:
+                case 2:
                     Console.Clear();
                     Schedule.OpenGeneralMenu();
                     Console.Clear();
                     break;
+                case 3:
+                    if (Authentication.User == null)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Tot ziens!");
+                        Environment.Exit(0);
+                        Console.ReadLine();
+                        break;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Reserveringen");
+                        Console.ReadLine();
+                        Console.Clear();
+                        break;
+                    }
                 case 4:
                     Console.Clear();
                     Console.WriteLine("Tot ziens!");
@@ -115,7 +128,7 @@ static int ShowMenuInline(string[] options, string prompt)
     string[] promptParts = prompt.Split(" pijltjestoetsen ");
     
     Console.Write(promptParts[0]);
-    Console.ForegroundColor = ConsoleColor.Red; 
+    Console.ForegroundColor = ConsoleColor.Magenta; 
     Console.Write(" pijltjestoetsen ");
     Console.ResetColor();
     Console.WriteLine(promptParts[1]);
@@ -126,7 +139,7 @@ static int ShowMenuInline(string[] options, string prompt)
             Console.CursorLeft = 41;
             if (i == selectedOption)
             {
-                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine($"   {options[i]}");
                 Console.ResetColor();
             }

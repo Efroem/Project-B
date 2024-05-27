@@ -145,7 +145,7 @@ public class AsciiArtPrinter
                     │          Menu:          │
                     ├─────────────────────────┤
                     │ 1. Bekijk films         │
-                    │ 2. Inloggen             │
+                    │ 2. Aanmelden            │
                     │ 3. Bekijk reserveringen │
                     | 4. Bekijk schema        |
                     │ 5. Verlaat pagina       │
@@ -170,6 +170,21 @@ public class AsciiArtPrinter
                     │ 5. Verlaat pagina       │
                     │ 6. Lijst zalen          │
                     │ 7. CinemaHall toevoegen │
+                    └─────────────────────────┘
+        ";
+        string centeredAsciiArt = "                    " + menuText2.Replace("\n", "\n                  ");
+        Console.WriteLine(centeredAsciiArt);
+    }
+    public static void PrintAsciiMenu3()
+    {
+        string menuText2 = @"
+                    ┌─────────────────────────┐
+                    │          Menu:          │
+                    ├─────────────────────────┤
+                    │ 1. Aanmelden            │
+                    │ 2. Bekijk films         │
+                    │ 3. Bekijk filmrooster   |
+                    | 4. Verlaat Pagina       │ 
                     └─────────────────────────┘
         ";
         string centeredAsciiArt = "                    " + menuText2.Replace("\n", "\n                  ");
