@@ -117,6 +117,9 @@ class Program
                     Console.Clear();
                     Console.WriteLine("Ongeldige invoer");
                     break;
+                case 8:
+                    Console.WriteLine();
+                    break;
             }
         }
     }
