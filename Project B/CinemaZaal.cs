@@ -7,7 +7,7 @@ public  class CinemaZaal
     private const string EmptyRowSeparator5 = "|                                   |";
 	private const string EmptyRowSeparator6 = "        |";
 	private const string EmptyRowSeparator7 = "      |";
-    private int currentRow = 4;
+    private int currentRow = 4; 
     private int cursorPosition = 5;
     public void NavigateGrid()
     {
@@ -28,18 +28,18 @@ public  class CinemaZaal
             }
             else if (keyInfo.Key == ConsoleKey.LeftArrow && cursorPosition > 4)
             {
-                if(currentRow == 4 ||currentRow == 8 || currentRow == 10|| currentRow == 14 || currentRow == 18 || currentRow == 20 || currentRow == 24|| currentRow == 28)
+                if(currentRow == 4 ||currentRow == 8 || currentRow == 10|| currentRow == 14 || currentRow == 18 || currentRow == 20)
                 {
-                    cursorPosition -= 6;
+                    cursorPosition -= 4;
                 }
                 else
                 {
-                    cursorPosition -= 2;
+                    cursorPosition -= 3;
                 }
             }
             else if (keyInfo.Key == ConsoleKey.RightArrow  && cursorPosition < 45)
             {
-                if(currentRow == 4 ||currentRow == 8 || currentRow == 10|| currentRow == 14 || currentRow == 18 || currentRow == 20|| currentRow == 24|| currentRow == 24)
+                if(currentRow == 4 ||currentRow == 8 || currentRow == 10|| currentRow == 14 || currentRow == 18 || currentRow == 20)
                 {
                     cursorPosition +=2;
                 }

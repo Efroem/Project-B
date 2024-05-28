@@ -68,10 +68,6 @@ class Program
                     break;
                 case 1:
                     Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    AsciiArtPrinter.PrintAsciifilms();
-                    Console.ResetColor();
-                    AsciiArtPrinter.PrintMovieTitles("movies.json");
                     SelectingMovies.MoviesSelect();
                     Console.Clear();
                     break;
