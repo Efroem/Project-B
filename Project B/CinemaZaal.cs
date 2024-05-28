@@ -9,9 +9,14 @@ public  class CinemaZaal
 	private const string EmptyRowSeparator7 = "      |";
     private int currentRow = 2;
     private int cursorPosition = 7;
+
+    private bool running = true;
+
     public void NavigateGrid()
     {
-        while (true)
+        Console.SetCursorPosition(0, 30);
+        Console.Write("> (Q) Terug naar het hoofdmenu <");
+        while (running)
         {   
             SetInitialCursorPosition();
             
@@ -63,6 +68,7 @@ public  class CinemaZaal
             }
             else if (keyInfo.Key == ConsoleKey.Escape || keyInfo.Key == ConsoleKey.Q)
             {
+                running = false;
                 break;
             }
         }
@@ -72,7 +78,7 @@ public  class CinemaZaal
         int originalCursorLeft = Console.CursorLeft;
         int originalCursorTop = Console.CursorTop;
 
-        Console.SetCursorPosition(0, 30);
+        Console.SetCursorPosition(0, 40);
         Console.Write($"Je stoel is ({currentRow}, {cursorPosition})");
 
         Console.CursorLeft = originalCursorLeft;
