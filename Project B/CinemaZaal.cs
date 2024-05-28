@@ -7,8 +7,8 @@ public  class CinemaZaal
     private const string EmptyRowSeparator5 = "|                                   |";
 	private const string EmptyRowSeparator6 = "        |";
 	private const string EmptyRowSeparator7 = "      |";
-    private int currentRow = 4;
-    private int cursorPosition = 5;
+    private int currentRow = 2;
+    private int cursorPosition = 7;
     public void NavigateGrid()
     {
         while (true)
@@ -21,10 +21,13 @@ public  class CinemaZaal
             if (keyInfo.Key == ConsoleKey.UpArrow && currentRow > 1)
             {
                 currentRow -= 2;
+                GlobalVariables.GlobalCurrentRow--;
             }
             else if (keyInfo.Key == ConsoleKey.DownArrow && currentRow < 19)
             {
                 currentRow += 2;
+                GlobalVariables.GlobalCurrentRow++;
+
             }
             else if (keyInfo.Key == ConsoleKey.LeftArrow && cursorPosition > 4)
             {
@@ -36,6 +39,8 @@ public  class CinemaZaal
                 {
                     cursorPosition -= 2;
                 }
+                GlobalVariables.GlobalCollum--;
+
             }
             else if (keyInfo.Key == ConsoleKey.RightArrow  && cursorPosition < 45)
             {
@@ -47,14 +52,32 @@ public  class CinemaZaal
                 {
                     cursorPosition += 6;
                 }
+                GlobalVariables.GlobalCollum++;
             }
-            else if (keyInfo.Key == ConsoleKey.Escape)
+            else if (keyInfo.Key == ConsoleKey.Enter)
+            {
+                PrintMessageAtDifferentLocation();
+                cursorPosition += 2;
+                GlobalVariables.GlobalList.Add(GlobalVariables.GlobalCollum);
+                GlobalVariables.GlobalList.Add(GlobalVariables.GlobalCurrentRow);
+            }
+            else if (keyInfo.Key == ConsoleKey.Escape || keyInfo.Key == ConsoleKey.Q)
             {
                 break;
             }
         }
     }
+    private void PrintMessageAtDifferentLocation()
+    {
+        int originalCursorLeft = Console.CursorLeft;
+        int originalCursorTop = Console.CursorTop;
 
+        Console.SetCursorPosition(0, 30);
+        Console.Write($"Je stoel is ({currentRow}, {cursorPosition})");
+
+        Console.CursorLeft = originalCursorLeft;
+        Console.CursorTop = originalCursorTop;
+    }
      private void SetInitialCursorPosition()
     {
         
