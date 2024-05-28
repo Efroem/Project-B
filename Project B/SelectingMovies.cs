@@ -20,7 +20,15 @@ public class SelectingMovies
             Console.ForegroundColor = ConsoleColor.Yellow;
             AsciiArtPrinter.PrintAsciifilms();
             Console.ResetColor();
-            Console.WriteLine("Gebruik de pijltjestoetsen om door de films te bladeren en druk op Enter om een film te selecteren:");
+            Console.Write("Gebruik de");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write(" pijltjestoetsen ");
+            Console.ResetColor();
+            Console.Write("om door de films te bladeren en druk op");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write(" Enter ");
+            Console.ResetColor();
+            Console.Write("om een film te selecteren:");
             Console.WriteLine();
 
             // Calculate the length of the longest movie title for box width
