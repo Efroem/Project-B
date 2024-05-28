@@ -75,7 +75,7 @@ public class Schedule
             if (currentIndex != 0)
             {
                 previousIndex = 1;
-                Console.WriteLine($"{previousIndex}. Vorige\n");
+                Console.WriteLine($"{previousIndex}. Vorige");
             }
 
             int moviesShownAmount = Math.Min(stepSize, schedules.Count - currentIndex);
@@ -104,7 +104,7 @@ public class Schedule
             Console.WriteLine($"{backNumber}. Terug naar menu");
 
             string userAction = (Console.ReadLine() ?? "").ToLower();
-            if ((userAction == "1" && backNumber != "1") || userAction == "vorige")
+            if (userAction == "1" || userAction == "vorige")
             {
                 currentIndex = currentIndex - 5 < 0 ? 0 : currentIndex - 5;
             }

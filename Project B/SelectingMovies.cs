@@ -8,11 +8,10 @@ public class SelectingMovies
     private static List<Movies> movies = new List<Movies>();
     public static void MoviesSelect()
     {
-        LoadMovies(); // Load the movies at the start of the program
+        LoadMovies(); // Laad de films aan het begin van het programma
 
         int selectedIndex = 0;
         bool running = true;
-        bool backToMainMenuSelected = false; // To keep track of whether "Back to Main Menu" option is selected
 
         while (running)
         {
@@ -20,15 +19,7 @@ public class SelectingMovies
             Console.ForegroundColor = ConsoleColor.Yellow;
             AsciiArtPrinter.PrintAsciifilms();
             Console.ResetColor();
-            Console.Write("Gebruik de");
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.Write(" pijltjestoetsen ");
-            Console.ResetColor();
-            Console.Write("om door de films te bladeren en druk op");
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.Write(" Enter ");
-            Console.ResetColor();
-            Console.Write("om een film te selecteren:");
+            Console.WriteLine("Gebruik de pijltjestoetsen om door de films te bladeren en druk op Enter om een film te selecteren:");
             Console.WriteLine();
 
             // Calculate the length of the longest movie title for box width
@@ -44,7 +35,7 @@ public class SelectingMovies
 
             // Calculate the horizontal position to center the box
             int windowWidth = Console.WindowWidth;
-            int leftMargin = (windowWidth - boxWidth - 10) / 2; // Adjusted for 10 more paddings
+            int leftMargin = (windowWidth - boxWidth) / 2;
 
             string topBottomBorder = new string('*', boxWidth);
 
@@ -66,13 +57,11 @@ public class SelectingMovies
                 Console.WriteLine(new string(' ', leftMargin) + $"* {title.PadRight(boxWidth - 3)}*");
             }
 
-            // Print the option to go back to the main menu
-            if (backToMainMenuSelected)
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-            }
-            Console.WriteLine(new string(' ', leftMargin) + (backToMainMenuSelected ? "> (M) Ga terug naar het hoofdmenu <" : "(M) Ga terug naar het hoofdmenu"));
-            Console.ResetColor();
+            // Print the option to view the movie schedule
+            Console.WriteLine(new string(' ', leftMargin) + "> (R) Bekijk filmrooster <");
+
+            Console.WriteLine(new string(' ', leftMargin) + "> (M) Terug naar het hoofdmenu <");
+
             Console.WriteLine(new string(' ', leftMargin) + topBottomBorder);
 
             // Handle key press
@@ -80,51 +69,36 @@ public class SelectingMovies
             switch (key)
             {
                 case ConsoleKey.UpArrow:
-                    if (selectedIndex == 0 && !backToMainMenuSelected)
-                    {
-                        selectedIndex = movies.Count;
-                        backToMainMenuSelected = true;
-                    }
-                    else if (selectedIndex > 0)
+                    if (selectedIndex > 0)
                     {
                         selectedIndex--;
                     }
                     break;
 
                 case ConsoleKey.DownArrow:
-                    if (backToMainMenuSelected)
-                    {
-                        selectedIndex = 0;
-                        backToMainMenuSelected = false;
-                    }
-                    else if (selectedIndex < movies.Count - 1)
+                    if (selectedIndex < movies.Count - 1)
                     {
                         selectedIndex++;
                     }
                     break;
 
                 case ConsoleKey.Enter:
-                    if (backToMainMenuSelected)
-                    {
-                        // Go back to the main menu
-                        return;
-                    }
-                    else
-                    {
-                        ShowMovieDetails(movies[selectedIndex]);
-                    }
-                    break;
-
-                case ConsoleKey.Escape:
-                    running = false;
+                    ShowMovieDetails(movies[selectedIndex]);
                     break;
 
                 case ConsoleKey.M:
-                    // Go back to the main menu
-                    return;
+                    running = false;
+                    break;
+
+                case ConsoleKey.R: // New case for viewing movie schedule
+                    Console.Clear();
+                    Schedule.OpenGeneralMenu();
+                    Console.Clear();
+                    break;
             }
         }
     }
+
 
 
     private static void ShowMovieDetails(Movies movie)
