@@ -48,7 +48,12 @@ class Program
                 AsciiArtPrinter.Printasciihm();
                 Console.ResetColor();
                 //AsciiArtPrinter.PrintAsciiMenu2();
-                options = new string[] { "1.Profiel bekijken", "2.Bekijk films", "3.Bekijk filmrooster", "4.Bekijk reserveringen", "5.Verlaat Pagina" };
+                if (!Authentication.User.IsAdmin) {
+                    options = new string[] { "1.Profiel bekijken", "2.Bekijk films", "3.Bekijk filmrooster", "4.Bekijk reserveringen", "5.Verlaat Pagina" };
+                } else {
+                    options = new string[] { "1.Profiel bekijken", "2.Bekijk films", "3.Bekijk filmrooster", "4.Bekijk reserveringen", "5.Verlaat Pagina", "6.Lijst Zalen", "7.Zaal toevoegen" };
+                }
+                
             }
 
             //Console.WriteLine("Gebruik de pijltjestoetsen om een optie te selecteren en druk op Enter.");

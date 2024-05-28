@@ -106,8 +106,15 @@ static class Authentication
         string birthdate = RegisterBirthdate();
         Console.Clear();
 
+        string adminCode = "admin123";
+        Console.WriteLine("Geef een admin code in indien van toepassing:");
+
+        string userAdminCode = Console.ReadLine();
+        bool admin = userAdminCode == adminCode;
+        Console.Clear();
+
         // Creates new object
-        Account account = new(email, password, firstName, lastName, birthdate);
+        Account account = new(email, password, firstName, lastName, birthdate, admin);
         SaveNewAccount(account);
 
         // save account to property and return account

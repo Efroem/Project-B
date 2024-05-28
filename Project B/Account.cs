@@ -13,14 +13,16 @@ class Account
     public string LastName { get; set; }
     public string BirthDate { get; set; }
     // public UserRole Role { get; set; }
+    public bool IsAdmin {get; set;} = false;
 
-    public Account(string email, string password, string firstName, string lastName, string birthDate)
+    public Account(string email, string password, string firstName, string lastName, string birthDate, bool isAdmin = false)
     {
         Email = email;
         Password = password;
         FirstName = firstName;
         LastName = lastName;
         BirthDate = birthDate;
+        IsAdmin = isAdmin;
     }
 
     public bool TestPassword(string password) => _password == password;
