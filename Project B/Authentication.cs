@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Drawing;
 
+// Authentication class
 static class Authentication
 {
     public static Account? User { get; private set; }
