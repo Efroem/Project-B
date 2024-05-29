@@ -107,6 +107,7 @@ static class Authentication
         string birthdate = RegisterBirthdate();
         Console.Clear();
 
+        AsciiArtPrinter.PrintAsciiRegister();
         string adminCode = "admin123";
         Console.WriteLine("Geef een admin code in indien van toepassing:");
 
