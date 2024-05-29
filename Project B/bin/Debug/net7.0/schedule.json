@@ -1,92 +1,92 @@
 [
-  {
-    "MovieTitle": "Dune Part Two",
-    "SerialNumber": 4,
-    "Date": "2025-05-10T11:15:00",
-    "Hall": {
-      "name": "Zaal4",
-      "size": 3,
-      "serial number": 4
+    {
+        "MovieTitle": "Dune Part Two",
+        "SerialNumber": 4,
+        "Date": "2025-05-10T11:15:00",
+        "Hall": {
+            "name": "Zaal4",
+            "size": 3,
+            "serial number": 4
+        }
+    },
+    {
+        "MovieTitle": "Dune Part One",
+        "SerialNumber": 4,
+        "Date": "2025-05-08T12:15:00",
+        "Hall": {
+            "name": "Zaal4",
+            "size": 3,
+            "serial number": 4
+        }
+    },
+    {
+        "MovieTitle": "Dune Part Three",
+        "SerialNumber": 4,
+        "Date": "2025-05-09T12:15:00",
+        "Hall": {
+            "name": "Zaal4",
+            "size": 3,
+            "serial number": 4
+        }
+    },
+    {
+        "MovieTitle": "Dune Part Four",
+        "SerialNumber": 4,
+        "Date": "2025-05-18T12:15:00",
+        "Hall": {
+            "name": "Zaal4",
+            "size": 3,
+            "serial number": 4
+        }
+    },
+    {
+        "MovieTitle": "Dune Part Five",
+        "SerialNumber": 4,
+        "Date": "2025-06-08T12:15:00",
+        "Hall": {
+            "name": "Zaal4",
+            "size": 3,
+            "serial number": 4
+        }
+    },
+    {
+        "MovieTitle": "Dune Part Six",
+        "SerialNumber": 4,
+        "Date": "2025-07-08T12:15:00",
+        "Hall": {
+            "name": "Zaal4",
+            "size": 3,
+            "serial number": 4
+        }
+    },
+    {
+        "MovieTitle": "Dune Part Seven",
+        "SerialNumber": 4,
+        "Date": "2025-08-08T12:15:00",
+        "Hall": {
+            "name": "Zaal4",
+            "size": 3,
+            "serial number": 4
+        }
+    },
+    {
+        "MovieTitle": "Dune Part Eight",
+        "SerialNumber": 4,
+        "Date": "2025-09-08T12:15:00",
+        "Hall": {
+            "name": "Zaal4",
+            "size": 3,
+            "serial number": 4
+        }
+    },
+    {
+        "MovieTitle": "Bob Marley: One Love",
+        "SerialNumber": 14,
+        "Date": "2024-06-28T15:45:00",
+        "Hall": {
+            "name": "Zaal14",
+            "size": 2,
+            "serial number": 14
+        }
     }
-  },
-  {
-    "MovieTitle": "Dune Part One",
-    "SerialNumber": 4,
-    "Date": "2025-05-08T12:15:00",
-    "Hall": {
-      "name": "Zaal4",
-      "size": 3,
-      "serial number": 4
-    }
-  },
-  {
-    "MovieTitle": "Dune Part Three",
-    "SerialNumber": 4,
-    "Date": "2025-05-09T12:15:00",
-    "Hall": {
-      "name": "Zaal4",
-      "size": 3,
-      "serial number": 4
-    }
-  },
-  {
-    "MovieTitle": "Dune Part Four",
-    "SerialNumber": 4,
-    "Date": "2025-05-18T12:15:00",
-    "Hall": {
-      "name": "Zaal4",
-      "size": 3,
-      "serial number": 4
-    }
-  },
-  {
-    "MovieTitle": "Dune Part Five",
-    "SerialNumber": 4,
-    "Date": "2025-06-08T12:15:00",
-    "Hall": {
-      "name": "Zaal4",
-      "size": 3,
-      "serial number": 4
-    }
-  },
-  {
-    "MovieTitle": "Dune Part Six",
-    "SerialNumber": 4,
-    "Date": "2025-07-08T12:15:00",
-    "Hall": {
-      "name": "Zaal4",
-      "size": 3,
-      "serial number": 4
-    }
-  },
-  {
-    "MovieTitle": "Dune Part Seven",
-    "SerialNumber": 4,
-    "Date": "2025-08-08T12:15:00",
-    "Hall": {
-      "name": "Zaal4",
-      "size": 3,
-      "serial number": 4
-    }
-  },
-  {
-    "MovieTitle": "Dune Part Eight",
-    "SerialNumber": 4,
-    "Date": "2025-09-08T12:15:00",
-    "Hall": {
-      "name": "Zaal4",
-      "size": 3,
-      "serial number": 4
-    }
-  },
-  {
-    "MovieTitle": "Bob Marley: One Love",
-    "SerialNumber": 14,
-    "Date": "2024-06-28T15:45:00",
-    "Hall": {
-      "name": "Zaal14",
-      "size": 2,
-      "serial number": 14
-    }
-  }
 ]

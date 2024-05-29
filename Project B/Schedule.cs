@@ -5,41 +5,55 @@ public class Schedule
 {
     [JsonPropertyName("movieTitle")]
     public string JsonMovieTitle { set => MovieTitle = value; }
+
+    private int _cinemaHallSerialNumber;
+    [JsonPropertyName("cinemaHallSerialNumber")]
+    public int CinemaHallSerialNumber
+    {
+        get => _cinemaHallSerialNumber;
+        set
+        {
+            _cinemaHallSerialNumber = Convert.ToInt32(value);
+            Hall = CinemaHall.ReadFromCinemaHall().Find(x => x.SerialNumber == _cinemaHallSerialNumber);
+        }
+    }
+
+    private int _serialNumber;
     [JsonPropertyName("serialNumber")]
-    public string JsonSerialNumber { set {
-            SerialNumber = Convert.ToInt32(value);
-            Hall = CinemaHall.ReadFromCinemaHall().Find(x => x.SerialNumber == SerialNumber);
+    public int SerialNumber
+    {
+        get => _serialNumber;
+        set
+        {
+            _serialNumber = value;
         }
     }
     [JsonPropertyName("date")]
-    public string JsonDate { set => Date = DateTime.ParseExact(value, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture); }
+    public string JsonDate {get => Date.ToString("dd/MM/yyyy HH:mm:ss"); set => Date = DateTime.ParseExact(value, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture); }
 
 
     public string MovieTitle { get; set; }
-    public int SerialNumber { get; set; }
+
+    [JsonIgnore]
     public DateTime Date { get; set; }
 
-    public CinemaHall Hall {get; set;}
+    [JsonIgnore]
+    public CinemaHall? Hall { get; set; }
 
-    public Schedule(string movieTitle, string serialNumber, string date) : this(movieTitle, Convert.ToInt32(serialNumber), DateTime.Parse(date))
+    public Schedule(string movieTitle, string cinemaHallSerialNumber, string date) : this(movieTitle, Convert.ToInt32(cinemaHallSerialNumber), DateTime.Parse(date))
     {
 
     }
 
-    public Schedule(string movieTitle, int serialNumber, DateTime date)
+    public Schedule(string movieTitle, int cinemaHallSerialNumber, DateTime date)
     {
         MovieTitle = movieTitle;
-        SerialNumber = serialNumber;
+        CinemaHallSerialNumber = cinemaHallSerialNumber;
         Date = date;
+        SerialNumber = ReadScheduleJson().OrderByDescending(x => x.SerialNumber).First().SerialNumber + 1;
     }
 
     public Schedule() { }
-
-    public static void Open()
-    {
-        Console.WriteLine("morgen is er een film om 18:00");
-        Console.ReadLine();
-    }
 
     public static List<Schedule> ReadScheduleJson()
     {
@@ -62,6 +76,11 @@ public class Schedule
         List<Schedule> schedules = ReadScheduleJson();
         schedules = schedules.Where(x => x.MovieTitle == movieTitle).Where(x => x.Date > DateTime.Now).OrderBy(x => x.Date).ToList();
         OpenScheduleMenu(schedules);
+    }
+
+    public static void OpenSpecificMenu(Movie movie)
+    {
+        OpenSpecificMenu(movie.Title);
     }
 
     private static void OpenScheduleMenu(List<Schedule> schedules)
