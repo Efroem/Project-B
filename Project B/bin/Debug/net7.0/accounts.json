@@ -1,29 +1,5 @@
 [
   {
-    "Email": null,
-    "Password": null,
-    "FirstName": null,
-    "LastName": null,
-    "BirthDate": null,
-    "IsAdmin": false
-  },
-  {
-    "Email": null,
-    "Password": null,
-    "FirstName": null,
-    "LastName": null,
-    "BirthDate": null,
-    "IsAdmin": false
-  },
-  {
-    "Email": null,
-    "Password": null,
-    "FirstName": null,
-    "LastName": null,
-    "BirthDate": null,
-    "IsAdmin": false
-  },
-  {
     "Email": "vff@gmail",
     "Password": "3072bf82de82ba2f8623b68ca4567647df4f659784830500d5d010a14cec21fc",
     "FirstName": "vincent",

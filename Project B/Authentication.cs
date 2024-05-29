@@ -111,7 +111,7 @@ static class Authentication
         string adminCode = "admin123";
         Console.WriteLine("Geef een admin code in indien van toepassing:");
 
-        string userAdminCode = Console.ReadLine();
+        string userAdminCode = Console.ReadLine() ?? "";
         bool admin = userAdminCode == adminCode;
         Console.Clear();
 
