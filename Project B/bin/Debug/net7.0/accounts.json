@@ -177,7 +177,6 @@
   },
   {
     "Email": "1073352@gmail.com",
-<<<<<<< Updated upstream
     "Password": "a29ba37d43b719a6645d0892f86160806d2c12676c0d0dd456ec04383259ab68",
     "FirstName": "skibibi",
     "LastName": "dop",
@@ -185,15 +184,10 @@
     "IsAdmin": true
   },
   {
-    "Email": "Admin@gmail.com",
+    "Email": "Admin",
     "Password": "3eb3fe66b31e3b4d10fa70b5cad49c7112294af6ae4e476a1c405155d45aa121",
     "FirstName": "Admin",
     "LastName": "Admin",
-=======
-    "Password": "f9e18e5428fcd197c72869375154f7c830be2729e163def13e0e3574ba6fd3d7",
-    "FirstName": "Manoooo",
-    "LastName": "manooo",
->>>>>>> Stashed changes
     "BirthDate": "20-10-1998",
     "IsAdmin": true
   }

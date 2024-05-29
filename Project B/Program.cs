@@ -51,7 +51,7 @@ class Program
                 if (!Authentication.User.IsAdmin) {
                     options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina" };
                 } else {
-                    options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina", "6.Lijst Zalen", "7.Zaal Toevoegen","8.Zaal Verwijderen","9.Zaal Veranderen"};
+                    options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina", "6.Lijst Zalen", "7.Zaal Toevoegen","8.Zaal Verwijderen","9.Zaal Veranderen", "10.Film toevoegen"};
                 }
                 
             }
@@ -139,12 +139,12 @@ class Program
                     Console.ReadLine();
                     Console.Clear();
                     break;
-                // case 9:
-                //     Console.Clear();
-                //     CinemaHall.AddNewMovie();
-                //     Console.ReadLine();
-                //     Console.Clear();
-                //     break;
+                case 9:
+                    Console.Clear();
+                    CinemaHall.AddNewMovie();
+                    Console.ReadLine();
+                    Console.Clear();
+                    break;
                 default:
                     Console.Clear();
                     Console.WriteLine("Ongeldige invoer");
