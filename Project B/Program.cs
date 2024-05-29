@@ -85,7 +85,9 @@ class Program
                     if (Authentication.User == null)
                     {
                         Console.Clear();
-                        Console.WriteLine("Tot ziens!");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        AsciiArtPrinter.Totziens();
+                        Console.ResetColor();
                         Environment.Exit(0);
                         Console.ReadLine();
                         break;
@@ -99,7 +101,9 @@ class Program
                     }
                 case 4:
                     Console.Clear();
-                    Console.WriteLine("Tot ziens!");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    AsciiArtPrinter.Totziens();
+                    Console.ResetColor();
                     Environment.Exit(0);
                     Console.ReadLine();
                     break;

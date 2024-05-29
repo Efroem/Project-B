@@ -175,6 +175,20 @@ public class AsciiArtPrinter
         string centeredAsciiArt = "                    " + menuText2.Replace("\n", "\n                  ");
         Console.WriteLine(centeredAsciiArt);
     }
+    public static void Totziens()
+    {
+        string totziens = @"
+  _______    _         _                
+ |__   __|  | |       (_)               
+    | | ___ | |_   _____  ___ _ __  ___ 
+    | |/ _ \| __| |_  / |/ _ \ '_ \/ __|
+    | | (_) | |_   / /| |  __/ | | \__ \
+    |_|\___/ \__| /___|_|\___|_| |_|___/
+                                        
+";
+        string centeredAsciiArt = "                    " + totziens.Replace("\n", "\n                                   ");
+        Console.WriteLine(centeredAsciiArt);
+    }
     public static void PrintAsciilogin()
     {
         string login = @"
