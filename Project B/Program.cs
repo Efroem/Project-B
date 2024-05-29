@@ -40,7 +40,7 @@ class Program
                 AsciiArtPrinter.Printasciihm();
                 Console.ResetColor();
                 //AsciiArtPrinter.PrintAsciiMenu();
-                options = new string[] { "1.Aanmelden", "2.Bekijk films", "3.Bekijk filmrooster", "4.verlaat pagina" };
+                options = new string[] { "1.Aanmelden", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Verlaat Pagina" };
             }
             else
             {
@@ -49,9 +49,9 @@ class Program
                 Console.ResetColor();
                 //AsciiArtPrinter.PrintAsciiMenu2();
                 if (!Authentication.User.IsAdmin) {
-                    options = new string[] { "1.Profiel bekijken", "2.Bekijk films", "3.Bekijk filmrooster", "4.Bekijk reserveringen", "5.Verlaat Pagina" };
+                    options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina" };
                 } else {
-                    options = new string[] { "1.Profiel bekijken", "2.Bekijk films", "3.Bekijk filmrooster", "4.Bekijk reserveringen", "5.Verlaat Pagina", "6.Lijst Zalen", "7.Zaal toevoegen" };
+                    options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina", "6.Lijst Zalen", "7.Zaal Toevoegen","8.Zaal Verwijderen","9.Zaal Veranderen"};
                 }
                 
             }
@@ -123,18 +123,31 @@ class Program
                     break;
                 case 7:
                     Console.Clear();
-                    CinemaZaal printer = new CinemaZaal();
-                    printer.PrintGridGroteZaal();
-                    printer.NavigateGrid();
+                    CinemaHall.RemoveCinemaHall();
+                    Console.ReadLine();
+                    Console.Clear();
+                    // Console.Clear();
+                    // CinemaZaal printer = new CinemaZaal();
+                    // printer.PrintGridGroteZaal();
+                    // printer.NavigateGrid();
+                    // Console.ReadLine();
+                    // Console.Clear();
+                    break;
+                case 8:
+                    Console.Clear();
+                    CinemaHall.ChangeCinemaHall();
                     Console.ReadLine();
                     Console.Clear();
                     break;
+                // case 9:
+                //     Console.Clear();
+                //     CinemaHall.AddNewMovie();
+                //     Console.ReadLine();
+                //     Console.Clear();
+                //     break;
                 default:
                     Console.Clear();
                     Console.WriteLine("Ongeldige invoer");
-                    break;
-                case 8:
-                    Console.WriteLine();
                     break;
             }
         }

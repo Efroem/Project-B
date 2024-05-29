@@ -174,5 +174,21 @@
     "LastName": "test",
     "BirthDate": "20-10-1998",
     "IsAdmin": true
+  },
+  {
+    "Email": "1073352@gmail.com",
+    "Password": "a29ba37d43b719a6645d0892f86160806d2c12676c0d0dd456ec04383259ab68",
+    "FirstName": "skibibi",
+    "LastName": "dop",
+    "BirthDate": "20-10-1998",
+    "IsAdmin": true
+  },
+  {
+    "Email": "Admin@gmail.com",
+    "Password": "3eb3fe66b31e3b4d10fa70b5cad49c7112294af6ae4e476a1c405155d45aa121",
+    "FirstName": "Admin",
+    "LastName": "Admin",
+    "BirthDate": "20-10-1998",
+    "IsAdmin": true
   }
 ]
