@@ -29,7 +29,7 @@ public class Schedule
         }
     }
     [JsonPropertyName("date")]
-    public string JsonDate {get => Date.ToString("dd/MM/yyyy HH:mm:ss"); set => Date = DateTime.ParseExact(value, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture); }
+    public string JsonDate { get => Date.ToString("dd/MM/yyyy HH:mm:ss"); set => Date = DateTime.ParseExact(value, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture); }
 
     public string MovieTitle { get; set; }
 
@@ -38,6 +38,9 @@ public class Schedule
 
     [JsonIgnore]
     public CinemaHall? Hall { get; set; }
+
+    [JsonPropertyName("seats")]
+    public List<Seat> Seats { get; set; }
 
     public Schedule(string movieTitle, string cinemaHallSerialNumber, string date) : this(movieTitle, Convert.ToInt32(cinemaHallSerialNumber), DateTime.Parse(date))
     {
@@ -50,9 +53,68 @@ public class Schedule
         CinemaHallSerialNumber = cinemaHallSerialNumber;
         Date = date;
         SerialNumber = ReadScheduleJson().OrderByDescending(x => x.SerialNumber).First().SerialNumber + 1;
+        GenerateSeats();
     }
 
     public Schedule() { }
+
+    // Als schedule.json niet goed gaat kan dit gerunned worden
+    public static void ReserializeExistingSchedule()
+    {
+        List<Schedule> AccountList = ReadScheduleJson();
+
+        foreach (Schedule schedule in AccountList)
+        {
+            if (schedule.Seats is null)
+                schedule.GenerateSeats();
+        }
+
+        JsonSerializerOptions options = new() { WriteIndented = true };
+        string jsonString = JsonSerializer.Serialize(AccountList, options);
+        File.WriteAllText("schedule.json", jsonString);
+    }
+
+    private void GenerateSeats()
+    {
+        Seats = new List<Seat>();
+        int rowLength;
+        switch (Hall.Size)
+        {
+            case 1:
+                for (int i = 0; i < 10; i++)
+                {
+                    rowLength = i % 2 == 0 ? 6 : 5;
+                    for (int j = 0; j < rowLength; j++)
+                    {
+                        Seat seat = new Seat($"{i + 1}-{j + 1}", 5.00);
+                        Seats.Add(seat);
+                    }
+                }
+                break;
+            case 2:
+                for (int i = 0; i < 9; i++)
+                {
+                    rowLength = i % 2 == 0 ? 10 : 9;
+                    for (int j = 0; j < rowLength; j++)
+                    {
+                        Seat seat = new Seat($"{i + 1}-{j + 1}", 5.00);
+                        Seats.Add(seat);
+                    }
+                }
+                break;
+            case 3:
+                for (int i = 0; i < 10; i++)
+                {
+                    rowLength = i % 2 == 0 ? 11 : 9;
+                    for (int j = 0; j < rowLength; j++)
+                    {
+                        Seat seat = new Seat($"{i + 1}-{j + 1}", 5.00);
+                        Seats.Add(seat);
+                    }
+                }
+                break;
+        }
+    }
 
     public static List<Schedule> ReadScheduleJson()
     {
