@@ -31,7 +31,6 @@ public class Schedule
     [JsonPropertyName("date")]
     public string JsonDate {get => Date.ToString("dd/MM/yyyy HH:mm:ss"); set => Date = DateTime.ParseExact(value, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture); }
 
-
     public string MovieTitle { get; set; }
 
     [JsonIgnore]
@@ -123,7 +122,7 @@ public class Schedule
             Console.WriteLine($"{backNumber}. Terug naar menu");
 
             string userAction = (Console.ReadLine() ?? "").ToLower();
-            if ((userAction == "1" && backNumber == "1") || userAction == "vorige")
+            if ((backNumber != "1" && userAction == "1") || userAction == "vorige")
             {
                 currentIndex = currentIndex - 5 < 0 ? 0 : currentIndex - 5;
             }
