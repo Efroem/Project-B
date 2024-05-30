@@ -120,12 +120,18 @@ public class SelectingMovies
             Console.WriteLine($"{"Beschrijving",-10} : {movie.Description}");
             Console.WriteLine(new string('*', Console.WindowWidth - 1));
             Console.WriteLine();
-            Console.WriteLine("Druk op een knop om terug te gaan naar het menu.");
+            Console.WriteLine("1. Bekijk schema van deze film");
+            Console.WriteLine("2. Terug naar film beschrijvingen");
 
-            var key = Console.ReadKey(true).Key;
-            if (key != ConsoleKey.Escape)
+            var key = Console.ReadLine();
+            if (key == "1")
             {
-                return; // Return to movie selection menu
+                Console.Clear();
+                Schedule.OpenSpecificMenu(movie.Title);
+            }
+            else if (key == "2")
+            {
+                return;
             }
         }
     }
