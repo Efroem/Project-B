@@ -46,15 +46,16 @@ public class SelectingMovies
                 string title = movies[i].Title;
                 if (i == selectedIndex)
                 {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     title = $"> {title}";
-                    Console.ResetColor();
+                    
                 }
                 else
                 {
-                    title = $"  {title}";
+                    title = $"  {title}";   
                 }
                 Console.WriteLine(new string(' ', leftMargin) + $"* {title.PadRight(boxWidth - 3)}*");
+                Console.ResetColor();
             }
 
             // Print the option to view the movie schedule
@@ -120,21 +121,68 @@ public class SelectingMovies
             Console.WriteLine($"{"Beschrijving",-10} : {movie.Description}");
             Console.WriteLine(new string('*', Console.WindowWidth - 1));
             Console.WriteLine();
-            Console.WriteLine("1. Bekijk schema van deze film");
-            Console.WriteLine("2. Terug naar film beschrijvingen");
 
-            var key = Console.ReadLine();
-            if (key == "1")
+            string[] options = { "Bekijk schema van deze film", "Terug naar film beschrijvingen" };
+            int selectedOption = ShowMenuInline(options, "Gebruik de pijltjestoetsen om een optie te selecteren en druk op Enter:");
+
+            if (selectedOption == 0)
             {
                 Console.Clear();
                 Schedule.OpenSpecificMenu(movie.Title);
             }
-            else if (key == "2")
+            else if (selectedOption == 1)
             {
                 return;
             }
         }
     }
+
+    public static int ShowMenuInline(string[] options, string prompt)
+    {
+        int selectedOption = 0;
+
+        Console.WriteLine(prompt);
+
+        while (true)
+        {
+            // Display options
+            for (int i = 0; i < options.Length; i++)
+            {
+                Console.CursorLeft = 41;
+                if (i == selectedOption)
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine($"> {options[i]}");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.WriteLine($"  {options[i]}");
+                }
+            }
+
+            var key = Console.ReadKey(true);
+
+            if (key.Key == ConsoleKey.UpArrow && selectedOption > 0)
+            {
+                selectedOption--;
+            }
+            else if (key.Key == ConsoleKey.DownArrow && selectedOption < options.Length - 1)
+            {
+                selectedOption++;
+            }
+            else if (key.Key == ConsoleKey.Enter)
+            {
+                break;
+            }
+
+            // Erase previous options display
+            Console.CursorTop -= options.Length;
+        }
+
+        return selectedOption;
+    }
+
 
 
 
