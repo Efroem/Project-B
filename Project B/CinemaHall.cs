@@ -89,6 +89,28 @@ public class CinemaHall
         }
     }
 
+    private static bool TryAgain()
+    {
+        while (true)
+        {
+            Console.WriteLine("1. Probeer opnieuw\n2. Terug naar het hoofdmenu");
+            string? choice = Console.ReadLine();
+            if (choice == "1")
+            {
+                Console.Clear();
+                return true;
+            }
+            else if (choice == "2")
+            {
+                Console.Clear();
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("Verkeerde input. Kies 1 of 2.");
+            }
+        }
+    }
 
 
     public static void AddNewCinemaHall()
@@ -324,70 +346,103 @@ public class CinemaHall
         Console.WriteLine("Beschikbare bioscoopzalen:");
         int maxNameLength = cinemaHalls.Max(hall => hall.Name.Length);
 
-        foreach (var hall in cinemaHalls)
-        {
-            Console.WriteLine($"- Serial number: {hall.SerialNumber.ToString().PadRight(2)}, Name: {hall.Name.PadRight(maxNameLength)}");
-        }
-
-        Console.WriteLine("\nWelke zaal wilt u selecteren? Voer het serienummer in:");
-
         int serialNumber;
         while (true)
         {
-            if (!int.TryParse(Console.ReadLine(), out serialNumber))
+            foreach (var hall in cinemaHalls)
             {
-                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld '3'):");
-                continue;
+                Console.WriteLine($"- Serial number: {hall.SerialNumber.ToString().PadRight(2)}, Name: {hall.Name.PadRight(maxNameLength)}");
             }
+            Console.WriteLine("\nWelke zaal wilt u selecteren? Voer het serienummer in:");
+            if (!int.TryParse(Console.ReadLine(), out serialNumber) || !cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
+            {
+                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in.");
+                if (!TryAgain()) return;
+            }
+            else
+            {
+                break;
+            }
+        }
 
-            if (cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
+        CinemaHall selectedHall = cinemaHalls.First(hall => hall.SerialNumber == serialNumber);
+
+        List<Movie> movies = ReadMoviesFromJson();
+        if (movies == null || movies.Count == 0)
+        {
+            Console.WriteLine("Geen films beschikbaar om te selecteren");
+            return;
+        }
+
+        Console.Clear();
+        Console.WriteLine("Kies een film uit de volgende lijst:\n");
+        for (int i = 0; i < movies.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {movies[i].Title}");
+        }
+
+        int selectedMovieIndex;
+        while (true)
+        {
+            Console.Write("Voer het nummer van de film in: ");
+            if (!int.TryParse(Console.ReadLine(), out selectedMovieIndex) || selectedMovieIndex < 1 || selectedMovieIndex > movies.Count)
+            {
+                Console.WriteLine("Ongeldige invoer. Voer een geldig nummer in.");
+                if (!TryAgain()) return;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        string movieTitle = movies[selectedMovieIndex - 1].Title;
+
+        Console.Write("Voer de datum van de film in (dd/MM/yyyy): ");
+        DateTime date;
+        while (true)
+        {
+            string? dateString = Console.ReadLine();
+            if (DateTime.TryParseExact(dateString, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out date))
             {
                 break;
             }
             else
             {
-                Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld '3'):");
+                Console.WriteLine("Verkeerde format. Voer de datum op een juiste manier in (dd/MM/yyyy)");
+                if (!TryAgain()) return;
             }
-        }
-
-        Console.WriteLine("Kies een film uit de volgende lijst:\n");
-        List<Movie> movies = ReadMoviesFromJson();
-
-        foreach (var movie in movies)
-        {
-            Console.WriteLine($"- {movie.Title}");
-        }
-
-        Console.Write("Voer de titel van de film in:");
-        string? movieTitle = Console.ReadLine();
-
-        if (string.IsNullOrWhiteSpace(movieTitle))
-        {
-            Console.WriteLine("Titel van de film mag niet leeg zijn.");
-            return;
-        }
-
-        Console.Write("Voer de datum van de film in (dd/MM/yyyy)");
-        string? dateString = Console.ReadLine();
-        DateTime date;
-        while (!DateTime.TryParse(Console.ReadLine(), out date))
-        {
-            Console.WriteLine("Verkeerde format. Voer de datum op een juiste manier in (dd/MM/yyyy)");
-            dateString = Console.ReadLine();
         }
 
         Console.WriteLine("Voer het uur in (0-23):");
         int hour;
-        while (!int.TryParse(Console.ReadLine(), out hour) || hour < 0 || hour > 23)
+        while (true)
         {
-            Console.WriteLine("Verkeerde input. Voer het uur binnen 0 en 23 in");
+            if (int.TryParse(Console.ReadLine(), out hour) || hour < 0 || hour > 23)
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Verkeerde input. Voer het uur binnen 0 en 23 in");
+                if (!TryAgain()) return;
+            }
+
         }
 
         Console.WriteLine("Voer de minuut in (0-59):");
         int minute;
-        while (!int.TryParse(Console.ReadLine(), out minute) || minute < 0 || minute > 59)
+        while (true)
         {
-            Console.WriteLine("Verkeerde input. Voer de minuut tussen 0 en 59 in");
+            if (int.TryParse(Console.ReadLine(), out minute) || minute < 0 || minute > 59)
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Verkeerde input. Voer de minuut tussen 0 en 59 in");
+                if (!TryAgain()) return;
+            }
         }
 
         DateTime movieDateTime = new DateTime(date.Year, date.Month, date.Day, hour, minute, 0);
@@ -396,10 +451,13 @@ public class CinemaHall
         {
             MovieTitle = movieTitle,
             SerialNumber = serialNumber,
-            Date = movieDateTime
+            Date = movieDateTime,
+            Hall = selectedHall
         };
 
         schedules.Add(newSchedule);
         WriteSchedulesToJson(schedules);
+
+        Console.WriteLine("Nieuwe film succesvol toegevoegd aan het schema.");
     }
 }

@@ -18,8 +18,8 @@ class Reservation {
     [JsonPropertyName("date")]
     public string JsonDate { set => Date = DateTime.ParseExact(value, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture); }
 
-    [JsonPropertyName("seat")]
-    public string Seat {get; set;}
+    [JsonPropertyName("seats")]
+    public List<string> Seats {get; set;}
     
     public DateTime Date {get; set;}
 
@@ -27,12 +27,15 @@ class Reservation {
 
     public CinemaHall? Hall {get; set;}
 
-    public Reservation(string movieTitle, string serialNumber, string email, string date, string seat) {
+    public List<string> Food {get; set;}
+
+    public Reservation(string movieTitle, string serialNumber, string email, string date, List<string> seats, List<string>? food) {
         MovieTitle = movieTitle;
         JsonSerialNumber = serialNumber;
         Email = email;
         Date = DateTime.ParseExact(date, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
-        Seat = seat;
+        Seats = seats;
+        Food = food ?? new();
     }
 
     public Reservation() {}
@@ -40,7 +43,7 @@ class Reservation {
     public override string ToString()
     {
         string hallName = Hall is not null ? Hall.Name : "onbekend";
-        return $"Film: {MovieTitle} \nZaal: {hallName} \nStoel: {Seat} \nDatum: {Date}";
+        return $"Film: {MovieTitle} \nZaal: {hallName} \nStoel: {Seats} \nDatum: {Date}";
     }
 
     public static void OpenReservationMenu(Account currentUser) {
@@ -67,8 +70,8 @@ class Reservation {
     }
 
         
-    public void createReservation(string movieTitle, string hallSerialNumber, string userEmail, string date, string seat) {
-        Reservation reservation = new(movieTitle, hallSerialNumber, userEmail, date, seat );
+    public void createReservation(string movieTitle, string hallSerialNumber, string userEmail, string date, List<string> seats, List<string>? food) {
+        Reservation reservation = new(movieTitle, hallSerialNumber, userEmail, date, seats, food);
         // Retrieves existing accounts
         List<Reservation> reservations = ReadReservationJson();
         // Adds the new account

@@ -79,8 +79,8 @@ public  class CinemaZaal
         int originalCursorTop = Console.CursorTop;
 
         Console.SetCursorPosition(0, 40);
-        Console.Write($"Je stoel is ({currentRow}, {cursorPosition})");
-
+        Console.Write($"Je stoel is ({currentRow}, {cursorPosition})\n> (K) Bevestging zitplekken <");
+        
         Console.CursorLeft = originalCursorLeft;
         Console.CursorTop = originalCursorTop;
     }

@@ -57,7 +57,7 @@ static class Authentication
         AsciiArtPrinter.PrintAsciiInlog();
         Console.ResetColor();
         Console.WriteLine("E-mailadres:");
-        string email = Console.ReadLine() ?? "";
+        string email = (Console.ReadLine() ?? "").ToLower();
         Console.Clear(); // Clear the console after reading email
         Console.ForegroundColor = ConsoleColor.Yellow;
         AsciiArtPrinter.PrintAsciiInlog();
@@ -107,10 +107,11 @@ static class Authentication
         string birthdate = RegisterBirthdate();
         Console.Clear();
 
+        AsciiArtPrinter.PrintAsciiRegister();
         string adminCode = "admin123";
         Console.WriteLine("Geef een admin code in indien van toepassing:");
 
-        string userAdminCode = Console.ReadLine();
+        string userAdminCode = Console.ReadLine() ?? "";
         bool admin = userAdminCode == adminCode;
         Console.Clear();
 
@@ -215,7 +216,7 @@ static class Authentication
             try
             {
                 Console.WriteLine("E-mailadres:");
-                string email = Console.ReadLine() ?? "";
+                string email = (Console.ReadLine() ?? "").ToLower();
                 Console.Clear();
 
                 if (email == "")
@@ -400,7 +401,7 @@ static class Authentication
     private static Account? GetAccountByEmail(string email)
     {
         List<Account> AccountList = GetSavedAccounts();
-        return AccountList?.Find(account => account.Email == email);
+        return AccountList?.Find(account => account.Email.ToLower() == email.ToLower());
     }
     private static void EditProfile()
     {
