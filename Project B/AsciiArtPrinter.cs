@@ -6,21 +6,29 @@ public class AsciiArtPrinter
 {
     public static void PrintCentered(string text)
     {
-        // Split the text into lines
         var lines = text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-
-        // Get the width of the console window
         int windowWidth = Console.WindowWidth;
 
         foreach (var line in lines)
         {
-            // Calculate the left padding needed to center the line
-            int padding = (windowWidth - line.Length) / 2;
+            string trimmedLine = line.TrimEnd();
+            int padding = Math.Max(0, (windowWidth - trimmedLine.Length) / 2);
 
-            // Print the line with the calculated padding
-            Console.WriteLine(new string(' ', padding) + line);
+            if (trimmedLine.Length > windowWidth)
+            {
+                Console.WriteLine(trimmedLine);
+            }
+            else
+            {
+                Console.WriteLine(new string(' ', padding) + trimmedLine);
+            }
         }
     }
+
+
+
+
+
 
 
     public static void PrintMovieTitles(string jsonFilePath)
