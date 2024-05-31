@@ -4,6 +4,25 @@ using System.Text.Json;
 
 public class AsciiArtPrinter
 {
+    public static void PrintCentered(string text)
+    {
+        // Split the text into lines
+        var lines = text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+
+        // Get the width of the console window
+        int windowWidth = Console.WindowWidth;
+
+        foreach (var line in lines)
+        {
+            // Calculate the left padding needed to center the line
+            int padding = (windowWidth - line.Length) / 2;
+
+            // Print the line with the calculated padding
+            Console.WriteLine(new string(' ', padding) + line);
+        }
+    }
+
+
     public static void PrintMovieTitles(string jsonFilePath)
     {
         // Read the JSON file
@@ -132,11 +151,9 @@ public class AsciiArtPrinter
  |_|  |_|\____/ \____/|_|    |_____/|_|  |_|______|_| \_|\____/ 
 ";
 
-        // Voeg handmatig het aantal spaties toe om het in het midden te plaatsen
-        string centeredAsciiArt = "                    " + asciiArthm.Replace("\n", "\n                  ");
+        PrintCentered(asciiArthm);
 
         // Print de ASCII art
-        Console.WriteLine(centeredAsciiArt);
     }
     public static void PrintAsciiMenu()
     {
@@ -186,8 +203,7 @@ public class AsciiArtPrinter
     |_|\___/ \__| /___|_|\___|_| |_|___/
                                         
 ";
-        string centeredAsciiArt = "                    " + totziens.Replace("\n", "\n                                   ");
-        Console.WriteLine(centeredAsciiArt);
+        PrintCentered(totziens);
     }
     public static void PrintAsciilogin()
     {
@@ -199,8 +215,7 @@ public class AsciiArtPrinter
  | |___| |__| | |__| |_| |_| |\  |
  |______\____/ \_____|_____|_| \_|
         ";
-        string centeredAsciiArt = "                    " + login.Replace("\n", "\n                                   ");
-        Console.WriteLine(centeredAsciiArt);
+        PrintCentered(login);
     }
     public static void PrintAsciiInlog()
     {
@@ -212,8 +227,7 @@ public class AsciiArtPrinter
   _| |_| |\  | |___| |__| | |__| | |__| | |____| |\  |
  |_____|_| \_|______\____/ \_____|\_____|______|_| \_|                                                                                                                   
         ";
-        string centeredAsciiArt = "                    " + inlog.Replace("\n", "\n                           ");
-        Console.WriteLine(centeredAsciiArt);
+        PrintCentered(inlog);
     }
     public static void PrintAsciiRegister()
     {
@@ -225,8 +239,7 @@ public class AsciiArtPrinter
  | | \ \| |___| |__| |_| |_ ____) |  | |  | | \ \| |____| | \ \| |____| |\  |
  |_|  \_\______\_____|_____|_____/   |_|  |_|  \_\______|_|  \_\______|_| \_|                                                                                                                                                          
         ";
-        string centeredAsciiArt = "                    " + register.Replace("\n", "\n                  ");
-        Console.WriteLine(centeredAsciiArt);
+        PrintCentered(register);
     }
     public static void PrintAsciibeschrijving()
     {
@@ -239,8 +252,7 @@ public class AsciiArtPrinter
  | |     _| |_| |____| |  | |    | |_) | |____ ____) | |____| |  | | | \ \ _| || |__| |  \  /   _| |_| |\  | |__| |
  |_|    |_____|______|_|  |_|    |____/|______|_____/ \_____|_|  |_|_|  \_\_____\____/    \/   |_____|_| \_|\_____|                                                                                                                                                                                                                               
         ";
-        string centeredAsciiArt = "                    " + beschrijving.Replace("\n", "\n        ");
-        Console.WriteLine(centeredAsciiArt);
+        PrintCentered(beschrijving);
     }
 
 }
