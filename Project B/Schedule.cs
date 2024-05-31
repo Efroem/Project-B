@@ -92,8 +92,8 @@ public class Schedule
                     rowLength = i % 2 == 0 ? 6 : 5;
                     for (int j = 0; j < rowLength; j++)
                     {
-                        Seat seat = j == 0 || j == rowLength - 1 
-                            ? new Seat($"{i + 1}-{j + 1}", _cheapSeatPrice) 
+                        Seat seat = j == 0 || j == rowLength - 1
+                            ? new Seat($"{i + 1}-{j + 1}", _cheapSeatPrice)
                             : new Seat($"{i + 1}-{j + 1}", _seatPrice);
                         Seats.Add(seat);
                     }
@@ -105,8 +105,8 @@ public class Schedule
                     rowLength = i % 2 == 0 ? 10 : 9;
                     for (int j = 0; j < rowLength; j++)
                     {
-                        Seat seat = j == 0 || j == rowLength - 1 
-                            ? new Seat($"{i + 1}-{j + 1}", _cheapSeatPrice) 
+                        Seat seat = j == 0 || j == rowLength - 1
+                            ? new Seat($"{i + 1}-{j + 1}", _cheapSeatPrice)
                             : new Seat($"{i + 1}-{j + 1}", _seatPrice);
                         Seats.Add(seat);
                     }
@@ -118,8 +118,8 @@ public class Schedule
                     rowLength = i % 2 == 0 ? 11 : 9;
                     for (int j = 0; j < rowLength; j++)
                     {
-                        Seat seat = j == 0 || j == rowLength - 1 
-                            ? new Seat($"{i + 1}-{j + 1}", _cheapSeatPrice) 
+                        Seat seat = j == 0 || j == rowLength - 1
+                            ? new Seat($"{i + 1}-{j + 1}", _cheapSeatPrice)
                             : new Seat($"{i + 1}-{j + 1}", _seatPrice);
                         Seats.Add(seat);
                     }
@@ -160,47 +160,40 @@ public class Schedule
     {
         int currentIndex = 0;
         const int stepSize = 5;
+        Schedule pickedSchedule;
 
         while (true)
         {
-            int previousIndex = 0;
-            if (currentIndex != 0)
-            {
-                previousIndex = 1;
-                Console.WriteLine($"{previousIndex}. Vorige");
-            }
 
             int moviesShownAmount = Math.Min(stepSize, schedules.Count - currentIndex);
+            List<string> movies = new();
             for (int i = 0; i < moviesShownAmount; i++)
             {
-                Console.WriteLine($"{i + 1 + previousIndex}. {schedules[currentIndex + i].MovieTitle}");
-                Console.WriteLine(schedules[currentIndex + i].Date);
-                Console.WriteLine(schedules[currentIndex + i].Hall.Name);
-                Console.WriteLine();
+                movies.Add($"{i + 1 + (currentIndex != 0 ? 1 : 0)}.{schedules[currentIndex + i].MovieTitle}\n{schedules[currentIndex + i].Date}\n{schedules[currentIndex + i].Hall.Name}");
             }
-
-            string nextNumber;
-            string backNumber;
-            if (currentIndex + 5 < schedules.Count)
+            List<string> options = new();
+            if (currentIndex != 0)
+                options.Add("1.Terug");
+            movies.ForEach(options.Add);
+            if (currentIndex + stepSize < schedules.Count)
             {
-                nextNumber = Convert.ToString(moviesShownAmount + 1 + previousIndex);
-                backNumber = Convert.ToString(moviesShownAmount + 2 + previousIndex);
-                Console.WriteLine($"{nextNumber}. Volgende");
+                options.Add($"{stepSize + 1}.Volgende");
+                options.Add($"{stepSize + 2}.Terug naar hoofdmenu");
             }
             else
             {
-                nextNumber = "_";
-                backNumber = Convert.ToString(moviesShownAmount + 1 + previousIndex);
+                options.Add($"{stepSize + 1}.Terug naar hoofdmenu");
             }
 
-            Console.WriteLine($"{backNumber}. Terug naar menu");
+            int userAction = ShowMenuInline(options.ToArray(), "Gebruik de pijltjestoetsen om een optie te selecteren en druk op Enter.");
 
-            string userAction = (Console.ReadLine() ?? "").ToLower();
-            if ((backNumber != "1" && userAction == "1") || userAction == "vorige")
+            // Go back in list
+            if (currentIndex != 0 && userAction == 0)
             {
                 currentIndex = currentIndex - 5 < 0 ? 0 : currentIndex - 5;
             }
-            else if (userAction == nextNumber || userAction == "volgende")
+            // Go Forward in list
+            else if ((currentIndex == 0 && userAction == movies.Count) || (currentIndex > 0 && userAction == movies.Count + 1))
             {
                 currentIndex = schedules.Count - currentIndex > stepSize
                         ? currentIndex + stepSize > schedules.Count - currentIndex
@@ -208,25 +201,146 @@ public class Schedule
                             : currentIndex + stepSize
                         : currentIndex;
             }
-            else if (userAction == backNumber || userAction.Contains("terug") || userAction.Contains("menu"))
+            // Movie picked
+            else if (currentIndex == 0 && userAction < movies.Count)
+            {
+                pickedSchedule = schedules[currentIndex + userAction];
+                Console.WriteLine($"You picked {userAction + 1}. {pickedSchedule.MovieTitle}");
+                Console.ReadLine();
+                Console.Clear();
+                HallAssignment.Callfunction2();
+            }
+            // Movie picked part 2
+            else if (currentIndex > 0 && userAction < movies.Count + 1)
+            {
+                pickedSchedule = schedules[currentIndex + (userAction - 1)];
+                Console.WriteLine($"You picked {userAction + 1}. {pickedSchedule.MovieTitle}");
+                Console.ReadLine();
+                Console.Clear();
+                HallAssignment.Callfunction2();
+            }
+            // Complicated way to check if user wants to return
+            else if (
+                    (currentIndex == 0 && userAction == movies.Count + 1 && currentIndex + stepSize < schedules.Count) ||
+                    (currentIndex == 0 && userAction == movies.Count + 2 && !(currentIndex + stepSize < schedules.Count)) ||
+                    (currentIndex > 0 && userAction == movies.Count + 2 && currentIndex + stepSize < schedules.Count) ||
+                    (currentIndex > 0 && userAction == movies.Count + 3 && !(currentIndex + stepSize < schedules.Count))
+                )
             {
                 return;
             }
 
-            for (int i = 0; i < Math.Min(stepSize, schedules.Count - currentIndex); i++)
+            Console.Clear();
+        }
+    }
+
+    // Modified ShowMenuInline for multiline options
+    private static int ShowMenuInline(string[] options, string prompt)
+    {
+        int selectedOption = 0;
+        int optionsLength = 0;
+        int longestLineLength = 0;
+
+        foreach (string option in options)
+        {
+            optionsLength += option.Split('\n').Length;
+
+            foreach (string line in option.Split('\n'))
             {
-                if (userAction == Convert.ToString(i + 1 + previousIndex) || userAction == schedules[currentIndex + i].MovieTitle)
+                longestLineLength = longestLineLength < line.Length ? line.Length : longestLineLength;
+            }
+        }
+
+        // Deel de prompt op rond de woorden die rood moeten worden
+        string[] promptParts = prompt.Split(new string[] { " pijltjestoetsen ", " Enter" }, StringSplitOptions.None);
+
+        // Schrijf het eerste deel van de prompt
+        AsciiArtPrinter.PrintCentered(promptParts[0]);
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        AsciiArtPrinter.PrintCentered(" pijltjestoetsen ");
+        Console.ResetColor();
+
+        AsciiArtPrinter.PrintCentered(promptParts[1]);
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        AsciiArtPrinter.PrintCentered(" Enter");
+        Console.ResetColor();
+
+        AsciiArtPrinter.PrintCentered(promptParts[2]);
+        do
+        {
+            for (int i = 0; i < options.Length; i++)
+            {
+
+                if (i == selectedOption)
                 {
-                    Console.WriteLine($"You picked {i + 1 + previousIndex}. {schedules[currentIndex + i].MovieTitle}");
-                    Console.ReadLine();
-                    Console.Clear();
-                    HallAssignment.Callfunction2();
-                    //Console.Clear();
-                    
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    PrintTextCentered($"{options[i]}", longestLineLength);
+                    Console.ResetColor();
+                }
+                else
+                {
+                    PrintTextCentered($"{options[i]}", longestLineLength);
                 }
             }
 
-            //Console.Clear();
-        }
+            var key = Console.ReadKey(true);
+            if (key.Key == ConsoleKey.UpArrow && selectedOption > 0)
+            {
+                selectedOption--;
+            }
+            else if (key.Key == ConsoleKey.DownArrow && selectedOption < options.Length - 1)
+            {
+                selectedOption++;
+            }
+            else if (key.Key == ConsoleKey.Enter)
+            {
+                break;
+            }
+
+            // Erase previous options display
+            Console.CursorTop -= optionsLength;
+        } while (true);
+
+        return selectedOption;
     }
+
+    // Modified PrintTextCentered for multiline options
+    private static void PrintTextCentered(string text, int longestLongestLineLength)
+    {
+
+
+        if (text.Contains('\n'))
+        {
+            string[] textArray = text.Split('\n');
+            int windowWidth;
+            int leftPadding;
+            int longestLineLength = 0;
+            foreach (string line in textArray)
+            {
+                longestLineLength = longestLineLength < line.Length ? line.Length : longestLineLength;
+            }
+
+            for (int i = 0; i < textArray.Length; i++)
+            {
+                windowWidth = Console.WindowWidth;
+                leftPadding = (windowWidth - longestLineLength + longestLineLength - longestLongestLineLength) / 2;
+                Console.CursorLeft = leftPadding;
+
+                Console.SetCursorPosition(leftPadding, Console.CursorTop);
+                Console.WriteLine(textArray[i]);
+            }
+        }
+        else
+        {
+            int windowWidth = Console.WindowWidth;
+            int leftPadding = (windowWidth - text.Length) / 2;
+            Console.CursorLeft = leftPadding;
+
+            Console.SetCursorPosition(leftPadding, Console.CursorTop);
+            Console.WriteLine(text);
+        }
+
+
+    }
+
 }

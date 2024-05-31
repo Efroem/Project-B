@@ -13,12 +13,12 @@ static class Authentication
     // Starts the authentication process
     public static Account? Start()
     {
+
         while (true)
         {
-            Console.WriteLine("Kies het volgende: ");
-            Console.WriteLine("1. Inloggen\n2. Registreren\n3. Terug naar hoofdmenu");
-            string userAction = (Console.ReadLine() ?? "").ToLower();
-            if (userAction == "1" || userAction == "Inloggen" || userAction == "inloggen")
+            string[] options = new string[] { "1.Inloggen            ", "2.Registreren         ", "3.Terug naar hoofdmenu" };
+            int userAction = Program.ShowMenuInline(options, "Gebruik de pijltjestoetsen om een optie te selecteren en druk op Enter.");
+            if (userAction == 0)
                 try
                 {
                     Console.Clear();
@@ -28,7 +28,7 @@ static class Authentication
                 {
                     Console.WriteLine(e.Message);
                 }
-            else if (userAction == "2" || userAction == "Registreren" || userAction == "registreren")
+            else if (userAction == 1)
             {
                 try
                 {
@@ -97,6 +97,7 @@ static class Authentication
         Console.WriteLine("Voornaam:");
         string firstName = Console.ReadLine() ?? "";
         Console.Clear();
+
         Console.ForegroundColor = ConsoleColor.Yellow;
         AsciiArtPrinter.PrintAsciiRegister();
         Console.ResetColor();
@@ -107,7 +108,9 @@ static class Authentication
         string birthdate = RegisterBirthdate();
         Console.Clear();
 
+        Console.ForegroundColor = ConsoleColor.Yellow;
         AsciiArtPrinter.PrintAsciiRegister();
+        Console.ResetColor();
         string adminCode = "admin123";
         Console.WriteLine("Geef een admin code in indien van toepassing:");
 
@@ -130,42 +133,35 @@ static class Authentication
         while (true)
         {
             if (User != null)
-                Console.WriteLine($"{User.ToString()}");
+            {
+                Console.WriteLine();
+                string[] userStrings = User.ToString().Split("\n");
+                int longestUserString = userStrings.OrderByDescending(x => x.Length).First().Length;
+                int leftPadding = (Console.WindowWidth - longestUserString) / 2;
+                foreach (string userString in userStrings)
+                {
+                    Console.CursorLeft = leftPadding;
+                    Console.WriteLine($"{userString}");
+                }
+            }
 
-            Console.WriteLine("1. Uitloggen\n2. Gegevens aanpassen \n3. Terug naar hoofdmenu");
-            string userAction = (Console.ReadLine() ?? "").ToLower();
+            string[] options = new string[] { "1.Uitloggen           ", "2.Profiel aanpassen   ", "3.Terug naar hoofdmenu" };
+            int userAction = Program.ShowMenuInline(options, "Gebruik de pijltjestoetsen om een optie te selecteren en druk op Enter.");
             switch (userAction)
             {
-                case "1":
-                case "uitloggen":
-                case "log uit":
+                case 0:
                     Console.Clear();
                     Logout();
                     return;
 
-                case "2":
-                case "gegevens":
-                case "aanpassen":
-                case "gegevens aanpassen":
+                case 1:
                     EditProfile();
                     break;
 
-                case "3":
-                case "terug naar hoofdmenu":
-                case "terug":
-                case "hoofdmenu":
+                case 2:
                     Console.Clear();
                     return;
             }
-            if (userAction == "1" || userAction.ToLower() == "uitloggen")
-            {
-                Console.Clear();
-                Logout();
-                break;
-            }
-            else if (userAction == "3" || userAction.ToLower() == "Terug naar hoofdmenu" || userAction.ToLower() == "terug")
-                Console.Clear();
-            break;
         }
     }
 
@@ -206,8 +202,6 @@ static class Authentication
         return password;
     }
 
-    // Checks if the email is valid
-    // Checks if the email is valid
     // Checks if the email is valid
     private static string RegisterEmail()
     {
@@ -412,14 +406,29 @@ static class Authentication
         string password;
         List<Account> savedAccounts = GetSavedAccounts();
         int accountIndex = savedAccounts.FindIndex(x => x.Email == User.Email);
-        Console.WriteLine($"{User.ToString()}");
-        Console.WriteLine("1. Verander email \n2. Verander voornaam \n3. Verander achternaam \n4. Verander geboortedatum \n5. Verander wachtwoord \n6. Terug");
-        string userAction = (Console.ReadLine() ?? "").ToLower();
+
+        string[] userStrings = User.ToString().Split("\n");
+        int longestUserString = userStrings.OrderByDescending(x => x.Length).First().Length;
+        int leftPadding = (Console.WindowWidth - longestUserString) / 2;
+        foreach (string userString in userStrings)
+        {
+            Console.CursorLeft = leftPadding;
+            Console.WriteLine($"{userString}");
+        }
+
+        string[] options = new string[] {
+            "1.Verander email        ",
+            "2.Verander voornaam     ",
+            "3.Verander achternaam   ",
+            "4.Verander geboortedatum",
+            "5.Verander wachtwoord   ",
+            "6.Terug                 "
+        };
+
+        int userAction = Program.ShowMenuInline(options, "Gebruik de pijltjestoetsen om een optie te selecteren en druk op Enter.");
         switch (userAction)
         {
-            case "1":
-            case "email":
-            case "verander email":
+            case 0:
                 Console.Clear();
                 Console.WriteLine("Voer uw Wachtwoord opnieuw in:");
                 password = HashPassword(ReadPassword());
@@ -430,9 +439,7 @@ static class Authentication
                 }
                 break;
 
-            case "2":
-            case "voornaam":
-            case "verander voornaam":
+            case 1:
                 Console.Clear();
                 Console.WriteLine("Voer uw Wachtwoord opnieuw in:");
                 password = HashPassword(ReadPassword());
@@ -444,9 +451,7 @@ static class Authentication
                 }
                 break;
 
-            case "3":
-            case "achternaam":
-            case "verander achternaam":
+            case 2:
                 Console.Clear();
                 Console.WriteLine("Voer uw Wachtwoord opnieuw in:");
                 password = HashPassword(ReadPassword());
@@ -458,9 +463,7 @@ static class Authentication
                 }
                 break;
 
-            case "4":
-            case "geboortedatum":
-            case "verander geboortedatum":
+            case 3:
                 Console.Clear();
                 Console.WriteLine("Voer uw Wachtwoord opnieuw in:");
                 password = HashPassword(ReadPassword());
@@ -471,9 +474,7 @@ static class Authentication
                 }
                 break;
 
-            case "5":
-            case "wachtwoord":
-            case "verander wachtwoord":
+            case 4:
                 Console.Clear();
                 Console.WriteLine("Voer uw Wachtwoord opnieuw in:");
                 password = HashPassword(ReadPassword());
@@ -485,8 +486,7 @@ static class Authentication
                 }
                 break;
 
-            case "6":
-            case "terug":
+            case 5:
                 Console.Clear();
                 return;
         }
