@@ -4,11 +4,11 @@ public  class CinemaZaal
 	private const string EmptyRowSeparator2 = " |";
 	private const string EmptyRowSeparator3 = "         |";
     private const string EmptyRowSeparator4 = "      |";
-    private const string EmptyRowSeparator5 = "|                                   |";
-	private const string EmptyRowSeparator6 = "        |";
-	private const string EmptyRowSeparator7 = "      |";
-    private int currentRow = 2;
-    private int cursorPosition = 7;
+    // private const string EmptyRowSeparator5 = "|                                   |";
+	// private const string EmptyRowSeparator6 = "        |";
+	// private const string EmptyRowSeparator7 = "      |";
+    private static int currentRow = 2;
+    private static int cursorPosition = 7;
 
     private bool running = true;
 
@@ -73,7 +73,7 @@ public  class CinemaZaal
             }
         }
     }
-    private void PrintMessageAtDifferentLocation()
+    public static void PrintMessageAtDifferentLocation()
     {
         int originalCursorLeft = Console.CursorLeft;
         int originalCursorTop = Console.CursorTop;
@@ -84,7 +84,7 @@ public  class CinemaZaal
         Console.CursorLeft = originalCursorLeft;
         Console.CursorTop = originalCursorTop;
     }
-     private void SetInitialCursorPosition()
+    public static void SetInitialCursorPosition()
     {
         
         if (currentRow == 4 ||currentRow == 8 || currentRow == 10|| currentRow == 14 || currentRow == 18 || currentRow == 20)
@@ -97,7 +97,7 @@ public  class CinemaZaal
         }
 
     }
-    public void PrintGridGroteZaal()
+    public static void PrintGridGroteZaal()
     {
         Console.WriteLine("_____________________________________________________");
         Console.WriteLine("|												    |");
@@ -147,7 +147,7 @@ public  class CinemaZaal
 
 
 
-public void PrintGridMediumZaal()
+public static void PrintGridMediumZaal()
     {
         Console.WriteLine("_____________________________________________________");
         Console.WriteLine("|												    |");
@@ -190,40 +190,40 @@ public void PrintGridMediumZaal()
         Console.WriteLine("|____________________________________________________|");
     }
 
-    public void PrintGridKleineZaal()
-    {
-        Console.WriteLine("____________________________________");
-        Console.WriteLine("|								   |");
+    // public static void PrintGridKleineZaal()
+    // {
+    //     Console.WriteLine("____________________________________");
+    //     Console.WriteLine("|								   |");
 
-        for (char c = 'A'; c <= 'J'; c++)
-        {
-            Console.Write("|  " + c + "  ");
-            int maxSeats3 = (c - 'A') % 2 == 0 ? 6 : 5;
-            for (int i = 1; i <= maxSeats3; i++)
-            {
-                if (i == 1 && maxSeats3 == 5)
-                Console.Write("  ["+ i + "] ");
-                else
-                Console.Write("[" + i + "] ");
-            }
-            if (maxSeats3 == 5)
-            {
-                Console.WriteLine(EmptyRowSeparator6);
-            }
-            else
-            {
-                Console.WriteLine(EmptyRowSeparator7);
-            }
-            if (c != 'J')
-            {
-            Console.WriteLine(EmptyRowSeparator5);
-            }
-        }
+    //     for (char c = 'A'; c <= 'J'; c++)
+    //     {
+    //         Console.Write("|  " + c + "");
+    //         int maxSeats3 = (c - 'A') % 2 == 0 ? 6 : 5;
+    //         for (int i = 1; i <= maxSeats3; i++)
+    //         {
+    //             if (i == 1 && maxSeats3 == 5)
+    //             Console.Write("  ["+ i + "] ");
+    //             else
+    //             Console.Write("[" + i + "] ");
+    //         }
+    //         if (maxSeats3 == 5)
+    //         {
+    //             Console.WriteLine(EmptyRowSeparator6);
+    //         }
+    //         else
+    //         {
+    //             Console.WriteLine(EmptyRowSeparator7);
+    //         }
+    //         if (c != 'J')
+    //         {
+    //         Console.WriteLine(EmptyRowSeparator5);
+    //         }
+    //     }
 
-        Console.WriteLine("|                                   |");
-        Console.WriteLine("|           filmdoek                |");
-        Console.WriteLine("|___________________________________|");
-    }
+    //     Console.WriteLine("|                                   |");
+    //     Console.WriteLine("|           filmdoek                |");
+    //     Console.WriteLine("|___________________________________|");
+    // }
 }
 
 

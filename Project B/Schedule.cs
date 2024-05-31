@@ -207,10 +207,14 @@ public class Schedule
                 {
                     Console.WriteLine($"You picked {i + 1 + previousIndex}. {schedules[currentIndex + i].MovieTitle}");
                     Console.ReadLine();
+                    Console.Clear();
+                    HallAssignment.Callfunction2();
+                    //Console.Clear();
+                    
                 }
             }
 
-            Console.Clear();
+            //Console.Clear();
         }
     }
 }
