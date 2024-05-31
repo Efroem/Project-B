@@ -6,29 +6,15 @@ public class AsciiArtPrinter
 {
     public static void PrintCentered(string text)
     {
-        var lines = text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+        string[] lines = text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
         int windowWidth = Console.WindowWidth;
 
-        foreach (var line in lines)
+        foreach (string line in lines)
         {
-            string trimmedLine = line.TrimEnd();
-            int padding = Math.Max(0, (windowWidth - trimmedLine.Length) / 2);
-
-            if (trimmedLine.Length > windowWidth)
-            {
-                Console.WriteLine(trimmedLine);
-            }
-            else
-            {
-                Console.WriteLine(new string(' ', padding) + trimmedLine);
-            }
+            int padding = Math.Max(0, (windowWidth - line.Length) / 2);
+            Console.WriteLine(line.PadLeft(padding + line.Length));
         }
     }
-
-
-
-
-
 
 
     public static void PrintMovieTitles(string jsonFilePath)
@@ -143,10 +129,8 @@ public class AsciiArtPrinter
  |  ___|_ _| |   |  \/  / ___| 
  | |_   | || |   | |\/| \___ \ 
  |  _|  | || |___| |  | |___) |
- |_|   |___|_____|_|  |_|____/ 
-                                ";
-        string centeredAsciiArt = "                    " + asciiartfilms.Replace("\n", "\n                                         ");
-        Console.WriteLine(centeredAsciiArt);
+ |_|   |___|_____|_|  |_|____/ ";
+        PrintCentered(asciiartfilms);
     }
     public static void Printasciihm()
     {
@@ -156,50 +140,11 @@ public class AsciiArtPrinter
  | |__| | |  | | |  | | |__  | |  | | \  / | |__  |  \| | |  | |
  |  __  | |  | | |  | |  __| | |  | | |\/| |  __| | . ` | |  | |
  | |  | | |__| | |__| | |    | |__| | |  | | |____| |\  | |__| |
- |_|  |_|\____/ \____/|_|    |_____/|_|  |_|______|_| \_|\____/ 
-";
+ |_|  |_|\____/ \____/|_|    |_____/|_|  |_|______|_| \_|\____/ ";
 
         PrintCentered(asciiArthm);
-
-        // Print de ASCII art
-    }
-    public static void PrintAsciiMenu()
-    {
-        string menuText = @"
-                    ┌─────────────────────────┐
-                    │          Menu:          │
-                    ├─────────────────────────┤
-                    │ 1. Bekijk films         │
-                    │ 2. Inloggen             │
-                    │ 3. Bekijk reserveringen │
-                    | 4. Bekijk schema        |
-                    │ 5. Verlaat pagina       │
-                    │ 6. Lijst zalen          │
-                    │ 7. CinemaHall toevoegen │
-                    └─────────────────────────┘
-";
-        string centeredAsciiArt = "                    " + menuText.Replace("\n", "\n                  ");
-        Console.WriteLine(centeredAsciiArt);
     }
 
-    public static void PrintAsciiMenu2()
-    {
-        string menuText2 = @"
-                    ┌─────────────────────────┐
-                    │          Menu:          │
-                    ├─────────────────────────┤
-                    │ 1. Bekijk films         │
-                    │ 2. Profiel bekijken     │
-                    │ 3. Bekijk reserveringen │
-                    | 4. Bekijk schema        |
-                    │ 5. Verlaat pagina       │
-                    │ 6. Lijst zalen          │
-                    │ 7. CinemaHall toevoegen │
-                    └─────────────────────────┘
-        ";
-        string centeredAsciiArt = "                    " + menuText2.Replace("\n", "\n                  ");
-        Console.WriteLine(centeredAsciiArt);
-    }
     public static void Totziens()
     {
         string totziens = @"
@@ -208,9 +153,7 @@ public class AsciiArtPrinter
     | | ___ | |_   _____  ___ _ __  ___ 
     | |/ _ \| __| |_  / |/ _ \ '_ \/ __|
     | | (_) | |_   / /| |  __/ | | \__ \
-    |_|\___/ \__| /___|_|\___|_| |_|___/
-                                        
-";
+    |_|\___/ \__| /___|_|\___|_| |_|___/";
         PrintCentered(totziens);
     }
     public static void PrintAsciilogin()
@@ -221,8 +164,7 @@ public class AsciiArtPrinter
  | |   | |  | | |  __  | | |  \| |
  | |   | |  | | | |_ | | | | . ` |
  | |___| |__| | |__| |_| |_| |\  |
- |______\____/ \_____|_____|_| \_|
-        ";
+ |______\____/ \_____|_____|_| \_|";
         PrintCentered(login);
     }
     public static void PrintAsciiInlog()
@@ -233,8 +175,7 @@ public class AsciiArtPrinter
    | | |  \| | |   | |  | | |  __| |  __| |__  |  \| |
    | | | . ` | |   | |  | | | |_ | | |_ |  __| | . ` |
   _| |_| |\  | |___| |__| | |__| | |__| | |____| |\  |
- |_____|_| \_|______\____/ \_____|\_____|______|_| \_|                                                                                                                   
-        ";
+ |_____|_| \_|______\____/ \_____|\_____|______|_| \_|";
         PrintCentered(inlog);
     }
     public static void PrintAsciiRegister()
@@ -245,22 +186,20 @@ public class AsciiArtPrinter
  | |__) | |__ | |  __  | | | (___    | |  | |__) | |__  | |__) | |__  |  \| |
  |  _  /|  __|| | |_ | | |  \___ \   | |  |  _  /|  __| |  _  /|  __| | . ` |
  | | \ \| |___| |__| |_| |_ ____) |  | |  | | \ \| |____| | \ \| |____| |\  |
- |_|  \_\______\_____|_____|_____/   |_|  |_|  \_\______|_|  \_\______|_| \_|                                                                                                                                                          
-        ";
+ |_|  \_\______\_____|_____|_____/   |_|  |_|  \_\______|_|  \_\______|_| \_|";
         PrintCentered(register);
     }
     public static void PrintAsciibeschrijving()
     {
-        string beschrijving = @"
-
-  ______ _____ _      __  __      ____  ______  _____  _____ _    _ _____  _____     ___      _______ _   _  _____ 
+        string asciiArtBeschrijving = @"
+ ______ _____ _      __  __      ____  ______  _____  _____ _    _ _____  _____     ___      _______ _   _  _____ 
  |  ____|_   _| |    |  \/  |    |  _ \|  ____|/ ____|/ ____| |  | |  __ \|_   _|   | \ \    / /_   _| \ | |/ ____|
  | |__    | | | |    | \  / |    | |_) | |__  | (___ | |    | |__| | |__) | | |     | |\ \  / /  | | |  \| | |  __ 
  |  __|   | | | |    | |\/| |    |  _ <|  __|  \___ \| |    |  __  |  _  /  | | _   | | \ \/ /   | | | . ` | | |_ |
  | |     _| |_| |____| |  | |    | |_) | |____ ____) | |____| |  | | | \ \ _| || |__| |  \  /   _| |_| |\  | |__| |
- |_|    |_____|______|_|  |_|    |____/|______|_____/ \_____|_|  |_|_|  \_\_____\____/    \/   |_____|_| \_|\_____|                                                                                                                                                                                                                               
-        ";
-        PrintCentered(beschrijving);
+ |_|    |_____|______|_|  |_|    |____/|______|_____/ \_____|_|  |_|_|  \_\_____\_____|   \/   |_____|_| \_|\_____|";
+
+        PrintCentered(asciiArtBeschrijving);
     }
 
 }

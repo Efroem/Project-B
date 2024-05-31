@@ -1,11 +1,11 @@
 using System;
- 
+
 public class TestPosters
 {
-   
+
     public static void MegaBioscoop()
-{
-    string Asciiartstart = @"
+    {
+        string Asciiartstart = @"
                 
        __          __  _ _                     ____  _ _            
        \ \        / / | | |                   |  _ \(_|_)           
@@ -25,10 +25,10 @@ public class TestPosters
               |___/                                          |_|    
 
     ";
-    string centeredAsciiArt = "                    " + Asciiartstart.Replace("\n", "\n                  ");
+        string centeredAsciiArt = "                    " + Asciiartstart.Replace("\n", "\n                  ");
 
-    Console.WriteLine(centeredAsciiArt);
-}
+        Console.WriteLine(centeredAsciiArt);
+    }
 
     public static string text2 = @"
                                       THE TERMINATOR 1984
@@ -72,4 +72,41 @@ public class TestPosters
                     |                                 \_\_|           |
                     |_________________________________________________|
 ";
+    //     public static void PrintAsciiMenu()
+    //     {
+    //         string menuText = @"
+    //                     ┌─────────────────────────┐
+    //                     │          Menu:          │
+    //                     ├─────────────────────────┤
+    //                     │ 1. Bekijk films         │
+    //                     │ 2. Inloggen             │
+    //                     │ 3. Bekijk reserveringen │
+    //                     | 4. Bekijk schema        |
+    //                     │ 5. Verlaat pagina       │
+    //                     │ 6. Lijst zalen          │
+    //                     │ 7. CinemaHall toevoegen │
+    //                     └─────────────────────────┘
+    // ";
+    //         string centeredAsciiArt = "                    " + menuText.Replace("\n", "\n                  ");
+    //         Console.WriteLine(centeredAsciiArt);
+    //     }
+
+    //     public static void PrintAsciiMenu2()
+    //     {
+    //         string menuText2 = @"
+    //                     ┌─────────────────────────┐
+    //                     │          Menu:          │
+    //                     ├─────────────────────────┤
+    //                     │ 1. Bekijk films         │
+    //                     │ 2. Profiel bekijken     │
+    //                     │ 3. Bekijk reserveringen │
+    //                     | 4. Bekijk schema        |
+    //                     │ 5. Verlaat pagina       │
+    //                     │ 6. Lijst zalen          │
+    //                     │ 7. CinemaHall toevoegen │
+    //                     └─────────────────────────┘
+    //         ";
+    //         string centeredAsciiArt = "                    " + menuText2.Replace("\n", "\n                  ");
+    //         Console.WriteLine(centeredAsciiArt);
+    //     }
 }
