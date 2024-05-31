@@ -42,6 +42,9 @@ public class Schedule
     [JsonPropertyName("seats")]
     public List<Seat> Seats { get; set; }
 
+    private double _cheapSeatPrice = 6.99;
+    private double _seatPrice = 8.99;
+
     public Schedule(string movieTitle, string cinemaHallSerialNumber, string date) : this(movieTitle, Convert.ToInt32(cinemaHallSerialNumber), DateTime.Parse(date))
     {
 
@@ -76,6 +79,9 @@ public class Schedule
 
     private void GenerateSeats()
     {
+        if (Hall is null)
+            return;
+
         Seats = new List<Seat>();
         int rowLength;
         switch (Hall.Size)
@@ -86,7 +92,7 @@ public class Schedule
                     rowLength = i % 2 == 0 ? 6 : 5;
                     for (int j = 0; j < rowLength; j++)
                     {
-                        Seat seat = new Seat($"{i + 1}-{j + 1}", 5.00);
+                        Seat seat = new Seat($"{i + 1}-{j + 1}", j == 0 || j == rowLength - 1 ?  _cheapSeatPrice : _seatPrice);
                         Seats.Add(seat);
                     }
                 }
@@ -97,7 +103,7 @@ public class Schedule
                     rowLength = i % 2 == 0 ? 10 : 9;
                     for (int j = 0; j < rowLength; j++)
                     {
-                        Seat seat = new Seat($"{i + 1}-{j + 1}", 5.00);
+                        Seat seat = new Seat($"{i + 1}-{j + 1}", j == 0 || j == rowLength - 1 ?  _cheapSeatPrice : _seatPrice);
                         Seats.Add(seat);
                     }
                 }
@@ -108,7 +114,7 @@ public class Schedule
                     rowLength = i % 2 == 0 ? 11 : 9;
                     for (int j = 0; j < rowLength; j++)
                     {
-                        Seat seat = new Seat($"{i + 1}-{j + 1}", 5.00);
+                        Seat seat = new Seat($"{i + 1}-{j + 1}", j == 0 || j == rowLength - 1 ?  _cheapSeatPrice : _seatPrice);
                         Seats.Add(seat);
                     }
                 }
