@@ -40,7 +40,7 @@ class Program
                 AsciiArtPrinter.Printasciihm();
                 Console.ResetColor();
                 //AsciiArtPrinter.PrintAsciiMenu();
-                options = new string[] { "1.Aanmelden", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Verlaat Pagina" };
+                options = new string[] { "1.Aanmelden       ", "2.Bekijk Films    ", " 3.Bekijk Filmrooster", "4.Verlaat Pagina  " };
             }
             else
             {
@@ -48,12 +48,14 @@ class Program
                 AsciiArtPrinter.Printasciihm();
                 Console.ResetColor();
                 //AsciiArtPrinter.PrintAsciiMenu2();
-                if (!Authentication.User.IsAdmin) {
-                    options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina" };
-                } else {
-                    options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina", "6.Lijst Zalen", "7.Zaal Toevoegen","8.Zaal Verwijderen","9.Zaal Veranderen", "10.Film toevoegen"};
+                if (!Authentication.User.IsAdmin)
+                {
+                    options = new string[] { "  1.Profiel Bekijken   ", "2.Bekijk Films     ", "  3.Bekijk Filmrooster ", "   4.Bekijk Reserveringen", "5.Verlaat Pagina   " };
                 }
-                
+                else
+                {
+                    options = new string[] { "  1.Profiel Bekijken   ", "2.Bekijk Films     ", "  3.Bekijk Filmrooster ", "   4.Bekijk Reserveringen", "5.Verlaat Pagina   ", "6.Lijst Zalen     ", "7.Zaal Toevoegen   ", " 8.Zaal Verwijderen  ", " 9.Zaal Veranderen   ", " 10.Film toevoegen   " };
+                }
             }
 
             //Console.WriteLine("Gebruik de pijltjestoetsen om een optie te selecteren en druk op Enter.");
@@ -154,6 +156,15 @@ class Program
         }
     }
 
+    public static void PrintTextCentered(string text)
+    {
+        int windowWidth = Console.WindowWidth;
+        int leftPadding = (windowWidth - text.Length) / 2;
+
+        Console.SetCursorPosition(leftPadding, Console.CursorTop);
+        Console.WriteLine(text);
+    }
+
     public static int ShowMenuInline(string[] options, string prompt)
     {
         int selectedOption = 0;
@@ -161,30 +172,33 @@ class Program
         // Deel de prompt op rond de woorden die rood moeten worden
         string[] promptParts = prompt.Split(new string[] { " pijltjestoetsen ", " Enter" }, StringSplitOptions.None);
 
+        int center = Console.WindowWidth / 2;
+
         // Schrijf het eerste deel van de prompt
-        Console.Write(promptParts[0]);
+        AsciiArtPrinter.PrintCentered(promptParts[0]);
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.Write(" pijltjestoetsen ");
+        AsciiArtPrinter.PrintCentered(" pijltjestoetsen ");
         Console.ResetColor();
-        Console.Write(promptParts[1]);
+        AsciiArtPrinter.PrintCentered(promptParts[1]);
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.Write(" Enter");
+        AsciiArtPrinter.PrintCentered(" Enter");
         Console.ResetColor();
-        Console.WriteLine(promptParts[2]);
+        AsciiArtPrinter.PrintCentered(promptParts[2]);
         do
         {
             for (int i = 0; i < options.Length; i++)
             {
-                Console.CursorLeft = 41;
+                int leftPadding = (Console.WindowWidth - options[i].Length) / 2;
+                Console.CursorLeft = leftPadding;
                 if (i == selectedOption)
                 {
                     Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine($"   {options[i]}");
+                    PrintTextCentered($"   {options[i]}");
                     Console.ResetColor();
                 }
                 else
                 {
-                    Console.WriteLine($"   {options[i]}");
+                    PrintTextCentered($"   {options[i]}");
                 }
             }
 
