@@ -92,7 +92,9 @@ public class Schedule
                     rowLength = i % 2 == 0 ? 6 : 5;
                     for (int j = 0; j < rowLength; j++)
                     {
-                        Seat seat = new Seat($"{i + 1}-{j + 1}", j == 0 || j == rowLength - 1 ?  _cheapSeatPrice : _seatPrice);
+                        Seat seat = j == 0 || j == rowLength - 1 
+                            ? new Seat($"{i + 1}-{j + 1}", _cheapSeatPrice) 
+                            : new Seat($"{i + 1}-{j + 1}", _seatPrice);
                         Seats.Add(seat);
                     }
                 }
@@ -103,7 +105,9 @@ public class Schedule
                     rowLength = i % 2 == 0 ? 10 : 9;
                     for (int j = 0; j < rowLength; j++)
                     {
-                        Seat seat = new Seat($"{i + 1}-{j + 1}", j == 0 || j == rowLength - 1 ?  _cheapSeatPrice : _seatPrice);
+                        Seat seat = j == 0 || j == rowLength - 1 
+                            ? new Seat($"{i + 1}-{j + 1}", _cheapSeatPrice) 
+                            : new Seat($"{i + 1}-{j + 1}", _seatPrice);
                         Seats.Add(seat);
                     }
                 }
@@ -114,7 +118,9 @@ public class Schedule
                     rowLength = i % 2 == 0 ? 11 : 9;
                     for (int j = 0; j < rowLength; j++)
                     {
-                        Seat seat = new Seat($"{i + 1}-{j + 1}", j == 0 || j == rowLength - 1 ?  _cheapSeatPrice : _seatPrice);
+                        Seat seat = j == 0 || j == rowLength - 1 
+                            ? new Seat($"{i + 1}-{j + 1}", _cheapSeatPrice) 
+                            : new Seat($"{i + 1}-{j + 1}", _seatPrice);
                         Seats.Add(seat);
                     }
                 }
