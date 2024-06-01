@@ -175,15 +175,29 @@ public class Schedule
             if (currentIndex != 0)
                 options.Add("1.Terug");
             movies.ForEach(options.Add);
-            if (currentIndex + stepSize < schedules.Count)
-            {
-                options.Add($"{stepSize + 1}.Volgende");
-                options.Add($"{stepSize + 2}.Terug naar hoofdmenu");
+            if (currentIndex == 0) {
+                if (currentIndex + stepSize < schedules.Count)
+                {
+                    options.Add($"{moviesShownAmount + 1}.Volgende");
+                    options.Add($"{moviesShownAmount + 2}.Terug naar hoofdmenu");
+                }
+                else
+                {
+                    options.Add($"{moviesShownAmount + 1}.Terug naar hoofdmenu");
+                }
             }
-            else
-            {
-                options.Add($"{stepSize + 1}.Terug naar hoofdmenu");
+            else {
+                if (currentIndex + stepSize < schedules.Count)
+                {
+                    options.Add($"{moviesShownAmount + 2}.Volgende");
+                    options.Add($"{moviesShownAmount + 3}.Terug naar hoofdmenu");
+                }
+                else
+                {
+                    options.Add($"{moviesShownAmount + 2}.Terug naar hoofdmenu");
+                }
             }
+            
 
             int userAction = ShowMenuInline(options.ToArray(), "Gebruik de pijltjestoetsen om een optie te selecteren en druk op Enter.");
 
@@ -193,7 +207,8 @@ public class Schedule
                 currentIndex = currentIndex - 5 < 0 ? 0 : currentIndex - 5;
             }
             // Go Forward in list
-            else if ((currentIndex == 0 && userAction == movies.Count) || (currentIndex > 0 && userAction == movies.Count + 1))
+            else if ((currentIndex == 0 && userAction == movies.Count && moviesShownAmount != 0 && currentIndex + stepSize < schedules.Count) 
+                || (currentIndex > 0 && userAction == movies.Count + 1 && currentIndex + stepSize < schedules.Count))
             {
                 currentIndex = schedules.Count - currentIndex > stepSize
                         ? currentIndex + stepSize > schedules.Count - currentIndex
@@ -222,11 +237,14 @@ public class Schedule
             // Complicated way to check if user wants to return
             else if (
                     (currentIndex == 0 && userAction == movies.Count + 1 && currentIndex + stepSize < schedules.Count) ||
-                    (currentIndex == 0 && userAction == movies.Count + 2 && !(currentIndex + stepSize < schedules.Count)) ||
-                    (currentIndex > 0 && userAction == movies.Count + 2 && currentIndex + stepSize < schedules.Count) ||
-                    (currentIndex > 0 && userAction == movies.Count + 3 && !(currentIndex + stepSize < schedules.Count))
+                    (currentIndex == 0 && userAction == movies.Count + 1 && currentIndex + stepSize >= schedules.Count) ||
+                    (currentIndex != 0 && userAction == movies.Count + 2 && currentIndex + stepSize < schedules.Count) ||
+                    (currentIndex != 0 && userAction == movies.Count + 1 && currentIndex + stepSize >= schedules.Count) ||
+                    (currentIndex == 0 && userAction == 0 && moviesShownAmount == 0)
                 )
             {
+                Console.WriteLine("adada");
+                Console.ReadLine();
                 return;
             }
 
