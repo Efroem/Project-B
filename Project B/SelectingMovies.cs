@@ -12,6 +12,8 @@ public class SelectingMovies
 
         int selectedIndex = 0;
         bool running = true;
+        string purple = "\u001b[35m";
+        string reset = "\u001b[0m";
 
         while (running)
         {
@@ -19,7 +21,7 @@ public class SelectingMovies
             Console.ForegroundColor = ConsoleColor.Yellow;
             AsciiArtPrinter.PrintAsciifilms();
             Console.ResetColor();
-            Console.WriteLine("Gebruik de pijltjestoetsen om door de films te bladeren en druk op Enter om een film te selecteren:");
+            Program.PrintTextCentered($"Gebruik de {purple}pijltjestoetsen{reset} om door de films te bladeren en druk op {purple}Enter{reset} om een film te selecteren:");
             Console.WriteLine();
 
             // Calculate the length of the longest movie title for box width
@@ -122,8 +124,12 @@ public class SelectingMovies
             Console.WriteLine(new string('*', Console.WindowWidth - 1));
             Console.WriteLine();
 
+            string purple = "\u001b[35m";
+            string reset = "\u001b[0m";
+
             string[] options = { "Bekijk schema van deze film", "Terug naar film beschrijvingen" };
-            int selectedOption = ShowMenuInline(options, "Gebruik de pijltjestoetsen om een optie te selecteren en druk op Enter:");
+            Program.PrintTextCentered($"Gebruik de {purple}pijltjestoetsen{reset} om een optie te selecteren en druk op {purple}Enter{reset} om een film te selecteren:");
+            int selectedOption = ShowMenuInline(options);
 
             if (selectedOption == 0)
             {
@@ -137,11 +143,9 @@ public class SelectingMovies
         }
     }
 
-    public static int ShowMenuInline(string[] options, string prompt)
+    public static int ShowMenuInline(string[] options)
     {
         int selectedOption = 0;
-
-        Console.WriteLine(prompt);
 
         while (true)
         {

@@ -10,15 +10,14 @@ class Program
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
 
+        string purple = "\u001b[35m";
+        string reset = "\u001b[0m";
+
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Yellow;
         AsciiArtPrinter.MegaBioscoop();
         Console.ResetColor();
-        Console.Write("Druk op een ");
-        Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.Write("knop");
-        Console.ResetColor();
-        Console.Write(" om verder te gaan");
+        PrintTextCentered($"Druk op een {purple}knop{reset} om verder te gaan.");
         Console.ReadKey();
         Console.Clear();
 
@@ -63,8 +62,10 @@ class Program
                 }
             }
 
-            //Console.WriteLine("Gebruik de pijltjestoetsen om een optie te selecteren en druk op Enter.");
-            int selectedOption = ShowMenuInline(options, "Gebruik de pijltjestoetsen om een optie te selecteren en druk op Enter.");
+
+
+            PrintTextCentered($"\nGebruik de {purple}pijltjestoetsen{reset} om een optie te selecteren en druk op {purple}Enter{reset}.\n\n");
+            int selectedOption = ShowMenuInline(options);
 
             switch (selectedOption)
             {
@@ -168,32 +169,24 @@ class Program
 
     public static void PrintTextCentered(string text)
     {
+        string[] lines = text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
         int windowWidth = Console.WindowWidth;
-        int leftPadding = (windowWidth - text.Length) / 2;
 
-        Console.SetCursorPosition(leftPadding, Console.CursorTop);
-        Console.WriteLine(text);
+        foreach (string line in lines)
+        {
+            int leftPadding = (windowWidth - line.Length) / 2;
+            if (leftPadding < 0)
+                leftPadding = 0;
+
+            Console.SetCursorPosition(leftPadding, Console.CursorTop);
+            Console.WriteLine(line);
+        }
     }
 
-    public static int ShowMenuInline(string[] options, string prompt)
+    public static int ShowMenuInline(string[] options)
     {
         int selectedOption = 0;
 
-        // Deel de prompt op rond de woorden die rood moeten worden
-        string[] promptParts = prompt.Split(new string[] { " pijltjestoetsen ", " Enter" }, StringSplitOptions.None);
-
-        int center = Console.WindowWidth / 2;
-
-        // Schrijf het eerste deel van de prompt
-        AsciiArtPrinter.PrintCentered(promptParts[0]);
-        Console.ForegroundColor = ConsoleColor.Magenta;
-        AsciiArtPrinter.PrintCentered(" pijltjestoetsen ");
-        Console.ResetColor();
-        AsciiArtPrinter.PrintCentered(promptParts[1]);
-        Console.ForegroundColor = ConsoleColor.Magenta;
-        AsciiArtPrinter.PrintCentered(" Enter");
-        Console.ResetColor();
-        AsciiArtPrinter.PrintCentered(promptParts[2]);
         do
         {
             for (int i = 0; i < options.Length; i++)

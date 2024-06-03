@@ -198,9 +198,12 @@ public class Schedule
                     options.Add($"{moviesShownAmount + 2}.Terug naar hoofdmenu");
                 }
             }
+            string purple = "\u001b[35m";
+            string reset = "\u001b[0m";
 
-
-            int userAction = ShowMenuInline(options.ToArray(), "Gebruik de pijltjestoetsen om een optie te selecteren en druk op Enter.");
+            AsciiArtPrinter.PrintAsciifilms();
+            Program.PrintTextCentered($"Gebruik de {purple}pijltjestoetsen{reset} om een optie te selecteren en druk op {purple}Enter{reset}.");
+            int userAction = ShowMenuInline(options.ToArray());
             // Go back in list
             if (currentIndex != 0 && userAction == 0)
             {
@@ -247,7 +250,7 @@ public class Schedule
     }
 
     // Modified ShowMenuInline for multiline options
-    private static int ShowMenuInline(string[] options, string prompt)
+    private static int ShowMenuInline(string[] options)
     {
         int selectedOption = 0;
         int optionsLength = 0;
@@ -263,21 +266,21 @@ public class Schedule
             }
         }
 
-        // Deel de prompt op rond de woorden die rood moeten worden
-        string[] promptParts = prompt.Split(new string[] { " pijltjestoetsen ", " Enter" }, StringSplitOptions.None);
+        // // Deel de prompt op rond de woorden die rood moeten worden
+        // string[] promptParts = prompt.Split(new string[] { " pijltjestoetsen ", " Enter" }, StringSplitOptions.None);
 
-        // Schrijf het eerste deel van de prompt
-        AsciiArtPrinter.PrintCentered(promptParts[0]);
-        Console.ForegroundColor = ConsoleColor.Magenta;
-        AsciiArtPrinter.PrintCentered(" pijltjestoetsen ");
-        Console.ResetColor();
+        // // Schrijf het eerste deel van de prompt
+        // AsciiArtPrinter.PrintCentered(promptParts[0]);
+        // Console.ForegroundColor = ConsoleColor.Magenta;
+        // AsciiArtPrinter.PrintCentered(" pijltjestoetsen ");
+        // Console.ResetColor();
 
-        AsciiArtPrinter.PrintCentered(promptParts[1]);
-        Console.ForegroundColor = ConsoleColor.Magenta;
-        AsciiArtPrinter.PrintCentered(" Enter");
-        Console.ResetColor();
+        // AsciiArtPrinter.PrintCentered(promptParts[1]);
+        // Console.ForegroundColor = ConsoleColor.Magenta;
+        // AsciiArtPrinter.PrintCentered(" Enter");
+        // Console.ResetColor();
 
-        AsciiArtPrinter.PrintCentered(promptParts[2]);
+        // AsciiArtPrinter.PrintCentered(promptParts[2]);
         do
         {
             for (int i = 0; i < options.Length; i++)
