@@ -77,51 +77,51 @@ public class AsciiArtPrinter
             // Check if the root element is an array
             if (root.ValueKind == JsonValueKind.Array)
             {
-                if (Console.WindowWidth > 130)
-                {
-                    List<JsonElement> filteredElements = new List<JsonElement>();
-                    foreach (JsonElement element in root.EnumerateArray())
-                    {
-                        if (element.GetProperty("Ascii").GetString() != "")
-                        {
-                            filteredElements.Add(element);
-                        }
-                    }
-                    for (int i = 0; i < filteredElements.Count; i += 2)
-                    {
-                        string[] poster1List = filteredElements[i].GetProperty("Ascii").GetString().Split("\n");
-                        string[] poster2List = filteredElements.Count() - 1 > i ? filteredElements[i + 1].GetProperty("Ascii").GetString().Split("\n") : new string[] { "", "" };
+                // Create a list to store movie elements
+                List<JsonElement> movies = new List<JsonElement>();
 
-                        for (int j = 0; j < Math.Max(poster1List.Length, poster2List.Length); j++)
-                        {
-                            if (poster1List.Length > j && poster2List.Length > j)
-                            {
-                                Console.Write($"{poster1List[j]}");
-                                Console.Write(poster2List[j].PadLeft(75 + poster2List[j].Length - poster1List[j].Length, ' '));
-                                Console.Write("\n");
-                            }
-                            else if (poster1List.Length > j)
-                                Console.WriteLine($"{poster1List[j] ?? ""}");
-                            else
-                            {
-                                Console.WriteLine(poster2List[j].PadLeft(75 + poster2List[j].Length, ' '));
-                            }
-                        }
-                    }
-                }
-                else
+                // Add each movie element to the list
+                foreach (JsonElement movie in root.EnumerateArray())
                 {
-                    foreach (JsonElement movie in root.EnumerateArray())
-                    {
-                        // Print the title of each movie with box
-                        Console.WriteLine(movie.GetProperty("Ascii").GetString());
-                        Console.WriteLine();
-                    }
+                    movies.Add(movie);
                 }
 
+                // Determine the number of posters to print based on screen width
+                int numberOfPosters = Console.WindowWidth > 130 ? 4 : 2;
+
+                // Shuffle the list of movies randomly
+                Random rnd = new Random();
+                movies = movies.OrderBy(x => rnd.Next()).ToList();
+
+                // Print the ASCII art for the selected number of posters
+                for (int i = 0; i < Math.Min(numberOfPosters, movies.Count); i += 2)
+                {
+                    string[] poster1List = movies[i].GetProperty("Ascii").GetString().Split("\n");
+                    string[] poster2List = i + 1 < movies.Count ? movies[i + 1].GetProperty("Ascii").GetString().Split("\n") : new string[] { "", "" };
+
+                    for (int j = 0; j < Math.Max(poster1List.Length, poster2List.Length); j++)
+                    {
+                        if (poster1List.Length > j && poster2List.Length > j)
+                        {
+                            Console.Write($"{poster1List[j]}");
+                            Console.Write(poster2List[j].PadLeft(75 + poster2List[j].Length - poster1List[j].Length, ' '));
+                            Console.Write("\n");
+                        }
+                        else if (poster1List.Length > j)
+                            Console.WriteLine($"{poster1List[j] ?? ""}");
+                        else
+                        {
+                            Console.WriteLine(poster2List[j].PadLeft(75 + poster2List[j].Length, ' '));
+                        }
+                    }
+
+                    // Separate the posters
+                    Console.WriteLine();
+                }
             }
         }
     }
+
     public static void PrintAsciifilms()
     {
         string asciiartfilms = @" 
