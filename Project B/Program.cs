@@ -55,7 +55,7 @@ class Program
                 //AsciiArtPrinter.PrintAsciiMenu2();
                 if (!Authentication.User.IsAdmin)
                 {
-                    options = new string[] { "  1.Profiel Bekijken   ", "2.Bekijk Films     ", "  3.Bekijk Filmrooster ", "   4.Bekijk Reserveringen", "5.Verlaat Pagina   " };
+                    options = new string[] { "  1.Profiel Bekijken   ", "2.Bekijk Films     ", "  3.Bekijk Filmrooster ", "   4.Bekijk Reserveringen", "5.Verlaat Pagina   ", "6. eten kopen   " };
                 }
                 else
                 {
@@ -116,6 +116,11 @@ class Program
                     Console.ReadLine();
                     break;
                 case 5:
+                    if (!Authentication.User.IsAdmin)
+                    {
+                        Console.Clear();
+                        Payment.BestelMenu();
+                    }
                     Console.Clear();
                     Console.WriteLine("Lijst Zalen");
                     AdminFunctions.PrintCinemaHalls();
