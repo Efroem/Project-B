@@ -87,9 +87,9 @@ public class Schedule
         switch (Hall.Size)
         {
             case 1:
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 8; i++)
                 {
-                    rowLength = i % 2 == 0 ? 6 : 5;
+                    rowLength = 7;
                     for (int j = 0; j < rowLength; j++)
                     {
                         Seat seat = j == 0 || j == rowLength - 1
@@ -100,9 +100,9 @@ public class Schedule
                 }
                 break;
             case 2:
-                for (int i = 0; i < 9; i++)
+                for (int i = 0; i < 11; i++)
                 {
-                    rowLength = i % 2 == 0 ? 10 : 9;
+                    rowLength = 8;
                     for (int j = 0; j < rowLength; j++)
                     {
                         Seat seat = j == 0 || j == rowLength - 1
@@ -115,7 +115,7 @@ public class Schedule
             case 3:
                 for (int i = 0; i < 10; i++)
                 {
-                    rowLength = i % 2 == 0 ? 11 : 9;
+                    rowLength = 10;
                     for (int j = 0; j < rowLength; j++)
                     {
                         Seat seat = j == 0 || j == rowLength - 1
