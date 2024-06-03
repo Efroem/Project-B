@@ -14,7 +14,7 @@ public class Schedule
         set
         {
             _cinemaHallSerialNumber = Convert.ToInt32(value);
-            Hall = CinemaHall.ReadFromCinemaHall().Find(x => x.SerialNumber == _cinemaHallSerialNumber);
+            Hall = AdminFunctions.ReadFromCinemaHall().Find(x => x.SerialNumber == _cinemaHallSerialNumber);
         }
     }
 
@@ -37,7 +37,7 @@ public class Schedule
     public DateTime Date { get; set; }
 
     [JsonIgnore]
-    public CinemaHall? Hall { get; set; }
+    public AdminFunctions? Hall { get; set; }
 
     [JsonPropertyName("seats")]
     public List<Seat> Seats { get; set; }
@@ -174,7 +174,8 @@ public class Schedule
             if (currentIndex != 0)
                 options.Add("1.Terug");
             movies.ForEach(options.Add);
-            if (currentIndex == 0) {
+            if (currentIndex == 0)
+            {
                 if (currentIndex + stepSize <= schedules.Count)
                 {
                     options.Add($"{moviesShownAmount + 1}.Volgende");
@@ -185,7 +186,8 @@ public class Schedule
                     options.Add($"{moviesShownAmount + 1}.Terug naar hoofdmenu");
                 }
             }
-            else {
+            else
+            {
                 if (currentIndex + stepSize <= schedules.Count)
                 {
                     options.Add($"{moviesShownAmount + 2}.Volgende");
@@ -196,7 +198,7 @@ public class Schedule
                     options.Add($"{moviesShownAmount + 2}.Terug naar hoofdmenu");
                 }
             }
-            
+
 
             int userAction = ShowMenuInline(options.ToArray(), "Gebruik de pijltjestoetsen om een optie te selecteren en druk op Enter.");
             // Go back in list
@@ -205,8 +207,8 @@ public class Schedule
                 currentIndex = currentIndex - 5 < 0 ? 0 : currentIndex - 5;
             }
             // Go Forward in list
-            else if ((currentIndex == 0 && userAction == movies.Count && moviesShownAmount != 0 && currentIndex + stepSize < schedules.Count) 
-                || (currentIndex > 0 && userAction == movies.Count + 1 && currentIndex + stepSize  < schedules.Count))
+            else if ((currentIndex == 0 && userAction == movies.Count && moviesShownAmount != 0 && currentIndex + stepSize < schedules.Count)
+                || (currentIndex > 0 && userAction == movies.Count + 1 && currentIndex + stepSize < schedules.Count))
             {
                 currentIndex += stepSize;
             }

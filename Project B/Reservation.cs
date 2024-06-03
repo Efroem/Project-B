@@ -1,35 +1,40 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Globalization;
-class Reservation {
+class Reservation
+{
     [JsonPropertyName("movieTitle")]
-    public string MovieTitle {get; set;}
+    public string MovieTitle { get; set; }
 
     [JsonPropertyName("serialNumber")]
-    public string JsonSerialNumber { set {
+    public string JsonSerialNumber
+    {
+        set
+        {
             SerialNumber = Convert.ToInt32(value);
-            Hall = CinemaHall.ReadFromCinemaHall().Find(x => x.SerialNumber == SerialNumber);
+            Hall = AdminFunctions.ReadFromCinemaHall().Find(x => x.SerialNumber == SerialNumber);
         }
     }
 
     [JsonPropertyName("email")]
-    public string Email {get; set;}
+    public string Email { get; set; }
 
     [JsonPropertyName("date")]
     public string JsonDate { set => Date = DateTime.ParseExact(value, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture); }
 
     [JsonPropertyName("seats")]
-    public List<string> Seats {get; set;}
-    
-    public DateTime Date {get; set;}
+    public List<string> Seats { get; set; }
 
-    public int SerialNumber {get; set;}
+    public DateTime Date { get; set; }
 
-    public CinemaHall? Hall {get; set;}
+    public int SerialNumber { get; set; }
 
-    public List<string> Food {get; set;}
+    public AdminFunctions? Hall { get; set; }
 
-    public Reservation(string movieTitle, string serialNumber, string email, string date, List<string> seats, List<string>? food) {
+    public List<string> Food { get; set; }
+
+    public Reservation(string movieTitle, string serialNumber, string email, string date, List<string> seats, List<string>? food)
+    {
         MovieTitle = movieTitle;
         JsonSerialNumber = serialNumber;
         Email = email;
@@ -38,7 +43,7 @@ class Reservation {
         Food = food ?? new();
     }
 
-    public Reservation() {}
+    public Reservation() { }
 
     public override string ToString()
     {
@@ -46,21 +51,24 @@ class Reservation {
         return $"Film: {MovieTitle} \nZaal: {hallName} \nStoel: {Seats} \nDatum: {Date}";
     }
 
-    public static void OpenReservationMenu(Account currentUser) {
+    public static void OpenReservationMenu(Account currentUser)
+    {
         List<Reservation> reservations = ReadReservationJson();
         reservations = reservations.Where(x => x.Email == currentUser.Email).Where(x => x.Date > DateTime.Now).OrderBy(x => x.Date).ToList();
 
-        while (true) {
+        while (true)
+        {
             reservations.ForEach(x => Console.WriteLine($"{x}\n"));
             Console.WriteLine("1. Terug");
             string userAction = (Console.ReadLine() ?? "").ToLower();
-            if (userAction == "1" || userAction == "terug") {
+            if (userAction == "1" || userAction == "terug")
+            {
                 return;
             }
         }
     }
 
-     public static List<Reservation> ReadReservationJson()
+    public static List<Reservation> ReadReservationJson()
     {
         // Read the JSON file as a string
         string jsonString = File.ReadAllText("reservations.json");
@@ -69,8 +77,9 @@ class Reservation {
         return JsonSerializer.Deserialize<List<Reservation>>(jsonString) ?? new();
     }
 
-        
-    public void createReservation(string movieTitle, string hallSerialNumber, string userEmail, string date, List<string> seats, List<string>? food) {
+
+    public void createReservation(string movieTitle, string hallSerialNumber, string userEmail, string date, List<string> seats, List<string>? food)
+    {
         Reservation reservation = new(movieTitle, hallSerialNumber, userEmail, date, seats, food);
         // Retrieves existing accounts
         List<Reservation> reservations = ReadReservationJson();

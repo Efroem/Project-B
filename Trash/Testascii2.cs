@@ -22,9 +22,7 @@ public class TestPosters
  | |  | |  __/ (_| | (_| | | |_) | | (_) \__ \ (_| (_) | (_) | |_) |
  |_|  |_|\___|\__, |\__,_| |____/|_|\___/|___/\___\___/ \___/| .__/ 
                __/ |                                         | |    
-              |___/                                          |_|    
-
-    ";
+              |___/                                          |_|    ";
         string centeredAsciiArt = "                    " + Asciiartstart.Replace("\n", "\n                  ");
 
         Console.WriteLine(centeredAsciiArt);
@@ -72,41 +70,41 @@ public class TestPosters
                     |                                 \_\_|           |
                     |_________________________________________________|
 ";
-    //     public static void PrintAsciiMenu()
-    //     {
-    //         string menuText = @"
-    //                     ┌─────────────────────────┐
-    //                     │          Menu:          │
-    //                     ├─────────────────────────┤
-    //                     │ 1. Bekijk films         │
-    //                     │ 2. Inloggen             │
-    //                     │ 3. Bekijk reserveringen │
-    //                     | 4. Bekijk schema        |
-    //                     │ 5. Verlaat pagina       │
-    //                     │ 6. Lijst zalen          │
-    //                     │ 7. CinemaHall toevoegen │
-    //                     └─────────────────────────┘
-    // ";
-    //         string centeredAsciiArt = "                    " + menuText.Replace("\n", "\n                  ");
-    //         Console.WriteLine(centeredAsciiArt);
-    //     }
+    public static void PrintAsciiMenu()
+    {
+        string menuText = @"
+                        ┌─────────────────────────┐
+                        │          Menu:          │
+                        ├─────────────────────────┤
+                        │ 1. Bekijk films         │
+                        │ 2. Inloggen             │
+                        │ 3. Bekijk reserveringen │
+                        | 4. Bekijk schema        |
+                        │ 5. Verlaat pagina       │
+                        │ 6. Lijst zalen          │
+                        │ 7. CinemaHall toevoegen │
+                        └─────────────────────────┘
+    ";
+        string centeredAsciiArt = "                    " + menuText.Replace("\n", "\n                  ");
+        Console.WriteLine(centeredAsciiArt);
+    }
 
-    //     public static void PrintAsciiMenu2()
-    //     {
-    //         string menuText2 = @"
-    //                     ┌─────────────────────────┐
-    //                     │          Menu:          │
-    //                     ├─────────────────────────┤
-    //                     │ 1. Bekijk films         │
-    //                     │ 2. Profiel bekijken     │
-    //                     │ 3. Bekijk reserveringen │
-    //                     | 4. Bekijk schema        |
-    //                     │ 5. Verlaat pagina       │
-    //                     │ 6. Lijst zalen          │
-    //                     │ 7. CinemaHall toevoegen │
-    //                     └─────────────────────────┘
-    //         ";
-    //         string centeredAsciiArt = "                    " + menuText2.Replace("\n", "\n                  ");
-    //         Console.WriteLine(centeredAsciiArt);
-    //     }
+    public static void PrintAsciiMenu2()
+    {
+        string menuText2 = @"
+                        ┌─────────────────────────┐
+                        │          Menu:          │
+                        ├─────────────────────────┤
+                        │ 1. Bekijk films         │
+                        │ 2. Profiel bekijken     │
+                        │ 3. Bekijk reserveringen │
+                        | 4. Bekijk schema        |
+                        │ 5. Verlaat pagina       │
+                        │ 6. Lijst zalen          │
+                        │ 7. CinemaHall toevoegen │
+                        └─────────────────────────┘
+            ";
+        string centeredAsciiArt = "                    " + menuText2.Replace("\n", "\n                  ");
+        Console.WriteLine(centeredAsciiArt);
+    }
 }

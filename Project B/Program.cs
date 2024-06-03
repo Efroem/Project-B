@@ -12,7 +12,7 @@ class Program
 
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Yellow;
-        TestPosters.MegaBioscoop();
+        AsciiArtPrinter.MegaBioscoop();
         Console.ResetColor();
         Console.Write("Druk op een ");
         Console.ForegroundColor = ConsoleColor.Magenta;
@@ -23,13 +23,18 @@ class Program
         Console.Clear();
 
         AsciiArtPrinter.PrintAscii("movies.json");
-        Console.Write("Druk op een ");
-        Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.Write("knop");
-        Console.ResetColor();
-        Console.Write(" om verder te gaan");
-        Console.ReadKey();
+        Thread.Sleep(2000);
         Console.Clear();
+        Console.WriteLine("\x1b[3J");
+        Console.Clear();
+
+        // Console.Write("Druk op een ");
+        // Console.ForegroundColor = ConsoleColor.Magenta;
+        // Console.Write("knop");
+        // Console.ResetColor();
+        // Console.Write(" om verder te gaan");
+        // Console.ReadKey();
+        // Console.Clear();
 
         while (true)
         {
@@ -90,7 +95,7 @@ class Program
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         AsciiArtPrinter.Totziens();
                         Console.ResetColor();
-                        Thread.Sleep(1000);
+                        Thread.Sleep(1500);
                         Environment.Exit(0);
                         Console.ReadLine();
                         break;
@@ -113,20 +118,20 @@ class Program
                 case 5:
                     Console.Clear();
                     Console.WriteLine("Lijst Zalen");
-                    CinemaHall.PrintCinemaHalls();
+                    AdminFunctions.PrintCinemaHalls();
                     Console.ReadLine();
                     Console.Clear();
                     break;
                 case 6:
                     Console.Clear();
                     Console.WriteLine("CinemaHall Toevoegen");
-                    CinemaHall.AddNewCinemaHall();
+                    AdminFunctions.AddNewCinemaHall();
                     Console.ReadLine();
                     Console.Clear();
                     break;
                 case 7:
                     Console.Clear();
-                    CinemaHall.RemoveCinemaHall();
+                    AdminFunctions.RemoveCinemaHall();
                     Console.ReadLine();
                     Console.Clear();
                     // Console.Clear();
@@ -138,13 +143,13 @@ class Program
                     break;
                 case 8:
                     Console.Clear();
-                    CinemaHall.ChangeCinemaHall();
+                    AdminFunctions.ChangeCinemaHall();
                     Console.ReadLine();
                     Console.Clear();
                     break;
                 case 9:
                     Console.Clear();
-                    CinemaHall.AddNewMovie();
+                    AdminFunctions.AddNewMovie();
                     Console.ReadLine();
                     Console.Clear();
                     break;

@@ -1,457 +1,229 @@
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.RegularExpressions;
-
 public class CinemaHall
 {
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
+    private const string EmptyRowSeparator = "|                                                    |";
+    private const string EmptyRowSeparator2 = " |";
+    private const string EmptyRowSeparator3 = "         |";
+    private const string EmptyRowSeparator4 = "      |";
+    // private const string EmptyRowSeparator5 = "|                                   |";
+    // private const string EmptyRowSeparator6 = "        |";
+    // private const string EmptyRowSeparator7 = "      |";
+    private static int currentRow = 2;
+    private static int cursorPosition = 7;
 
-    [JsonPropertyName("size")]
-    public int Size { get; set; }
+    private bool running = true;
 
-    [JsonPropertyName("serial number")]
-    public int SerialNumber { get; set; }
-
-    public CinemaHall(string name, int size, int serialNumber)
+    public void NavigateGrid()
     {
-        Name = name;
-        Size = size;
-        SerialNumber = serialNumber;
-    }
-
-    public static List<CinemaHall>? ReadFromCinemaHall()
-    {
-        try
+        Console.SetCursorPosition(0, 30);
+        Console.Write("> (Q) Terug naar het hoofdmenu <");
+        while (running)
         {
-            string jsonContent = File.ReadAllText("cinemaHall.json");
+            SetInitialCursorPosition();
 
-            if (string.IsNullOrWhiteSpace(jsonContent))
+            Console.SetCursorPosition(cursorPosition, currentRow);
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+            if (keyInfo.Key == ConsoleKey.UpArrow && currentRow > 1)
             {
-                Console.WriteLine("JSON inhoud is leeg.");
-                return null;
+                currentRow -= 2;
+                GlobalVariables.GlobalCurrentRow--;
             }
-
-            List<CinemaHall>? cinemaHalls = JsonSerializer.Deserialize<List<CinemaHall>>(jsonContent);
-            return cinemaHalls;
-        }
-        catch (FileNotFoundException)
-        {
-            Console.WriteLine("Bestand niet gevonden: cinemaHall.json");
-            return null;
-        }
-        catch (JsonException ex)
-        {
-            Console.WriteLine($"Error lezen van JSON inhoud: {ex.Message}");
-            return null;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error gevonden: {ex.Message}");
-            return null;
-        }
-    }
-
-    public static List<Movie> ReadMoviesFromJson()
-    {
-        string jsonString = File.ReadAllText("movies.json");
-        return JsonSerializer.Deserialize<List<Movie>>(jsonString);
-    }
-
-    private static void WriteSchedulesToJson(List<Schedule> schedules)
-    {
-        JsonSerializerOptions options = new JsonSerializerOptions
-        {
-            WriteIndented = true,
-            IgnoreNullValues = true
-        };
-
-        string jsonString = JsonSerializer.Serialize(schedules, options);
-        File.WriteAllText("schedule.json", jsonString);
-    }
-
-
-    public static void PrintCinemaHalls()
-    {
-        List<CinemaHall>? cinemaHalls = ReadFromCinemaHall();
-
-        if (cinemaHalls == null || cinemaHalls.Count == 0)
-        {
-            Console.WriteLine("Geen zalen gevonden.");
-            return;
-        }
-
-        foreach (var hall in cinemaHalls)
-        {
-            Console.WriteLine($"Naam: {hall.Name}\nGrootte: {hall.Size}\nSerial Number: {hall.SerialNumber}\n");
-        }
-    }
-
-    private static bool TryAgain()
-    {
-        while (true)
-        {
-            Console.WriteLine("1. Probeer opnieuw\n2. Terug naar het hoofdmenu");
-            string? choice = Console.ReadLine();
-            if (choice == "1")
+            else if (keyInfo.Key == ConsoleKey.DownArrow && currentRow < 19)
             {
-                Console.Clear();
-                return true;
+                currentRow += 2;
+                GlobalVariables.GlobalCurrentRow++;
+
             }
-            else if (choice == "2")
+            else if (keyInfo.Key == ConsoleKey.LeftArrow && cursorPosition > 4)
             {
-                Console.Clear();
-                return false;
-            }
-            else
-            {
-                Console.WriteLine("Verkeerde input. Kies 1 of 2.");
-            }
-        }
-    }
-
-
-    public static void AddNewCinemaHall()
-    {
-        List<CinemaHall>? cinemaHalls = ReadFromCinemaHall();
-
-        if (cinemaHalls == null)
-        {
-            Console.WriteLine("Gefaald lezen van de data.");
-            return;
-        }
-
-        Console.Write("Naam van de bioscoopzaal: ");
-        string? name = Console.ReadLine();
-
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            Console.WriteLine("Verkeerde naam. Voer een juiste naam in.");
-            return;
-        }
-
-        int size;
-        do
-        {
-            Console.WriteLine($"Kies de grootte van de nieuwe bioscoopzaal\n1 - klein: (55 mensen)\n2 - medium: (86 mensen)\n3 - groot(100 mensen):");
-            if (!int.TryParse(Console.ReadLine(), out size) || (size < 1 || size > 3))
-            {
-                Console.WriteLine("Verkeerde input. Kies tussen 1, 2, of 3.");
-            }
-        } while (size < 1 || size > 3);
-
-        int maxSerialNumber = cinemaHalls.Count > 0 ? cinemaHalls.Max(hall => hall.SerialNumber) : 0;
-        int serialNumber = maxSerialNumber + 1;
-
-        CinemaHall newCinemaHall = new CinemaHall(name, size, serialNumber);
-        cinemaHalls.Add(newCinemaHall);
-
-        try
-        {
-            string jsonString = JsonSerializer.Serialize(cinemaHalls, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText("cinemaHall.json", jsonString);
-            Console.WriteLine("Nieuwe bioscoopzaal succesvol toegevoegd.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Er is een error ontstaan met het maken van de bioscoopzaal: {ex.Message}");
-        }
-    }
-
-    public static void RemoveCinemaHall()
-    {
-        List<CinemaHall>? cinemaHalls = ReadFromCinemaHall();
-
-        if (cinemaHalls == null)
-        {
-            Console.WriteLine("Gefaald lezen van de data.");
-            return;
-        }
-
-        Console.WriteLine("De beschikbare bioscoopzalen:");
-
-        int maxNameLength = cinemaHalls.Max(hall => hall.Name.Length);
-
-        foreach (var hall in cinemaHalls)
-        {
-            Console.WriteLine($"- Serial number: {hall.SerialNumber.ToString().PadRight(2)}, Name: {hall.Name.PadRight(maxNameLength)}");
-        }
-
-        Console.WriteLine("\nWelke zaal wilt u verwijderen? Voer het serienummer in:");
-
-        int serialNumber;
-        while (true)
-        {
-            if (!int.TryParse(Console.ReadLine(), out serialNumber))
-            {
-                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld: '3'):");
-                continue;
-            }
-
-            if (cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
-            {
-                break;
-            }
-            else
-            {
-                Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld: '3'):");
-            }
-        }
-
-        CinemaHall? hallToRemove = cinemaHalls.Find(hall => hall.SerialNumber == serialNumber);
-
-        if (hallToRemove == null)
-        {
-            Console.WriteLine($"Bioscoopzaal met serienummer {serialNumber} niet gevonden.");
-            return;
-        }
-
-        cinemaHalls.Remove(hallToRemove);
-
-        try
-        {
-            string jsonString = JsonSerializer.Serialize(cinemaHalls, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText("cinemaHall.json", jsonString);
-            Console.WriteLine($"Bioscoopzaal met serienummer {serialNumber} succesvol verwijderd.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Er is een error ontstaan met het verwijderen van de bioscoopzaal: {ex.Message}");
-        }
-    }
-
-    public static void ChangeCinemaHall()
-    {
-        List<CinemaHall>? cinemaHalls = ReadFromCinemaHall();
-
-        if (cinemaHalls == null)
-        {
-            Console.WriteLine("Gefaald lezen van de data.");
-            return;
-        }
-
-        Console.WriteLine("De beschikbare bioscoopzalen:");
-
-        int maxNameLength = cinemaHalls.Max(hall => hall.Name.Length);
-
-        foreach (var hall in cinemaHalls)
-        {
-            Console.WriteLine($"- Serial number: {hall.SerialNumber.ToString().PadRight(2)}, Name: {hall.Name.PadRight(maxNameLength)}");
-        }
-
-        Console.WriteLine("\nWelke zaal wilt u wijzigen? Voer het serienummer in:");
-
-        int serialNumber;
-        while (true)
-        {
-            if (!int.TryParse(Console.ReadLine(), out serialNumber))
-            {
-                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld '3'):");
-                continue;
-            }
-
-            if (cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
-            {
-                break;
-            }
-            else
-            {
-                Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld '3'):");
-            }
-        }
-
-        Console.WriteLine("Wat wilt u wijzigen?\n1. Naam\n2. Grootte");
-
-        string? choiceInput;
-        int choice;
-        while (true)
-        {
-            choiceInput = Console.ReadLine()?.ToLower();
-            if (choiceInput == "naam" || choiceInput == "1")
-            {
-                choice = 1;
-                break;
-            }
-            else if (choiceInput == "grootte" || choiceInput == "2")
-            {
-                choice = 2;
-                break;
-            }
-            else
-            {
-                Console.WriteLine($"Ongeldige invoer. Voer 1 ('naam') of 2 ('grootte') in voor uw keuze.");
-            }
-        }
-
-        CinemaHall hallToChange = cinemaHalls.Find(hall => hall.SerialNumber == serialNumber)!;
-
-        switch (choice)
-        {
-            case 1:
-                Console.Write("Voer de nieuwe naam in: ");
-                string? newName = Console.ReadLine();
-                if (newName == null)
+                if (currentRow == 4 || currentRow == 8 || currentRow == 10 || currentRow == 14 || currentRow == 18 || currentRow == 20 || currentRow == 24 || currentRow == 28)
                 {
-                    do
-                    {
-                        Console.WriteLine("verkeerde input");
-                    } while (newName == null);
-
+                    cursorPosition -= 6;
                 }
                 else
                 {
-                    hallToChange.Name = newName;
+                    cursorPosition -= 2;
                 }
-                break;
+                GlobalVariables.GlobalCollum--;
 
-            case 2:
-                int newSize;
-                do
+            }
+            else if (keyInfo.Key == ConsoleKey.RightArrow && cursorPosition < 45)
+            {
+                if (currentRow == 4 || currentRow == 8 || currentRow == 10 || currentRow == 14 || currentRow == 18 || currentRow == 20 || currentRow == 24 || currentRow == 24)
                 {
-                    Console.WriteLine($"Kies de nieuwe grootte van de bioscoopzaal\n1 - klein: (55 mensen)\n2 - medium: (86 mensen)\n3 - groot(100 mensen):");
-                    if (!int.TryParse(Console.ReadLine(), out newSize) || (newSize < 1 || newSize > 3))
-                    {
-                        Console.WriteLine("Verkeerde input. Kies tussen 1, 2 of 3");
-                    }
-                } while (newSize < 1 || newSize > 3);
-                hallToChange.Size = newSize;
+                    cursorPosition += 2;
+                }
+                else
+                {
+                    cursorPosition += 6;
+                }
+                GlobalVariables.GlobalCollum++;
+            }
+            else if (keyInfo.Key == ConsoleKey.Enter)
+            {
+                PrintMessageAtDifferentLocation();
+                cursorPosition += 2;
+                GlobalVariables.GlobalList.Add(GlobalVariables.GlobalCollum);
+                GlobalVariables.GlobalList.Add(GlobalVariables.GlobalCurrentRow);
+            }
+            else if (keyInfo.Key == ConsoleKey.Escape || keyInfo.Key == ConsoleKey.Q)
+            {
+                running = false;
                 break;
-        }
-
-        try
-        {
-            string jsonString = JsonSerializer.Serialize(cinemaHalls, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText("cinemaHall.json", jsonString);
-            Console.WriteLine($"Wijziging van bioscoopzaal met serienummer {serialNumber} succesvol doorgevoerd.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Er is een error ontstaan met het wijzigen van de bioscoopzaal: {ex.Message}");
+            }
         }
     }
-
-    public static void AddNewMovie()
+    public static void PrintMessageAtDifferentLocation()
     {
-        List<Schedule> schedules = Schedule.ReadScheduleJson();
-        List<CinemaHall>? cinemaHalls = ReadFromCinemaHall();
+        int originalCursorLeft = Console.CursorLeft;
+        int originalCursorTop = Console.CursorTop;
 
-        if (cinemaHalls == null || cinemaHalls.Count == 0)
-        {
-            Console.WriteLine("Geen zalen beschikbaar om een film toe te voegen.");
-            return;
-        }
+        Console.SetCursorPosition(0, 40);
+        Console.Write($"Je stoel is ({currentRow}, {cursorPosition})\n> (K) Bevestging zitplekken <");
 
-        Console.WriteLine("Beschikbare bioscoopzalen:");
-        int maxNameLength = cinemaHalls.Max(hall => hall.Name.Length);
-
-        int serialNumber;
-        while (true)
-        {
-            foreach (var hall in cinemaHalls)
-            {
-                Console.WriteLine($"- Serial number: {hall.SerialNumber.ToString().PadRight(2)}, Name: {hall.Name.PadRight(maxNameLength)}");
-            }
-            Console.WriteLine("\nWelke zaal wilt u selecteren? Voer het serienummer in:");
-            if (!int.TryParse(Console.ReadLine(), out serialNumber) || !cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
-            {
-                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in.");
-                if (!TryAgain()) return;
-            }
-            else
-            {
-                break;
-            }
-        }
-
-        CinemaHall selectedHall = cinemaHalls.First(hall => hall.SerialNumber == serialNumber);
-
-        List<Movie> movies = ReadMoviesFromJson();
-        if (movies == null || movies.Count == 0)
-        {
-            Console.WriteLine("Geen films beschikbaar om te selecteren");
-            return;
-        }
-
-        Console.Clear();
-        Console.WriteLine("Kies een film uit de volgende lijst:\n");
-        for (int i = 0; i < movies.Count; i++)
-        {
-            Console.WriteLine($"{i + 1}. {movies[i].Title}");
-        }
-
-        int selectedMovieIndex;
-        while (true)
-        {
-            Console.Write("Voer het nummer van de film in: ");
-            if (!int.TryParse(Console.ReadLine(), out selectedMovieIndex) || selectedMovieIndex < 1 || selectedMovieIndex > movies.Count)
-            {
-                Console.WriteLine("Ongeldige invoer. Voer een geldig nummer in.");
-                if (!TryAgain()) return;
-            }
-            else
-            {
-                break;
-            }
-        }
-
-        string movieTitle = movies[selectedMovieIndex - 1].Title;
-
-        Console.Write("Voer de datum van de film in (dd/MM/yyyy): ");
-        DateTime date;
-        while (true)
-        {
-            string? dateString = Console.ReadLine();
-            if (DateTime.TryParseExact(dateString, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out date))
-            {
-                break;
-            }
-            else
-            {
-                Console.WriteLine("Verkeerde format. Voer de datum op een juiste manier in (dd/MM/yyyy)");
-                if (!TryAgain()) return;
-            }
-        }
-
-        Console.WriteLine("Voer het uur in (0-23):");
-        int hour;
-        while (true)
-        {
-            if (int.TryParse(Console.ReadLine(), out hour) || hour < 0 || hour > 23)
-            {
-                break;
-            }
-            else
-            {
-                Console.WriteLine("Verkeerde input. Voer het uur binnen 0 en 23 in");
-                if (!TryAgain()) return;
-            }
-
-        }
-
-        Console.WriteLine("Voer de minuut in (0-59):");
-        int minute;
-        while (true)
-        {
-            if (int.TryParse(Console.ReadLine(), out minute) || minute < 0 || minute > 59)
-            {
-                break;
-            }
-            else
-            {
-                Console.WriteLine("Verkeerde input. Voer de minuut tussen 0 en 59 in");
-                if (!TryAgain()) return;
-            }
-        }
-
-        DateTime movieDateTime = new DateTime(date.Year, date.Month, date.Day, hour, minute, 0);
-
-        Schedule newSchedule = new(movieTitle, serialNumber, movieDateTime);
-
-        schedules.Add(newSchedule);
-        WriteSchedulesToJson(schedules);
-
-        Console.WriteLine("Nieuwe film succesvol toegevoegd aan het schema.");
+        Console.CursorLeft = originalCursorLeft;
+        Console.CursorTop = originalCursorTop;
     }
+    public static void SetInitialCursorPosition()
+    {
+
+        if (currentRow == 4 || currentRow == 8 || currentRow == 10 || currentRow == 14 || currentRow == 18 || currentRow == 20)
+        {
+            cursorPosition = cursorPosition + 2;
+        }
+        else
+        {
+            cursorPosition = cursorPosition - 2;
+        }
+
+    }
+    public static void PrintGridGroteZaal()
+    {
+        Console.WriteLine("_____________________________________________________");
+        Console.WriteLine("|												    |");
+
+
+        for (char c = 'A'; c <= 'J'; c++)
+        {
+            Console.Write("|  " + c + "");
+            int maxSeats1 = (c - 'A') % 2 == 0 ? 11 : 9;
+            // hierboven staat een bereking van hoe het wordt berekent 
+            // (c - 'A') hier wordt met ascii table gebruikt gemaakt dus character - a.
+            // als c B is en B is 2 in ascii table dus het resutlaat zal dan 1 zijn etc.
+            // als (c - 'A') % 2 en even getal is zal er een row met 11 stoelen geprint worden en als het oneven is dan een row met 9 stoelen.
+            // zelfde is met de andere functies maar dan met andere getallen
+            for (int i = 1; i <= maxSeats1; i++)
+            {
+                if (i == 1 && maxSeats1 == 9)
+                    Console.Write("  [" + i + "] ");
+
+                else if (i <= 9)
+                {
+                    Console.Write("[" + i + "] ");
+                }
+                else
+                {
+                    Console.Write("[" + i + "] ");
+                }
+            }
+            if (maxSeats1 == 11)
+            {
+                Console.WriteLine(EmptyRowSeparator2);
+            }
+            else
+            {
+                Console.WriteLine(EmptyRowSeparator3);
+            }
+            if (c != 'J')
+            {
+                Console.WriteLine(EmptyRowSeparator);
+            }
+        }
+
+        Console.WriteLine("|                                                    |");
+        Console.WriteLine("|                   filmdoek                         |");
+        Console.WriteLine("|____________________________________________________|");
+    }
+
+
+
+    public static void PrintGridMediumZaal()
+    {
+        Console.WriteLine("_____________________________________________________");
+        Console.WriteLine("|												    |");
+
+        for (char c = 'A'; c <= 'I'; c++)
+        {
+            Console.Write("|  " + c + "");
+            int maxSeats2 = (c - 'A') % 2 == 0 ? 10 : 9;
+            for (int i = 1; i <= maxSeats2; i++)
+            {
+                if (i == 1 && maxSeats2 == 9)
+                    Console.Write("  [" + i + "] ");
+
+                else if (i <= 9)
+                {
+                    Console.Write("[" + i + "] ");
+                }
+                else
+                {
+                    Console.Write("[" + i + "] ");
+                }
+            }
+            if (maxSeats2 == 10)
+            {
+                Console.WriteLine(EmptyRowSeparator4);
+            }
+            else
+            {
+                Console.WriteLine(EmptyRowSeparator3);
+            }
+            if (c != 'J')
+            {
+                Console.WriteLine(EmptyRowSeparator);
+            }
+        }
+
+        // Print the bottom part
+        Console.WriteLine("|                                                    |");
+        Console.WriteLine("|                   filmdoek                         |");
+        Console.WriteLine("|____________________________________________________|");
+    }
+
+    // public static void PrintGridKleineZaal()
+    // {
+    //     Console.WriteLine("____________________________________");
+    //     Console.WriteLine("|								   |");
+
+    //     for (char c = 'A'; c <= 'J'; c++)
+    //     {
+    //         Console.Write("|  " + c + "");
+    //         int maxSeats3 = (c - 'A') % 2 == 0 ? 6 : 5;
+    //         for (int i = 1; i <= maxSeats3; i++)
+    //         {
+    //             if (i == 1 && maxSeats3 == 5)
+    //             Console.Write("  ["+ i + "] ");
+    //             else
+    //             Console.Write("[" + i + "] ");
+    //         }
+    //         if (maxSeats3 == 5)
+    //         {
+    //             Console.WriteLine(EmptyRowSeparator6);
+    //         }
+    //         else
+    //         {
+    //             Console.WriteLine(EmptyRowSeparator7);
+    //         }
+    //         if (c != 'J')
+    //         {
+    //         Console.WriteLine(EmptyRowSeparator5);
+    //         }
+    //     }
+
+    //     Console.WriteLine("|                                   |");
+    //     Console.WriteLine("|           filmdoek                |");
+    //     Console.WriteLine("|___________________________________|");
+    // }
 }
+
+

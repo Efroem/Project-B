@@ -35,24 +35,23 @@ public class HallAssignment
 
     public static void CallFunction(File1Entry entry1, File2Entry entry2)
     {
-        CinemaZaal cinemaZaal = new CinemaZaal();
-        CinemaZaalKlein cinemaZaalKlein = new CinemaZaalKlein();
+        CinemaHall cinemaZaal = new CinemaHall();
 
         if (entry2.size == 3)
         {
-            CinemaZaal.PrintGridGroteZaal();
+            CinemaHall.PrintGridGroteZaal();
             cinemaZaal.NavigateGrid();
         }
         else if (entry2.size == 2)
         {
-            CinemaZaal.PrintGridMediumZaal();
+            CinemaHall.PrintGridMediumZaal();
             cinemaZaal.NavigateGrid();
         }
-        else
-        {
-            CinemaZaalKlein.PrintGridKleineZaal();
-            cinemaZaalKlein.NavigateGridKleineZaal();
-        }
+        // else
+        // {
+        //     CinemaZaalKlein.PrintGridKleineZaal();
+        //     cinemaZaalKlein.NavigateGridKleineZaal();
+        // }
 
     }
 

@@ -5,7 +5,7 @@ using System.IO;
 
 public class SelectingMovies
 {
-    private static List<Movies> movies = new List<Movies>();
+    private static List<Movie> movies = new List<Movie>();
     public static void MoviesSelect()
     {
         LoadMovies(); // Laad de films aan het begin van het programma
@@ -48,11 +48,11 @@ public class SelectingMovies
                 {
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     title = $"> {title}";
-                    
+
                 }
                 else
                 {
-                    title = $"  {title}";   
+                    title = $"  {title}";
                 }
                 Console.WriteLine(new string(' ', leftMargin) + $"* {title.PadRight(boxWidth - 3)}*");
                 Console.ResetColor();
@@ -102,7 +102,7 @@ public class SelectingMovies
 
 
 
-    private static void ShowMovieDetails(Movies movie)
+    private static void ShowMovieDetails(Movie movie)
     {
         while (true)
         {
@@ -193,7 +193,7 @@ public class SelectingMovies
             using (StreamReader r = new StreamReader("movies.json"))
             {
                 string json = r.ReadToEnd();
-                movies = JsonConvert.DeserializeObject<List<Movies>>(json);
+                movies = JsonConvert.DeserializeObject<List<Movie>>(json);
             }
         }
         catch (Exception ex)

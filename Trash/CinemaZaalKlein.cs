@@ -1,8 +1,8 @@
 public class CinemaZaalKlein
 {
     private const string EmptyRowSeparator5 = "|                                   |";
-	private const string EmptyRowSeparator6 = "        |";
-	private const string EmptyRowSeparator7 = "      |";
+    private const string EmptyRowSeparator6 = "        |";
+    private const string EmptyRowSeparator7 = "      |";
     private int currentRow = 2;
     private int cursorPosition = 2;
 
@@ -20,9 +20,9 @@ public class CinemaZaalKlein
             for (int i = 1; i <= maxSeats3; i++)
             {
                 if (i == 1 && maxSeats3 == 5)
-                Console.Write("  ["+ i + "] ");
+                    Console.Write("  [" + i + "] ");
                 else
-                Console.Write("[" + i + "] ");
+                    Console.Write("[" + i + "] ");
             }
             if (maxSeats3 == 5)
             {
@@ -34,7 +34,7 @@ public class CinemaZaalKlein
             }
             if (c != 'J')
             {
-            Console.WriteLine(EmptyRowSeparator5);
+                Console.WriteLine(EmptyRowSeparator5);
             }
         }
 
@@ -48,9 +48,9 @@ public class CinemaZaalKlein
         Console.SetCursorPosition(0, 30);
         Console.Write("> (Q) Terug naar het hoofdmenu <");
         while (running)
-        {   
+        {
             CinemaZaal.SetInitialCursorPosition();
-            
+
             Console.SetCursorPosition(cursorPosition, currentRow);
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
@@ -67,7 +67,7 @@ public class CinemaZaalKlein
             }
             else if (keyInfo.Key == ConsoleKey.LeftArrow && cursorPosition > 4)
             {
-                if(currentRow == 4 ||currentRow == 8 || currentRow == 10|| currentRow == 14 || currentRow == 18 || currentRow == 20 || currentRow == 24|| currentRow == 28)
+                if (currentRow == 4 || currentRow == 8 || currentRow == 10 || currentRow == 14 || currentRow == 18 || currentRow == 20 || currentRow == 24 || currentRow == 28)
                 {
                     cursorPosition -= 6;
                 }
@@ -78,11 +78,11 @@ public class CinemaZaalKlein
                 GlobalVariables.GlobalCollum--;
 
             }
-            else if (keyInfo.Key == ConsoleKey.RightArrow  && cursorPosition < 45)
+            else if (keyInfo.Key == ConsoleKey.RightArrow && cursorPosition < 45)
             {
-                if(currentRow == 4 ||currentRow == 8 || currentRow == 10|| currentRow == 14 || currentRow == 18 || currentRow == 20|| currentRow == 24|| currentRow == 24)
+                if (currentRow == 4 || currentRow == 8 || currentRow == 10 || currentRow == 14 || currentRow == 18 || currentRow == 20 || currentRow == 24 || currentRow == 24)
                 {
-                    cursorPosition +=2;
+                    cursorPosition += 2;
                 }
                 else
                 {
