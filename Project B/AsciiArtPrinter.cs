@@ -130,7 +130,9 @@ public class AsciiArtPrinter
  | |_   | || |   | |\/| \___ \ 
  |  _|  | || |___| |  | |___) |
  |_|   |___|_____|_|  |_|____/ ";
+        Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(asciiartfilms);
+        Console.ResetColor();
     }
     public static void Printasciihm()
     {
@@ -141,7 +143,7 @@ public class AsciiArtPrinter
  |  __  | |  | | |  | |  __| | |  | | |\/| |  __| | . ` | |  | |
  | |  | | |__| | |__| | |    | |__| | |  | | |____| |\  | |__| |
  |_|  |_|\____/ \____/|_|    |_____/|_|  |_|______|_| \_|\____/ ";
-
+        Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(asciiArthm);
     }
 
@@ -154,6 +156,7 @@ public class AsciiArtPrinter
     | |/ _ \| __| |_  / |/ _ \ '_ \/ __|
     | | (_) | |_   / /| |  __/ | | \__ \
     |_|\___/ \__| /___|_|\___|_| |_|___/";
+        Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(totziens);
     }
     public static void PrintAsciilogin()
@@ -165,6 +168,7 @@ public class AsciiArtPrinter
  | |   | |  | | | |_ | | | | . ` |
  | |___| |__| | |__| |_| |_| |\  |
  |______\____/ \_____|_____|_| \_|";
+        Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(login);
     }
     public static void PrintAsciiInlog()
@@ -176,6 +180,7 @@ public class AsciiArtPrinter
    | | | . ` | |   | |  | | | |_ | | |_ |  __| | . ` |
   _| |_| |\  | |___| |__| | |__| | |__| | |____| |\  |
  |_____|_| \_|______\____/ \_____|\_____|______|_| \_|";
+        Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(inlog);
     }
     public static void PrintAsciiRegister()
@@ -187,6 +192,7 @@ public class AsciiArtPrinter
  |  _  /|  __|| | |_ | | |  \___ \   | |  |  _  /|  __| |  _  /|  __| | . ` |
  | | \ \| |___| |__| |_| |_ ____) |  | |  | | \ \| |____| | \ \| |____| |\  |
  |_|  \_\______\_____|_____|_____/   |_|  |_|  \_\______|_|  \_\______|_| \_|";
+        Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(register);
     }
     public static void PrintAsciibeschrijving()
@@ -198,7 +204,7 @@ public class AsciiArtPrinter
  |  __|   | | | |    | |\/| |    |  _ <|  __|  \___ \| |    |  __  |  _  /  | | _   | | \ \/ /   | | | . ` | | |_ |
  | |     _| |_| |____| |  | |    | |_) | |____ ____) | |____| |  | | | \ \ _| || |__| |  \  /   _| |_| |\  | |__| |
  |_|    |_____|______|_|  |_|    |____/|______|_____/ \_____|_|  |_|_|  \_\_____\_____|   \/   |_____|_| \_|\_____|";
-
+        Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(asciiArtBeschrijving);
     }
     public static void MegaBioscoop()
@@ -221,6 +227,7 @@ public class AsciiArtPrinter
  |_|  |_|\___|\__, |\__,_| |____/|_|\___/|___/\___\___/ \___/| .__/ 
                __/ |                                         | |    
               |___/                                          |_|    ";
+        Console.ForegroundColor = ConsoleColor.Yellow;
         string centeredAsciiArt = "                    " + Asciiartstart.Replace("\n", "\n                  ");
 
         Console.WriteLine(centeredAsciiArt);
