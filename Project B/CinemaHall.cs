@@ -447,13 +447,7 @@ public class CinemaHall
 
         DateTime movieDateTime = new DateTime(date.Year, date.Month, date.Day, hour, minute, 0);
 
-        Schedule newSchedule = new Schedule
-        {
-            MovieTitle = movieTitle,
-            SerialNumber = serialNumber,
-            Date = movieDateTime,
-            Hall = selectedHall
-        };
+        Schedule newSchedule = new(movieTitle, serialNumber, movieDateTime);
 
         schedules.Add(newSchedule);
         WriteSchedulesToJson(schedules);
