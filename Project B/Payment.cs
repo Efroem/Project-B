@@ -18,50 +18,71 @@ public static class Payment
 
     private static int KiesOptie(string prompt, string[] opties)
     {
-        Console.WriteLine(prompt);
-        int selectedIndex = 0;
+        PrintTextCentered(prompt);
+        int selectedOption = 0;
+        int optiesLength = opties.Length;
 
-        while (true)
+        do
         {
+            Console.Clear(); // Maak het scherm leeg voordat je de opties weergeeft
+            PrintTextCentered(prompt); // Print de prompt opnieuw nadat het scherm is geleegd
             for (int i = 0; i < opties.Length; i++)
             {
-                if (i == selectedIndex)
+                if (i == selectedOption)
                 {
                     Console.ForegroundColor = ConsoleColor.Cyan;
-                    PrintTextCentered($"   {opties[i]}");
+                    PrintTextCentered(opties[i]);
                     Console.ResetColor();
                 }
                 else
                 {
-                    PrintTextCentered($"   {opties[i]}");
+                    PrintTextCentered(opties[i]);
                 }
             }
 
-            ConsoleKeyInfo key = Console.ReadKey(true);
-            if (key.Key == ConsoleKey.UpArrow)
+            var key = Console.ReadKey(true);
+            if (key.Key == ConsoleKey.UpArrow && selectedOption > 0)
             {
-                selectedIndex = (selectedIndex - 1 + opties.Length) % opties.Length;
+                selectedOption--;
             }
-            else if (key.Key == ConsoleKey.DownArrow)
+            else if (key.Key == ConsoleKey.DownArrow && selectedOption < opties.Length - 1)
             {
-                selectedIndex = (selectedIndex + 1) % opties.Length;
+                selectedOption++;
             }
             else if (key.Key == ConsoleKey.Enter)
             {
                 break;
             }
-            Console.Clear();
-            Console.WriteLine(prompt);
-        }
 
-        return selectedIndex;
+            // Wis de vorige opties weergave
+            Console.CursorTop -= (optiesLength + 1); // +1 om ook de prompt te wissen
+        } while (true);
+
+        return selectedOption;
+    }
+
+    private static void PrintTextCentered(string text)
+    {
+        string[] lines = text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+        int windowWidth = Console.WindowWidth;
+
+        foreach (string line in lines)
+        {
+            int leftPadding = (windowWidth - line.Length) / 2;
+            if (leftPadding < 0)
+                leftPadding = 0;
+
+            Console.SetCursorPosition(leftPadding, Console.CursorTop);
+            Console.WriteLine(line);
+        }
     }
 
     public static void BestelMenu()
     {
         string[] opties = { "Eten", "Drinken", "Afrekenen" };
+        PrintTextCentered("Wat wilt u bestellen?");
         int selectedIndex = KiesOptie("Wat wilt u bestellen?", opties);
-
+        AsciiArtPrinter.PrintAsciibetaling();
         switch (selectedIndex)
         {
             case 0:
@@ -70,14 +91,17 @@ public static class Payment
             case 1:
                 BestelDrinken();
                 break;
-
+            case 2:
+                break;
         }
     }
 
     public static void BestelEten()
     {
+        AsciiArtPrinter.PrintAsciibetaling();
         string[] opties = { "Popcorn", "Nachos", "Chips", "Terug naar menu" };
         double[][] prijzen = { popcornPrijzen, nachosPrijzen, chipsPrijzen }; // Een array van prijzenarrays voor elk voedseltype
+        PrintTextCentered("Wat wilt u bestellen?");
         int selectedIndex = KiesOptie("Wat wilt u bestellen?", opties);
 
         switch (selectedIndex)
@@ -99,8 +123,10 @@ public static class Payment
 
     public static void BestelDrinken()
     {
+        AsciiArtPrinter.PrintAsciibetaling();
         string[] opties = { "Frisdrank", "Thee", "Koffie", "Terug naar menu" };
         double[][] prijzen = { frisdrankPrijzen, theePrijzen, koffiePrijzen }; // Een array van prijzenarrays voor elk dranktype
+        PrintTextCentered("Wat wilt u bestellen?");
         int selectedIndex = KiesOptie("Wat wilt u bestellen?", opties);
 
         switch (selectedIndex)
@@ -122,7 +148,9 @@ public static class Payment
 
     public static void WiltMeerBestellen()
     {
+        AsciiArtPrinter.PrintAsciibetaling();
         string[] opties = { "Ja, nog meer bestellen", "Ik wil afrekenen" };
+        PrintTextCentered("Wilt u nog meer eten/drinken bestellen of afrekenen?");
         int selectedIndex = KiesOptie("Wilt u nog meer eten/drinken bestellen of afrekenen?", opties);
 
         if (selectedIndex == 0)
@@ -133,120 +161,138 @@ public static class Payment
 
     public static void Popcorn(double[] prijzen)
     {
+        AsciiArtPrinter.PrintAsciibetaling();
         string[] popcorn = { "Zoet", "Zout", "Gemixt" };
         string[] opties = { "Klein", "Middel", "Groot" };
         Console.Clear();
+        AsciiArtPrinter.PrintAsciibetaling();
+        PrintTextCentered("Kies gewenste smaak");
         int popcornchoice = KiesOptie("Kies gewenste smaak", popcorn);
         Console.Clear();
+        AsciiArtPrinter.PrintAsciibetaling();
+        PrintTextCentered("Kies de grootte voor uw popcorn:");
         int selectedIndex = KiesOptie("Kies de grootte voor uw popcorn:", opties);
         Console.Clear();
-        string gekozenpopcorn = opties[popcornchoice];
+        string gekozenpopcorn = popcorn[popcornchoice];
         string gekozenGrootte = opties[selectedIndex];
         double gekozenPrijs = prijzen[selectedIndex];
-        Console.WriteLine($"\nU heeft gekozen voor {gekozenGrootte} Popcorn {gekozenpopcorn} - €{gekozenPrijs:0.00}");
+        AsciiArtPrinter.PrintAsciibetaling();
+        PrintTextCentered($"\nU heeft gekozen voor {gekozenGrootte} Popcorn {gekozenpopcorn} - €{gekozenPrijs:0.00}");
 
         // Bereken de totaalkosten
         totaalKosten += gekozenPrijs;
 
-        Console.WriteLine("\nUw bestelling is toegevoegd.");
+        PrintTextCentered("\nUw bestelling is toegevoegd.");
         WiltMeerBestellen();
     }
 
     public static void Nachos(double[] prijzen)
     {
+        AsciiArtPrinter.PrintAsciibetaling();
         string[] opties = { "Klein", "Middel", "Groot" };
         Console.Clear();
+        AsciiArtPrinter.PrintAsciibetaling();
+        PrintTextCentered("Kies de grootte voor uw nachos:");
         int selectedIndex = KiesOptie("Kies de grootte voor uw nachos:", opties);
         Console.Clear();
+        AsciiArtPrinter.PrintAsciibetaling();
         string gekozenGrootte = opties[selectedIndex];
         double gekozenPrijs = prijzen[selectedIndex];
-        Console.WriteLine($"\nU heeft gekozen voor {gekozenGrootte} nachos - €{gekozenPrijs:0.00}");
+
+        PrintTextCentered($"\nU heeft gekozen voor {gekozenGrootte} nachos - €{gekozenPrijs:0.00}");
 
         // Bereken de totaalkosten
         totaalKosten += gekozenPrijs;
 
-        Console.WriteLine("\nUw bestelling is toegevoegd.");
+        PrintTextCentered("\nUw bestelling is toegevoegd.");
         WiltMeerBestellen();
     }
 
     public static void Chips(double[] prijzen)
     {
+        AsciiArtPrinter.PrintAsciibetaling();
         string[] chips = { "Naturel", "Paprika" };
         string[] opties = { "Klein", "Middel", "Groot" };
         Console.Clear();
+        AsciiArtPrinter.PrintAsciibetaling();
+        PrintTextCentered("Kies de smaak voor uw chips:");
         int chipschoice = KiesOptie("Kies de smaak voor uw chips:", chips);
         Console.Clear();
+        AsciiArtPrinter.PrintAsciibetaling();
+        PrintTextCentered("Kies de grootte voor uw chips:");
         int selectedIndex = KiesOptie("Kies de grootte voor uw chips:", opties);
         Console.Clear();
-        string gekozenchips = opties[chipschoice];
+        string gekozenchips = chips[chipschoice];
         string gekozenGrootte = opties[selectedIndex];
         double gekozenPrijs = prijzen[selectedIndex];
-        Console.WriteLine($"\nU heeft gekozen voor {gekozenGrootte} {gekozenchips} chips - €{gekozenPrijs:0.00}");
+        AsciiArtPrinter.PrintAsciibetaling();
+        PrintTextCentered($"\nU heeft gekozen voor {gekozenGrootte} {gekozenchips} chips - €{gekozenPrijs:0.00}");
 
         // Bereken de totaalkosten
         totaalKosten += gekozenPrijs;
 
-        Console.WriteLine("\nUw bestelling is toegevoegd.");
+        PrintTextCentered("\nUw bestelling is toegevoegd.");
         WiltMeerBestellen();
-
     }
+
     public static void Frisdrank(double[] prijzen)
     {
+        AsciiArtPrinter.PrintAsciibetaling();
         string[] frisdrank = { "Cola", "Fanta", "Icetea sparkling", "Icetea green", "Cassis", "Fernandes" };
         Console.Clear();
+        AsciiArtPrinter.PrintAsciibetaling();
+        PrintTextCentered("Kies frisdrank naar keuze:");
         int frisdrankChoice = KiesOptie("Kies frisdrank naar keuze:", frisdrank);
         Console.Clear();
         string gekozenFrisdrank = frisdrank[frisdrankChoice];
         double gekozenPrijs = prijzen[frisdrankChoice];
-        Console.WriteLine($"\nU heeft gekozen voor {gekozenFrisdrank} - €{gekozenPrijs:0.00}");
+        AsciiArtPrinter.PrintAsciibetaling();
+        PrintTextCentered($"\nU heeft gekozen voor {gekozenFrisdrank} - €{gekozenPrijs:0.00}");
         totaalKosten += gekozenPrijs;
 
-        Console.WriteLine("\nUw bestelling is toegevoegd.");
+        PrintTextCentered("\nUw bestelling is toegevoegd.");
         WiltMeerBestellen();
-
     }
 
     public static void Thee(double[] prijzen)
     {
+        AsciiArtPrinter.PrintAsciibetaling();
         string[] thee = { "Earl grey", "Jasmijn thee", "Groene thee", "Rooibos thee", "Munt thee" };
         Console.Clear();
+        AsciiArtPrinter.PrintAsciibetaling();
+        PrintTextCentered("Kies thee naar keuze:");
         int theechoice = KiesOptie("Kies thee naar keuze:", thee);
         Console.Clear();
         string gekozenthee = thee[theechoice];
         double gekozenPrijs = prijzen[theechoice];
-        Console.WriteLine($"\nU heeft gekozen voor {gekozenthee} - €{gekozenPrijs:0.00}");
+        AsciiArtPrinter.PrintAsciibetaling();
+        PrintTextCentered($"\nU heeft gekozen voor {gekozenthee} - €{gekozenPrijs:0.00}");
 
         // Bereken de totaalkosten
         totaalKosten += gekozenPrijs;
 
-        Console.WriteLine("\nUw bestelling is toegevoegd.");
+        PrintTextCentered("\nUw bestelling is toegevoegd.");
         WiltMeerBestellen();
-
     }
+
     public static void Koffie(double[] prijzen)
     {
+        AsciiArtPrinter.PrintAsciibetaling();
         string[] opties = { "Klein", "Middel", "Groot" };
         Console.Clear();
+        AsciiArtPrinter.PrintAsciibetaling();
+        PrintTextCentered("Kies de grootte voor uw Koffie:");
         int selectedIndex = KiesOptie("Kies de grootte voor uw Koffie:", opties);
         Console.Clear();
         string gekozenGrootte = opties[selectedIndex];
         double gekozenPrijs = prijzen[selectedIndex];
-        Console.WriteLine($"\nU heeft gekozen voor {gekozenGrootte} Koffie - €{gekozenPrijs:0.00}");
+        AsciiArtPrinter.PrintAsciibetaling();
+        PrintTextCentered($"\nU heeft gekozen voor {gekozenGrootte} Koffie - €{gekozenPrijs:0.00}");
 
         // Bereken de totaalkosten
         totaalKosten += gekozenPrijs;
 
-        Console.WriteLine("\nUw bestelling is toegevoegd.");
+        PrintTextCentered("\nUw bestelling is toegevoegd.");
         WiltMeerBestellen();
-
-    }
-
-    public static void PrintTextCentered(string text)
-    {
-        int windowWidth = Console.WindowWidth;
-        int leftPadding = (windowWidth - text.Length) / 2;
-
-        Console.SetCursorPosition(leftPadding, Console.CursorTop);
-        Console.WriteLine(text);
     }
 }

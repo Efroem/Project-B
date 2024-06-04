@@ -17,12 +17,16 @@ class Program
         Console.ForegroundColor = ConsoleColor.Yellow;
         AsciiArtPrinter.MegaBioscoop();
         Console.ResetColor();
-        PrintTextCentered($"Druk op een {purple}knop{reset} om verder te gaan.");
+        PrintTextCentered("Druk op een ");
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        PrintTextCentered("knop");
+        Console.ResetColor();
+        PrintTextCentered(" om verder te gaan");
         Console.ReadKey();
         Console.Clear();
 
         AsciiArtPrinter.PrintAscii("movies.json");
-        Thread.Sleep(2000);
+        Thread.Sleep(1000);
         Console.Clear();
         Console.WriteLine("\x1b[3J");
         Console.Clear();
@@ -64,7 +68,14 @@ class Program
 
 
 
-            PrintTextCentered($"\nGebruik de {purple}pijltjestoetsen{reset} om een optie te selecteren en druk op {purple}Enter{reset}.\n\n");
+            PrintTextCentered($"\nGebruik de ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            PrintTextCentered("pijltjestoetsen");
+            Console.ResetColor();
+            PrintTextCentered("om een optie te selecteren en druk op ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            PrintTextCentered("Enter\n");
+            Console.ResetColor();
             int selectedOption = ShowMenuInline(options);
 
             switch (selectedOption)

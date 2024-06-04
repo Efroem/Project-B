@@ -202,7 +202,14 @@ public class Schedule
             string reset = "\u001b[0m";
 
             AsciiArtPrinter.PrintAsciifilms();
-            Program.PrintTextCentered($"Gebruik de {purple}pijltjestoetsen{reset} om een optie te selecteren en druk op {purple}Enter{reset}.");
+            Program.PrintTextCentered($"\nGebruik de ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Program.PrintTextCentered("pijltjestoetsen");
+            Console.ResetColor();
+            Program.PrintTextCentered("om een optie te selecteren en druk op ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Program.PrintTextCentered("Enter\n");
+            Console.ResetColor();
             int userAction = ShowMenuInline(options.ToArray());
             // Go back in list
             if (currentIndex != 0 && userAction == 0)

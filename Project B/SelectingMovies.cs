@@ -21,7 +21,14 @@ public class SelectingMovies
             Console.ForegroundColor = ConsoleColor.Yellow;
             AsciiArtPrinter.PrintAsciifilms();
             Console.ResetColor();
-            Program.PrintTextCentered($"Gebruik de {purple}pijltjestoetsen{reset} om door de films te bladeren en druk op {purple}Enter{reset} om een film te selecteren:");
+            Program.PrintTextCentered($"\nGebruik de ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Program.PrintTextCentered("pijltjestoetsen");
+            Console.ResetColor();
+            Program.PrintTextCentered("om een optie te selecteren en druk op ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Program.PrintTextCentered("Enter\n");
+            Console.ResetColor();
             Console.WriteLine();
 
             // Calculate the length of the longest movie title for box width
@@ -128,7 +135,14 @@ public class SelectingMovies
             string reset = "\u001b[0m";
 
             string[] options = { "Bekijk schema van deze film", "Terug naar film beschrijvingen" };
-            Program.PrintTextCentered($"Gebruik de {purple}pijltjestoetsen{reset} om een optie te selecteren en druk op {purple}Enter{reset} om een film te selecteren:");
+            Program.PrintTextCentered($"\nGebruik de ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Program.PrintTextCentered("pijltjestoetsen");
+            Console.ResetColor();
+            Program.PrintTextCentered("om een optie te selecteren en druk op ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Program.PrintTextCentered("Enter\n");
+            Console.ResetColor();
             int selectedOption = ShowMenuInline(options);
 
             if (selectedOption == 0)
