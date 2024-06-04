@@ -18,13 +18,15 @@ public static class Payment
 
     private static int KiesOptie(string prompt, string[] opties)
     {
-        PrintTextCentered(prompt);
+
         int selectedOption = 0;
         int optiesLength = opties.Length;
 
         do
         {
             Console.Clear(); // Maak het scherm leeg voordat je de opties weergeeft
+            AsciiArtPrinter.PrintAsciibetaling();
+            Console.ResetColor();
             PrintTextCentered(prompt); // Print de prompt opnieuw nadat het scherm is geleegd
             for (int i = 0; i < opties.Length; i++)
             {
@@ -79,10 +81,10 @@ public static class Payment
 
     public static void BestelMenu()
     {
-        string[] opties = { "Eten", "Drinken", "Afrekenen" };
-        PrintTextCentered("Wat wilt u bestellen?");
-        int selectedIndex = KiesOptie("Wat wilt u bestellen?", opties);
         AsciiArtPrinter.PrintAsciibetaling();
+        string[] opties = { "Eten", "Drinken", "Afrekenen" };
+        // PrintTextCentered("Wat wilt u bestellen?");
+        int selectedIndex = KiesOptie("Wat wilt u bestellen?", opties);
         switch (selectedIndex)
         {
             case 0:
@@ -101,7 +103,7 @@ public static class Payment
         AsciiArtPrinter.PrintAsciibetaling();
         string[] opties = { "Popcorn", "Nachos", "Chips", "Terug naar menu" };
         double[][] prijzen = { popcornPrijzen, nachosPrijzen, chipsPrijzen }; // Een array van prijzenarrays voor elk voedseltype
-        PrintTextCentered("Wat wilt u bestellen?");
+        // PrintTextCentered("Wat wilt u bestellen?");
         int selectedIndex = KiesOptie("Wat wilt u bestellen?", opties);
 
         switch (selectedIndex)
@@ -126,7 +128,7 @@ public static class Payment
         AsciiArtPrinter.PrintAsciibetaling();
         string[] opties = { "Frisdrank", "Thee", "Koffie", "Terug naar menu" };
         double[][] prijzen = { frisdrankPrijzen, theePrijzen, koffiePrijzen }; // Een array van prijzenarrays voor elk dranktype
-        PrintTextCentered("Wat wilt u bestellen?");
+        // PrintTextCentered("Wat wilt u bestellen?");
         int selectedIndex = KiesOptie("Wat wilt u bestellen?", opties);
 
         switch (selectedIndex)

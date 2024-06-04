@@ -162,16 +162,12 @@ public class AsciiArtPrinter
     public static void PrintAsciibetaling()
     {
         string betaling = @"
-        
-        
   ____  ______ _______       _      _____ _   _  _____ 
  |  _ \|  ____|__   __|/\   | |    |_   _| \ | |/ ____|
  | |_) | |__     | |  /  \  | |      | | |  \| | |  __ 
  |  _ <|  __|    | | / /\ \ | |      | | | . ` | | |_ |
  | |_) | |____   | |/ ____ \| |____ _| |_| |\  | |__| |
- |____/|______|  |_/_/    \_\______|_____|_| \_|\_____|
-                                                       
-        ";
+ |____/|______|  |_/_/    \_\______|_____|_| \_|\_____|";
         Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(betaling);
     }
