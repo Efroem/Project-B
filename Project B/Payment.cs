@@ -82,7 +82,7 @@ public static class Payment
 
     public static void BestelMenu()
     {
-        string[] menuOptions = { "Eten", "Drinken", "Prijzenlijst", "Afrekenen" };
+        string[] menuOptions = { "1.Eten", "2.Drinken", "3.Prijzenlijst", "4.Afrekenen" };
         int selectedIndex = KiesOptie("Wat wilt u bestellen?", menuOptions);
 
         switch (selectedIndex)
@@ -94,7 +94,7 @@ public static class Payment
                 BestelDrinken();
                 break;
             case 2:
-                string[] priceOptions = { "Prijzen eten", "Prijzen frisdranken", "Prijzen koffie of thee" };
+                string[] priceOptions = { "1.Prijzen eten", "2.Prijzen frisdranken", "3.Prijzen koffie of thee", "4. Terug naar menu" };
                 int priceChoice = KiesOptie("Welke prijslijst wilt u bekijken?", priceOptions);
 
                 switch (priceChoice)
@@ -108,7 +108,13 @@ public static class Payment
                     case 2:
                         AsciiArtPrinter.PrintAsciiTheekoffie();
                         break;
+                    case 3:
+                        BestelMenu();
+                        break;
                 }
+                break;
+            case 3:
+                Afrekenen();
                 break;
         }
     }
@@ -118,7 +124,7 @@ public static class Payment
         string[] opties = { "Popcorn", "Nachos", "Chips", "Terug naar menu" };
         double[][] prijzen = { popcornPrijzen, nachosPrijzen, chipsPrijzen }; // Een array van prijzenarrays voor elk voedseltype
         // PrintTextCentered("Wat wilt u bestellen?");
-        int selectedIndex = KiesOptie("Wat wilt u bestellen?", opties);
+        int selectedIndex = KiesOptie("Kies het gewenste eten", opties);
 
         switch (selectedIndex)
         {
@@ -141,7 +147,7 @@ public static class Payment
     {
         string[] opties = { "Frisdrank", "Thee", "Koffie", "Terug naar menu" };
         double[][] prijzen = { frisdrankPrijzen, theePrijzen, koffiePrijzen }; // Een array van prijzenarrays voor elk dranktype
-        int selectedIndex = KiesOptie("Wat wilt u bestellen?", opties);
+        int selectedIndex = KiesOptie("Kies het gewenste drinken", opties);
 
         switch (selectedIndex)
         {
@@ -166,9 +172,14 @@ public static class Payment
         PrintTextCentered("Wilt u nog meer eten/drinken bestellen of afrekenen?");
         int selectedIndex = KiesOptie("Wilt u nog meer eten/drinken bestellen of afrekenen?", opties);
 
-        if (selectedIndex == 0)
+        switch (selectedIndex)
         {
-            BestelMenu();
+            case 0:
+                BestelMenu();
+                break;
+            case 1:
+                Afrekenen();
+                break;
         }
     }
 
@@ -187,6 +198,13 @@ public static class Payment
         totaalKosten += gekozenPrijs;
 
         PrintTextCentered("\nUw bestelling is toegevoegd.");
+        Program.PrintTextCentered("Druk op een ");
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Program.PrintTextCentered("knop");
+        Console.ResetColor();
+        Program.PrintTextCentered(" om verder te gaan");
+        Console.ReadKey();
+        Console.Clear();
         WiltMeerBestellen();
     }
 
@@ -205,6 +223,13 @@ public static class Payment
         totaalKosten += gekozenPrijs;
 
         PrintTextCentered("\nUw bestelling is toegevoegd.");
+        Program.PrintTextCentered("Druk op een ");
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Program.PrintTextCentered("knop");
+        Console.ResetColor();
+        Program.PrintTextCentered(" om verder te gaan");
+        Console.ReadKey();
+        Console.Clear();
         WiltMeerBestellen();
     }
 
@@ -223,6 +248,13 @@ public static class Payment
         totaalKosten += gekozenPrijs;
 
         PrintTextCentered("\nUw bestelling is toegevoegd.");
+        Program.PrintTextCentered("Druk op een ");
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Program.PrintTextCentered("knop");
+        Console.ResetColor();
+        Program.PrintTextCentered(" om verder te gaan");
+        Console.ReadKey();
+        Console.Clear();
         WiltMeerBestellen();
     }
 
@@ -236,6 +268,13 @@ public static class Payment
         totaalKosten += gekozenPrijs;
 
         PrintTextCentered("\nUw bestelling is toegevoegd.");
+        Program.PrintTextCentered("Druk op een ");
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Program.PrintTextCentered("knop");
+        Console.ResetColor();
+        Program.PrintTextCentered(" om verder te gaan");
+        Console.ReadKey();
+        Console.Clear();
         WiltMeerBestellen();
     }
 
@@ -251,6 +290,13 @@ public static class Payment
         totaalKosten += gekozenPrijs;
 
         PrintTextCentered("\nUw bestelling is toegevoegd.");
+        Program.PrintTextCentered("Druk op een ");
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Program.PrintTextCentered("knop");
+        Console.ResetColor();
+        Program.PrintTextCentered(" om verder te gaan");
+        Console.ReadKey();
+        Console.Clear();
         WiltMeerBestellen();
     }
 
@@ -266,11 +312,38 @@ public static class Payment
         totaalKosten += gekozenPrijs;
 
         PrintTextCentered("\nUw bestelling is toegevoegd.");
+        Program.PrintTextCentered("Druk op een ");
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Program.PrintTextCentered("knop");
+        Console.ResetColor();
+        Program.PrintTextCentered(" om verder te gaan");
+        Console.ReadKey();
+        Console.Clear();
         WiltMeerBestellen();
     }
-    public static void afrekenen()
+    public static void Afrekenen()
     {
-        string[] opties = { "IDEAL", "PayPal", "Creditard" };
-        int selectedIndex = KiesOptie("Kies de gewenste betaalmethode::", opties);
+        string[] opties = { "IDEAL", "PayPal", "Creditcard" };
+        int selectedIndex = KiesOptie("Kies de gewenste betaalmethode:", opties);
+
+        switch (selectedIndex)
+        {
+            case 0:
+                string[] partnersIDEAL = { "ING", "ABN AMRO", "ASN Bank", "RaboBank", "Revolut" };
+                int selectpartner = KiesOptie("Kies de gewenste Bank:", partnersIDEAL);
+                Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
+                Console.ReadLine();
+                break;
+            case 1:
+                Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
+                Console.ReadLine();
+                break;
+            case 2:
+                Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
+                Console.ReadLine();
+                break;
+
+        }
     }
+
 }
