@@ -48,7 +48,7 @@ class Program
                 AsciiArtPrinter.Printasciihm();
                 Console.ResetColor();
                 //AsciiArtPrinter.PrintAsciiMenu();
-                options = new string[] { "1.Aanmelden       ", "2.Bekijk Films    ", " 3.Bekijk Filmrooster", "4.Verlaat Pagina  " };
+                options = new string[] { "1.Aanmelden", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Verlaat Pagina" };
             }
             else
             {
@@ -58,11 +58,11 @@ class Program
                 //AsciiArtPrinter.PrintAsciiMenu2();
                 if (!Authentication.User.IsAdmin)
                 {
-                    options = new string[] { "  1.Profiel Bekijken   ", "2.Bekijk Films     ", "  3.Bekijk Filmrooster ", "   4.Bekijk Reserveringen", "5.Verlaat Pagina   ", "6. eten kopen   " };
+                    options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina", "6. eten kopen" };
                 }
                 else
                 {
-                    options = new string[] { "  1.Profiel Bekijken   ", "2.Bekijk Films     ", "  3.Bekijk Filmrooster ", "   4.Bekijk Reserveringen", "5.Verlaat Pagina   ", "6.Lijst Zalen     ", "7.Zaal Toevoegen   ", " 8.Zaal Verwijderen  ", " 9.Zaal Veranderen   ", " 10.Film toevoegen   " };
+                    options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina", "6.Lijst Zalen", "7.Zaal Toevoegen", " 8.Zaal Verwijderen", " 9.Zaal Veranderen", " 10.Film toevoegen" };
                 }
             }
 
@@ -197,6 +197,14 @@ class Program
     public static int ShowMenuInline(string[] options)
     {
         int selectedOption = 0;
+        int longestLineLength = 0;
+
+        foreach (string option in options)
+        {
+            longestLineLength = longestLineLength < option.Length ? option.Length : longestLineLength;
+        }
+        longestLineLength += 3;
+        PrintTextCentered("┌"+new string('─', longestLineLength)+"┐");
 
         do
         {
@@ -207,14 +215,16 @@ class Program
                 if (i == selectedOption)
                 {
                     Console.ForegroundColor = ConsoleColor.Cyan;
-                    PrintTextCentered($"   {options[i]}");
+                    PrintTextCentered($"│ {options[i]}"+ new string(' ', longestLineLength - options[i].Length - 1) + "│");
                     Console.ResetColor();
                 }
                 else
                 {
-                    PrintTextCentered($"   {options[i]}");
+                    PrintTextCentered($"│ {options[i]}"+ new string(' ', longestLineLength - options[i].Length - 1) + "│");
                 }
             }
+
+            PrintTextCentered("┕"+new string('─', longestLineLength)+"┘");
 
             var key = Console.ReadKey(true);
             if (key.Key == ConsoleKey.UpArrow && selectedOption > 0)
@@ -231,7 +241,7 @@ class Program
             }
 
             // Erase previous options display
-            Console.CursorTop -= options.Length;
+            Console.CursorTop -= options.Length + 1;
         } while (true);
 
         return selectedOption;

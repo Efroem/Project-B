@@ -46,10 +46,11 @@ public class SelectingMovies
             int windowWidth = Console.WindowWidth;
             int leftMargin = (windowWidth - boxWidth) / 2;
 
-            string topBottomBorder = new string('*', boxWidth);
+            string topBorder = "┌"+new string('─', boxWidth)+"┐";
+            string bottomBorder = "└"+new string('─', boxWidth)+"┘";
 
             // Print the box
-            Console.WriteLine(new string(' ', leftMargin) + topBottomBorder);
+            Console.WriteLine(new string(' ', leftMargin) + topBorder);
             for (int i = 0; i < movies.Count; i++)
             {
                 string title = movies[i].Title;
@@ -63,16 +64,16 @@ public class SelectingMovies
                 {
                     title = $"  {title}";
                 }
-                Console.WriteLine(new string(' ', leftMargin) + $"* {title.PadRight(boxWidth - 3)}*");
+                Console.WriteLine(new string(' ', leftMargin) + $"│ {title.PadRight(boxWidth - 1)}│");
                 Console.ResetColor();
             }
 
             // Print the option to view the movie schedule
-            Console.WriteLine(new string(' ', leftMargin) + "> (R) Bekijk filmrooster <");
+            Console.WriteLine(new string(' ', leftMargin) + $"│ {"> (R) Bekijk filmrooster".PadRight(boxWidth - 3)}< │");
 
-            Console.WriteLine(new string(' ', leftMargin) + "> (M) Terug naar het hoofdmenu <");
+            Console.WriteLine(new string(' ', leftMargin) + $"│ {"> (M) Terug naar het hoofdmenu".PadRight(boxWidth - 3)}< │");
 
-            Console.WriteLine(new string(' ', leftMargin) + topBottomBorder);
+            Console.WriteLine(new string(' ', leftMargin) + bottomBorder);
 
             // Handle key press
             var key = Console.ReadKey(true).Key;

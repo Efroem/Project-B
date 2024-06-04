@@ -291,6 +291,7 @@ public class Schedule
                 longestLineLength = longestLineLength < line.Length ? line.Length : longestLineLength;
             }
         }
+        Program.PrintTextCentered("     ┌"+new string('─', longestLineLength+3)+"┐");
 
         // // Deel de prompt op rond de woorden die rood moeten worden
         // string[] promptParts = prompt.Split(new string[] { " pijltjestoetsen ", " Enter" }, StringSplitOptions.None);
@@ -324,6 +325,8 @@ public class Schedule
                 }
             }
 
+            Program.PrintTextCentered("     └"+new string('─', longestLineLength + 3)+"┘");
+
             var key = Console.ReadKey(true);
             if (key.Key == ConsoleKey.UpArrow && selectedOption > 0)
             {
@@ -339,7 +342,7 @@ public class Schedule
             }
 
             // Erase previous options display
-            Console.CursorTop -= optionsLength;
+            Console.CursorTop -= optionsLength + 1;
         } while (true);
 
         return selectedOption;
@@ -348,40 +351,24 @@ public class Schedule
     // Modified PrintTextCentered for multiline options
     private static void PrintTextCentered(string text, int longestLongestLineLength)
     {
-
-
-        if (text.Contains('\n'))
+        string[] textArray = text.Split('\n');
+        int windowWidth;
+        int leftPadding;
+        int longestLineLength = 0;
+        foreach (string line in textArray)
         {
-            string[] textArray = text.Split('\n');
-            int windowWidth;
-            int leftPadding;
-            int longestLineLength = 0;
-            foreach (string line in textArray)
-            {
-                longestLineLength = longestLineLength < line.Length ? line.Length : longestLineLength;
-            }
-
-            for (int i = 0; i < textArray.Length; i++)
-            {
-                windowWidth = Console.WindowWidth;
-                leftPadding = (windowWidth - longestLineLength + longestLineLength - longestLongestLineLength) / 2;
-                Console.CursorLeft = leftPadding;
-
-                Console.SetCursorPosition(leftPadding, Console.CursorTop);
-                Console.WriteLine(textArray[i]);
-            }
+            longestLineLength = longestLineLength < line.Length ? line.Length : longestLineLength;
         }
-        else
+
+        for (int i = 0; i < textArray.Length; i++)
         {
-            int windowWidth = Console.WindowWidth;
-            int leftPadding = (windowWidth - text.Length) / 2;
+            windowWidth = Console.WindowWidth;
+            leftPadding = (windowWidth - longestLineLength + longestLineLength - longestLongestLineLength) / 2;
             Console.CursorLeft = leftPadding;
 
             Console.SetCursorPosition(leftPadding, Console.CursorTop);
-            Console.WriteLine(text);
+            Console.WriteLine($"│ {textArray[i]}"+ new string(' ', longestLongestLineLength + 3 - textArray[i].Length - 1) + "│");
         }
-
-
     }
 
 
