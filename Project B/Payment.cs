@@ -172,9 +172,14 @@ public static class Payment
         PrintTextCentered("Wilt u nog meer eten/drinken bestellen of afrekenen?");
         int selectedIndex = KiesOptie("Wilt u nog meer eten/drinken bestellen of afrekenen?", opties);
 
-        if (selectedIndex == 0)
+        switch (selectedIndex)
         {
-            BestelMenu();
+            case 0:
+                BestelMenu();
+                break;
+            case 1:
+                Afrekenen();
+                break;
         }
     }
 
@@ -320,9 +325,23 @@ public static class Payment
     {
         string[] opties = { "IDEAL", "PayPal", "Creditcard" };
         int selectedIndex = KiesOptie("Kies de gewenste betaalmethode:", opties);
-        Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
-        Console.ReadLine();
-        // Hier zou je de gekozen betaalmethode kunnen verwerken
+
+        switch (selectedIndex)
+        {
+            case 0:
+                string[] partnersIDEAL = { "ING", "ABN AMRO", "ASN Bank", "RaboBank", "Revolut" };
+                int selectpartner = KiesOptie("Kies de gewenste Bank:", partnersIDEAL);
+                Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
+                Console.ReadLine();
+                break;
+            case 1:
+                Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
+                Console.ReadLine();
+                break;
+            default:
+                Console.WriteLine("Ongeldige keuze. Probeer het opnieuw.");
+                break;
+        }
     }
 
 }
