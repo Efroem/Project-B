@@ -36,10 +36,12 @@ public class HallAssignment
     public static void CallFunction(File1Entry entry1, File2Entry entry2)
     {
         CinemaHall cinemaZaal = new CinemaHall();
+        TheaterSeatingPrinter seatingPrinter = new TheaterSeatingPrinter();
+        
 
         if (entry2.size == 3)
         {
-            CinemaHall.PrintGridGroteZaal();
+            //CinemaHall.PrintGridGroteZaal();
             cinemaZaal.NavigateGrid();
         }
         else if (entry2.size == 2)
@@ -47,11 +49,11 @@ public class HallAssignment
             CinemaHall.PrintGridMediumZaal();
             cinemaZaal.NavigateGrid();
         }
-        // else
-        // {
-        //     CinemaZaalKlein.PrintGridKleineZaal();
-        //     cinemaZaalKlein.NavigateGridKleineZaal();
-        // }
+        else
+        {
+            CinemaHall.PrintGridKleineZaal();
+            cinemaZaal.NavigateGrid();
+        }
 
     }
 
