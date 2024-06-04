@@ -41,7 +41,7 @@ public class Schedule
 
     [JsonPropertyName("seats")]
     public List<Seat> Seats { get; set; }
-
+    
     private double _cheapSeatPrice = 6.99;
     private double _seatPrice = 8.99;
 
@@ -229,7 +229,26 @@ public class Schedule
                 Console.WriteLine($"You picked {userAction + 1}. {pickedSchedule.MovieTitle}");
                 Console.ReadLine();
                 Console.Clear();
-                HallAssignment.Callfunction2();
+                bool running = true;
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                while(running == true)
+                {
+                TheaterSeatingPrinter seatingPrinter = new TheaterSeatingPrinter();
+                CinemaHall cinemaZaal = new CinemaHall();
+                
+                string filePath = "schedule.json";
+                int scheduleSerialNumber = pickedSchedule.SerialNumber;
+
+                seatingPrinter.PrintTheaterSeating(filePath, scheduleSerialNumber);
+                cinemaZaal.NavigateGrid();
+                if(keyInfo.Key == ConsoleKey.Escape || keyInfo.Key == ConsoleKey.Q)
+                {
+                    break;
+                }
+                }
+
+                
+                //HallAssignment.Callfunction2();
             }
             // Movie picked part 2
             else if (currentIndex > 0 && userAction < movies.Count + 1)
@@ -364,5 +383,6 @@ public class Schedule
 
 
     }
+
 
 }

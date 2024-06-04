@@ -1,6 +1,6 @@
-public static class GlobalVariables
+public class GlobalVariables
 {
     public static int GlobalCurrentRow = 1;
     public static int GlobalCollum = 1;
-    public static List<int> GlobalList = new List<int>();
+    public static List<Tuple<int, int>> GlobalList = new List<Tuple<int, int>>();
 }
