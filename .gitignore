@@ -12,3 +12,7 @@
 */obj
 */.vscode
 *.sln
+*.dll
+Project B/bin/Debug/net7.0/Project B.dll
+Project B/bin/Debug/net7.0/Project B.exe
+Project B/bin/Debug/net7.0/Project B.pdb
