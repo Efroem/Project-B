@@ -242,8 +242,6 @@ public class AsciiArtPrinter
         | 5. Cassis         €2.50  |
         | 6. Fernandes      €3.00  |
         [__________________________]
-        
-        
         ";
         PrintCentered(prijzen);
         Program.PrintTextCentered("Druk op een ");
@@ -258,14 +256,14 @@ public class AsciiArtPrinter
     public static void PrintAsciiprijzenlijst()
     {
         string prijzenlijst = @"
-  _____      _ _               _ _ _     _   
- |  __ \    (_|_)             | (_|_)   | |  
- | |__) | __ _ _ _______ _ __ | |_ _ ___| |_ 
- |  ___/ '__| | |_  / _ \ '_ \| | | / __| __|
- | |   | |  | | |/ /  __/ | | | | | \__ \ |_ 
- |_|   |_|  |_| /___\___|_| |_|_|_| |___/\__|
-             _/ |                _/ |        
-            |__/                |__/         
+   _____      _ _     _ _ _     _   
+ |  __ \    (_|_)   | (_|_)   | |  
+ | |__) | __ _ _ ___| |_ _ ___| |_ 
+ |  ___/ '__| | / __| | | / __| __|
+ | |   | |  | | \__ \ | | \__ \ |_ 
+ |_|   |_|  |_| |___/_|_| |___/\__|
+             _/ |      _/ |        
+            |__/      |__/         
 ";      
     Console.ForegroundColor = ConsoleColor.Yellow;
     PrintCentered(prijzenlijst);
@@ -291,8 +289,6 @@ public class AsciiArtPrinter
         | 2. Koffie middel  €3.50  |
          | 3. Koffie groot   €5.00  | 
         [__________________________]
-        
-        
         ";
         PrintCentered(prijzen);
         Program.PrintTextCentered("Druk op een ");
