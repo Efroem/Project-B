@@ -48,7 +48,7 @@ class Program
                 AsciiArtPrinter.Printasciihm();
                 Console.ResetColor();
                 //AsciiArtPrinter.PrintAsciiMenu();
-                options = new string[] { "1.Aanmelden       ", "2.Bekijk Films    ", "  3.Bekijk Filmrooster", "4.Verlaat Pagina  " };
+                options = new string[] { "1.Aanmelden       ", "2.Bekijk Films    ", " 3.Bekijk Filmrooster", "4.Verlaat Pagina  " };
             }
             else
             {
@@ -58,7 +58,7 @@ class Program
                 //AsciiArtPrinter.PrintAsciiMenu2();
                 if (!Authentication.User.IsAdmin)
                 {
-                    options = new string[] { "  1.Profiel Bekijken   ", "2.Bekijk Films     ", "  3.Bekijk Filmrooster ", "   4.Bekijk Reserveringen", "5.Verlaat Pagina   ", "6.Eten bestellen    " };
+                    options = new string[] { "  1.Profiel Bekijken   ", "2.Bekijk Films     ", "  3.Bekijk Filmrooster ", "   4.Bekijk Reserveringen", "5.Verlaat Pagina   ", "6. eten kopen   " };
                 }
                 else
                 {

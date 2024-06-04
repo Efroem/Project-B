@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.IO;
 using System.Text.Json;
 
@@ -194,6 +195,114 @@ public class AsciiArtPrinter
  |_____|_| \_|______\____/ \_____|\_____|______|_| \_|";
         Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(inlog);
+    }
+    public static void PrintAsciietenprijzen()
+    {
+        Console.Clear();
+        PrintAsciiprijzenlijst();
+        string prijzen = @"
+        ____________________________
+        [         Popcorn          ]
+        | 1. Popcorn klein  €3.50  |
+        | 2. Popcorn middel €5.00  |
+        | 3. Popcorn Groot  €7.00  |
+        |                          |
+        |         Nachos           |
+        | 1. Nachos klein   €4.00  |
+        | 2. Nachos middel  €6.00  |
+        | 3. Nachos groot   €8.00  |
+        |                          |
+        |         Chips            |
+        | 1. Chips klein    €2.00  |
+        | 2. Chips middel   €3.50  |
+        | 3. Chips groot    €5.00  |
+        [__________________________]
+        ";
+        PrintCentered(prijzen);
+        Program.PrintTextCentered("Druk op een ");
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Program.PrintTextCentered("knop");
+        Console.ResetColor();
+        Program.PrintTextCentered(" om verder te gaan");
+        Console.ReadKey();
+        Console.Clear();
+        Payment.BestelMenu();
+    }
+    public static void PrintAsciifrisdrank()
+    {
+        Console.Clear();
+        PrintAsciiprijzenlijst();
+        string prijzen = @"
+        ____________________________
+        [        Frisdrank         ]
+        | 1. Cola           €3.50  |
+        | 2. Fanta          €3.00  |
+        | 3. Icetea prik    €3.50  |
+        | 4. Icetea green   €3.00  |
+        | 5. Cassis         €2.50  |
+        | 6. Fernandes      €3.00  |
+        [__________________________]
+        
+        
+        ";
+        PrintCentered(prijzen);
+        Program.PrintTextCentered("Druk op een ");
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Program.PrintTextCentered("knop");
+        Console.ResetColor();
+        Program.PrintTextCentered(" om verder te gaan");
+        Console.ReadKey();
+        Console.Clear();
+        Payment.BestelMenu();
+    }
+    public static void PrintAsciiprijzenlijst()
+    {
+        string prijzenlijst = @"
+  _____      _ _               _ _ _     _   
+ |  __ \    (_|_)             | (_|_)   | |  
+ | |__) | __ _ _ _______ _ __ | |_ _ ___| |_ 
+ |  ___/ '__| | |_  / _ \ '_ \| | | / __| __|
+ | |   | |  | | |/ /  __/ | | | | | \__ \ |_ 
+ |_|   |_|  |_| /___\___|_| |_|_|_| |___/\__|
+             _/ |                _/ |        
+            |__/                |__/         
+";      
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    PrintCentered(prijzenlijst);
+    Console.ResetColor();
+
+    }
+    public static void PrintAsciiTheekoffie()
+    {
+        Console.Clear();
+        PrintAsciiprijzenlijst();
+        string prijzen = @"
+        ____________________________
+        [           Thee           ]
+        | 1. Earl Grey      €3.00  |
+        | 2. Jasmijn thee   €3.50  |
+        | 3. Groene thee    €3.00  |
+        | 4. Rooibos thee   €2.50  |
+        | 5. Munt thee      €4.00  |
+        | 6. Fernandes      €3.00  |
+        |                          |
+        |          Koffie          |
+        | 1. Koffie klein   €2.50  |
+        | 2. Koffie middel  €3.50  |
+         | 3. Koffie groot   €5.00  | 
+        [__________________________]
+        
+        
+        ";
+        PrintCentered(prijzen);
+        Program.PrintTextCentered("Druk op een ");
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Program.PrintTextCentered("knop");
+        Console.ResetColor();
+        Program.PrintTextCentered(" om verder te gaan");
+        Console.ReadKey();
+        Console.Clear();
+        Payment.BestelMenu();
     }
     public static void PrintAsciiRegister()
     {
