@@ -21,6 +21,15 @@ public static class Payment
 
         int selectedOption = 0;
         int optiesLength = opties.Length;
+        
+        int longestLineLength = 0;
+        foreach (string option in opties)
+        {
+            longestLineLength = longestLineLength < option.Length ? option.Length : longestLineLength;
+        }
+        longestLineLength = longestLineLength < prompt.Length ? prompt.Length : longestLineLength;
+        longestLineLength += 3;
+        
 
         do
         {
@@ -28,20 +37,23 @@ public static class Payment
             AsciiArtPrinter.PrintAsciibetaling();
             Console.WriteLine();
             Console.ResetColor();
-            PrintTextCentered(prompt);
+
+            PrintTextCentered("┌"+new string('─', longestLineLength)+"┐");
+            PrintTextCentered($"│ {prompt}"+ new string(' ', longestLineLength - prompt.Length - 1) + "│");
             for (int i = 0; i < opties.Length; i++)
             {
                 if (i == selectedOption)
                 {
                     Console.ForegroundColor = ConsoleColor.Cyan;
-                    PrintTextCentered(opties[i]);
+                    PrintTextCentered($"│ {opties[i]}"+ new string(' ', longestLineLength - opties[i].Length - 1) + "│");
                     Console.ResetColor();
                 }
                 else
                 {
-                    PrintTextCentered(opties[i]);
+                    PrintTextCentered($"│ {opties[i]}"+ new string(' ', longestLineLength - opties[i].Length - 1) + "│");
                 }
             }
+            PrintTextCentered("┕"+new string('─', longestLineLength)+"┘");
 
             var key = Console.ReadKey(true);
             if (key.Key == ConsoleKey.UpArrow && selectedOption > 0)
