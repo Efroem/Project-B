@@ -338,9 +338,11 @@ public static class Payment
                 Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
                 Console.ReadLine();
                 break;
-            default:
-                Console.WriteLine("Ongeldige keuze. Probeer het opnieuw.");
+            case 2:
+                Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
+                Console.ReadLine();
                 break;
+
         }
     }
 
