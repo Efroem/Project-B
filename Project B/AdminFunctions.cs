@@ -63,7 +63,6 @@ public class AdminFunctions
 
     private static void WriteSchedulesToJson(List<Schedule> schedules)
     {
-        // Sort the schedules by date before writing to JSON
         schedules.Sort((s1, s2) => s1.Date.CompareTo(s2.Date));
 
         JsonSerializerOptions options = new JsonSerializerOptions

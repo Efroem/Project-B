@@ -20,22 +20,16 @@ public class AsciiArtPrinter
 
     public static void PrintMovieTitles(string jsonFilePath)
     {
-        // Read the JSON file
         string jsonString = File.ReadAllText(jsonFilePath);
 
         // Deserialize the JSON to a JsonDocument
         using (JsonDocument document = JsonDocument.Parse(jsonString))
         {
-            // Access root element
             JsonElement root = document.RootElement;
 
-            // Check if the root element is an array
             if (root.ValueKind == JsonValueKind.Array)
             {
-                // Calculate the width of the terminal
                 int terminalWidth = Console.WindowWidth;
-
-                // Calculate the maximum width of the movie titles
                 int maxTitleWidth = 0;
                 foreach (JsonElement movie in root.EnumerateArray())
                 {
@@ -47,9 +41,8 @@ public class AsciiArtPrinter
                 }
 
                 // Calculate padding for center alignment
-                int leftPadding = (terminalWidth - maxTitleWidth - 2) / 2; // Subtract 2 for the padding characters '|'
+                int leftPadding = (terminalWidth - maxTitleWidth - 2) / 2;
 
-                // Print top border
                 Console.WriteLine("+" + new string('-', terminalWidth - 2) + "+");
 
                 // Print movie titles
@@ -59,42 +52,32 @@ public class AsciiArtPrinter
                     Console.WriteLine("|" + new string(' ', leftPadding) + title.PadRight(maxTitleWidth) + new string(' ', terminalWidth - leftPadding - maxTitleWidth - 2) + "|");
                 }
 
-                // Print bottom border
                 Console.WriteLine("+" + new string('-', terminalWidth - 2) + "+");
             }
         }
     }
     public static void PrintAscii(string jsonFilePath)
     {
-        // Read the JSON file
         string jsonString = File.ReadAllText(jsonFilePath);
 
-        // Deserialize the JSON to a JsonDocument
         using (JsonDocument document = JsonDocument.Parse(jsonString))
         {
-            // Access root element
             JsonElement root = document.RootElement;
 
-            // Check if the root element is an array
             if (root.ValueKind == JsonValueKind.Array)
             {
-                // Create a list to store movie elements
                 List<JsonElement> movies = new List<JsonElement>();
 
-                // Add each movie element to the list
                 foreach (JsonElement movie in root.EnumerateArray())
                 {
                     movies.Add(movie);
                 }
 
-                // Determine the number of posters to print based on screen width
                 int numberOfPosters = Console.WindowWidth > 130 ? 4 : 2;
 
-                // Shuffle the list of movies randomly
                 Random rnd = new Random();
                 movies = movies.OrderBy(x => rnd.Next()).ToList();
 
-                // Print the ASCII art for the selected number of posters
                 for (int i = 0; i < Math.Min(numberOfPosters, movies.Count); i += 2)
                 {
                     string[] poster1List = movies[i].GetProperty("Ascii").GetString().Split("\n");
@@ -116,7 +99,6 @@ public class AsciiArtPrinter
                         }
                     }
 
-                    // Separate the posters
                     Console.WriteLine();
                 }
             }

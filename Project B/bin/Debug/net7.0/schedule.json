@@ -112,12 +112,12 @@
       },
       {
         "id": "3-6",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
         "id": "3-7",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
@@ -152,12 +152,12 @@
       },
       {
         "id": "4-6",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
         "id": "4-7",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {

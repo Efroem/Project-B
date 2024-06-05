@@ -71,10 +71,8 @@ class Reservation
 
     public static List<Reservation> ReadReservationJson()
     {
-        // Read the JSON file as a string
         string jsonString = File.ReadAllText("reservations.json");
 
-        // Deserialize the JSON string into an object
         return JsonSerializer.Deserialize<List<Reservation>>(jsonString) ?? new();
     }
 

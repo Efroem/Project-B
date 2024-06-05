@@ -106,7 +106,6 @@ public static class ProgramFunctions
                 break;
             }
 
-            // Erase previous options display
             Console.CursorTop -= options.Length + 1;
         } while (true);
 

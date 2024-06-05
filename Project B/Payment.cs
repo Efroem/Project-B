@@ -70,7 +70,7 @@ public static class Payment
             }
 
             // Wis de vorige opties weergave
-            Console.CursorTop -= (optiesLength + 1); // +1 om ook de prompt te wissen
+            Console.CursorTop -= (optiesLength + 1);
         } while (true);
 
         return selectedOption;
@@ -135,23 +135,23 @@ public static class Payment
     public static void BestelEten()
     {
         string[] opties = { "Popcorn", "Nachos", "Chips", "Terug naar menu" };
-        double[][] prijzen = { popcornPrijzen, nachosPrijzen, chipsPrijzen }; // Een array van prijzenarrays voor elk voedseltype
+        double[][] prijzen = { popcornPrijzen, nachosPrijzen, chipsPrijzen };
         // PrintTextCentered("Wat wilt u bestellen?");
         int selectedIndex = KiesOptie("Kies het gewenste eten", opties);
 
         switch (selectedIndex)
         {
             case 0:
-                Popcorn(prijzen[selectedIndex]); // We geven de juiste prijzenarray door aan de Popcorn-methode
+                Popcorn(prijzen[selectedIndex]);
                 break;
             case 1:
-                Nachos(prijzen[selectedIndex]); // We geven de juiste prijzenarray door aan de Nachos-methode
+                Nachos(prijzen[selectedIndex]);
                 break;
             case 2:
-                Chips(prijzen[selectedIndex]); // We geven de juiste prijzenarray door aan de Chips-methode
+                Chips(prijzen[selectedIndex]);
                 break;
             case 3:
-                BestelMenu(); // Terug naar menu
+                BestelMenu();
                 break;
         }
     }
@@ -159,22 +159,22 @@ public static class Payment
     public static void BestelDrinken()
     {
         string[] opties = { "Frisdrank", "Thee", "Koffie", "Terug naar menu" };
-        double[][] prijzen = { frisdrankPrijzen, theePrijzen, koffiePrijzen }; // Een array van prijzenarrays voor elk dranktype
+        double[][] prijzen = { frisdrankPrijzen, theePrijzen, koffiePrijzen };
         int selectedIndex = KiesOptie("Kies het gewenste drinken", opties);
 
         switch (selectedIndex)
         {
             case 0:
-                Frisdrank(prijzen[selectedIndex]); // We geven de juiste prijzenarray door aan de Frisdrank-methode
+                Frisdrank(prijzen[selectedIndex]);
                 break;
             case 1:
-                Thee(prijzen[selectedIndex]); // We geven de juiste prijzenarray door aan de Thee-methode
+                Thee(prijzen[selectedIndex]);
                 break;
             case 2:
-                Koffie(prijzen[selectedIndex]); // We geven de juiste prijzenarray door aan de Koffie-methode
+                Koffie(prijzen[selectedIndex]);
                 break;
             case 3:
-                BestelMenu(); // Terug naar menu
+                BestelMenu();
                 break;
         }
     }

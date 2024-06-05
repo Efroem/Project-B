@@ -137,7 +137,7 @@ public class TheaterSeatingPrinter
 
                 var seat = seats.FirstOrDefault(s => s.ID == seatId);
 
-                if (i == userYPosition && j == userXPosition)                   //dit is de muis
+                if (i == userYPosition && j == userXPosition)
 
                 {
 
@@ -218,7 +218,7 @@ public class TheaterSeatingPrinter
 
     }
 
-    private static bool HandleUserInput(int rows, int columns, List<Schedule> schedules, int scheduleSerialNumber, TheaterSeatingPrinter printer) //Dit word gebruikt voor navigatie, positie word nog niet opgeslagen
+    private static bool HandleUserInput(int rows, int columns, List<Schedule> schedules, int scheduleSerialNumber, TheaterSeatingPrinter printer)
 
     {
 
@@ -266,10 +266,10 @@ public class TheaterSeatingPrinter
 
                 if (userPositions.Count > 0)
                 {
-                // verwijdert het laatst toegevoegde
-                userPositions.RemoveAt(userPositions.Count - 1);
+                    // verwijdert het laatst toegevoegde
+                    userPositions.RemoveAt(userPositions.Count - 1);
                 }
-                
+
                 break;
             case ConsoleKey.K:
                 double seatPrice = printer.ZettenVanTuppleInListNaarJson(schedules, scheduleSerialNumber);
@@ -310,7 +310,6 @@ public class TheaterSeatingPrinter
                 {
                     GeldteBetalen += seat.Price;
                     seat.IsAvailable = false;
-                    //Console.WriteLine(GeldteBetalen);
                 }
             }
         }

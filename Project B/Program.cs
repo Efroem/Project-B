@@ -13,7 +13,6 @@ class Program
         AsciiArtPrinter.MegaBioscoop();
         Console.ResetColor();
 
-        // Combine the text into one line with appropriate colors
         Console.WriteLine();
         ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
 

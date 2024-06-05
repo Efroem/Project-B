@@ -8,7 +8,7 @@ public class SelectingMovies
     private static List<Movie> movies = new List<Movie>();
     public static void MoviesSelect()
     {
-        LoadMovies(); // Laad de films aan het begin van het programma
+        LoadMovies();
 
         int selectedIndex = 0;
         bool running = true;
@@ -31,7 +31,7 @@ public class SelectingMovies
                     boxWidth = movie.Title.Length;
                 }
             }
-            boxWidth += 5; // Adding padding
+            boxWidth += 5;
 
             // Calculate the horizontal position to center the box
             int windowWidth = Console.WindowWidth;
@@ -92,7 +92,7 @@ public class SelectingMovies
                     running = false;
                     break;
 
-                case ConsoleKey.R: // New case for viewing movie schedule
+                case ConsoleKey.R:
                     Console.Clear();
                     Schedule.OpenGeneralMenu();
                     Console.Clear();
