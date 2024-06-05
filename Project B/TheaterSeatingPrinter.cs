@@ -24,7 +24,6 @@ public class TheaterSeatingPrinter
     public static bool navigateGridBool;
     private static int userXPosition = 1;
     private static int userYPosition = 1;
-    public double GeldteBetalen = 0;
     private static List<(int x, int y)> userPositions = new List<(int x, int y)>();
     public void PrintTheaterSeating(List<Schedule> schedules, int scheduleSerialNumber)
 
@@ -154,6 +153,22 @@ public class TheaterSeatingPrinter
 
                 }
 
+                else if (userPositions.Contains((j, i)))
+
+                {
+
+                    Console.Write("[");
+
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+
+                    Console.Write("O");
+
+                    Console.ResetColor();
+
+                    Console.Write("] ");
+
+                }
+
                 else if (seat != null && seat.IsAvailable)
 
                 {
@@ -240,22 +255,31 @@ public class TheaterSeatingPrinter
 
                 var userPosition = (userXPosition, userYPosition);
                 // maakt tuple
-                userPositions.Add(userPosition);
-
+                if (!userPositions.Contains(userPosition))
+                {
+                    userPositions.Add(userPosition);
+                }
                 // zet tuple in list
 
                 break;
+            case ConsoleKey.Backspace:
+
+                if (userPositions.Count > 0)
+                {
+                // verwijdert het laatst toegevoegde
+                userPositions.RemoveAt(userPositions.Count - 1);
+                }
+                
+                break;
             case ConsoleKey.K:
+                double seatPrice = printer.ZettenVanTuppleInListNaarJson(schedules, scheduleSerialNumber);
                 Console.Clear();
-                double seatPrice = printer.GetTotalSeatPrice(schedules, scheduleSerialNumber);
                 Payment.AddSeatPrice(seatPrice);
                 Payment.AddSelectedSeats(userPositions);
                 Payment.BestelMenu();
-                printer.ZettenVanTuppleInListNaarJson(schedules, scheduleSerialNumber);
                 break;
 
 
-                break;
             case ConsoleKey.Q:
 
                 return false;
@@ -265,7 +289,7 @@ public class TheaterSeatingPrinter
         return true;
 
     }
-    public double GetTotalSeatPrice(List<Schedule> schedules, int scheduleSerialNumber)
+    public double ZettenVanTuppleInListNaarJson(List<Schedule> schedules, int scheduleSerialNumber)
     {
         var schedule = schedules.FirstOrDefault(s => s.SerialNumber == scheduleSerialNumber);
         if (schedule == null)
@@ -273,35 +297,7 @@ public class TheaterSeatingPrinter
             return 0;
         }
 
-        double totalSeatPrice = 0;
-        foreach (var position in userPositions)
-        {
-            foreach (var seat in schedule.Seats)
-            {
-                string[] parts = seat.ID.Split('-');
-                int seatRow = int.Parse(parts[0]);
-                int seatColumn = int.Parse(parts[1]);
-
-                if (position.x == seatColumn && position.y == seatRow && seat.IsAvailable)
-                {
-                    totalSeatPrice += seat.Price;
-                    seat.IsAvailable = false; // Mark seat as booked
-                }
-            }
-        }
-
-        return totalSeatPrice;
-    }
-
-    public void ZettenVanTuppleInListNaarJson(List<Schedule> schedules, int scheduleSerialNumber)
-    {
-        var schedule = schedules.FirstOrDefault(s => s.SerialNumber == scheduleSerialNumber);
-        if (schedule == null)
-        {
-            Console.WriteLine("Invalid schedule serial number.");
-            return;
-        }
-
+        double GeldteBetalen = 0;
         foreach (var position in userPositions)
         {
             foreach (var seat in schedule.Seats)
@@ -310,10 +306,10 @@ public class TheaterSeatingPrinter
                 int seatRow = int.Parse(parts[1]);
                 int seatColumn = int.Parse(parts[0]);
 
-                if (position.x == seatRow && position.y == seatColumn)
+                if (position.x == seatRow && position.y == seatColumn && seat.IsAvailable)
                 {
+                    GeldteBetalen += seat.Price;
                     seat.IsAvailable = false;
-                    GeldteBetalen = seat.Price;
                     //Console.WriteLine(GeldteBetalen);
                 }
             }
@@ -321,6 +317,8 @@ public class TheaterSeatingPrinter
         JsonSerializerOptions options = new() { WriteIndented = true };
         string jsonString = JsonSerializer.Serialize(schedules, options);
         File.WriteAllText("schedule.json", jsonString);
+        userPositions.Clear();
+        return GeldteBetalen;
 
     }
 }

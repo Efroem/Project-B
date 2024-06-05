@@ -2,7 +2,7 @@ public static class Payment
 {
     private static List<Product> Purchasedproducts = new List<Product>();
 
-    private static HashSet<(int y, int x)> selectedSeats = new HashSet<(int row, int column)>();
+    private static HashSet<(int x, int y)> selectedSeats = new HashSet<(int row, int column)>();
 
 
     private static double totaalKosten = 0;
