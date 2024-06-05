@@ -178,7 +178,7 @@ public class Schedule
 
             if (currentIndex == 0)
             {
-                if (currentIndex + stepSize <= schedules.Count)
+                if (currentIndex + stepSize < schedules.Count)
                 {
                     options.Add($"{moviesShownAmount + 1}.Volgende");
                     options.Add($"{moviesShownAmount + 2}.Terug naar hoofdmenu");
@@ -190,7 +190,7 @@ public class Schedule
             }
             else
             {
-                if (currentIndex + stepSize <= schedules.Count)
+                if (currentIndex + stepSize < schedules.Count)
                 {
                     options.Add($"{moviesShownAmount + 2}.Volgende");
                     options.Add($"{moviesShownAmount + 3}.Terug naar hoofdmenu");
@@ -211,7 +211,7 @@ public class Schedule
                 currentIndex = currentIndex - 5 < 0 ? 0 : currentIndex - 5;
             }
             else if ((currentIndex == 0 && userAction == movies.Count && moviesShownAmount != 0 && currentIndex + stepSize < schedules.Count)
-                || (currentIndex > 0 && userAction == movies.Count + 1 && currentIndex + stepSize < schedules.Count))
+                || (currentIndex != 0 && userAction == movies.Count + 1 && currentIndex + stepSize < schedules.Count))
             {
                 currentIndex += stepSize;
             }
@@ -233,20 +233,33 @@ public class Schedule
             else if (currentIndex > 0 && userAction < movies.Count + 1)
             {
                 pickedSchedule = schedules[currentIndex + (userAction - 1)];
-                Console.WriteLine($"You picked {userAction + 1}. {pickedSchedule.MovieTitle}");
-                Console.ReadLine();
                 Console.Clear();
+
+                if (Authentication.User is not null)
+                {
+                    TheaterSeatingPrinter seatingPrinter = new TheaterSeatingPrinter();
+                    seatingPrinter.PrintTheaterSeating(schedules, pickedSchedule.SerialNumber);
+                    return;
+                }
                 // HallAssignment.Callfunction2();
             }
             else if (
-                (currentIndex == 0 && userAction == movies.Count + 1 && currentIndex <= schedules.Count) ||
-                (currentIndex == 0 && userAction == movies.Count + 1 && currentIndex + stepSize > schedules.Count) ||
-                (currentIndex != 0 && userAction == movies.Count + 2 && currentIndex <= schedules.Count) ||
-                (currentIndex != 0 && userAction == movies.Count + 1 && currentIndex + stepSize > schedules.Count) ||
+                (currentIndex == 0 && userAction == movies.Count + 0 && currentIndex <= schedules.Count) ||
+                (currentIndex == 0 && userAction == movies.Count + 1 && currentIndex + stepSize < schedules.Count) ||
+                (currentIndex != 0 && userAction == movies.Count + 2 && currentIndex < schedules.Count) ||
+                (currentIndex != 0 && userAction == movies.Count + 1 && currentIndex + stepSize >= schedules.Count) ||
                 (currentIndex == 0 && userAction == 0 && moviesShownAmount == 0)
             )
             {
                 return;
+            }
+            else {
+                Console.WriteLine("da");
+                Console.WriteLine(currentIndex);
+                Console.WriteLine(userAction);
+                Console.WriteLine(movies.Count);
+                Console.WriteLine(schedules.Count);
+                Console.ReadLine();
             }
 
             Console.Clear();
