@@ -29,7 +29,7 @@ public class Schedule
         }
     }
     [JsonPropertyName("date")]
-    public string JsonDate { get => Date.ToString("dd/MM/yyyy HH:mm:ss"); set => Date = DateTime.ParseExact(value, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture); }
+    public string JsonDate { get => Date.ToString("dd/MM/yyyy HH:mm:ss"); set => Date = DateTime.ParseExact(value, "dd/MM/yyyy HH:mm:ss", CultureInfo.InstalledUICulture); }
 
     public string MovieTitle { get; set; }
 
@@ -41,7 +41,7 @@ public class Schedule
 
     [JsonPropertyName("seats")]
     public List<Seat> Seats { get; set; }
-    
+
     private double _cheapSeatPrice = 6.99;
     private double _seatPrice = 8.99;
 
@@ -157,100 +157,100 @@ public class Schedule
     }
 
     private static void OpenScheduleMenu(List<Schedule> schedules)
-{
-    int currentIndex = 0;
-    const int stepSize = 5;
-    Schedule pickedSchedule;
- 
-    while (true)
     {
-        int moviesShownAmount = Math.Min(stepSize, schedules.Count - currentIndex);
-        List<string> movies = new();
-        for (int i = 0; i < moviesShownAmount; i++)
+        int currentIndex = 0;
+        const int stepSize = 5;
+        Schedule pickedSchedule;
+
+        while (true)
         {
-            var schedule = schedules[currentIndex + i];
-            movies.Add($"{i + 1 + (currentIndex != 0 ? 1 : 0)}.{schedule.MovieTitle}\n{schedule.Date}\n{schedule.CinemaHallSerialNumber}");
-        }
- 
-        List<string> options = new();
-        if (currentIndex != 0) options.Add("1.Terug");
-        movies.ForEach(options.Add);
- 
-        if (currentIndex == 0)
-        {
-            if (currentIndex + stepSize <= schedules.Count)
+            int moviesShownAmount = Math.Min(stepSize, schedules.Count - currentIndex);
+            List<string> movies = new();
+            for (int i = 0; i < moviesShownAmount; i++)
             {
-                options.Add($"{moviesShownAmount + 1}.Volgende");
-                options.Add($"{moviesShownAmount + 2}.Terug naar hoofdmenu");
+                var schedule = schedules[currentIndex + i];
+                movies.Add($"{i + 1 + (currentIndex != 0 ? 1 : 0)}.{schedule.MovieTitle}\n{schedule.Date}\n{schedule.CinemaHallSerialNumber}");
+            }
+
+            List<string> options = new();
+            if (currentIndex != 0) options.Add("1.Terug");
+            movies.ForEach(options.Add);
+
+            if (currentIndex == 0)
+            {
+                if (currentIndex + stepSize <= schedules.Count)
+                {
+                    options.Add($"{moviesShownAmount + 1}.Volgende");
+                    options.Add($"{moviesShownAmount + 2}.Terug naar hoofdmenu");
+                }
+                else
+                {
+                    options.Add($"{moviesShownAmount + 1}.Terug naar hoofdmenu");
+                }
             }
             else
             {
-                options.Add($"{moviesShownAmount + 1}.Terug naar hoofdmenu");
+                if (currentIndex + stepSize <= schedules.Count)
+                {
+                    options.Add($"{moviesShownAmount + 2}.Volgende");
+                    options.Add($"{moviesShownAmount + 3}.Terug naar hoofdmenu");
+                }
+                else
+                {
+                    options.Add($"{moviesShownAmount + 2}.Terug naar hoofdmenu");
+                }
             }
-        }
-        else
-        {
-            if (currentIndex + stepSize <= schedules.Count)
-            {
-                options.Add($"{moviesShownAmount + 2}.Volgende");
-                options.Add($"{moviesShownAmount + 3}.Terug naar hoofdmenu");
-            }
-            else
-            {
-                options.Add($"{moviesShownAmount + 2}.Terug naar hoofdmenu");
-            }
-        }
- 
-        Console.Clear();
-        // ASCII art and instructions...
- 
-        int userAction = ShowMenuInline(options.ToArray());
- 
-        if (currentIndex != 0 && userAction == 0)
-        {
-            currentIndex = currentIndex - 5 < 0 ? 0 : currentIndex - 5;
-        }
-        else if ((currentIndex == 0 && userAction == movies.Count && moviesShownAmount != 0 && currentIndex + stepSize < schedules.Count)
-            || (currentIndex > 0 && userAction == movies.Count + 1 && currentIndex + stepSize < schedules.Count))
-        {
-            currentIndex += stepSize;
-        }
-        else if (currentIndex == 0 && userAction < movies.Count)
-        {
-            pickedSchedule = schedules[currentIndex + userAction];
-            Console.WriteLine($"You picked {userAction + 1}. {pickedSchedule.MovieTitle}");
-            Console.ReadLine();
+
             Console.Clear();
- 
-            
-            TheaterSeatingPrinter seatingPrinter = new TheaterSeatingPrinter();
-            seatingPrinter.PrintTheaterSeating(schedules, pickedSchedule.SerialNumber);
+            // ASCII art and instructions...
+
+            int userAction = ShowMenuInline(options.ToArray());
+
+            if (currentIndex != 0 && userAction == 0)
+            {
+                currentIndex = currentIndex - 5 < 0 ? 0 : currentIndex - 5;
+            }
+            else if ((currentIndex == 0 && userAction == movies.Count && moviesShownAmount != 0 && currentIndex + stepSize < schedules.Count)
+                || (currentIndex > 0 && userAction == movies.Count + 1 && currentIndex + stepSize < schedules.Count))
+            {
+                currentIndex += stepSize;
+            }
+            else if (currentIndex == 0 && userAction < movies.Count)
+            {
+                pickedSchedule = schedules[currentIndex + userAction];
+                Console.WriteLine($"You picked {userAction + 1}. {pickedSchedule.MovieTitle}");
+                Console.ReadLine();
+                Console.Clear();
+
+
+                TheaterSeatingPrinter seatingPrinter = new TheaterSeatingPrinter();
+                seatingPrinter.PrintTheaterSeating(schedules, pickedSchedule.SerialNumber);
                 //CinemaHall.NavigateGrid();
-            Console.ReadLine();
-            return;
-        }
-        else if (currentIndex > 0 && userAction < movies.Count + 1)
-        {
-            pickedSchedule = schedules[currentIndex + (userAction - 1)];
-            Console.WriteLine($"You picked {userAction + 1}. {pickedSchedule.MovieTitle}");
-            Console.ReadLine();
+                Console.ReadLine();
+                return;
+            }
+            else if (currentIndex > 0 && userAction < movies.Count + 1)
+            {
+                pickedSchedule = schedules[currentIndex + (userAction - 1)];
+                Console.WriteLine($"You picked {userAction + 1}. {pickedSchedule.MovieTitle}");
+                Console.ReadLine();
+                Console.Clear();
+                // HallAssignment.Callfunction2();
+            }
+            else if (
+                (currentIndex == 0 && userAction == movies.Count + 1 && currentIndex <= schedules.Count) ||
+                (currentIndex == 0 && userAction == movies.Count + 1 && currentIndex + stepSize > schedules.Count) ||
+                (currentIndex != 0 && userAction == movies.Count + 2 && currentIndex <= schedules.Count) ||
+                (currentIndex != 0 && userAction == movies.Count + 1 && currentIndex + stepSize > schedules.Count) ||
+                (currentIndex == 0 && userAction == 0 && moviesShownAmount == 0)
+            )
+            {
+                return;
+            }
+
             Console.Clear();
-            // HallAssignment.Callfunction2();
         }
-        else if (
-            (currentIndex == 0 && userAction == movies.Count + 1 && currentIndex <= schedules.Count) ||
-            (currentIndex == 0 && userAction == movies.Count + 1 && currentIndex + stepSize > schedules.Count) ||
-            (currentIndex != 0 && userAction == movies.Count + 2 && currentIndex <= schedules.Count) ||
-            (currentIndex != 0 && userAction == movies.Count + 1 && currentIndex + stepSize > schedules.Count) ||
-            (currentIndex == 0 && userAction == 0 && moviesShownAmount == 0)
-        )
-        {
-            return;
-        }
- 
-        Console.Clear();
     }
-}
 
     // Modified ShowMenuInline for multiline options
     private static int ShowMenuInline(string[] options)
@@ -268,7 +268,7 @@ public class Schedule
                 longestLineLength = longestLineLength < line.Length ? line.Length : longestLineLength;
             }
         }
-        Program.PrintTextCentered("     ┌"+new string('─', longestLineLength+3)+"┐");
+        Program.PrintTextCentered("     ┌" + new string('─', longestLineLength + 3) + "┐");
 
         // // Deel de prompt op rond de woorden die rood moeten worden
         // string[] promptParts = prompt.Split(new string[] { " pijltjestoetsen ", " Enter" }, StringSplitOptions.None);
@@ -302,7 +302,7 @@ public class Schedule
                 }
             }
 
-            Program.PrintTextCentered("     └"+new string('─', longestLineLength + 3)+"┘");
+            Program.PrintTextCentered("     └" + new string('─', longestLineLength + 3) + "┘");
 
             var key = Console.ReadKey(true);
             if (key.Key == ConsoleKey.UpArrow && selectedOption > 0)
@@ -344,7 +344,7 @@ public class Schedule
             Console.CursorLeft = leftPadding;
 
             Console.SetCursorPosition(leftPadding, Console.CursorTop);
-            Console.WriteLine($"│ {textArray[i]}"+ new string(' ', longestLongestLineLength + 3 - textArray[i].Length - 1) + "│");
+            Console.WriteLine($"│ {textArray[i]}" + new string(' ', longestLongestLineLength + 3 - textArray[i].Length - 1) + "│");
         }
     }
 

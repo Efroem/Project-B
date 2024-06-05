@@ -62,10 +62,13 @@ public class AdminFunctions
 
     private static void WriteSchedulesToJson(List<Schedule> schedules)
     {
+        // Sort the schedules by date before writing to JSON
+        schedules.Sort((s1, s2) => s1.Date.CompareTo(s2.Date));
+
         JsonSerializerOptions options = new JsonSerializerOptions
         {
             WriteIndented = true,
-            IgnoreNullValues = true
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
         string jsonString = JsonSerializer.Serialize(schedules, options);
@@ -358,6 +361,10 @@ public class AdminFunctions
             {
                 Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in.");
                 if (!TryAgain()) return;
+                foreach (var hall in cinemaHalls)
+                {
+                    Console.WriteLine($"- Serial number: {hall.SerialNumber.ToString().PadRight(2)}, Name: {hall.Name.PadRight(maxNameLength)}");
+                }
             }
             else
             {
@@ -389,6 +396,11 @@ public class AdminFunctions
             {
                 Console.WriteLine("Ongeldige invoer. Voer een geldig nummer in.");
                 if (!TryAgain()) return;
+                Console.Clear();
+                for (int i = 0; i < movies.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {movies[i].Title}");
+                }
             }
             else
             {
@@ -403,6 +415,7 @@ public class AdminFunctions
         while (true)
         {
             string? dateString = Console.ReadLine();
+            dateString = dateString?.Replace("-", "/");
             if (DateTime.TryParseExact(dateString, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out date))
             {
                 break;
@@ -411,6 +424,7 @@ public class AdminFunctions
             {
                 Console.WriteLine("Verkeerde format. Voer de datum op een juiste manier in (dd/MM/yyyy)");
                 if (!TryAgain()) return;
+                Console.WriteLine("Verkeerde format. Voer de datum op een juiste manier in (dd/MM/yyyy)");
             }
         }
 
@@ -426,6 +440,7 @@ public class AdminFunctions
             {
                 Console.WriteLine("Verkeerde input. Voer het uur binnen 0 en 23 in");
                 if (!TryAgain()) return;
+                Console.WriteLine("Verkeerde input. Voer het uur binnen 0 en 23 in");
             }
 
         }
@@ -442,6 +457,7 @@ public class AdminFunctions
             {
                 Console.WriteLine("Verkeerde input. Voer de minuut tussen 0 en 59 in");
                 if (!TryAgain()) return;
+                Console.WriteLine("Verkeerde input. Voer de minuut tussen 0 en 59 in");
             }
         }
 
@@ -452,6 +468,7 @@ public class AdminFunctions
         schedules.Add(newSchedule);
         WriteSchedulesToJson(schedules);
 
-        Console.WriteLine("Nieuwe film succesvol toegevoegd aan het schema.");
+        Console.WriteLine("Nieuwe film succesvol toegevoegd aan het schema. Druk op een knop om verder te gaan");
+        Console.ReadLine();
     }
 }

@@ -167,7 +167,6 @@ class Program
                 case 9:
                     Console.Clear();
                     AdminFunctions.AddNewMovie();
-                    Console.ReadLine();
                     Console.Clear();
                     break;
                 default:
@@ -204,7 +203,7 @@ class Program
             longestLineLength = longestLineLength < option.Length ? option.Length : longestLineLength;
         }
         longestLineLength += 3;
-        PrintTextCentered("┌"+new string('─', longestLineLength)+"┐");
+        PrintTextCentered("┌" + new string('─', longestLineLength) + "┐");
 
         do
         {
@@ -215,16 +214,16 @@ class Program
                 if (i == selectedOption)
                 {
                     Console.ForegroundColor = ConsoleColor.Cyan;
-                    PrintTextCentered($"│ {options[i]}"+ new string(' ', longestLineLength - options[i].Length - 1) + "│");
+                    PrintTextCentered($"│ {options[i]}" + new string(' ', longestLineLength - options[i].Length - 1) + "│");
                     Console.ResetColor();
                 }
                 else
                 {
-                    PrintTextCentered($"│ {options[i]}"+ new string(' ', longestLineLength - options[i].Length - 1) + "│");
+                    PrintTextCentered($"│ {options[i]}" + new string(' ', longestLineLength - options[i].Length - 1) + "│");
                 }
             }
 
-            PrintTextCentered("┕"+new string('─', longestLineLength)+"┘");
+            PrintTextCentered("┕" + new string('─', longestLineLength) + "┘");
 
             var key = Console.ReadKey(true);
             if (key.Key == ConsoleKey.UpArrow && selectedOption > 0)
