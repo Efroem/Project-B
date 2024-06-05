@@ -29,7 +29,7 @@ public class Schedule
         }
     }
     [JsonPropertyName("date")]
-    public string JsonDate { get => Date.ToString("dd/MM/yyyy HH:mm:ss"); set => Date = DateTime.ParseExact(value, "dd/MM/yyyy HH:mm:ss", CultureInfo.InstalledUICulture); }
+    public string JsonDate { get => Date.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture); set => Date = DateTime.ParseExact(value, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture); }
 
     public string MovieTitle { get; set; }
 
