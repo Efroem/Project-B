@@ -132,7 +132,7 @@ public class AdminFunctions
         if (string.IsNullOrWhiteSpace(name))
         {
             Console.WriteLine("Verkeerde naam. Voer een juiste naam in.");
-            return;
+            if (!TryAgain()) return;
         }
 
         int size;
@@ -141,6 +141,8 @@ public class AdminFunctions
             Console.WriteLine($"Kies de grootte van de nieuwe bioscoopzaal\n1 - klein: (55 mensen)\n2 - medium: (86 mensen)\n3 - groot(100 mensen):");
             if (!int.TryParse(Console.ReadLine(), out size) || (size < 1 || size > 3))
             {
+                Console.WriteLine("Verkeerde input. Kies tussen 1, 2, of 3.");
+                if (!TryAgain()) return;
                 Console.WriteLine("Verkeerde input. Kies tussen 1, 2, of 3.");
             }
         } while (size < 1 || size > 3);
@@ -190,7 +192,8 @@ public class AdminFunctions
             if (!int.TryParse(Console.ReadLine(), out serialNumber))
             {
                 Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld: '3'):");
-                continue;
+                if (!TryAgain()) return;
+                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld: '3'):");
             }
 
             if (cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
@@ -199,6 +202,8 @@ public class AdminFunctions
             }
             else
             {
+                Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld: '3'):");
+                if (!TryAgain()) return;
                 Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld: '3'):");
             }
         }
@@ -252,7 +257,8 @@ public class AdminFunctions
             if (!int.TryParse(Console.ReadLine(), out serialNumber))
             {
                 Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld '3'):");
-                continue;
+                if (!TryAgain()) return;
+                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld '3'):");
             }
 
             if (cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
@@ -262,6 +268,7 @@ public class AdminFunctions
             else
             {
                 Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld '3'):");
+                if (!TryAgain()) return;
             }
         }
 
@@ -285,6 +292,8 @@ public class AdminFunctions
             else
             {
                 Console.WriteLine($"Ongeldige invoer. Voer 1 ('naam') of 2 ('grootte') in voor uw keuze.");
+                if (!TryAgain()) return;
+                Console.WriteLine($"Ongeldige invoer. Voer 1 ('naam') of 2 ('grootte') in voor uw keuze.");
             }
         }
 
@@ -301,7 +310,6 @@ public class AdminFunctions
                     {
                         Console.WriteLine("verkeerde input");
                     } while (newName == null);
-
                 }
                 else
                 {
