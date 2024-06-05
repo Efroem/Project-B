@@ -219,11 +219,8 @@ public class AsciiArtPrinter
         [__________________________]
         ";
         PrintCentered(prijzen);
-        ProgramFunctions.PrintTextCentered("Druk op een ");
-        Console.ForegroundColor = ConsoleColor.Magenta;
-        ProgramFunctions.PrintTextCentered("knop");
-        Console.ResetColor();
-        ProgramFunctions.PrintTextCentered(" om verder te gaan");
+        Console.WriteLine();
+        ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
         Console.ReadKey();
         Console.Clear();
         Payment.BestelMenu();
@@ -244,11 +241,8 @@ public class AsciiArtPrinter
         [__________________________]
         ";
         PrintCentered(prijzen);
-        ProgramFunctions.PrintTextCentered("Druk op een ");
-        Console.ForegroundColor = ConsoleColor.Magenta;
-        ProgramFunctions.PrintTextCentered("knop");
-        Console.ResetColor();
-        ProgramFunctions.PrintTextCentered(" om verder te gaan");
+        Console.WriteLine();
+        ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
         Console.ReadKey();
         Console.Clear();
         Payment.BestelMenu();
@@ -291,11 +285,8 @@ public class AsciiArtPrinter
         [__________________________]
         ";
         PrintCentered(prijzen);
-        ProgramFunctions.PrintTextCentered("Druk op een ");
-        Console.ForegroundColor = ConsoleColor.Magenta;
-        ProgramFunctions.PrintTextCentered("knop");
-        Console.ResetColor();
-        ProgramFunctions.PrintTextCentered(" om verder te gaan");
+        Console.WriteLine();
+        ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
         Console.ReadKey();
         Console.Clear();
         Payment.BestelMenu();

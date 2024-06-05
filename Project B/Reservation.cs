@@ -58,6 +58,7 @@ class Reservation
 
         while (true)
         {
+            Console.Clear();
             reservations.ForEach(x => Console.WriteLine($"{x}\n"));
             Console.WriteLine("1. Terug");
             string userAction = (Console.ReadLine() ?? "").ToLower();

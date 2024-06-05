@@ -112,28 +112,22 @@ class Program
                         Payment.BestelMenu();
                     }
                     Console.Clear();
-                    Console.WriteLine("Lijst Zalen");
                     AdminFunctions.PrintCinemaHalls();
-                    Console.ReadLine();
                     Console.Clear();
                     break;
                 case 6:
                     Console.Clear();
-                    Console.WriteLine("CinemaHall Toevoegen");
                     AdminFunctions.AddNewCinemaHall();
-                    Console.ReadLine();
                     Console.Clear();
                     break;
                 case 7:
                     Console.Clear();
                     AdminFunctions.RemoveCinemaHall();
-                    Console.ReadLine();
                     Console.Clear();
                     break;
                 case 8:
                     Console.Clear();
                     AdminFunctions.ChangeCinemaHall();
-                    Console.ReadLine();
                     Console.Clear();
                     break;
                 case 9:
