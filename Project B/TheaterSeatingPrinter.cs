@@ -241,15 +241,17 @@ public class TheaterSeatingPrinter
                 var userPosition = (userXPosition, userYPosition);
                 // maakt tuple
                 userPositions.Add(userPosition);
+
+                // zet tuple in list
+
+                break;
+            case ConsoleKey.K:
                 Console.Clear();
                 double seatPrice = printer.GetTotalSeatPrice(schedules, scheduleSerialNumber);
                 Payment.AddSeatPrice(seatPrice);
                 Payment.AddSelectedSeats(userPositions);
                 Payment.BestelMenu();
                 printer.ZettenVanTuppleInListNaarJson(schedules, scheduleSerialNumber);
-
-                break;
-            case ConsoleKey.K:
                 break;
 
 
