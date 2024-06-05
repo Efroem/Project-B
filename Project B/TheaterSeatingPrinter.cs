@@ -153,6 +153,22 @@ public class TheaterSeatingPrinter
 
                 }
 
+                else if (userPositions.Contains((j, i)))
+
+                {
+
+                    Console.Write("[");
+
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+
+                    Console.Write("O");
+
+                    Console.ResetColor();
+
+                    Console.Write("] ");
+
+                }
+
                 else if (seat != null && seat.IsAvailable)
 
                 {
@@ -239,10 +255,21 @@ public class TheaterSeatingPrinter
 
                 var userPosition = (userXPosition, userYPosition);
                 // maakt tuple
-                userPositions.Add(userPosition);
-
+                if (!userPositions.Contains(userPosition))
+                {
+                    userPositions.Add(userPosition);
+                }
                 // zet tuple in list
 
+                break;
+            case ConsoleKey.Backspace:
+
+                if (userPositions.Count > 0)
+                {
+                // verwijdert het laatst toegevoegde
+                userPositions.RemoveAt(userPositions.Count - 1);
+                }
+                
                 break;
             case ConsoleKey.K:
                 double seatPrice = printer.ZettenVanTuppleInListNaarJson(schedules, scheduleSerialNumber);
@@ -290,6 +317,7 @@ public class TheaterSeatingPrinter
         JsonSerializerOptions options = new() { WriteIndented = true };
         string jsonString = JsonSerializer.Serialize(schedules, options);
         File.WriteAllText("schedule.json", jsonString);
+        userPositions.Clear();
         return GeldteBetalen;
 
     }
