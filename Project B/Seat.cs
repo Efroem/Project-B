@@ -6,7 +6,7 @@ public class Seat
     public  string ID { get; set; }
 
     [JsonPropertyName("isAvailable")]
-    public static bool IsAvailable { get; set; }
+    public bool IsAvailable { get; set; }
 
     [JsonPropertyName("price")]
     public double Price { get; set; }
