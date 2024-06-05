@@ -1,8 +1,10 @@
 public static class Payment
 {
-    private static bool bestellingGeplaatst;
-
     private static List<Product> Purchasedproducts = new List<Product>();
+
+    private static HashSet<(int y, int x)> selectedSeats = new HashSet<(int row, int column)>();
+
+
     private static double totaalKosten = 0;
 
     // Definieer de prijzen
@@ -13,10 +15,6 @@ public static class Payment
     private static readonly double[] koffiePrijzen = { 2.50, 3.50, 5.00 };
     private static readonly double[] theePrijzen = { 3.00, 3.50, 3.00, 2.50, 4.50 };
 
-    static Payment()
-    {
-        bestellingGeplaatst = false;
-    }
 
     private static int KiesOptie(string prompt, string[] opties)
     {
@@ -77,6 +75,7 @@ public static class Payment
 
         return selectedOption;
     }
+
 
     private static void PrintTextCentered(string text)
     {
@@ -194,6 +193,17 @@ public static class Payment
             case 1:
                 Afrekenen();
                 break;
+        }
+    }
+    public static void AddSeatPrice(double seatPrice)
+    {
+        totaalKosten += seatPrice;
+    }
+    public static void AddSelectedSeats(List<(int x, int y)> seats)
+    {
+        foreach (var seat in seats)
+        {
+            selectedSeats.Add(seat);
         }
     }
 
@@ -351,30 +361,48 @@ public static class Payment
             case 0:
                 string[] partnersIDEAL = { "ING", "ABN AMRO", "ASN Bank", "RaboBank", "Revolut" };
                 int selectpartner = KiesOptie("Kies de gewenste Bank:", partnersIDEAL);
-                Console.WriteLine("\nGekochte producten:");
+                Console.WriteLine("\nUw bestellingen:");
                 foreach (var product in Purchasedproducts)
                 {
                     Console.WriteLine($"{product.Naam} - €{product.Prijs:0.00}");
+                }
+                Console.WriteLine();
+                Console.WriteLine("\nGeselecteerde stoelen:");
+                foreach (var seat in selectedSeats)
+                {
+                    Console.WriteLine($"Rij: {seat.y}, Stoel: {seat.x}");
                 }
                 Console.WriteLine();
                 Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
                 Console.ReadLine();
                 break;
             case 1:
-                Console.WriteLine("\nGekochte producten:");
+                Console.WriteLine("\nUw bestellingen:");
                 foreach (var product in Purchasedproducts)
                 {
                     Console.WriteLine($"{product.Naam} - €{product.Prijs:0.00}");
+                }
+                Console.WriteLine();
+                Console.WriteLine("\nGeselecteerde stoelen:");
+                foreach (var seat in selectedSeats)
+                {
+                    Console.WriteLine($"Rij: {seat.y}, Stoel: {seat.x}");
                 }
                 Console.WriteLine();
                 Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
                 Console.ReadLine();
                 break;
             case 2:
-                Console.WriteLine("\nGekochte producten:");
+                Console.WriteLine("\nUw bestellingen:");
                 foreach (var product in Purchasedproducts)
                 {
                     Console.WriteLine($"{product.Naam} - €{product.Prijs:0.00}");
+                }
+                Console.WriteLine();
+                Console.WriteLine("\nGeselecteerde stoelen:");
+                foreach (var seat in selectedSeats)
+                {
+                    Console.WriteLine($"Rij: {seat.y}, Stoel: {seat.x}");
                 }
                 Console.WriteLine();
                 Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");

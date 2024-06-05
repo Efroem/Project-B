@@ -218,16 +218,17 @@ public class Schedule
             else if (currentIndex == 0 && userAction < movies.Count)
             {
                 pickedSchedule = schedules[currentIndex + userAction];
-                Console.WriteLine($"You picked {userAction + 1}. {pickedSchedule.MovieTitle}");
-                Console.ReadLine();
                 Console.Clear();
 
-
-                TheaterSeatingPrinter seatingPrinter = new TheaterSeatingPrinter();
-                seatingPrinter.PrintTheaterSeating(schedules, pickedSchedule.SerialNumber);
+                if (Authentication.User is not null)
+                {
+                    TheaterSeatingPrinter seatingPrinter = new TheaterSeatingPrinter();
+                    seatingPrinter.PrintTheaterSeating(schedules, pickedSchedule.SerialNumber);
+                    return;
+                }
                 //CinemaHall.NavigateGrid();
-                Console.ReadLine();
-                return;
+                // Console.ReadLine();
+
             }
             else if (currentIndex > 0 && userAction < movies.Count + 1)
             {
