@@ -220,14 +220,15 @@ public class Schedule
                 pickedSchedule = schedules[currentIndex + userAction];
                 Console.Clear();
 
-                if (Authentication.User is not null) {
+                if (Authentication.User is not null)
+                {
                     TheaterSeatingPrinter seatingPrinter = new TheaterSeatingPrinter();
                     seatingPrinter.PrintTheaterSeating(schedules, pickedSchedule.SerialNumber);
                     return;
                 }
                 //CinemaHall.NavigateGrid();
                 // Console.ReadLine();
-                
+
             }
             else if (currentIndex > 0 && userAction < movies.Count + 1)
             {
