@@ -272,8 +272,6 @@ public class TheaterSeatingPrinter
             foreach (var seat in schedule.Seats)
             {
                 string[] parts = seat.ID.Split('-');
-                // int seatRow = int.Parse(parts[0]);
-                // int seatColumn = int.Parse(parts[1]);
                 int seatRow = int.Parse(parts[1]);
                 int seatColumn = int.Parse(parts[0]);
 
