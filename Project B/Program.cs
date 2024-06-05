@@ -3,25 +3,20 @@ using System.IO;
 using System.Text.Json;
 
 class Program
-
 {
-
     static void Main()
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
-
-        string purple = "\u001b[35m";
-        string reset = "\u001b[0m";
 
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Yellow;
         AsciiArtPrinter.MegaBioscoop();
         Console.ResetColor();
-        PrintTextCentered("Druk op een ");
-        Console.ForegroundColor = ConsoleColor.Magenta;
-        PrintTextCentered("knop");
-        Console.ResetColor();
-        PrintTextCentered(" om verder te gaan");
+
+        // Combine the text into one line with appropriate colors
+        Console.WriteLine();
+        ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+
         Console.ReadKey();
         Console.Clear();
 
@@ -31,14 +26,6 @@ class Program
         Console.WriteLine("\x1b[3J");
         Console.Clear();
 
-        // Console.Write("Druk op een ");
-        // Console.ForegroundColor = ConsoleColor.Magenta;
-        // Console.Write("knop");
-        // Console.ResetColor();
-        // Console.Write(" om verder te gaan");
-        // Console.ReadKey();
-        // Console.Clear();
-
         while (true)
         {
             string[] options;
@@ -47,7 +34,6 @@ class Program
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 AsciiArtPrinter.Printasciihm();
                 Console.ResetColor();
-                //AsciiArtPrinter.PrintAsciiMenu();
                 options = new string[] { "1.Aanmelden", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Verlaat Pagina" };
             }
             else
@@ -55,28 +41,20 @@ class Program
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 AsciiArtPrinter.Printasciihm();
                 Console.ResetColor();
-                //AsciiArtPrinter.PrintAsciiMenu2();
                 if (!Authentication.User.IsAdmin)
                 {
-                    options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina", "6. eten kopen" };
+                    options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina", "6.Eten Kopen" };
                 }
                 else
                 {
-                    options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina", "6.Lijst Zalen", "7.Zaal Toevoegen", " 8.Zaal Verwijderen", " 9.Zaal Veranderen", " 10.Film toevoegen" };
+                    options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina", "6.Lijst Zalen", "7.Zaal Toevoegen", "8.Zaal Verwijderen", "9.Zaal Veranderen", "10.Film toevoegen" };
                 }
             }
 
+            Console.WriteLine();
+            ProgramFunctions.PrintColoredTextCentered("Gebruik de ", ConsoleColor.White, "pijltjestoetsen", ConsoleColor.Magenta, " om een optie te selecteren en druk op ", ConsoleColor.White, "Enter\n", ConsoleColor.Magenta);
 
-
-            PrintTextCentered($"\nGebruik de ");
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            PrintTextCentered("pijltjestoetsen");
-            Console.ResetColor();
-            PrintTextCentered("om een optie te selecteren en druk op ");
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            PrintTextCentered("Enter\n");
-            Console.ResetColor();
-            int selectedOption = ShowMenuInline(options);
+            int selectedOption = ProgramFunctions.ShowMenuInline(options);
 
             switch (selectedOption)
             {
@@ -151,12 +129,6 @@ class Program
                     AdminFunctions.RemoveCinemaHall();
                     Console.ReadLine();
                     Console.Clear();
-                    // Console.Clear();
-                    // CinemaZaal printer = new CinemaZaal();
-                    // printer.PrintGridGroteZaal();
-                    // printer.NavigateGrid();
-                    // Console.ReadLine();
-                    // Console.Clear();
                     break;
                 case 8:
                     Console.Clear();
@@ -176,75 +148,4 @@ class Program
             }
         }
     }
-
-    public static void PrintTextCentered(string text)
-    {
-        string[] lines = text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-        int windowWidth = Console.WindowWidth;
-
-        foreach (string line in lines)
-        {
-            int leftPadding = (windowWidth - line.Length) / 2;
-            if (leftPadding < 0)
-                leftPadding = 0;
-
-            Console.SetCursorPosition(leftPadding, Console.CursorTop);
-            Console.WriteLine(line);
-        }
-    }
-
-    public static int ShowMenuInline(string[] options)
-    {
-        int selectedOption = 0;
-        int longestLineLength = 0;
-
-        foreach (string option in options)
-        {
-            longestLineLength = longestLineLength < option.Length ? option.Length : longestLineLength;
-        }
-        longestLineLength += 3;
-        PrintTextCentered("┌" + new string('─', longestLineLength) + "┐");
-
-        do
-        {
-            for (int i = 0; i < options.Length; i++)
-            {
-                int leftPadding = (Console.WindowWidth - options[i].Length) / 2;
-                Console.CursorLeft = leftPadding;
-                if (i == selectedOption)
-                {
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    PrintTextCentered($"│ {options[i]}" + new string(' ', longestLineLength - options[i].Length - 1) + "│");
-                    Console.ResetColor();
-                }
-                else
-                {
-                    PrintTextCentered($"│ {options[i]}" + new string(' ', longestLineLength - options[i].Length - 1) + "│");
-                }
-            }
-
-            PrintTextCentered("┕" + new string('─', longestLineLength) + "┘");
-
-            var key = Console.ReadKey(true);
-            if (key.Key == ConsoleKey.UpArrow && selectedOption > 0)
-            {
-                selectedOption--;
-            }
-            else if (key.Key == ConsoleKey.DownArrow && selectedOption < options.Length - 1)
-            {
-                selectedOption++;
-            }
-            else if (key.Key == ConsoleKey.Enter)
-            {
-                break;
-            }
-
-            // Erase previous options display
-            Console.CursorTop -= options.Length + 1;
-        } while (true);
-
-        return selectedOption;
-    }
-
 }
-

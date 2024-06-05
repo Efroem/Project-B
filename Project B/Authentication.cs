@@ -17,7 +17,7 @@ static class Authentication
         while (true)
         {
             string[] options = new string[] { "1.Inloggen            ", "2.Registreren         ", "3.Terug naar hoofdmenu" };
-            int userAction = Program.ShowMenuInline(options);
+            int userAction = ProgramFunctions.ShowMenuInline(options);
             if (userAction == 0)
                 try
                 {
@@ -146,7 +146,7 @@ static class Authentication
             }
 
             string[] options = new string[] { "1.Uitloggen           ", "2.Profiel aanpassen   ", "3.Terug naar hoofdmenu" };
-            int userAction = Program.ShowMenuInline(options);
+            int userAction = ProgramFunctions.ShowMenuInline(options);
             switch (userAction)
             {
                 case 0:
@@ -425,7 +425,7 @@ static class Authentication
             "6.Terug                 "
         };
 
-        int userAction = Program.ShowMenuInline(options);
+        int userAction = ProgramFunctions.ShowMenuInline(options);
         switch (userAction)
         {
             case 0:
