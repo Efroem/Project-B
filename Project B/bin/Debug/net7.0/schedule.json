@@ -2,7 +2,7 @@
   {
     "cinemaHallSerialNumber": 10,
     "serialNumber": 2,
-    "date": "28-05-2025 10:25:00",
+    "date": "28/05/2025 10:25:00",
     "MovieTitle": "De Super Mario Bros. Movie (OV)",
     "seats": [
       {
@@ -132,12 +132,12 @@
       },
       {
         "id": "4-2",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
         "id": "4-3",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
@@ -450,7 +450,7 @@
   {
     "cinemaHallSerialNumber": 7,
     "serialNumber": 1,
-    "date": "28-09-2025 14:12:00",
+    "date": "28/09/2025 14:12:00",
     "MovieTitle": "Oppenheimer",
     "seats": [
       {
@@ -580,12 +580,12 @@
       },
       {
         "id": "4-2",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
         "id": "4-3",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
@@ -815,12 +815,12 @@
       },
       {
         "id": "10-1",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 6.99
       },
       {
         "id": "10-2",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
