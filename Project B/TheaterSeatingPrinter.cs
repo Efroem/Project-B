@@ -24,7 +24,6 @@ public class TheaterSeatingPrinter
     public static bool navigateGridBool;
     private static int userXPosition = 1;
     private static int userYPosition = 1;
-    public double GeldteBetalen = 0;
     private static List<(int x, int y)> userPositions = new List<(int x, int y)>();
     public void PrintTheaterSeating(List<Schedule> schedules, int scheduleSerialNumber)
 
@@ -254,7 +253,6 @@ public class TheaterSeatingPrinter
                 break;
 
 
-                break;
             case ConsoleKey.Q:
 
                 return false;
@@ -269,10 +267,10 @@ public class TheaterSeatingPrinter
         var schedule = schedules.FirstOrDefault(s => s.SerialNumber == scheduleSerialNumber);
         if (schedule == null)
         {
-            Console.WriteLine("Invalid schedule serial number.");
-            return 0.0;
+            return 0;
         }
 
+        double GeldteBetalen = 0;
         foreach (var position in userPositions)
         {
             foreach (var seat in schedule.Seats)
@@ -283,8 +281,8 @@ public class TheaterSeatingPrinter
 
                 if (position.x == seatRow && position.y == seatColumn && seat.IsAvailable)
                 {
-                    seat.IsAvailable = false;
                     GeldteBetalen += seat.Price;
+                    seat.IsAvailable = false;
                     //Console.WriteLine(GeldteBetalen);
                 }
             }

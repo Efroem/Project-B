@@ -37,27 +37,27 @@
       },
       {
         "id": "1-7",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
         "id": "1-8",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 6.99
       },
       {
         "id": "2-1",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 6.99
       },
       {
         "id": "2-2",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
         "id": "2-3",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
@@ -87,7 +87,7 @@
       },
       {
         "id": "3-1",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 6.99
       },
       {
@@ -137,7 +137,7 @@
       },
       {
         "id": "4-3",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
@@ -177,7 +177,7 @@
       },
       {
         "id": "5-3",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
@@ -217,12 +217,12 @@
       },
       {
         "id": "6-3",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
         "id": "6-4",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
@@ -262,7 +262,7 @@
       },
       {
         "id": "7-4",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
@@ -302,7 +302,7 @@
       },
       {
         "id": "8-4",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {
