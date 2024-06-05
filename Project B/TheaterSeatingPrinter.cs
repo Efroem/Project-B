@@ -24,6 +24,7 @@ public class TheaterSeatingPrinter
     public static bool navigateGridBool;
     private static int userXPosition = 1;
     private static int userYPosition = 1;
+    public double GeldteBetalen = 0;
     private static List<(int x, int y)> userPositions = new List<(int x, int y)>();
     public void PrintTheaterSeating(List<Schedule> schedules, int scheduleSerialNumber)
 
@@ -240,12 +241,14 @@ public class TheaterSeatingPrinter
                 var userPosition = (userXPosition, userYPosition);
                 // maakt tuple
                 userPositions.Add(userPosition);
+
                 // zet tuple in list
 
                 break;
             case ConsoleKey.K:
-
-                printer.ZettenVanTuppleInListNaarJson(schedules, scheduleSerialNumber);                
+                Console.Clear();
+                Payment.BestelMenu();
+                printer.ZettenVanTuppleInListNaarJson(schedules, scheduleSerialNumber);               
                 
                 break;
             case ConsoleKey.Q:
@@ -278,11 +281,14 @@ public class TheaterSeatingPrinter
                 if (position.x == seatRow && position.y == seatColumn)
                 {
                     seat.IsAvailable = false;
+                    GeldteBetalen = seat.Price;
+                    //Console.WriteLine(GeldteBetalen);
                 }
             }
         }
         JsonSerializerOptions options = new() { WriteIndented = true };
         string jsonString = JsonSerializer.Serialize(schedules, options);
         File.WriteAllText("schedule.json", jsonString);
+
     }
 }
