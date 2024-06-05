@@ -253,14 +253,6 @@ public class Schedule
             {
                 return;
             }
-            else {
-                Console.WriteLine("da");
-                Console.WriteLine(currentIndex);
-                Console.WriteLine(userAction);
-                Console.WriteLine(movies.Count);
-                Console.WriteLine(schedules.Count);
-                Console.ReadLine();
-            }
 
             Console.Clear();
         }
