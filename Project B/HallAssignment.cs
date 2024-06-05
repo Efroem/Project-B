@@ -27,35 +27,35 @@ public class HallAssignment
             {
                 if (entry1.CinemaHallSerialNumber == entry2.SerialNumber)
                 {
-                    //CallFunction(entry1, entry2);
+                    CallFunction(entry1, entry2);
                 }
             }
         }
     }
 
-    // public static void CallFunction(File1Entry entry1, File2Entry entry2)
-    // {
-    //     CinemaHall cinemaZaal = new CinemaHall();
-    //     TheaterSeatingPrinter seatingPrinter = new TheaterSeatingPrinter();
+    public static void CallFunction(File1Entry entry1, File2Entry entry2)
+    {
+        CinemaHall cinemaZaal = new CinemaHall();
+        TheaterSeatingPrinter seatingPrinter = new TheaterSeatingPrinter();
         
 
-    //     if (entry2.size == 3)
-    //     {
-    //         //CinemaHall.PrintGridGroteZaal();
-    //         cinemaZaal.NavigateGrid();
-    //     }
-    //     else if (entry2.size == 2)
-    //     {
-    //         CinemaHall.PrintGridMediumZaal();
-    //         cinemaZaal.NavigateGrid();
-    //     }
-    //     else
-    //     {
-    //         CinemaHall.PrintGridKleineZaal();
-    //         cinemaZaal.NavigateGrid();
-    //     }
+        if (entry2.size == 3)
+        {
+            //CinemaHall.PrintGridGroteZaal();
+            cinemaZaal.NavigateGrid();
+        }
+        else if (entry2.size == 2)
+        {
+            CinemaHall.PrintGridMediumZaal();
+            cinemaZaal.NavigateGrid();
+        }
+        else
+        {
+            CinemaHall.PrintGridKleineZaal();
+            cinemaZaal.NavigateGrid();
+        }
 
-    // }
+    }
 
     public static void Callfunction2()
     {
