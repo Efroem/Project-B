@@ -136,16 +136,19 @@ public class AdminFunctions
         }
 
         int size;
-        do
+        while (true)
         {
             Console.WriteLine($"Kies de grootte van de nieuwe bioscoopzaal\n1 - klein: (55 mensen)\n2 - medium: (86 mensen)\n3 - groot(100 mensen):");
             if (!int.TryParse(Console.ReadLine(), out size) || (size < 1 || size > 3))
             {
                 Console.WriteLine("Verkeerde input. Kies tussen 1, 2, of 3.");
                 if (!TryAgain()) return;
-                Console.WriteLine("Verkeerde input. Kies tussen 1, 2, of 3.");
             }
-        } while (size < 1 || size > 3);
+            else
+            {
+                break;
+            }
+        }
 
         int maxSerialNumber = cinemaHalls.Count > 0 ? cinemaHalls.Max(hall => hall.SerialNumber) : 0;
         int serialNumber = maxSerialNumber + 1;
@@ -164,6 +167,7 @@ public class AdminFunctions
             Console.WriteLine($"Er is een error ontstaan met het maken van de bioscoopzaal: {ex.Message}");
         }
     }
+
 
     public static void RemoveCinemaHall()
     {
@@ -193,10 +197,8 @@ public class AdminFunctions
             {
                 Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld: '3'):");
                 if (!TryAgain()) return;
-                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld: '3'):");
             }
-
-            if (cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
+            else if (cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
             {
                 break;
             }
@@ -204,7 +206,6 @@ public class AdminFunctions
             {
                 Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld: '3'):");
                 if (!TryAgain()) return;
-                Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld: '3'):");
             }
         }
 
@@ -213,22 +214,25 @@ public class AdminFunctions
         if (hallToRemove == null)
         {
             Console.WriteLine($"Bioscoopzaal met serienummer {serialNumber} niet gevonden.");
-            return;
+            if (!TryAgain()) return;
         }
-
-        cinemaHalls.Remove(hallToRemove);
-
-        try
+        else
         {
-            string jsonString = JsonSerializer.Serialize(cinemaHalls, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText("cinemaHall.json", jsonString);
-            Console.WriteLine($"Bioscoopzaal met serienummer {serialNumber} succesvol verwijderd.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Er is een error ontstaan met het verwijderen van de bioscoopzaal: {ex.Message}");
+            cinemaHalls.Remove(hallToRemove);
+
+            try
+            {
+                string jsonString = JsonSerializer.Serialize(cinemaHalls, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText("cinemaHall.json", jsonString);
+                Console.WriteLine($"Bioscoopzaal met serienummer {serialNumber} succesvol verwijderd.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Er is een error ontstaan met het verwijderen van de bioscoopzaal: {ex.Message}");
+            }
         }
     }
+
 
     public static void ChangeCinemaHall()
     {
@@ -258,10 +262,8 @@ public class AdminFunctions
             {
                 Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld '3'):");
                 if (!TryAgain()) return;
-                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld '3'):");
             }
-
-            if (cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
+            else if (cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
             {
                 break;
             }
@@ -293,7 +295,6 @@ public class AdminFunctions
             {
                 Console.WriteLine($"Ongeldige invoer. Voer 1 ('naam') of 2 ('grootte') in voor uw keuze.");
                 if (!TryAgain()) return;
-                Console.WriteLine($"Ongeldige invoer. Voer 1 ('naam') of 2 ('grootte') in voor uw keuze.");
             }
         }
 
@@ -304,12 +305,10 @@ public class AdminFunctions
             case 1:
                 Console.Write("Voer de nieuwe naam in: ");
                 string? newName = Console.ReadLine();
-                if (newName == null)
+                if (string.IsNullOrWhiteSpace(newName))
                 {
-                    do
-                    {
-                        Console.WriteLine("verkeerde input");
-                    } while (newName == null);
+                    Console.WriteLine("Verkeerde input. Voer een geldige naam in.");
+                    if (!TryAgain()) return;
                 }
                 else
                 {
@@ -319,14 +318,19 @@ public class AdminFunctions
 
             case 2:
                 int newSize;
-                do
+                while (true)
                 {
                     Console.WriteLine($"Kies de nieuwe grootte van de bioscoopzaal\n1 - klein: (55 mensen)\n2 - medium: (86 mensen)\n3 - groot(100 mensen):");
                     if (!int.TryParse(Console.ReadLine(), out newSize) || (newSize < 1 || newSize > 3))
                     {
-                        Console.WriteLine("Verkeerde input. Kies tussen 1, 2 of 3");
+                        Console.WriteLine("Verkeerde input. Kies tussen 1, 2 of 3.");
+                        if (!TryAgain()) return;
                     }
-                } while (newSize < 1 || newSize > 3);
+                    else
+                    {
+                        break;
+                    }
+                }
                 hallToChange.Size = newSize;
                 break;
         }
@@ -342,6 +346,7 @@ public class AdminFunctions
             Console.WriteLine($"Er is een error ontstaan met het wijzigen van de bioscoopzaal: {ex.Message}");
         }
     }
+
 
     public static void AddNewMovie()
     {

@@ -219,11 +219,11 @@ public class AsciiArtPrinter
         [__________________________]
         ";
         PrintCentered(prijzen);
-        Program.PrintTextCentered("Druk op een ");
+        ProgramFunctions.PrintTextCentered("Druk op een ");
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Program.PrintTextCentered("knop");
+        ProgramFunctions.PrintTextCentered("knop");
         Console.ResetColor();
-        Program.PrintTextCentered(" om verder te gaan");
+        ProgramFunctions.PrintTextCentered(" om verder te gaan");
         Console.ReadKey();
         Console.Clear();
         Payment.BestelMenu();
@@ -244,11 +244,11 @@ public class AsciiArtPrinter
         [__________________________]
         ";
         PrintCentered(prijzen);
-        Program.PrintTextCentered("Druk op een ");
+        ProgramFunctions.PrintTextCentered("Druk op een ");
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Program.PrintTextCentered("knop");
+        ProgramFunctions.PrintTextCentered("knop");
         Console.ResetColor();
-        Program.PrintTextCentered(" om verder te gaan");
+        ProgramFunctions.PrintTextCentered(" om verder te gaan");
         Console.ReadKey();
         Console.Clear();
         Payment.BestelMenu();
@@ -264,10 +264,10 @@ public class AsciiArtPrinter
  |_|   |_|  |_| |___/_|_| |___/\__|
              _/ |      _/ |        
             |__/      |__/         
-";      
-    Console.ForegroundColor = ConsoleColor.Yellow;
-    PrintCentered(prijzenlijst);
-    Console.ResetColor();
+";
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        PrintCentered(prijzenlijst);
+        Console.ResetColor();
 
     }
     public static void PrintAsciiTheekoffie()
@@ -291,11 +291,11 @@ public class AsciiArtPrinter
         [__________________________]
         ";
         PrintCentered(prijzen);
-        Program.PrintTextCentered("Druk op een ");
+        ProgramFunctions.PrintTextCentered("Druk op een ");
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Program.PrintTextCentered("knop");
+        ProgramFunctions.PrintTextCentered("knop");
         Console.ResetColor();
-        Program.PrintTextCentered(" om verder te gaan");
+        ProgramFunctions.PrintTextCentered(" om verder te gaan");
         Console.ReadKey();
         Console.Clear();
         Payment.BestelMenu();

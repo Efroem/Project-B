@@ -223,11 +223,11 @@ public static class Payment
         totaalKosten += gekozenPrijs;
 
         PrintTextCentered("\nUw bestelling is toegevoegd.");
-        Program.PrintTextCentered("Druk op een ");
+        ProgramFunctions.PrintTextCentered("Druk op een ");
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Program.PrintTextCentered("knop");
+        ProgramFunctions.PrintTextCentered("knop");
         Console.ResetColor();
-        Program.PrintTextCentered(" om verder te gaan");
+        ProgramFunctions.PrintTextCentered(" om verder te gaan");
         Console.ReadKey();
         Console.Clear();
         WiltMeerBestellen();
@@ -249,11 +249,11 @@ public static class Payment
         totaalKosten += gekozenPrijs;
 
         PrintTextCentered("\nUw bestelling is toegevoegd.");
-        Program.PrintTextCentered("Druk op een ");
+        ProgramFunctions.PrintTextCentered("Druk op een ");
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Program.PrintTextCentered("knop");
+        ProgramFunctions.PrintTextCentered("knop");
         Console.ResetColor();
-        Program.PrintTextCentered(" om verder te gaan");
+        ProgramFunctions.PrintTextCentered(" om verder te gaan");
         Console.ReadKey();
         Console.Clear();
         WiltMeerBestellen();
@@ -275,11 +275,11 @@ public static class Payment
         totaalKosten += gekozenPrijs;
 
         PrintTextCentered("\nUw bestelling is toegevoegd.");
-        Program.PrintTextCentered("Druk op een ");
+        ProgramFunctions.PrintTextCentered("Druk op een ");
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Program.PrintTextCentered("knop");
+        ProgramFunctions.PrintTextCentered("knop");
         Console.ResetColor();
-        Program.PrintTextCentered(" om verder te gaan");
+        ProgramFunctions.PrintTextCentered(" om verder te gaan");
         Console.ReadKey();
         Console.Clear();
         WiltMeerBestellen();
@@ -296,11 +296,11 @@ public static class Payment
         totaalKosten += gekozenPrijs;
 
         PrintTextCentered("\nUw bestelling is toegevoegd.");
-        Program.PrintTextCentered("Druk op een ");
+        ProgramFunctions.PrintTextCentered("Druk op een ");
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Program.PrintTextCentered("knop");
+        ProgramFunctions.PrintTextCentered("knop");
         Console.ResetColor();
-        Program.PrintTextCentered(" om verder te gaan");
+        ProgramFunctions.PrintTextCentered(" om verder te gaan");
         Console.ReadKey();
         Console.Clear();
         WiltMeerBestellen();
@@ -319,11 +319,11 @@ public static class Payment
         totaalKosten += gekozenPrijs;
 
         PrintTextCentered("\nUw bestelling is toegevoegd.");
-        Program.PrintTextCentered("Druk op een ");
+        ProgramFunctions.PrintTextCentered("Druk op een ");
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Program.PrintTextCentered("knop");
+        ProgramFunctions.PrintTextCentered("knop");
         Console.ResetColor();
-        Program.PrintTextCentered(" om verder te gaan");
+        ProgramFunctions.PrintTextCentered(" om verder te gaan");
         Console.ReadKey();
         Console.Clear();
         WiltMeerBestellen();
@@ -342,11 +342,11 @@ public static class Payment
         totaalKosten += gekozenPrijs;
 
         PrintTextCentered("\nUw bestelling is toegevoegd.");
-        Program.PrintTextCentered("Druk op een ");
+        ProgramFunctions.PrintTextCentered("Druk op een ");
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Program.PrintTextCentered("knop");
+        ProgramFunctions.PrintTextCentered("knop");
         Console.ResetColor();
-        Program.PrintTextCentered(" om verder te gaan");
+        ProgramFunctions.PrintTextCentered(" om verder te gaan");
         Console.ReadKey();
         Console.Clear();
         WiltMeerBestellen();

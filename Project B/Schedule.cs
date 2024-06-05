@@ -269,7 +269,7 @@ public class Schedule
                 longestLineLength = longestLineLength < line.Length ? line.Length : longestLineLength;
             }
         }
-        Program.PrintTextCentered("     ┌" + new string('─', longestLineLength + 3) + "┐");
+        ProgramFunctions.PrintTextCentered("     ┌" + new string('─', longestLineLength + 3) + "┐");
 
         // // Deel de prompt op rond de woorden die rood moeten worden
         // string[] promptParts = prompt.Split(new string[] { " pijltjestoetsen ", " Enter" }, StringSplitOptions.None);
@@ -303,7 +303,7 @@ public class Schedule
                 }
             }
 
-            Program.PrintTextCentered("     └" + new string('─', longestLineLength + 3) + "┘");
+            ProgramFunctions.PrintTextCentered("     └" + new string('─', longestLineLength + 3) + "┘");
 
             var key = Console.ReadKey(true);
             if (key.Key == ConsoleKey.UpArrow && selectedOption > 0)

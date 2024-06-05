@@ -21,13 +21,13 @@ public class SelectingMovies
             Console.ForegroundColor = ConsoleColor.Yellow;
             AsciiArtPrinter.PrintAsciifilms();
             Console.ResetColor();
-            Program.PrintTextCentered($"\nGebruik de ");
+            ProgramFunctions.PrintTextCentered($"\nGebruik de ");
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Program.PrintTextCentered("pijltjestoetsen");
+            ProgramFunctions.PrintTextCentered("pijltjestoetsen");
             Console.ResetColor();
-            Program.PrintTextCentered("om een optie te selecteren en druk op ");
+            ProgramFunctions.PrintTextCentered("om een optie te selecteren en druk op ");
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Program.PrintTextCentered("Enter\n");
+            ProgramFunctions.PrintTextCentered("Enter\n");
             Console.ResetColor();
             Console.WriteLine();
 
@@ -46,8 +46,8 @@ public class SelectingMovies
             int windowWidth = Console.WindowWidth;
             int leftMargin = (windowWidth - boxWidth) / 2;
 
-            string topBorder = "┌"+new string('─', boxWidth)+"┐";
-            string bottomBorder = "└"+new string('─', boxWidth)+"┘";
+            string topBorder = "┌" + new string('─', boxWidth) + "┐";
+            string bottomBorder = "└" + new string('─', boxWidth) + "┘";
 
             // Print the box
             Console.WriteLine(new string(' ', leftMargin) + topBorder);
@@ -136,13 +136,13 @@ public class SelectingMovies
             string reset = "\u001b[0m";
 
             string[] options = { "Bekijk schema van deze film", "Terug naar film beschrijvingen" };
-            Program.PrintTextCentered($"\nGebruik de ");
+            ProgramFunctions.PrintTextCentered($"\nGebruik de ");
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Program.PrintTextCentered("pijltjestoetsen");
+            ProgramFunctions.PrintTextCentered("pijltjestoetsen");
             Console.ResetColor();
-            Program.PrintTextCentered("om een optie te selecteren en druk op ");
+            ProgramFunctions.PrintTextCentered("om een optie te selecteren en druk op ");
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Program.PrintTextCentered("Enter\n");
+            ProgramFunctions.PrintTextCentered("Enter\n");
             Console.ResetColor();
             int selectedOption = ShowMenuInline(options);
 
