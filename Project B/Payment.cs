@@ -1,7 +1,9 @@
 public static class Payment
 {
     private static List<Product> Purchasedproducts = new List<Product>();
-    private static List<(int x, int y)> selectedSeats = new List<(int x, int y)>();
+
+    private static HashSet<(int y, int x)> selectedSeats = new HashSet<(int row, int column)>();
+
 
     private static double totaalKosten = 0;
 
@@ -199,7 +201,10 @@ public static class Payment
     }
     public static void AddSelectedSeats(List<(int x, int y)> seats)
     {
-        selectedSeats.AddRange(seats);
+        foreach (var seat in seats)
+        {
+            selectedSeats.Add(seat);
+        }
     }
 
     public static void Popcorn(double[] prijzen)
@@ -378,6 +383,12 @@ public static class Payment
                     Console.WriteLine($"{product.Naam} - €{product.Prijs:0.00}");
                 }
                 Console.WriteLine();
+                Console.WriteLine("\nGeselecteerde stoelen:");
+                foreach (var seat in selectedSeats)
+                {
+                    Console.WriteLine($"Rij: {seat.y}, Stoel: {seat.x}");
+                }
+                Console.WriteLine();
                 Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
                 Console.ReadLine();
                 break;
@@ -386,6 +397,12 @@ public static class Payment
                 foreach (var product in Purchasedproducts)
                 {
                     Console.WriteLine($"{product.Naam} - €{product.Prijs:0.00}");
+                }
+                Console.WriteLine();
+                Console.WriteLine("\nGeselecteerde stoelen:");
+                foreach (var seat in selectedSeats)
+                {
+                    Console.WriteLine($"Rij: {seat.y}, Stoel: {seat.x}");
                 }
                 Console.WriteLine();
                 Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
