@@ -116,7 +116,7 @@ public class AsciiArtPrinter
         Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(asciiartfilms);
         Console.ResetColor();
-        
+
     }
     public static void Printasciihm()
     {
@@ -129,7 +129,7 @@ public class AsciiArtPrinter
  |_|  |_|\____/ \____/|_|    |_____/|_|  |_|______|_| \_|\____/ ";
         Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(asciiArthm);
-        Console.ResetColor(); 
+        Console.ResetColor();
     }
 
     public static void Totziens()
@@ -143,7 +143,7 @@ public class AsciiArtPrinter
     |_|\___/ \__| /___|_|\___|_| |_|___/";
         Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(totziens);
-        Console.ResetColor(); 
+        Console.ResetColor();
     }
     public static void PrintAsciibetaling()
     {
@@ -156,7 +156,7 @@ public class AsciiArtPrinter
  |____/|______|  |_/_/    \_\______|_____|_| \_|\_____|";
         Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(betaling);
-        Console.ResetColor(); 
+        Console.ResetColor();
     }
     public static void PrintAsciilogin()
     {
@@ -169,7 +169,7 @@ public class AsciiArtPrinter
  |______\____/ \_____|_____|_| \_|";
         Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(login);
-        Console.ResetColor(); 
+        Console.ResetColor();
     }
     public static void PrintAsciiprofielaanpassen()
     {
@@ -199,7 +199,7 @@ public class AsciiArtPrinter
                                                    |___/ ";
         Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(reservering);
-        Console.ResetColor();                                                   
+        Console.ResetColor();
     }
     public static void PrintAsciiInlog()
     {
@@ -320,7 +320,7 @@ public class AsciiArtPrinter
  |_|  \_\______\_____|_____|_____/   |_|  |_|  \_\______|_|  \_\______|_| \_|";
         Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(register);
-        Console.ResetColor(); 
+        Console.ResetColor();
     }
     public static void PrintAsciibeschrijving()
     {
@@ -333,7 +333,7 @@ public class AsciiArtPrinter
  |_|    |_____|______|_|  |_|    |____/|______|_____/ \_____|_|  |_|_|  \_\_____\_____|   \/   |_____|_| \_|\_____|";
         Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(asciiArtBeschrijving);
-        Console.ResetColor(); 
+        Console.ResetColor();
     }
     public static void AsciiArtPrinterRooster()
     {
@@ -372,6 +372,6 @@ public class AsciiArtPrinter
         Console.ForegroundColor = ConsoleColor.Yellow;
         string centeredAsciiArt = "                    " + Asciiartstart.Replace("\n", "\n                  ");
         Console.WriteLine(centeredAsciiArt);
-        Console.ResetColor(); 
+        Console.ResetColor();
     }
 }

@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 public class Seat
 {
     [JsonPropertyName("id")]
-    public  string ID { get; set; }
+    public string ID { get; set; }
 
     [JsonPropertyName("isAvailable")]
     public bool IsAvailable { get; set; }
