@@ -89,8 +89,8 @@ class Program
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     AsciiArtPrinter.Totziens();
                     Console.ResetColor();
+                    Thread.Sleep(1250);
                     Environment.Exit(0);
-                    Console.ReadLine();
                     break;
                 case 5:
                     if (!Authentication.User.IsAdmin)
