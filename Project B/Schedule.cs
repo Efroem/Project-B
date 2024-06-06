@@ -286,7 +286,7 @@ public class Schedule
                 longestLineLength = longestLineLength < line.Length ? line.Length : longestLineLength;
             }
         }
-        ProgramFunctions.PrintTextCentered("     ┌" + new string('─', longestLineLength + 3) + "┐");
+        ProgramFunctions.PrintTextCentered("┌" + new string('─', longestLineLength + 3) + "┐");
 
         do
         {
@@ -305,7 +305,7 @@ public class Schedule
                 }
             }
 
-            ProgramFunctions.PrintTextCentered("     └" + new string('─', longestLineLength + 3) + "┘");
+            ProgramFunctions.PrintTextCentered("└" + new string('─', longestLineLength + 3) + "┘");
 
             var key = Console.ReadKey(true);
             if (key.Key == ConsoleKey.UpArrow && selectedOption > 0)
@@ -343,7 +343,7 @@ public class Schedule
         for (int i = 0; i < textArray.Length; i++)
         {
             windowWidth = Console.WindowWidth;
-            leftPadding = (windowWidth - longestLineLength + longestLineLength - longestLongestLineLength) / 2;
+            leftPadding = (windowWidth - longestLineLength + longestLineLength - longestLongestLineLength) / 2 - 2;
             Console.CursorLeft = leftPadding;
 
             Console.SetCursorPosition(leftPadding, Console.CursorTop);
