@@ -137,7 +137,7 @@ public class TheaterSeatingPrinter
 
                 var seat = seats.FirstOrDefault(s => s.ID == seatId);
 
-                if (i == userYPosition && j == userXPosition)                   //dit is de muis
+                if (i == userYPosition && j == userXPosition)
 
                 {
 
@@ -146,6 +146,22 @@ public class TheaterSeatingPrinter
                     Console.ForegroundColor = ConsoleColor.Yellow;
 
                     Console.Write("@");
+
+                    Console.ResetColor();
+
+                    Console.Write("] ");
+
+                }
+
+                else if (userPositions.Contains((j, i)))
+
+                {
+
+                    Console.Write("[");
+
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+
+                    Console.Write("O");
 
                     Console.ResetColor();
 
@@ -202,7 +218,7 @@ public class TheaterSeatingPrinter
 
     }
 
-    private static bool HandleUserInput(int rows, int columns, List<Schedule> schedules, int scheduleSerialNumber, TheaterSeatingPrinter printer) //Dit word gebruikt voor navigatie, positie word nog niet opgeslagen
+    private static bool HandleUserInput(int rows, int columns, List<Schedule> schedules, int scheduleSerialNumber, TheaterSeatingPrinter printer)
 
     {
 
@@ -239,9 +255,20 @@ public class TheaterSeatingPrinter
 
                 var userPosition = (userXPosition, userYPosition);
                 // maakt tuple
-                userPositions.Add(userPosition);
-
+                if (!userPositions.Contains(userPosition))
+                {
+                    userPositions.Add(userPosition);
+                }
                 // zet tuple in list
+
+                break;
+            case ConsoleKey.Backspace:
+
+                if (userPositions.Count > 0)
+                {
+                    // verwijdert het laatst toegevoegde
+                    userPositions.RemoveAt(userPositions.Count - 1);
+                }
 
                 break;
             case ConsoleKey.K:
@@ -283,13 +310,13 @@ public class TheaterSeatingPrinter
                 {
                     GeldteBetalen += seat.Price;
                     seat.IsAvailable = false;
-                    //Console.WriteLine(GeldteBetalen);
                 }
             }
         }
         JsonSerializerOptions options = new() { WriteIndented = true };
         string jsonString = JsonSerializer.Serialize(schedules, options);
         File.WriteAllText("schedule.json", jsonString);
+        userPositions.Clear();
         return GeldteBetalen;
 
     }

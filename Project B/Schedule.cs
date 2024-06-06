@@ -130,10 +130,8 @@ public class Schedule
 
     public static List<Schedule> ReadScheduleJson()
     {
-        // Read the JSON file as a string
         string jsonString = File.ReadAllText("schedule.json");
 
-        // Deserialize the JSON string into an object
         return JsonSerializer.Deserialize<List<Schedule>>(jsonString) ?? new();
     }
 
@@ -226,9 +224,6 @@ public class Schedule
                     seatingPrinter.PrintTheaterSeating(schedules, pickedSchedule.SerialNumber);
                     return;
                 }
-                //CinemaHall.NavigateGrid();
-                // Console.ReadLine();
-
             }
             else if (currentIndex > 0 && userAction < movies.Count + 1)
             {
@@ -276,21 +271,6 @@ public class Schedule
         }
         ProgramFunctions.PrintTextCentered("     ┌" + new string('─', longestLineLength + 3) + "┐");
 
-        // // Deel de prompt op rond de woorden die rood moeten worden
-        // string[] promptParts = prompt.Split(new string[] { " pijltjestoetsen ", " Enter" }, StringSplitOptions.None);
-
-        // // Schrijf het eerste deel van de prompt
-        // AsciiArtPrinter.PrintCentered(promptParts[0]);
-        // Console.ForegroundColor = ConsoleColor.Magenta;
-        // AsciiArtPrinter.PrintCentered(" pijltjestoetsen ");
-        // Console.ResetColor();
-
-        // AsciiArtPrinter.PrintCentered(promptParts[1]);
-        // Console.ForegroundColor = ConsoleColor.Magenta;
-        // AsciiArtPrinter.PrintCentered(" Enter");
-        // Console.ResetColor();
-
-        // AsciiArtPrinter.PrintCentered(promptParts[2]);
         do
         {
             for (int i = 0; i < options.Length; i++)

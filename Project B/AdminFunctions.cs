@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Text;
 
 public class AdminFunctions
 {
@@ -62,7 +63,6 @@ public class AdminFunctions
 
     private static void WriteSchedulesToJson(List<Schedule> schedules)
     {
-        // Sort the schedules by date before writing to JSON
         schedules.Sort((s1, s2) => s1.Date.CompareTo(s2.Date));
 
         JsonSerializerOptions options = new JsonSerializerOptions
@@ -75,6 +75,21 @@ public class AdminFunctions
         File.WriteAllText("schedule.json", jsonString);
     }
 
+    public static void FormatCinemaHalls(List<AdminFunctions> cinemaHalls)
+    {
+        int maxNameLength = cinemaHalls.Max(hall => hall.Name.Length);
+        int maxSerialNumberLength = cinemaHalls.Max(hall => hall.SerialNumber.ToString().Length);
+        int maxSizeLength = cinemaHalls.Max(hall => hall.Size.ToString().Length);
+
+        for (int i = 0; i < cinemaHalls.Count; i++)
+        {
+            var hall = cinemaHalls[i];
+            Console.WriteLine($"Serial Number: {hall.SerialNumber.ToString().PadRight(maxSerialNumberLength)}  Name: {hall.Name.PadRight(maxNameLength)}  Grootte: {hall.Size.ToString().PadRight(maxSizeLength)}");
+            Console.WriteLine(new string('-', 40));
+        }
+    }
+
+
 
     public static void PrintCinemaHalls()
     {
@@ -86,9 +101,24 @@ public class AdminFunctions
             return;
         }
 
-        foreach (var hall in cinemaHalls)
+        int maxNameLength = cinemaHalls.Max(hall => hall.Name.Length);
+        int maxSerialNumberLength = cinemaHalls.Max(hall => hall.SerialNumber.ToString().Length);
+        int maxSizeLength = cinemaHalls.Max(hall => hall.Size.ToString().Length);
+
+        Console.WriteLine("Beschikbare bioscoopzalen:\n");
+
+        for (int i = 0; i < cinemaHalls.Count; i++)
         {
-            Console.WriteLine($"Naam: {hall.Name}\nGrootte: {hall.Size}\nSerial Number: {hall.SerialNumber}\n");
+            var hall = cinemaHalls[i];
+            Console.WriteLine($"Serial Number: {hall.SerialNumber.ToString().PadRight(maxSerialNumberLength)}  Name: {hall.Name.PadRight(maxNameLength)}  Grootte: {hall.Size.ToString().PadRight(maxSizeLength)}");
+            Console.WriteLine(new string('-', 40));
+
+            if (i == cinemaHalls.Count - 1)
+            {
+                Console.WriteLine();
+                ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+                Console.ReadKey();
+            }
         }
     }
 
@@ -100,16 +130,15 @@ public class AdminFunctions
             string? choice = Console.ReadLine();
             if (choice == "1")
             {
-                Console.Clear();
                 return true;
             }
             else if (choice == "2")
             {
-                Console.Clear();
                 return false;
             }
             else
             {
+                Console.Clear();
                 Console.WriteLine("Verkeerde input. Kies 1 of 2.");
             }
         }
@@ -119,6 +148,7 @@ public class AdminFunctions
     public static void AddNewCinemaHall()
     {
         List<AdminFunctions>? cinemaHalls = ReadFromCinemaHall();
+        string? name = null;
 
         if (cinemaHalls == null)
         {
@@ -126,23 +156,34 @@ public class AdminFunctions
             return;
         }
 
-        Console.Write("Naam van de bioscoopzaal: ");
-        string? name = Console.ReadLine();
-
-        if (string.IsNullOrWhiteSpace(name))
+        while (true)
         {
-            Console.WriteLine("Verkeerde naam. Voer een juiste naam in.");
-            if (!TryAgain()) return;
+            Console.Write($"\nNaam van de bioscoopzaal: ");
+            string? input = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                Console.WriteLine("Verkeerde naam. Voer een juiste naam in.");
+                if (!TryAgain()) return;
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
+            }
+            else
+            {
+                name = input;
+                break;
+            }
         }
 
         int size;
         while (true)
         {
-            Console.WriteLine($"Kies de grootte van de nieuwe bioscoopzaal\n1 - klein: (55 mensen)\n2 - medium: (86 mensen)\n3 - groot(100 mensen):");
+            Console.Write($"\nKies de grootte van de nieuwe bioscoopzaal\n1 - klein: (55 mensen)\n2 - medium: (86 mensen)\n3 - groot(100 mensen):");
             if (!int.TryParse(Console.ReadLine(), out size) || (size < 1 || size > 3))
             {
-                Console.WriteLine("Verkeerde input. Kies tussen 1, 2, of 3.");
                 if (!TryAgain()) return;
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
             }
             else
             {
@@ -160,7 +201,11 @@ public class AdminFunctions
         {
             string jsonString = JsonSerializer.Serialize(cinemaHalls, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText("cinemaHall.json", jsonString);
-            Console.WriteLine("Nieuwe bioscoopzaal succesvol toegevoegd.");
+            Console.Clear();
+            Console.WriteLine();
+            ProgramFunctions.PrintTextCentered($"Nieuwe bioscoopzaal {name} succesvol toegevoegd");
+            ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+            Console.ReadKey();
         }
         catch (Exception ex)
         {
@@ -179,14 +224,7 @@ public class AdminFunctions
             return;
         }
 
-        Console.WriteLine("De beschikbare bioscoopzalen:");
-
-        int maxNameLength = cinemaHalls.Max(hall => hall.Name.Length);
-
-        foreach (var hall in cinemaHalls)
-        {
-            Console.WriteLine($"- Serial number: {hall.SerialNumber.ToString().PadRight(2)}, Name: {hall.Name.PadRight(maxNameLength)}");
-        }
+        FormatCinemaHalls(cinemaHalls);
 
         Console.WriteLine("\nWelke zaal wilt u verwijderen? Voer het serienummer in:");
 
@@ -197,6 +235,10 @@ public class AdminFunctions
             {
                 Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld: '3'):");
                 if (!TryAgain()) return;
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
+                FormatCinemaHalls(cinemaHalls);
+                Console.WriteLine("\nWelke zaal wilt u verwijderen? Voer het serienummer in:");
             }
             else if (cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
             {
@@ -206,6 +248,10 @@ public class AdminFunctions
             {
                 Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld: '3'):");
                 if (!TryAgain()) return;
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
+                FormatCinemaHalls(cinemaHalls);
+                Console.WriteLine("\nWelke zaal wilt u verwijderen? Voer het serienummer in:");
             }
         }
 
@@ -215,6 +261,10 @@ public class AdminFunctions
         {
             Console.WriteLine($"Bioscoopzaal met serienummer {serialNumber} niet gevonden.");
             if (!TryAgain()) return;
+            Console.Clear();
+            Console.WriteLine("\x1b[3J");
+            FormatCinemaHalls(cinemaHalls);
+            Console.WriteLine("\nWelke zaal wilt u verwijderen? Voer het serienummer in:");
         }
         else
         {
@@ -224,7 +274,11 @@ public class AdminFunctions
             {
                 string jsonString = JsonSerializer.Serialize(cinemaHalls, new JsonSerializerOptions { WriteIndented = true });
                 File.WriteAllText("cinemaHall.json", jsonString);
-                Console.WriteLine($"Bioscoopzaal met serienummer {serialNumber} succesvol verwijderd.");
+                Console.Clear();
+                Console.WriteLine();
+                ProgramFunctions.PrintTextCentered($"Bioscoopzaal met serienummer {serialNumber} succesvol verwijderd.");
+                ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+                Console.ReadKey();
             }
             catch (Exception ex)
             {
@@ -232,6 +286,7 @@ public class AdminFunctions
             }
         }
     }
+
 
 
     public static void ChangeCinemaHall()
@@ -244,14 +299,7 @@ public class AdminFunctions
             return;
         }
 
-        Console.WriteLine("De beschikbare bioscoopzalen:");
-
-        int maxNameLength = cinemaHalls.Max(hall => hall.Name.Length);
-
-        foreach (var hall in cinemaHalls)
-        {
-            Console.WriteLine($"- Serial number: {hall.SerialNumber.ToString().PadRight(2)}, Name: {hall.Name.PadRight(maxNameLength)}");
-        }
+        FormatCinemaHalls(cinemaHalls);
 
         Console.WriteLine("\nWelke zaal wilt u wijzigen? Voer het serienummer in:");
 
@@ -262,6 +310,10 @@ public class AdminFunctions
             {
                 Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld '3'):");
                 if (!TryAgain()) return;
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
+                FormatCinemaHalls(cinemaHalls);
+                Console.WriteLine("\nWelke zaal wilt u wijzigen? Voer het serienummer in:");
             }
             else if (cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
             {
@@ -271,10 +323,14 @@ public class AdminFunctions
             {
                 Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld '3'):");
                 if (!TryAgain()) return;
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
+                FormatCinemaHalls(cinemaHalls);
+                Console.WriteLine("\nWelke zaal wilt u wijzigen? Voer het serienummer in:");
             }
         }
 
-        Console.WriteLine("Wat wilt u wijzigen?\n1. Naam\n2. Grootte");
+        Console.WriteLine("\nWat wilt u wijzigen?\n1. Naam\n2. Grootte");
 
         string? choiceInput;
         int choice;
@@ -295,6 +351,10 @@ public class AdminFunctions
             {
                 Console.WriteLine($"Ongeldige invoer. Voer 1 ('naam') of 2 ('grootte') in voor uw keuze.");
                 if (!TryAgain()) return;
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
+                FormatCinemaHalls(cinemaHalls);
+                Console.WriteLine("\nWat wilt u wijzigen?\n1. Naam\n2. Grootte");
             }
         }
 
@@ -303,16 +363,22 @@ public class AdminFunctions
         switch (choice)
         {
             case 1:
-                Console.Write("Voer de nieuwe naam in: ");
-                string? newName = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(newName))
+                while (true)
                 {
-                    Console.WriteLine("Verkeerde input. Voer een geldige naam in.");
-                    if (!TryAgain()) return;
-                }
-                else
-                {
-                    hallToChange.Name = newName;
+                    Console.Write("Voer de nieuwe naam in: ");
+                    string? newName = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(newName))
+                    {
+                        Console.WriteLine("Verkeerde input. Voer een geldige naam in.");
+                        if (!TryAgain()) return;
+                        Console.Clear();
+                        Console.WriteLine("\x1b[3J");
+                    }
+                    else
+                    {
+                        hallToChange.Name = newName;
+                        break;
+                    }
                 }
                 break;
 
@@ -325,6 +391,9 @@ public class AdminFunctions
                     {
                         Console.WriteLine("Verkeerde input. Kies tussen 1, 2 of 3.");
                         if (!TryAgain()) return;
+                        Console.Clear();
+                        Console.WriteLine("\x1b[3J");
+                        FormatCinemaHalls(cinemaHalls);
                     }
                     else
                     {
@@ -339,7 +408,9 @@ public class AdminFunctions
         {
             string jsonString = JsonSerializer.Serialize(cinemaHalls, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText("cinemaHall.json", jsonString);
-            Console.WriteLine($"Wijziging van bioscoopzaal met serienummer {serialNumber} succesvol doorgevoerd.");
+            ProgramFunctions.PrintTextCentered($"Wijziging van bioscoopzaal met serienummer {serialNumber} succesvol doorgevoerd.");
+            ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+            Console.ReadKey();
         }
         catch (Exception ex)
         {
@@ -359,25 +430,19 @@ public class AdminFunctions
             return;
         }
 
-        Console.WriteLine("Beschikbare bioscoopzalen:");
-        int maxNameLength = cinemaHalls.Max(hall => hall.Name.Length);
-
         int serialNumber;
         while (true)
         {
-            foreach (var hall in cinemaHalls)
-            {
-                Console.WriteLine($"- Serial number: {hall.SerialNumber.ToString().PadRight(2)}, Name: {hall.Name.PadRight(maxNameLength)}");
-            }
+            FormatCinemaHalls(cinemaHalls);
             Console.WriteLine("\nWelke zaal wilt u selecteren? Voer het serienummer in:");
             if (!int.TryParse(Console.ReadLine(), out serialNumber) || !cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
             {
                 Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in.");
                 if (!TryAgain()) return;
-                foreach (var hall in cinemaHalls)
-                {
-                    Console.WriteLine($"- Serial number: {hall.SerialNumber.ToString().PadRight(2)}, Name: {hall.Name.PadRight(maxNameLength)}");
-                }
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
+                FormatCinemaHalls(cinemaHalls);
+                Console.WriteLine("\nWelke zaal wilt u selecteren? Voer het serienummer in:");
             }
             else
             {
@@ -395,24 +460,28 @@ public class AdminFunctions
         }
 
         Console.Clear();
-        Console.WriteLine("Kies een film uit de volgende lijst:\n");
+        Console.WriteLine("\x1b[3J");
+
         for (int i = 0; i < movies.Count; i++)
         {
             Console.WriteLine($"{i + 1}. {movies[i].Title}");
+            Console.WriteLine(new string('-', 40));
         }
 
         int selectedMovieIndex;
         while (true)
         {
-            Console.Write("Voer het nummer van de film in: ");
+            Console.Write($"\nVoer het nummer van de film in: ");
             if (!int.TryParse(Console.ReadLine(), out selectedMovieIndex) || selectedMovieIndex < 1 || selectedMovieIndex > movies.Count)
             {
                 Console.WriteLine("Ongeldige invoer. Voer een geldig nummer in.");
                 if (!TryAgain()) return;
                 Console.Clear();
+                Console.WriteLine("\x1b[3J");
                 for (int i = 0; i < movies.Count; i++)
                 {
                     Console.WriteLine($"{i + 1}. {movies[i].Title}");
+                    Console.WriteLine(new string('-', 40));
                 }
             }
             else
@@ -423,7 +492,7 @@ public class AdminFunctions
 
         string movieTitle = movies[selectedMovieIndex - 1].Title;
 
-        Console.Write("Voer de datum van de film in (dd/MM/yyyy): ");
+        Console.Write($"\nVoer de datum van de film in (dd/MM/yyyy): ");
         DateTime date;
         while (true)
         {
@@ -435,13 +504,15 @@ public class AdminFunctions
             }
             else
             {
-                Console.WriteLine("Verkeerde format. Voer de datum op een juiste manier in (dd/MM/yyyy)");
+                Console.WriteLine("Verkeerde format. Voer een geldige datum in en op de juiste manier: (dd/MM/yyyy)");
                 if (!TryAgain()) return;
-                Console.WriteLine("Verkeerde format. Voer de datum op een juiste manier in (dd/MM/yyyy)");
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
+                Console.Write($"\nVoer de datum van de film in (dd/MM/yyyy): ");
             }
         }
 
-        Console.WriteLine("Voer het uur in (0-23):");
+        Console.Write($"\nVoer het uur in (0-23): ");
         int hour;
         while (true)
         {
@@ -453,12 +524,14 @@ public class AdminFunctions
             {
                 Console.WriteLine("Verkeerde input. Voer het uur binnen 0 en 23 in");
                 if (!TryAgain()) return;
-                Console.WriteLine("Verkeerde input. Voer het uur binnen 0 en 23 in");
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
+                Console.Write($"\nVoer het uur in (0-23): ");
             }
 
         }
 
-        Console.WriteLine("Voer de minuut in (0-59):");
+        Console.Write($"\nVoer de minuut in (0-59): ");
         int minute;
         while (true)
         {
@@ -470,7 +543,9 @@ public class AdminFunctions
             {
                 Console.WriteLine("Verkeerde input. Voer de minuut tussen 0 en 59 in");
                 if (!TryAgain()) return;
-                Console.WriteLine("Verkeerde input. Voer de minuut tussen 0 en 59 in");
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
+                Console.Write($"\nVoer de minuut in (0-59): ");
             }
         }
 
@@ -481,7 +556,9 @@ public class AdminFunctions
         schedules.Add(newSchedule);
         WriteSchedulesToJson(schedules);
 
-        Console.WriteLine("Nieuwe film succesvol toegevoegd aan het schema. Druk op een knop om verder te gaan");
-        Console.ReadLine();
+        Console.Clear();
+        ProgramFunctions.PrintTextCentered("Film succesvol aan het rooster toegevoegd");
+        ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+        Console.ReadKey();
     }
 }

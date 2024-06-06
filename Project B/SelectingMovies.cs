@@ -8,12 +8,10 @@ public class SelectingMovies
     private static List<Movie> movies = new List<Movie>();
     public static void MoviesSelect()
     {
-        LoadMovies(); // Laad de films aan het begin van het programma
+        LoadMovies();
 
         int selectedIndex = 0;
         bool running = true;
-        string purple = "\u001b[35m";
-        string reset = "\u001b[0m";
 
         while (running)
         {
@@ -21,15 +19,8 @@ public class SelectingMovies
             Console.ForegroundColor = ConsoleColor.Yellow;
             AsciiArtPrinter.PrintAsciifilms();
             Console.ResetColor();
-            ProgramFunctions.PrintTextCentered($"\nGebruik de ");
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            ProgramFunctions.PrintTextCentered("pijltjestoetsen");
-            Console.ResetColor();
-            ProgramFunctions.PrintTextCentered("om een optie te selecteren en druk op ");
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            ProgramFunctions.PrintTextCentered("Enter\n");
-            Console.ResetColor();
             Console.WriteLine();
+            ProgramFunctions.PrintColoredTextCentered("Gebruik de ", ConsoleColor.White, "pijltjestoetsen", ConsoleColor.Magenta, " om een optie te selecteren en druk op ", ConsoleColor.White, "Enter\n", ConsoleColor.Magenta);
 
             // Calculate the length of the longest movie title for box width
             int boxWidth = 0;
@@ -40,7 +31,7 @@ public class SelectingMovies
                     boxWidth = movie.Title.Length;
                 }
             }
-            boxWidth += 5; // Adding padding
+            boxWidth += 5;
 
             // Calculate the horizontal position to center the box
             int windowWidth = Console.WindowWidth;
@@ -101,7 +92,7 @@ public class SelectingMovies
                     running = false;
                     break;
 
-                case ConsoleKey.R: // New case for viewing movie schedule
+                case ConsoleKey.R:
                     Console.Clear();
                     Schedule.OpenGeneralMenu();
                     Console.Clear();
@@ -132,18 +123,10 @@ public class SelectingMovies
             Console.WriteLine(new string('*', Console.WindowWidth - 1));
             Console.WriteLine();
 
-            string purple = "\u001b[35m";
-            string reset = "\u001b[0m";
-
             string[] options = { "Bekijk schema van deze film", "Terug naar film beschrijvingen" };
-            ProgramFunctions.PrintTextCentered($"\nGebruik de ");
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            ProgramFunctions.PrintTextCentered("pijltjestoetsen");
-            Console.ResetColor();
-            ProgramFunctions.PrintTextCentered("om een optie te selecteren en druk op ");
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            ProgramFunctions.PrintTextCentered("Enter\n");
-            Console.ResetColor();
+            Console.WriteLine();
+            ProgramFunctions.PrintColoredTextCentered("Gebruik de ", ConsoleColor.White, "pijltjestoetsen", ConsoleColor.Magenta, " om een optie te selecteren en druk op ", ConsoleColor.White, "Enter\n", ConsoleColor.Magenta);
+
             int selectedOption = ShowMenuInline(options);
 
             if (selectedOption == 0)

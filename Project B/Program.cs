@@ -13,7 +13,6 @@ class Program
         AsciiArtPrinter.MegaBioscoop();
         Console.ResetColor();
 
-        // Combine the text into one line with appropriate colors
         Console.WriteLine();
         ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
 
@@ -112,28 +111,22 @@ class Program
                         Payment.BestelMenu();
                     }
                     Console.Clear();
-                    Console.WriteLine("Lijst Zalen");
                     AdminFunctions.PrintCinemaHalls();
-                    Console.ReadLine();
                     Console.Clear();
                     break;
                 case 6:
                     Console.Clear();
-                    Console.WriteLine("CinemaHall Toevoegen");
                     AdminFunctions.AddNewCinemaHall();
-                    Console.ReadLine();
                     Console.Clear();
                     break;
                 case 7:
                     Console.Clear();
                     AdminFunctions.RemoveCinemaHall();
-                    Console.ReadLine();
                     Console.Clear();
                     break;
                 case 8:
                     Console.Clear();
                     AdminFunctions.ChangeCinemaHall();
-                    Console.ReadLine();
                     Console.Clear();
                     break;
                 case 9:
