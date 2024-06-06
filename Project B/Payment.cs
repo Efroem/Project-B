@@ -4,6 +4,7 @@ public static class Payment
 
     private static HashSet<(int x, int y)> selectedSeats = new HashSet<(int row, int column)>();
 
+    public static int scheduleSerialNumber;
 
     private static double totaalKosten = 0;
 
@@ -359,6 +360,7 @@ public static class Payment
                 Console.WriteLine();
                 PrintTextCentered($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
                 ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+                SaveReservation();
                 Console.ReadKey();
                 Console.Clear();
                 Console.WriteLine("\x1b[3J");
@@ -379,6 +381,7 @@ public static class Payment
                 Console.WriteLine();
                 PrintTextCentered($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
                 ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+                SaveReservation();
                 Console.ReadKey();
                 Console.Clear();
                 Console.WriteLine("\x1b[3J");
@@ -399,12 +402,20 @@ public static class Payment
                 Console.WriteLine();
                 PrintTextCentered($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
                 ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+                SaveReservation();
                 Console.ReadKey();
                 Console.Clear();
                 Console.WriteLine("\x1b[3J");
                 Program.Main();
                 break;
-
         }
+    }
+
+    private static void SaveReservation() {
+        Reservation.CreateReservation(scheduleSerialNumber, selectedSeats, Purchasedproducts, totaalKosten);
+        Purchasedproducts = new List<Product>();
+        selectedSeats = new HashSet<(int row, int column)>();
+        scheduleSerialNumber = default;
+        totaalKosten = 0;
     }
 }

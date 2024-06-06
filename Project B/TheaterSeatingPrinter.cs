@@ -185,6 +185,7 @@ public class TheaterSeatingPrinter
                 Console.Clear();
                 Payment.AddSeatPrice(seatPrice);
                 Payment.AddSelectedSeats(userPositions); // Toegevoegd
+                Payment.scheduleSerialNumber = scheduleSerialNumber;
                 Payment.BestelMenu();
                 break;
 
