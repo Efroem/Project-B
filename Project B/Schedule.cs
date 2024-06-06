@@ -167,7 +167,7 @@ public class Schedule
             for (int i = 0; i < moviesShownAmount; i++)
             {
                 var schedule = schedules[currentIndex + i];
-                movies.Add($"{i + 1 + (currentIndex != 0 ? 1 : 0)}.{schedule.MovieTitle}\n{schedule.Date}\n{schedule.CinemaHallSerialNumber}");
+                movies.Add($"{i + 1 + (currentIndex != 0 ? 1 : 0)}.{schedule.MovieTitle}\n{schedule.Date}\n{schedule.Hall.Name}");
             }
 
             List<string> options = new();
@@ -246,7 +246,12 @@ public class Schedule
                     seatingPrinter.PrintTheaterSeating(schedules, pickedSchedule.SerialNumber);
                     return;
                 }
-                // HallAssignment.Callfunction2();
+                else if (Authentication.User is null)
+                {
+                    ProgramFunctions.PrintTextCentered("U bent nog niet ingelogd");
+                    Authentication.Start();
+
+                }
             }
             else if (
                 (currentIndex == 0 && userAction == movies.Count + 0 && currentIndex <= schedules.Count) ||
