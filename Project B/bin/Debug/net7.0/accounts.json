@@ -38,5 +38,13 @@
     "LastName": "Stoel",
     "BirthDate": "20-10-2007",
     "IsAdmin": true
+  },
+  {
+    "Email": "kleinemano@gmail.com",
+    "Password": "6f15184eb209bc814d01fe50fec3e772d1d2ae30bf74bf881b1f8dd7367ee1f1",
+    "FirstName": "Manojlo",
+    "LastName": "Stoel",
+    "BirthDate": "20-10-2017",
+    "IsAdmin": false
   }
 ]
