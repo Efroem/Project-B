@@ -36,24 +36,62 @@ class Reservation
 
     public override string ToString()
     {
-        return $"Film: {_schedule.MovieTitle} \nZaal: {_schedule.CinemaHallSerialNumber}\nDatum: {_schedule}\nStoelen: {string.Join(", ", Seats)}";
+        return $"Film: {_schedule.MovieTitle} \nZaal: {_schedule.CinemaHallSerialNumber}\nDatum: {_schedule}\nStoelen: {string.Join(", ", Seats)}\nExtra: {string.Join(",", Food.Select(x => x.Naam))}";
     }
 
     public static void OpenReservationMenu(Account currentUser)
     {
+        AsciiArtPrinter.PrintAsciiReservering();
         List<Reservation> reservations = ReadReservationJson();
         reservations = reservations.Where(x => x.Email == currentUser.Email).Where(x => x._schedule.Date > DateTime.Now).OrderBy(x => x._schedule.Date).ToList();
 
-        while (true)
+        int longestLineLength = 0;
+
+        foreach (Reservation reservation in reservations)
         {
-            Console.Clear();
-            reservations.ForEach(x => Console.WriteLine($"{x}\n"));
-            Console.WriteLine("1. Terug");
-            string userAction = (Console.ReadLine() ?? "").ToLower();
-            if (userAction == "1" || userAction == "terug")
+
+            foreach (string line in reservation.ToString().Split('\n'))
             {
-                return;
+                longestLineLength = longestLineLength < line.Length ? line.Length : longestLineLength;
             }
+        }
+        ProgramFunctions.PrintTextCentered("     ┌" + new string('─', longestLineLength + 3) + "┐");
+        for (int i = 0; i < reservations.Count; i++)
+        {
+            PrintTextCentered($"{reservations[i]}", longestLineLength);
+            if (i != reservations.Count - 1) {
+                ProgramFunctions.PrintTextCentered("     ├" + new string('─', longestLineLength + 3) + "┤");
+            }
+        }
+
+        ProgramFunctions.PrintTextCentered("     └" + new string('─', longestLineLength + 3) + "┘");
+
+        Console.WriteLine();
+        ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om terug te gaan", ConsoleColor.White);
+        Console.ReadKey();
+        return;
+    }
+
+    // Modified PrintTextCentered for multiline options
+    private static void PrintTextCentered(string text, int longestLongestLineLength)
+    {
+        string[] textArray = text.Split('\n');
+        int windowWidth;
+        int leftPadding;
+        int longestLineLength = 0;
+        foreach (string line in textArray)
+        {
+            longestLineLength = longestLineLength < line.Length ? line.Length : longestLineLength;
+        }
+
+        for (int i = 0; i < textArray.Length; i++)
+        {
+            windowWidth = Console.WindowWidth;
+            leftPadding = (windowWidth - longestLineLength + longestLineLength - longestLongestLineLength) / 2;
+            Console.CursorLeft = leftPadding;
+
+            Console.SetCursorPosition(leftPadding, Console.CursorTop);
+            Console.WriteLine($"│ {textArray[i]}" + new string(' ', longestLongestLineLength + 3 - textArray[i].Length - 1) + "│");
         }
     }
 
