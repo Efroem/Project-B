@@ -91,72 +91,60 @@ class Reservation
                 {
                     ProgramFunctions.PrintTextCentered("├" + new string('─', longestLineLength + 3) + "┤");
                 }
-                foreach (string line in reservation.ToString().Split('\n'))
-                {
-                    longestLineLength = longestLineLength < line.Length ? line.Length : longestLineLength;
-                }
-            }
-            ProgramFunctions.PrintTextCentered("     ┌" + new string('─', longestLineLength + 3) + "┐");
-            for (int i = 0; i < reservations.Count; i++)
-            {
-                PrintTextCentered($"{reservations[i]}", longestLineLength);
-                if (i != reservations.Count - 1)
-                {
-                    ProgramFunctions.PrintTextCentered("     ├" + new string('─', longestLineLength + 3) + "┤");
-                }
-
-                ProgramFunctions.PrintTextCentered("└" + new string('─', longestLineLength + 3) + "┘");
             }
 
-
-
-            Console.WriteLine();
-            ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om terug te gaan", ConsoleColor.White);
-            Console.ReadKey();
-            return;
+            ProgramFunctions.PrintTextCentered("└" + new string('─', longestLineLength + 3) + "┘");
         }
 
-        // Modified PrintTextCentered for multiline options
-        private static void PrintTextCentered(string text, int longestLongestLineLength)
+
+
+        Console.WriteLine();
+        ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om terug te gaan", ConsoleColor.White);
+        Console.ReadKey();
+        return;
+    }
+
+    // Modified PrintTextCentered for multiline options
+    private static void PrintTextCentered(string text, int longestLongestLineLength)
+    {
+        string[] textArray = text.Split('\n');
+        int windowWidth;
+        int leftPadding;
+        int longestLineLength = 0;
+        foreach (string line in textArray)
         {
-            string[] textArray = text.Split('\n');
-            int windowWidth;
-            int leftPadding;
-            int longestLineLength = 0;
-            foreach (string line in textArray)
-            {
-                longestLineLength = longestLineLength < line.Length ? line.Length : longestLineLength;
-            }
-
-            for (int i = 0; i < textArray.Length; i++)
-            {
-                windowWidth = Console.WindowWidth;
-                leftPadding = (windowWidth - longestLineLength + longestLineLength - longestLongestLineLength) / 2 - 3;
-                Console.CursorLeft = leftPadding;
-
-                Console.SetCursorPosition(leftPadding, Console.CursorTop);
-                Console.WriteLine($"│ {textArray[i]}" + new string(' ', longestLongestLineLength + 3 - textArray[i].Length - 1) + "│");
-            }
+            longestLineLength = longestLineLength < line.Length ? line.Length : longestLineLength;
         }
 
-        public static List<Reservation> ReadReservationJson()
+        for (int i = 0; i < textArray.Length; i++)
         {
-            string jsonString = File.ReadAllText("reservations.json");
+            windowWidth = Console.WindowWidth;
+            leftPadding = (windowWidth - longestLineLength + longestLineLength - longestLongestLineLength) / 2 - 2;
+            Console.CursorLeft = leftPadding;
 
-            return JsonSerializer.Deserialize<List<Reservation>>(jsonString) ?? new();
-        }
-
-        public static void CreateReservation(int scheduleSerialNumber, HashSet<(int x, int y)> seats, List<Product> products, double totalPrice)
-        {
-            List<string> seatStrings = seats.Select(seat => $"{seat.x}-{seat.y}").ToList();
-            Reservation reservation = new(scheduleSerialNumber, seatStrings, products, totalPrice);
-            // Retrieves existing reservations
-            List<Reservation> reservations = ReadReservationJson();
-            // Adds the new reservation
-            reservations.Add(reservation);
-            //saves reservations
-            JsonSerializerOptions options = new() { WriteIndented = true };
-            string jsonString = JsonSerializer.Serialize(reservations, options);
-            File.WriteAllText("reservations.json", jsonString);
+            Console.SetCursorPosition(leftPadding, Console.CursorTop);
+            Console.WriteLine($"│ {textArray[i]}" + new string(' ', longestLongestLineLength + 3 - textArray[i].Length - 1) + "│");
         }
     }
+
+    public static List<Reservation> ReadReservationJson()
+    {
+        string jsonString = File.ReadAllText("reservations.json");
+
+        return JsonSerializer.Deserialize<List<Reservation>>(jsonString) ?? new();
+    }
+
+    public static void CreateReservation(int scheduleSerialNumber, HashSet<(int x, int y)> seats, List<Product> products, double totalPrice)
+    {
+        List<string> seatStrings = seats.Select(seat => $"{seat.x}-{seat.y}").ToList();
+        Reservation reservation = new(scheduleSerialNumber, seatStrings, products, totalPrice);
+        // Retrieves existing reservations
+        List<Reservation> reservations = ReadReservationJson();
+        // Adds the new reservation
+        reservations.Add(reservation);
+        //saves reservations
+        JsonSerializerOptions options = new() { WriteIndented = true };
+        string jsonString = JsonSerializer.Serialize(reservations, options);
+        File.WriteAllText("reservations.json", jsonString);
+    }
+}
