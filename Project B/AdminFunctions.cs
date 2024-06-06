@@ -448,6 +448,8 @@ public class AdminFunctions
             {
                 break;
             }
+            Console.Clear();
+            Console.WriteLine("\x1b[3J");
         }
 
         AdminFunctions selectedHall = cinemaHalls.First(hall => hall.SerialNumber == serialNumber);

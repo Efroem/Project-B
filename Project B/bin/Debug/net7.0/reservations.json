@@ -13,5 +13,15 @@
       }
     ],
     "totalPrice": 18.98
+  },
+  {
+    "userEmail": "test",
+    "seats": [
+      "8-6",
+      "8-7"
+    ],
+    "scheduleSerialNumber": 9,
+    "Food": [],
+    "totalPrice": 17.98
   }
 ]

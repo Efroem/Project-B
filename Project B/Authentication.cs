@@ -26,7 +26,9 @@ static class Authentication
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    AsciiArtPrinter.PrintAsciilogin();
+                    Console.WriteLine();
+                    ProgramFunctions.PrintTextCentered(e.Message);
                 }
             else if (userAction == 1)
             {
@@ -71,7 +73,9 @@ static class Authentication
 
         // checks the password hash on the found account
         if (!foundAccount.TestPassword(HashPassword(password)))
-            throw new Exception("Aanmeldgegevens niet gevonden");
+        {
+            throw new Exception ("Aanmeldgegevens niet gevonden");
+        }
 
         // sets User property and returns User
         User = foundAccount;
@@ -302,6 +306,7 @@ static class Authentication
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                Console.Clear();
             }
         }
     }

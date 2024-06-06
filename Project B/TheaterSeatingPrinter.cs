@@ -131,8 +131,9 @@ public class TheaterSeatingPrinter
         Console.WriteLine("|                                                    |");
         Console.WriteLine("|                   filmdoek                         |");
         Console.WriteLine("|____________________________________________________|");
-        Console.WriteLine("Klik Q om naar het hoofdmenu terug te gaan");
-        Console.WriteLine("Klik K om te stoelen te bevestigen");
+        Console.WriteLine("Klik op Backspace om stoelen te deselecteren");
+        Console.WriteLine("Klik op Q om naar het hoofdmenu terug te gaan");
+        Console.WriteLine("Klik op E om te stoelen te bevestigen");
     }
 
     private static bool HandleUserInput(int rows, int columns, List<Schedule> schedules, int scheduleSerialNumber, TheaterSeatingPrinter printer)
@@ -180,7 +181,7 @@ public class TheaterSeatingPrinter
                 }
                 break;
 
-            case ConsoleKey.K:
+            case ConsoleKey.E:
                 double seatPrice = printer.ZettenVanTuppleInListNaarJson(schedules, scheduleSerialNumber);
                 Console.Clear();
                 Payment.AddSeatPrice(seatPrice);
