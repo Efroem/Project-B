@@ -115,11 +115,16 @@ static class Authentication
         Console.ForegroundColor = ConsoleColor.Yellow;
         AsciiArtPrinter.PrintAsciiRegister();
         Console.ResetColor();
-        string adminCode = "admin123";
-        Console.WriteLine("Geef een admin code in indien van toepassing:");
 
-        string userAdminCode = Console.ReadLine() ?? "";
-        bool admin = userAdminCode == adminCode;
+        bool admin = false;
+        if (email.Contains("@admin.com"))
+        {
+            string adminCode = "admin123";
+            Console.WriteLine("Geef een admin code in indien van toepassing:");
+
+            string userAdminCode = Console.ReadLine() ?? "";
+            admin = userAdminCode == adminCode;
+        }
         Console.Clear();
 
         // Creates new object
