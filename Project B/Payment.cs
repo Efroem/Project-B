@@ -343,20 +343,23 @@ public static class Payment
             case 0:
                 string[] partnersIDEAL = { "ING", "ABN AMRO", "ASN Bank", "RaboBank", "Revolut" };
                 int selectpartner = KiesOptie("Kies de gewenste Bank:", partnersIDEAL);
-                Console.WriteLine("\nUw bestellingen:");
+                ProgramFunctions.PrintTextCentered("\nUw bestellingen:");
                 foreach (var product in Purchasedproducts)
                 {
-                    Console.WriteLine($"{product.Naam}");
+                    ProgramFunctions.PrintTextCentered($"{product.Naam}");
                 }
                 Console.WriteLine();
-                Console.WriteLine("\nGeselecteerde stoelen:");
+                PrintTextCentered("\nGeselecteerde stoelen:");
                 foreach (var seat in selectedSeats)
                 {
-                    Console.WriteLine($"Rij: {seat.y}, Stoel: {seat.x}");
+                    PrintTextCentered($"Rij: {seat.y}, Stoel: {seat.x}");
                 }
                 Console.WriteLine();
-                Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
-                Console.ReadLine();
+                PrintTextCentered($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
+                ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+                Console.ReadKey();
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
                 Program.Main();
                 break;
             case 1:

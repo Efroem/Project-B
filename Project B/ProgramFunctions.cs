@@ -111,4 +111,26 @@ public static class ProgramFunctions
 
         return selectedOption;
     }
+
+    public static void ShowIntro()
+    {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        AsciiArtPrinter.MegaBioscoop();
+        Console.ResetColor();
+
+        Console.WriteLine();
+        ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+
+        Console.ReadKey();
+        Console.Clear();
+
+        AsciiArtPrinter.PrintAscii("movies.json");
+        Thread.Sleep(1000);
+        Console.Clear();
+        Console.WriteLine("\x1b[3J");
+        Console.Clear();
+    }
 }

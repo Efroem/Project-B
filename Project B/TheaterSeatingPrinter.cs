@@ -26,23 +26,16 @@ public class TheaterSeatingPrinter
     private static int userYPosition = 1;
     private static List<(int x, int y)> userPositions = new List<(int x, int y)>();
     public void PrintTheaterSeating(List<Schedule> schedules, int scheduleSerialNumber)
-
     {
-
         try
-
         {
-
             var schedule = schedules.FirstOrDefault(s => s.SerialNumber == scheduleSerialNumber);
 
             if (schedule == null)
 
             {
-
                 Console.WriteLine("Invalid schedule serial number.");
-
                 return;
-
             }
 
             var seats = schedule.Seats;
