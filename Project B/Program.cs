@@ -30,7 +30,7 @@ class Program
                 Console.ResetColor();
                 if (!Authentication.User.IsAdmin)
                 {
-                    options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina", "6.Eten Kopen" };
+                    options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina"};
                 }
                 else
                 {
@@ -93,11 +93,6 @@ class Program
                     Environment.Exit(0);
                     break;
                 case 5:
-                    if (!Authentication.User.IsAdmin)
-                    {
-                        Console.Clear();
-                        Payment.BestelMenu();
-                    }
                     Console.Clear();
                     AdminFunctions.PrintCinemaHalls();
                     Console.Clear();
