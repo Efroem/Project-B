@@ -1,5 +1,7 @@
 using System;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Globalization;
 using System.Collections.Generic;
 using System.IO;
 
@@ -189,10 +191,14 @@ public class SelectingMovies
     {
         try
         {
-            using (StreamReader r = new StreamReader("movies.json"))
-            {
-                string json = r.ReadToEnd();
-                movies = JsonConvert.DeserializeObject<List<Movie>>(json);
+            movies = JsonSerializer.Deserialize<List<Movie>>(File.ReadAllText("movies.json"));
+
+            if (Authentication.User is not null && movies.Count != 0) {
+                DateTime birthDate = DateTime.ParseExact(Authentication.User.BirthDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                // Get the current date
+                DateTime currentDate = DateTime.Now;
+                int age = currentDate.Year - birthDate.Year;
+                movies = movies.Where(movie => movie.AgeRestricted <= age).ToList();
             }
         }
         catch (Exception ex)

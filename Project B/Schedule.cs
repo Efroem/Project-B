@@ -139,6 +139,16 @@ public class Schedule
     {
         List<Schedule> schedules = ReadScheduleJson();
         schedules = schedules.Where(x => x.Date > DateTime.Now).OrderBy(x => x.Date).ToList();
+
+        if (Authentication.User is not null && schedules.Count != 0) {
+            List<Movie> movies = JsonSerializer.Deserialize<List<Movie>>(File.ReadAllText("movies.json"));
+
+            DateTime birthDate = DateTime.ParseExact(Authentication.User.BirthDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+            // Get the current date
+            DateTime currentDate = DateTime.Now;
+            int age = currentDate.Year - birthDate.Year;
+            schedules = schedules.Where(schedule => movies.Find(m => m.Title == schedule.MovieTitle).AgeRestricted <= age).ToList();
+        }
         OpenScheduleMenu(schedules);
     }
 
