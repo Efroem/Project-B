@@ -242,7 +242,12 @@ public class Schedule
                     seatingPrinter.PrintTheaterSeating(schedules, pickedSchedule.SerialNumber);
                     return;
                 }
-                // HallAssignment.Callfunction2();
+                else if (Authentication.User is null)
+                {
+                    ProgramFunctions.PrintTextCentered("U bent nog niet ingelogd");
+                    Authentication.Start();
+
+                }
             }
             else if (
                 (currentIndex == 0 && userAction == movies.Count + 0 && currentIndex <= schedules.Count) ||
