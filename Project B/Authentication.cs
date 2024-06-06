@@ -102,12 +102,34 @@ static class Authentication
         string firstName = Console.ReadLine() ?? "";
         Console.Clear();
 
+        while (!IsValidFirstName(firstName))
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            AsciiArtPrinter.PrintAsciiRegister();
+            Console.ResetColor();
+            Console.WriteLine("Ongeldige voornaam. Voer een geldige voornaam in die alleen letters bevat:");
+            Console.WriteLine("Voornaam:");
+            firstName = Console.ReadLine() ?? "";
+            Console.Clear();
+        }
+
         Console.ForegroundColor = ConsoleColor.Yellow;
         AsciiArtPrinter.PrintAsciiRegister();
         Console.ResetColor();
         Console.WriteLine("Achternaam:");
         string lastName = Console.ReadLine() ?? "";
         Console.Clear();
+
+        while (!IsValidLastName(lastName))
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            AsciiArtPrinter.PrintAsciiRegister();
+            Console.ResetColor();
+            Console.WriteLine("Ongeldige achternaam. Voer een geldige achternaam in die alleen letters bevat:");
+            Console.WriteLine("Achternaam:");
+            lastName = Console.ReadLine() ?? "";
+            Console.Clear();
+        }
 
         string birthdate = RegisterBirthdate();
         Console.Clear();
@@ -404,6 +426,14 @@ static class Authentication
         string jsonString = JsonSerializer.Serialize(AccountList, options);
         File.WriteAllText("accounts.json", jsonString);
     }
+    static bool IsValidFirstName(string firstName)
+    {
+        return firstName.All(char.IsLetter);
+    }
+    static bool IsValidLastName(string lastName)
+    {
+        return lastName.All(char.IsLetter);
+    }
 
     // Search for an account based on email
     private static Account? GetAccountByEmail(string email)
@@ -414,6 +444,7 @@ static class Authentication
     private static void EditProfile()
     {
         Console.Clear();
+        AsciiArtPrinter.PrintAsciiprofielaanpassen();
         if (User == null)
             return;
 
@@ -438,12 +469,12 @@ static class Authentication
             "5.Verander wachtwoord   ",
             "6.Terug                 "
         };
-
         int userAction = ProgramFunctions.ShowMenuInline(options);
         switch (userAction)
         {
             case 0:
                 Console.Clear();
+                AsciiArtPrinter.PrintAsciiprofielaanpassen();
                 Console.WriteLine("Voer uw Wachtwoord opnieuw in:");
                 password = HashPassword(ReadPassword());
                 Console.Clear();
@@ -461,40 +492,71 @@ static class Authentication
                 if (User.TestPassword(password))
                 {
                     Console.WriteLine("Voornaam:");
-                    User.FirstName = Console.ReadLine() ?? "";
+                    string firstName = Console.ReadLine() ?? "";
+
+                    while (!IsValidFirstName(firstName))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        AsciiArtPrinter.PrintAsciiprofielaanpassen();
+                        Console.ResetColor();
+                        Console.WriteLine("Ongeldige voornaam. Voer een geldige voornaam in die alleen letters bevat:");
+                        Console.WriteLine("Voornaam:");
+                        firstName = Console.ReadLine() ?? "";
+                        Console.Clear();
+                    }
+
+                    User.FirstName = firstName;
                 }
                 break;
 
             case 2:
                 Console.Clear();
+                AsciiArtPrinter.PrintAsciiprofielaanpassen();
                 Console.WriteLine("Voer uw Wachtwoord opnieuw in:");
                 password = HashPassword(ReadPassword());
                 Console.Clear();
                 if (User.TestPassword(password))
                 {
                     Console.WriteLine("Achternaam:");
-                    User.LastName = Console.ReadLine() ?? "";
+                    string lastName = Console.ReadLine() ?? "";
+
+                    while (!IsValidFirstName(lastName))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        AsciiArtPrinter.PrintAsciiprofielaanpassen();
+                        Console.ResetColor();
+                        Console.WriteLine("Ongeldige achternaam. Voer een geldige achternaam in die alleen letters bevat:");
+                        Console.WriteLine("Achternaam:");
+                        lastName = Console.ReadLine() ?? "";
+                        Console.Clear();
+                    }
+
+                    User.LastName = lastName;
                 }
                 break;
 
             case 3:
                 Console.Clear();
+                AsciiArtPrinter.PrintAsciiprofielaanpassen();
                 Console.WriteLine("Voer uw Wachtwoord opnieuw in:");
                 password = HashPassword(ReadPassword());
                 Console.Clear();
                 if (User.TestPassword(password))
                 {
+                    AsciiArtPrinter.PrintAsciiprofielaanpassen();
                     User.BirthDate = RegisterBirthdate();
                 }
                 break;
 
             case 4:
                 Console.Clear();
+                AsciiArtPrinter.PrintAsciiprofielaanpassen();
                 Console.WriteLine("Voer uw Wachtwoord opnieuw in:");
                 password = HashPassword(ReadPassword());
                 Console.Clear();
                 if (User.TestPassword(password))
                 {
+                    AsciiArtPrinter.PrintAsciiprofielaanpassen();
                     Console.WriteLine("Voer uw nieuwe wachtwoord in:");
                     User.Password = HashPassword(RegisterConfirmPassword(false));
                 }
