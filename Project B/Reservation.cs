@@ -3,58 +3,46 @@ using System.Text.Json.Serialization;
 using System.Globalization;
 class Reservation
 {
-    [JsonPropertyName("movieTitle")]
-    public string MovieTitle { get; set; }
-
-    [JsonPropertyName("serialNumber")]
-    public string JsonSerialNumber
-    {
-        set
-        {
-            SerialNumber = Convert.ToInt32(value);
-            Hall = AdminFunctions.ReadFromCinemaHall().Find(x => x.SerialNumber == SerialNumber);
-        }
-    }
-
-    [JsonPropertyName("email")]
+    [JsonPropertyName("userEmail")]
     public string Email { get; set; }
-
-    [JsonPropertyName("date")]
-    public string JsonDate { set => Date = DateTime.ParseExact(value, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture); }
 
     [JsonPropertyName("seats")]
     public List<string> Seats { get; set; }
 
-    public DateTime Date { get; set; }
+    [JsonPropertyName("scheduleSerialNumber")]
+    public int ScheduleSerialNumber {get => _scheduleSerialNumber; set {
+        _scheduleSerialNumber = value;
+        _schedule = Schedule.ReadScheduleJson().Find(x => x.SerialNumber == value);
+    }}
 
-    public int SerialNumber { get; set; }
+    private int _scheduleSerialNumber;
 
-    public AdminFunctions? Hall { get; set; }
+    private Schedule _schedule;
+    public List<Product> Food { get; set; }
 
-    public List<string> Food { get; set; }
+    [JsonPropertyName("totalPrice")]
+    public double TotalPrice {get; set;}
 
-    public Reservation(string movieTitle, string serialNumber, string email, string date, List<string> seats, List<string>? food)
+    public Reservation(int scheduleSerialNumber, List<string> seats, List<Product> food, double totalPrice)
     {
-        MovieTitle = movieTitle;
-        JsonSerialNumber = serialNumber;
-        Email = email;
-        Date = DateTime.ParseExact(date, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+        Email = Authentication.User.Email;
+        ScheduleSerialNumber = scheduleSerialNumber;
         Seats = seats;
-        Food = food ?? new();
+        Food = food;
+        TotalPrice = totalPrice;
     }
 
     public Reservation() { }
 
     public override string ToString()
     {
-        string hallName = Hall is not null ? Hall.Name : "onbekend";
-        return $"Film: {MovieTitle} \nZaal: {hallName} \nStoel: {Seats} \nDatum: {Date}";
+        return $"Film: {_schedule.MovieTitle} \nZaal: {_schedule.CinemaHallSerialNumber}\nDatum: {_schedule}\nStoelen: {string.Join(", ", Seats)}";
     }
 
     public static void OpenReservationMenu(Account currentUser)
     {
         List<Reservation> reservations = ReadReservationJson();
-        reservations = reservations.Where(x => x.Email == currentUser.Email).Where(x => x.Date > DateTime.Now).OrderBy(x => x.Date).ToList();
+        reservations = reservations.Where(x => x.Email == currentUser.Email).Where(x => x._schedule.Date > DateTime.Now).OrderBy(x => x._schedule.Date).ToList();
 
         while (true)
         {
@@ -76,15 +64,14 @@ class Reservation
         return JsonSerializer.Deserialize<List<Reservation>>(jsonString) ?? new();
     }
 
-
-    public void createReservation(string movieTitle, string hallSerialNumber, string userEmail, string date, List<string> seats, List<string>? food)
-    {
-        Reservation reservation = new(movieTitle, hallSerialNumber, userEmail, date, seats, food);
-        // Retrieves existing accounts
+    public static void CreateReservation(int scheduleSerialNumber, HashSet<(int x, int y)> seats, List<Product> products, double totalPrice) {
+        List<string> seatStrings = seats.Select(seat => $"{seat.x}-{seat.y}").ToList();
+        Reservation reservation = new(scheduleSerialNumber, seatStrings, products, totalPrice);
+        // Retrieves existing reservations
         List<Reservation> reservations = ReadReservationJson();
-        // Adds the new account
+        // Adds the new reservation
         reservations.Add(reservation);
-        //saves accounts
+        //saves reservations
         JsonSerializerOptions options = new() { WriteIndented = true };
         string jsonString = JsonSerializer.Serialize(reservations, options);
         File.WriteAllText("reservations.json", jsonString);
