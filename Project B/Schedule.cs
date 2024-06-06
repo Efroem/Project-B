@@ -139,6 +139,16 @@ public class Schedule
     {
         List<Schedule> schedules = ReadScheduleJson();
         schedules = schedules.Where(x => x.Date > DateTime.Now).OrderBy(x => x.Date).ToList();
+
+        if (Authentication.User is not null && schedules.Count != 0) {
+            List<Movie> movies = JsonSerializer.Deserialize<List<Movie>>(File.ReadAllText("movies.json"));
+
+            DateTime birthDate = DateTime.ParseExact(Authentication.User.BirthDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+            // Get the current date
+            DateTime currentDate = DateTime.Now;
+            int age = currentDate.Year - birthDate.Year;
+            schedules = schedules.Where(schedule => movies.Find(m => m.Title == schedule.MovieTitle).AgeRestricted <= age).ToList();
+        }
         OpenScheduleMenu(schedules);
     }
 
@@ -286,7 +296,7 @@ public class Schedule
                 longestLineLength = longestLineLength < line.Length ? line.Length : longestLineLength;
             }
         }
-        ProgramFunctions.PrintTextCentered("┌" + new string('─', longestLineLength + 3) + "┐");
+        ProgramFunctions.PrintTextCentered("     ┌" + new string('─', longestLineLength + 3) + "┐");
 
         do
         {
@@ -305,7 +315,7 @@ public class Schedule
                 }
             }
 
-            ProgramFunctions.PrintTextCentered("└" + new string('─', longestLineLength + 3) + "┘");
+            ProgramFunctions.PrintTextCentered("     └" + new string('─', longestLineLength + 3) + "┘");
 
             var key = Console.ReadKey(true);
             if (key.Key == ConsoleKey.UpArrow && selectedOption > 0)
@@ -343,7 +353,7 @@ public class Schedule
         for (int i = 0; i < textArray.Length; i++)
         {
             windowWidth = Console.WindowWidth;
-            leftPadding = (windowWidth - longestLineLength + longestLineLength - longestLongestLineLength) / 2 - 2;
+            leftPadding = (windowWidth - longestLineLength + longestLineLength - longestLongestLineLength) / 2;
             Console.CursorLeft = leftPadding;
 
             Console.SetCursorPosition(leftPadding, Console.CursorTop);
