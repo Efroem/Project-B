@@ -38,37 +38,5 @@
     "LastName": "Markovic",
     "BirthDate": "20-10-2017",
     "IsAdmin": false
-  },
-  {
-    "Email": "papa@hotmail.com",
-    "Password": "b79457791306b3ff6596f0702de8e9e8445ead55f0bd88fa6ae4f28c0dbad69a",
-    "FirstName": "lala",
-    "LastName": "lala",
-    "BirthDate": "01-01-0131",
-    "IsAdmin": false
-  },
-  {
-    "Email": "hallo@g.nl",
-    "Password": "b79457791306b3ff6596f0702de8e9e8445ead55f0bd88fa6ae4f28c0dbad69a",
-    "FirstName": "lala",
-    "LastName": "lala",
-    "BirthDate": "12-12-1231",
-    "IsAdmin": false
-  },
-  {
-    "Email": "o@gmail.com",
-    "Password": "b79457791306b3ff6596f0702de8e9e8445ead55f0bd88fa6ae4f28c0dbad69a",
-    "FirstName": "lala",
-    "LastName": "lala",
-    "BirthDate": "12-12-1231",
-    "IsAdmin": false
-  },
-  {
-    "Email": "hallo@gmail.com",
-    "Password": "b79457791306b3ff6596f0702de8e9e8445ead55f0bd88fa6ae4f28c0dbad69a",
-    "FirstName": "kaka",
-    "LastName": "lala",
-    "BirthDate": "12-12-1231",
-    "IsAdmin": false
   }
 ]

@@ -13,35 +13,5 @@
       }
     ],
     "totalPrice": 18.98
-  },
-  {
-    "userEmail": "test",
-    "seats": [
-      "1-1",
-      "2-1"
-    ],
-    "scheduleSerialNumber": 4,
-    "Food": [],
-    "totalPrice": 15.98
-  },
-  {
-    "userEmail": "hallo@gmail.com",
-    "seats": [
-      "1-2",
-      "2-2"
-    ],
-    "scheduleSerialNumber": 4,
-    "Food": [],
-    "totalPrice": 15.98
-  },
-  {
-    "userEmail": "hallo@gmail.com",
-    "seats": [
-      "3-3",
-      "4-3"
-    ],
-    "scheduleSerialNumber": 4,
-    "Food": [],
-    "totalPrice": 17.98
   }
 ]

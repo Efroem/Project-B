@@ -171,21 +171,6 @@ public class AsciiArtPrinter
         PrintCentered(login);
         Console.ResetColor();
     }
-    public static void PrintAsciiprofielaanpassen()
-    {
-        string aanpassen = @"
-  _____            __ _      _                                                    
- |  __ \          / _(_)    | |                                                   
- | |__) | __ ___ | |_ _  ___| |   __ _  __ _ _ __  _ __   __ _ ___ ___  ___ _ __  
- |  ___/ '__/ _ \|  _| |/ _ \ |  / _` |/ _` | '_ \| '_ \ / _` / __/ __|/ _ \ '_ \ 
- | |   | | | (_) | | | |  __/ | | (_| | (_| | | | | |_) | (_| \__ \__ \  __/ | | |
- |_|   |_|  \___/|_| |_|\___|_|  \__,_|\__,_|_| |_| .__/ \__,_|___/___/\___|_| |_|
-                                                  | |                             
-                                                  |_|                             ";
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        PrintCentered(aanpassen);
-        Console.ResetColor();  
-    }
     public static void PrintAsciiReservering()
     {
         string reservering = @"
