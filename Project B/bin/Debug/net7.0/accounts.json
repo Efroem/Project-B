@@ -16,14 +16,6 @@
     "IsAdmin": false
   },
   {
-    "Email": "1079037@gmail.com",
-    "Password": "f550a5781f968025b232b7bfb5f34c60a7c8a549ba177bb94cea35b877ab3fb0",
-    "FirstName": "Basis123!",
-    "LastName": "Basis1231",
-    "BirthDate": "20-10-1998",
-    "IsAdmin": false
-  },
-  {
     "Email": "blabla@test.bla",
     "Password": "6f15184eb209bc814d01fe50fec3e772d1d2ae30bf74bf881b1f8dd7367ee1f1",
     "FirstName": "pun",
@@ -43,7 +35,7 @@
     "Email": "kleinemano@gmail.com",
     "Password": "6f15184eb209bc814d01fe50fec3e772d1d2ae30bf74bf881b1f8dd7367ee1f1",
     "FirstName": "Manojlo",
-    "LastName": "Stoel",
+    "LastName": "Markovic",
     "BirthDate": "20-10-2017",
     "IsAdmin": false
   }
