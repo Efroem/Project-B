@@ -557,6 +557,7 @@ public class AdminFunctions
         WriteSchedulesToJson(schedules);
 
         Console.Clear();
+        Console.WriteLine("\x1b[3J");
         ProgramFunctions.PrintTextCentered("Film succesvol aan het rooster toegevoegd");
         ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
         Console.ReadKey();
