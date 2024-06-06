@@ -167,7 +167,7 @@ public class Schedule
             for (int i = 0; i < moviesShownAmount; i++)
             {
                 var schedule = schedules[currentIndex + i];
-                movies.Add($"{i + 1 + (currentIndex != 0 ? 1 : 0)}.{schedule.MovieTitle}\n{schedule.Date}\n{schedule.CinemaHallSerialNumber}");
+                movies.Add($"{i + 1 + (currentIndex != 0 ? 1 : 0)}.{schedule.MovieTitle}\n{schedule.Date}\n{schedule.Hall.Name}");
             }
 
             List<string> options = new();
