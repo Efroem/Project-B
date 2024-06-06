@@ -350,6 +350,4 @@ public class Schedule
             Console.WriteLine($"│ {textArray[i]}" + new string(' ', longestLongestLineLength + 3 - textArray[i].Length - 1) + "│");
         }
     }
-
-
 }

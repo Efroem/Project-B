@@ -10,10 +10,14 @@ class Reservation
     public List<string> Seats { get; set; }
 
     [JsonPropertyName("scheduleSerialNumber")]
-    public int ScheduleSerialNumber {get => _scheduleSerialNumber; set {
-        _scheduleSerialNumber = value;
-        _schedule = Schedule.ReadScheduleJson().Find(x => x.SerialNumber == value);
-    }}
+    public int ScheduleSerialNumber
+    {
+        get => _scheduleSerialNumber; set
+        {
+            _scheduleSerialNumber = value;
+            _schedule = Schedule.ReadScheduleJson().Find(x => x.SerialNumber == value);
+        }
+    }
 
     private int _scheduleSerialNumber;
 
@@ -21,7 +25,7 @@ class Reservation
     public List<Product> Food { get; set; }
 
     [JsonPropertyName("totalPrice")]
-    public double TotalPrice {get; set;}
+    public double TotalPrice { get; set; }
 
     public Reservation(int scheduleSerialNumber, List<string> seats, List<Product> food, double totalPrice)
     {
@@ -59,7 +63,8 @@ class Reservation
         for (int i = 0; i < reservations.Count; i++)
         {
             PrintTextCentered($"{reservations[i]}", longestLineLength);
-            if (i != reservations.Count - 1) {
+            if (i != reservations.Count - 1)
+            {
                 ProgramFunctions.PrintTextCentered("     ├" + new string('─', longestLineLength + 3) + "┤");
             }
         }
@@ -102,7 +107,8 @@ class Reservation
         return JsonSerializer.Deserialize<List<Reservation>>(jsonString) ?? new();
     }
 
-    public static void CreateReservation(int scheduleSerialNumber, HashSet<(int x, int y)> seats, List<Product> products, double totalPrice) {
+    public static void CreateReservation(int scheduleSerialNumber, HashSet<(int x, int y)> seats, List<Product> products, double totalPrice)
+    {
         List<string> seatStrings = seats.Select(seat => $"{seat.x}-{seat.y}").ToList();
         Reservation reservation = new(scheduleSerialNumber, seatStrings, products, totalPrice);
         // Retrieves existing reservations

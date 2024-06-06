@@ -74,7 +74,7 @@ static class Authentication
         // checks the password hash on the found account
         if (!foundAccount.TestPassword(HashPassword(password)))
         {
-            throw new Exception ("Aanmeldgegevens niet gevonden");
+            throw new Exception("Aanmeldgegevens niet gevonden");
         }
 
         // sets User property and returns User

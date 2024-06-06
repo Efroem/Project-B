@@ -48,9 +48,6 @@ public class TheaterSeatingPrinter
                 PrintGridGroteZaal(rows, columns, seats);
                 running = HandleUserInput(rows, columns, schedules, scheduleSerialNumber, this);
             }
-
-            Console.WriteLine("Back to menu");
-            Console.ReadKey();
         }
         catch (Exception ex)
         {
