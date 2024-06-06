@@ -200,7 +200,7 @@ public class Schedule
             }
 
             Console.Clear();
-            // ASCII art and instructions...
+            AsciiArtPrinter.AsciiArtPrinterRooster();
 
             int userAction = ShowMenuInline(options.ToArray());
 
@@ -226,6 +226,8 @@ public class Schedule
                 }
                 else if (Authentication.User is null)
                 {
+                    AsciiArtPrinter.PrintAsciiInlog();
+                    Console.WriteLine();
                     ProgramFunctions.PrintTextCentered("U bent nog niet ingelogd");
                     Authentication.Start();
 
