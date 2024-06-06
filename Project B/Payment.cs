@@ -210,13 +210,13 @@ public static class Payment
     public static void Popcorn(double[] prijzen)
     {
         string[] popcorn = { "Zoet", "Zout", "Gemixt" };
-        string[] opties = { "Klein", "Middel", "Groot" };
+        string[] opties = { "Klein - €3.50", "Middel - €5.00", "Groot €7.00" };
         int popcornchoice = KiesOptie("Kies gewenste smaak", popcorn);
         int selectedIndex = KiesOptie("Kies de grootte voor uw popcorn:", opties);
         string gekozenpopcorn = popcorn[popcornchoice];
         string gekozenGrootte = opties[selectedIndex];
         double gekozenPrijs = prijzen[selectedIndex];
-        PrintTextCentered($"\nU heeft gekozen voor {gekozenGrootte} Popcorn {gekozenpopcorn} - €{gekozenPrijs:0.00}");
+        PrintTextCentered($"\nU heeft gekozen voor {gekozenGrootte} Popcorn {gekozenpopcorn}");
         Purchasedproducts.Add(new Product($"{gekozenGrootte} Popcorn {gekozenpopcorn}", gekozenPrijs));
 
         // Bereken de totaalkosten
@@ -232,14 +232,14 @@ public static class Payment
 
     public static void Nachos(double[] prijzen)
     {
-        string[] opties = { "Klein", "Middel", "Groot" };
+        string[] opties = { "Klein - €4.00", "Middel - €6.00", "Groot - €8.00" };
         Console.Clear();
         int selectedIndex = KiesOptie("Kies de grootte voor uw nachos:", opties);
         Console.Clear();
         string gekozenGrootte = opties[selectedIndex];
         double gekozenPrijs = prijzen[selectedIndex];
 
-        PrintTextCentered($"\nU heeft gekozen voor {gekozenGrootte} nachos - €{gekozenPrijs:0.00}");
+        PrintTextCentered($"\nU heeft gekozen voor {gekozenGrootte} nachos");
         Purchasedproducts.Add(new Product($"{gekozenGrootte} Nachos", gekozenPrijs));
 
         // Bereken de totaalkosten
@@ -256,13 +256,13 @@ public static class Payment
     public static void Chips(double[] prijzen)
     {
         string[] chips = { "Naturel", "Paprika" };
-        string[] opties = { "Klein", "Middel", "Groot" };
+        string[] opties = { "Klein - €2.00", "Middel - €3.50", "Groot - €5.00" };
         int chipschoice = KiesOptie("Kies de smaak voor uw chips:", chips);
         int selectedIndex = KiesOptie("Kies de grootte voor uw chips:", opties);
         string gekozenchips = chips[chipschoice];
         string gekozenGrootte = opties[selectedIndex];
         double gekozenPrijs = prijzen[selectedIndex];
-        PrintTextCentered($"\nU heeft gekozen voor {gekozenGrootte} {gekozenchips} chips - €{gekozenPrijs:0.00}");
+        PrintTextCentered($"\nU heeft gekozen voor {gekozenGrootte} {gekozenchips} chips");
         Purchasedproducts.Add(new Product($"{gekozenGrootte} {gekozenchips} Chips", gekozenPrijs));
 
         // Bereken de totaalkosten
@@ -278,11 +278,11 @@ public static class Payment
 
     public static void Frisdrank(double[] prijzen)
     {
-        string[] frisdrank = { "Cola", "Fanta", "Icetea sparkling", "Icetea green", "Cassis", "Fernandes" };
+        string[] frisdrank = { "Cola - €3.50", "Fanta - €3.00", "Icetea sparkling - €3.50", "Icetea green - €3.00", "Cassis - €2.50", "Fernandes - €3.00" };
         int frisdrankChoice = KiesOptie("Kies frisdrank naar keuze:", frisdrank);
         string gekozenFrisdrank = frisdrank[frisdrankChoice];
         double gekozenPrijs = prijzen[frisdrankChoice];
-        PrintTextCentered($"\nU heeft gekozen voor {gekozenFrisdrank} - €{gekozenPrijs:0.00}");
+        PrintTextCentered($"\nU heeft gekozen voor {gekozenFrisdrank}");
         Purchasedproducts.Add(new Product($"{gekozenFrisdrank} ", gekozenPrijs));
         totaalKosten += gekozenPrijs;
 
@@ -296,11 +296,11 @@ public static class Payment
 
     public static void Thee(double[] prijzen)
     {
-        string[] thee = { "Earl grey", "Jasmijn thee", "Groene thee", "Rooibos thee", "Munt thee" };
+        string[] thee = { "Earl grey - €3.00", "Jasmijn thee - €3.50", "Groene thee - €3.00", "Rooibos thee - €2.50", "Munt thee - €4.50" };
         int theechoice = KiesOptie("Kies thee naar keuze:", thee);
         string gekozenthee = thee[theechoice];
         double gekozenPrijs = prijzen[theechoice];
-        PrintTextCentered($"\nU heeft gekozen voor {gekozenthee} - €{gekozenPrijs:0.00}");
+        PrintTextCentered($"\nU heeft gekozen voor {gekozenthee}");
         Purchasedproducts.Add(new Product($"{gekozenthee}", gekozenPrijs));
 
         // Bereken de totaalkosten
@@ -316,11 +316,11 @@ public static class Payment
 
     public static void Koffie(double[] prijzen)
     {
-        string[] opties = { "Klein", "Middel", "Groot" };
+        string[] opties = { "Klein - €2.50", "Middel - €3.50", "Groot - €5.00" };
         int selectedIndex = KiesOptie("Kies de grootte voor uw Koffie:", opties);
         string gekozenGrootte = opties[selectedIndex];
         double gekozenPrijs = prijzen[selectedIndex];
-        PrintTextCentered($"\nU heeft gekozen voor {gekozenGrootte} Koffie - €{gekozenPrijs:0.00}");
+        PrintTextCentered($"\nU heeft gekozen voor {gekozenGrootte} Koffie");
         Purchasedproducts.Add(new Product($"{gekozenGrootte} koffie", gekozenPrijs));
 
         // Bereken de totaalkosten
@@ -346,7 +346,7 @@ public static class Payment
                 Console.WriteLine("\nUw bestellingen:");
                 foreach (var product in Purchasedproducts)
                 {
-                    Console.WriteLine($"{product.Naam} - €{product.Prijs:0.00}");
+                    Console.WriteLine($"{product.Naam}");
                 }
                 Console.WriteLine();
                 Console.WriteLine("\nGeselecteerde stoelen:");
@@ -357,12 +357,13 @@ public static class Payment
                 Console.WriteLine();
                 Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
                 Console.ReadLine();
+                Program.Main();
                 break;
             case 1:
                 Console.WriteLine("\nUw bestellingen:");
                 foreach (var product in Purchasedproducts)
                 {
-                    Console.WriteLine($"{product.Naam} - €{product.Prijs:0.00}");
+                    Console.WriteLine($"{product.Naam}");
                 }
                 Console.WriteLine();
                 Console.WriteLine("\nGeselecteerde stoelen:");
@@ -373,12 +374,13 @@ public static class Payment
                 Console.WriteLine();
                 Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
                 Console.ReadLine();
+                Program.Main();
                 break;
             case 2:
                 Console.WriteLine("\nUw bestellingen:");
                 foreach (var product in Purchasedproducts)
                 {
-                    Console.WriteLine($"{product.Naam} - €{product.Prijs:0.00}");
+                    Console.WriteLine($"{product.Naam}");
                 }
                 Console.WriteLine();
                 Console.WriteLine("\nGeselecteerde stoelen:");
@@ -389,6 +391,7 @@ public static class Payment
                 Console.WriteLine();
                 Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
                 Console.ReadLine();
+                Program.Main();
                 break;
 
         }

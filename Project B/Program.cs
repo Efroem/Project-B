@@ -4,7 +4,7 @@ using System.Text.Json;
 
 class Program
 {
-    static void Main()
+    public static void Main()
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
 
