@@ -30,5 +30,13 @@
     "LastName": "Test2",
     "BirthDate": "20-10-1998",
     "IsAdmin": false
+  },
+  {
+    "Email": "o@gmail.com",
+    "Password": "b79457791306b3ff6596f0702de8e9e8445ead55f0bd88fa6ae4f28c0dbad69a",
+    "FirstName": "lala",
+    "LastName": "lala",
+    "BirthDate": "12-12-1231",
+    "IsAdmin": false
   }
 ]
