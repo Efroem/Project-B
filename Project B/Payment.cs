@@ -195,16 +195,17 @@ public static class Payment
                 break;
         }
     }
-    public static void AddSeatPrice(double seatPrice)
-    {
-        totaalKosten += seatPrice;
-    }
     public static void AddSelectedSeats(List<(int x, int y)> seats)
     {
         foreach (var seat in seats)
         {
-            selectedSeats.Add(seat);
+            Console.WriteLine($"Seat: Row {seat.y}, Column {seat.x}");
         }
+        selectedSeats.UnionWith(seats);
+    }
+    public static void AddSeatPrice(double seatPrice)
+    {
+        totaalKosten += seatPrice;
     }
 
     public static void Popcorn(double[] prijzen)
@@ -335,6 +336,7 @@ public static class Payment
     }
     public static void Afrekenen()
     {
+        
         string[] opties = { "IDEAL", "PayPal", "Creditcard" };
         int selectedIndex = KiesOptie("Kies de gewenste betaalmethode:", opties);
 
@@ -363,41 +365,46 @@ public static class Payment
                 Program.Main();
                 break;
             case 1:
-                Console.WriteLine("\nUw bestellingen:");
+                ProgramFunctions.PrintTextCentered("\nUw bestellingen:");
                 foreach (var product in Purchasedproducts)
                 {
-                    Console.WriteLine($"{product.Naam}");
+                    ProgramFunctions.PrintTextCentered($"{product.Naam}");
                 }
                 Console.WriteLine();
-                Console.WriteLine("\nGeselecteerde stoelen:");
+                PrintTextCentered("\nGeselecteerde stoelen:");
                 foreach (var seat in selectedSeats)
                 {
-                    Console.WriteLine($"Rij: {seat.y}, Stoel: {seat.x}");
+                    PrintTextCentered($"Rij: {seat.y}, Stoel: {seat.x}");
                 }
                 Console.WriteLine();
-                Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
-                Console.ReadLine();
+                PrintTextCentered($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
+                ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+                Console.ReadKey();
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
                 Program.Main();
                 break;
             case 2:
-                Console.WriteLine("\nUw bestellingen:");
+                ProgramFunctions.PrintTextCentered("\nUw bestellingen:");
                 foreach (var product in Purchasedproducts)
                 {
-                    Console.WriteLine($"{product.Naam}");
+                    ProgramFunctions.PrintTextCentered($"{product.Naam}");
                 }
                 Console.WriteLine();
-                Console.WriteLine("\nGeselecteerde stoelen:");
+                PrintTextCentered("\nGeselecteerde stoelen:");
                 foreach (var seat in selectedSeats)
                 {
-                    Console.WriteLine($"Rij: {seat.y}, Stoel: {seat.x}");
+                    PrintTextCentered($"Rij: {seat.y}, Stoel: {seat.x}");
                 }
                 Console.WriteLine();
-                Console.WriteLine($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
-                Console.ReadLine();
+                PrintTextCentered($"\nUw totale kosten zijn: €{totaalKosten:0.00}");
+                ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+                Console.ReadKey();
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
                 Program.Main();
                 break;
 
         }
     }
-
 }
