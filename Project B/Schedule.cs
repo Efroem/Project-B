@@ -228,7 +228,11 @@ public class Schedule
                 {
                     ProgramFunctions.PrintTextCentered("U bent nog niet ingelogd");
                     Authentication.Start();
-
+                }
+                else if (Authentication.User.IsAdmin)
+                {
+                    ProgramFunctions.PrintTextCentered("U bent admin");
+                    Program.Main();
                 }
             }
             else if (currentIndex > 0 && userAction < movies.Count + 1)
