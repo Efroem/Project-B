@@ -304,7 +304,11 @@ static class Authentication
                 Console.WriteLine("Bevestig wachtwoord:");
                 string passwordConfirm = ReadPassword();
                 if (password != passwordConfirm)
+                {
+                    Console.Clear();
                     throw new Exception("Wachtwoorden komen niet overeen");
+                }
+
                 else
                     return password;
             }

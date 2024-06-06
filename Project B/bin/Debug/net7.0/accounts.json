@@ -1,27 +1,11 @@
 [
   {
-    "Email": "1073352@gmail.com",
-    "Password": "a29ba37d43b719a6645d0892f86160806d2c12676c0d0dd456ec04383259ab68",
-    "FirstName": "skibibi",
-    "LastName": "dop",
-    "BirthDate": "20-10-1998",
-    "IsAdmin": false
-  },
-  {
     "Email": "Admin",
     "Password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
     "FirstName": "Admin",
     "LastName": "Admin",
     "BirthDate": "20-10-1998",
     "IsAdmin": true
-  },
-  {
-    "Email": "nana@gmail.com",
-    "Password": "b79457791306b3ff6596f0702de8e9e8445ead55f0bd88fa6ae4f28c0dbad69a",
-    "FirstName": "lala",
-    "LastName": "lala",
-    "BirthDate": "12-12-1231",
-    "IsAdmin": false
   },
   {
     "Email": "test",
@@ -32,11 +16,27 @@
     "IsAdmin": false
   },
   {
-    "Email": "o@gmail.com",
-    "Password": "b79457791306b3ff6596f0702de8e9e8445ead55f0bd88fa6ae4f28c0dbad69a",
-    "FirstName": "lala",
-    "LastName": "lala",
-    "BirthDate": "12-12-1231",
+    "Email": "blabla@test.bla",
+    "Password": "6f15184eb209bc814d01fe50fec3e772d1d2ae30bf74bf881b1f8dd7367ee1f1",
+    "FirstName": "pun",
+    "LastName": "punt",
+    "BirthDate": "20-10-1998",
+    "IsAdmin": false
+  },
+  {
+    "Email": "1078753@admin.com",
+    "Password": "6f15184eb209bc814d01fe50fec3e772d1d2ae30bf74bf881b1f8dd7367ee1f1",
+    "FirstName": "Vincent",
+    "LastName": "Stoel",
+    "BirthDate": "20-10-2007",
+    "IsAdmin": true
+  },
+  {
+    "Email": "kleinemano@gmail.com",
+    "Password": "6f15184eb209bc814d01fe50fec3e772d1d2ae30bf74bf881b1f8dd7367ee1f1",
+    "FirstName": "Manojlo",
+    "LastName": "Markovic",
+    "BirthDate": "20-10-2017",
     "IsAdmin": false
   }
 ]
