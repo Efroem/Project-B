@@ -124,7 +124,7 @@ static class Authentication
         Console.ResetColor();
 
         bool admin = false;
-        if (email.Contains("@admin.com"))
+        if (email.Contains("@admin"))
         {
             string adminCode = "admin123";
             Console.WriteLine("Geef een admin code in indien van toepassing:");
