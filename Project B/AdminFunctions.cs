@@ -149,7 +149,7 @@ public class AdminFunctions
     {
         List<AdminFunctions>? cinemaHalls = ReadFromCinemaHall();
         string? name = null;
-        
+
         AsciiArtPrinter.PrintAsciizaaltoevoegen();
         if (cinemaHalls == null)
         {
@@ -533,11 +533,11 @@ public class AdminFunctions
             }
         }
 
-        Console.Write($"\nVoer het uur in (0-23): ");
         int hour;
         while (true)
         {
-            if (int.TryParse(Console.ReadLine(), out hour) || hour < 0 || hour > 23)
+            Console.WriteLine("Please enter an hour between 0 and 23:");
+            if (int.TryParse(Console.ReadLine(), out hour) && hour >= 0 && hour <= 23)
             {
                 break;
             }
@@ -553,11 +553,11 @@ public class AdminFunctions
 
         }
 
-        Console.Write($"\nVoer de minuut in (0-59): ");
         int minute;
         while (true)
         {
-            if (int.TryParse(Console.ReadLine(), out minute) || minute < 0 || minute > 59)
+            Console.Write($"\nVoer de minuut in (0-59): ");
+            if (int.TryParse(Console.ReadLine(), out minute) && minute >= 0 && minute <= 59)
             {
                 break;
             }
@@ -568,7 +568,6 @@ public class AdminFunctions
                 Console.Clear();
                 AsciiArtPrinter.PrintAsciifilmtoevoegen();
                 Console.WriteLine("\x1b[3J");
-                Console.Write($"\nVoer de minuut in (0-59): ");
             }
         }
 
