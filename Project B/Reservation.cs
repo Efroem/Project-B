@@ -40,7 +40,7 @@ class Reservation
 
     public override string ToString()
     {
-        return $"Film: {_schedule.MovieTitle} \nZaal: {_schedule.CinemaHallSerialNumber}\nDatum: {_schedule}\nStoelen: {ListToString(Seats, 5)}\nExtra: {ListToString(Food.Select(x => x.Naam).ToList(), 3)}";
+        return $"Film: {_schedule.MovieTitle} \nZaal: {_schedule.CinemaHallSerialNumber}\nDatum: {_schedule.Date}\nStoelen: {ListToString(Seats, 5)}\nExtra: {ListToString(Food.Select(x => x.Naam).ToList(), 3)}";
     }
 
     private string ListToString(List<string> list, int maxLength)
