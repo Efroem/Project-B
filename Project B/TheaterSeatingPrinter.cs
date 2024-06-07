@@ -76,6 +76,7 @@ public class TheaterSeatingPrinter
 
     public static void PrintGridGroteZaal(int rows, int columns, List<Seat> seats)
     {
+        AsciiArtPrinter.AsciiArtPrinterSelecteren();
         Console.WriteLine("_____________________________________________________");
         Console.WriteLine("|                                                    |");
 

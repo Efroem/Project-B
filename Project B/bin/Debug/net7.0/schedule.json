@@ -330,12 +330,12 @@
       },
       {
         "id": "2-1",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 6.99
       },
       {
         "id": "2-2",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 8.99
       },
       {

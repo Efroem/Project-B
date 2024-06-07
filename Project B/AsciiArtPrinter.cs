@@ -171,6 +171,19 @@ public class AsciiArtPrinter
         PrintCentered(login);
         Console.ResetColor();
     }
+    public static void AsciiArtPrinterSelecteren()
+    {
+        string stoel = @"
+   _____ _             _            _           _                      
+  / ____| |           | |          | |         | |                     
+ | (___ | |_ ___   ___| |  ___  ___| | ___  ___| |_ ___ _ __ ___ _ __  
+  \___ \| __/ _ \ / _ \ | / __|/ _ \ |/ _ \/ __| __/ _ \ '__/ _ \ '_ \ 
+  ____) | || (_) |  __/ | \__ \  __/ |  __/ (__| ||  __/ | |  __/ | | |
+ |_____/ \__\___/ \___|_| |___/\___|_|\___|\___|\__\___|_|  \___|_| |_|"; 
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        PrintCentered(stoel);
+        Console.ResetColor();                                                                                                                                             
+    }
     public static void PrintAsciiReservering()
     {
         string reservering = @"
