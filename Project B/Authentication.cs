@@ -74,7 +74,7 @@ static class Authentication
         // checks the password hash on the found account
         if (!foundAccount.TestPassword(HashPassword(password)))
         {
-            throw new Exception ("Aanmeldgegevens niet gevonden");
+            throw new Exception("Aanmeldgegevens niet gevonden");
         }
 
         // sets User property and returns User
@@ -117,7 +117,7 @@ static class Authentication
         Console.ResetColor();
 
         bool admin = false;
-        if (email.Contains("@admin.com"))
+        if (email.Contains("@admin"))
         {
             string adminCode = "admin123";
             Console.WriteLine("Geef een admin code in indien van toepassing:");
