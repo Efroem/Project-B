@@ -74,7 +74,7 @@ static class Authentication
         // checks the password hash on the found account
         if (!foundAccount.TestPassword(HashPassword(password)))
         {
-            throw new Exception ("Aanmeldgegevens niet gevonden");
+            throw new Exception("Aanmeldgegevens niet gevonden");
         }
 
         // sets User property and returns User
@@ -101,6 +101,13 @@ static class Authentication
         Console.WriteLine("Voornaam:");
         string firstName = Console.ReadLine() ?? "";
         Console.Clear();
+
+        while (!IsValidFirstName(firstName))
+        {
+            Console.WriteLine("Ongeldige voornaam. Voer een geldige voornaam in die alleen letters bevat:");
+            firstName = Console.ReadLine() ?? "";
+            Console.Clear();
+        }
 
         Console.ForegroundColor = ConsoleColor.Yellow;
         AsciiArtPrinter.PrintAsciiRegister();
@@ -410,6 +417,10 @@ static class Authentication
     {
         List<Account> AccountList = GetSavedAccounts();
         return AccountList?.Find(account => account.Email.ToLower() == email.ToLower());
+    }
+    static bool IsValidFirstName(string firstName)
+    {
+        return firstName.All(char.IsLetter);
     }
     private static void EditProfile()
     {

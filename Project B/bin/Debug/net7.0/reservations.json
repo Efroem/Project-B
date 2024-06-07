@@ -13,5 +13,43 @@
       }
     ],
     "totalPrice": 18.98
+  },
+  {
+    "userEmail": "test",
+    "seats": [
+      "3-4",
+      "4-4",
+      "5-4"
+    ],
+    "scheduleSerialNumber": 14,
+    "Food": [
+      {
+        "Naam": "Groot - \u20AC8.00 Nachos",
+        "Prijs": 8
+      },
+      {
+        "Naam": "Cola - \u20AC3.50 ",
+        "Prijs": 3.5
+      }
+    ],
+    "totalPrice": 38.47
+  },
+  {
+    "userEmail": "test",
+    "seats": [
+      "5-5"
+    ],
+    "scheduleSerialNumber": 9,
+    "Food": [],
+    "totalPrice": 8.99
+  },
+  {
+    "userEmail": "test",
+    "seats": [
+      "1-2"
+    ],
+    "scheduleSerialNumber": 4,
+    "Food": [],
+    "totalPrice": 6.99
   }
 ]
