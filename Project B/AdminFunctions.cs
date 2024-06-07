@@ -181,6 +181,7 @@ public class AdminFunctions
             Console.Write($"\nKies de grootte van de nieuwe bioscoopzaal\n1 - klein: (55 mensen)\n2 - medium: (86 mensen)\n3 - groot(100 mensen):");
             if (!int.TryParse(Console.ReadLine(), out size) || (size < 1 || size > 3))
             {
+                Console.WriteLine("Verkeerde input. Kies tussen 1, 2 of 3");
                 if (!TryAgain()) return;
                 Console.Clear();
                 Console.WriteLine("\x1b[3J");
