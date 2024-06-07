@@ -102,6 +102,13 @@ static class Authentication
         string firstName = Console.ReadLine() ?? "";
         Console.Clear();
 
+        while (!IsValidFirstName(firstName))
+        {
+            Console.WriteLine("Ongeldige voornaam. Voer een geldige voornaam in die alleen letters bevat:");
+            firstName = Console.ReadLine() ?? "";
+            Console.Clear();
+        }
+
         Console.ForegroundColor = ConsoleColor.Yellow;
         AsciiArtPrinter.PrintAsciiRegister();
         Console.ResetColor();
@@ -410,6 +417,10 @@ static class Authentication
     {
         List<Account> AccountList = GetSavedAccounts();
         return AccountList?.Find(account => account.Email.ToLower() == email.ToLower());
+    }
+    static bool IsValidFirstName(string firstName)
+    {
+        return firstName.All(char.IsLetter);
     }
     private static void EditProfile()
     {
