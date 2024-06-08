@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Globalization;
-class Reservation
+public class Reservation
 {
     [JsonPropertyName("userEmail")]
     public string Email { get; set; }
@@ -96,7 +96,7 @@ class Reservation
             ProgramFunctions.PrintTextCentered("└" + new string('─', longestLineLength + 3) + "┘");
         }
 
-
+        
 
         Console.WriteLine();
         ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om terug te gaan", ConsoleColor.White);
