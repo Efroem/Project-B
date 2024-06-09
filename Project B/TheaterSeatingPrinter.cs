@@ -126,7 +126,6 @@ public class TheaterSeatingPrinter
                     Console.Write("]");
                 }
 
-                // Ensure no extra space is added after the last column
                 if (j < columns)
                 {
                     Console.Write(" ");
@@ -206,7 +205,7 @@ public class TheaterSeatingPrinter
             case ConsoleKey.E:
                 if (userPositions.Count == 0 || !userPositions.Any(pos => schedule.Seats.Any(s => s.ID == $"{pos.y}-{pos.x}" && s.IsAvailable)))
                 {
-                    ProgramFunctions.PrintTextCentered("Geen stoelen geselecteerd of geselecteerde stoelen zijn niet beschikbaar.\nSelecteer beschikbare stoelen voordat u door kunt gaan naar de betaling"); Console.WriteLine("");
+                    ProgramFunctions.PrintTextCentered("Geen stoelen geselecteerd of geselecteerde stoelen zijn niet beschikbaar\nSelecteer beschikbare stoelen voordat u door kunt gaan naar de betaling"); Console.WriteLine("");
                     ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
                     Console.ReadKey();
                     Console.Clear();
