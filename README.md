@@ -1,17 +1,17 @@
-Project-B
+# Project-B
 
 Dit is een Project voor Hogeschool Rotterdam.
 
-Gegevens:
+## Gegevens
 
-Admin:
-email: admin
-wachtwoord: admin
+### Admin:
+- **email:** admin
+- **wachtwoord:** admin
 
-TestGebruiker
-email: test
-wachtwoord: test
+### TestGebruiker:
+- **email:** test
+- **wachtwoord:** test
 
-TestGebruikerKind
-email: kleinemano@gmail.com
-wachtwoord: Blatest123!
+### TestGebruikerKind:
+- **email:** kleinemano@gmail.com
+- **wachtwoord:** Blatest123!
