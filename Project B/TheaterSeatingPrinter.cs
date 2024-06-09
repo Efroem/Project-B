@@ -76,10 +76,7 @@ public class TheaterSeatingPrinter
 
     public static void PrintGridGroteZaal(int rows, int columns, List<Seat> seats)
     {
-        // Calculate the total width needed for the seating grid
-        int totalWidth = columns * 4 + 5; // Each seat takes up 4 spaces "[O] " and 5 for the borders and row label
-
-        // Generate the top and bottom border lines based on the total width
+        int totalWidth = columns * 4 + 5;
         string topBorder = " " + new string('_', totalWidth - 2) + " ";
         string emptyBorder = "|" + new string(' ', totalWidth - 2) + "|";
 
@@ -88,7 +85,7 @@ public class TheaterSeatingPrinter
 
         for (int i = 1; i <= rows; i++)
         {
-            Console.Write("| " + (char)(i + 64) + " "); // Row label
+            Console.Write("| " + (char)(i + 64) + " ");
 
             for (int j = 1; j <= columns; j++)
             {

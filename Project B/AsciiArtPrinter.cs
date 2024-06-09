@@ -118,6 +118,65 @@ public class AsciiArtPrinter
         Console.ResetColor();
 
     }
+    public static void PrintAsciiZaalverwijderen()
+    {
+        string verwijderen = @"
+  ______           _                           _ _     _                     
+ |___  /          | |                         (_|_)   | |                    
+    / / __ _  __ _| | __   _____ _ ____      ___ _  __| | ___ _ __ ___ _ __  
+   / / / _` |/ _` | | \ \ / / _ \ '__\ \ /\ / / | |/ _` |/ _ \ '__/ _ \ '_ \ 
+  / /_| (_| | (_| | |  \ V /  __/ |   \ V  V /| | | (_| |  __/ | |  __/ | | |
+ /_____\__,_|\__,_|_|   \_/ \___|_|    \_/\_/ |_| |\__,_|\___|_|  \___|_| |_|
+                                               _/ |                          
+                                              |__/                           ";
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        PrintCentered(verwijderen);
+        Console.ResetColor();                                                                                           
+    }
+    public static void PrintAsciizaalveranderen()
+    {
+        string veranderen = @"
+  ______           _                                 _                     
+ |___  /          | |                               | |                    
+    / / __ _  __ _| | __   _____ _ __ __ _ _ __   __| | ___ _ __ ___ _ __  
+   / / / _` |/ _` | | \ \ / / _ \ '__/ _` | '_ \ / _` |/ _ \ '__/ _ \ '_ \ 
+  / /_| (_| | (_| | |  \ V /  __/ | | (_| | | | | (_| |  __/ | |  __/ | | |
+ /_____\__,_|\__,_|_|   \_/ \___|_|  \__,_|_| |_|\__,_|\___|_|  \___|_| |_|";  
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        PrintCentered(veranderen);
+        Console.ResetColor();                                                                                                                                                
+    }
+    public static void PrintAsciifilmtoevoegen()
+    {
+        string toevoegen = @"
+  ______ _ _             _                                              
+ |  ____(_) |           | |                                             
+ | |__   _| |_ __ ___   | |_ ___   _____   _____   ___  __ _  ___ _ __  
+ |  __| | | | '_ ` _ \  | __/ _ \ / _ \ \ / / _ \ / _ \/ _` |/ _ \ '_ \ 
+ | |    | | | | | | | | | || (_) |  __/\ V / (_) |  __/ (_| |  __/ | | |
+ |_|    |_|_|_| |_| |_|  \__\___/ \___| \_/ \___/ \___|\__, |\___|_| |_|
+                                                        __/ |           
+                                                       |___/            ";
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        PrintCentered(toevoegen);
+        Console.ResetColor();                                                       
+        
+    }
+    public static void PrintAsciizaaltoevoegen()
+    {
+        string toevoegen = @"
+  ______           _   _                                              
+ |___  /          | | | |                                             
+    / / __ _  __ _| | | |_ ___   _____   _____   ___  __ _  ___ _ __  
+   / / / _` |/ _` | | | __/ _ \ / _ \ \ / / _ \ / _ \/ _` |/ _ \ '_ \ 
+  / /_| (_| | (_| | | | || (_) |  __/\ V / (_) |  __/ (_| |  __/ | | |
+ /_____\__,_|\__,_|_|  \__\___/ \___| \_/ \___/ \___|\__, |\___|_| |_|
+                                                      __/ |           
+                                                     |___/            ";
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        PrintCentered(toevoegen);
+        Console.ResetColor();
+    }
     public static void Printasciihm()
     {
         string asciiArthm = @"
@@ -170,6 +229,19 @@ public class AsciiArtPrinter
         Console.ForegroundColor = ConsoleColor.Yellow;
         PrintCentered(login);
         Console.ResetColor();
+    }
+    public static void AsciiArtPrinterSelecteren()
+    {
+        string stoel = @"
+   _____ _             _            _           _                      
+  / ____| |           | |          | |         | |                     
+ | (___ | |_ ___   ___| |  ___  ___| | ___  ___| |_ ___ _ __ ___ _ __  
+  \___ \| __/ _ \ / _ \ | / __|/ _ \ |/ _ \/ __| __/ _ \ '__/ _ \ '_ \ 
+  ____) | || (_) |  __/ | \__ \  __/ |  __/ (__| ||  __/ | |  __/ | | |
+ |_____/ \__\___/ \___|_| |___/\___|_|\___|\___|\__\___|_|  \___|_| |_|"; 
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        PrintCentered(stoel);
+        Console.ResetColor();                                                                                                                                             
     }
     public static void PrintAsciiReservering()
     {

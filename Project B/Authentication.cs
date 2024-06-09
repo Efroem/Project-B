@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Drawing;
 
 // Authentication class
-static class Authentication
+public static class Authentication
 {
     public static Account? User { get; private set; }
 
@@ -328,7 +328,7 @@ static class Authentication
     }
 
     // returns hash of string
-    private static string HashPassword(string password)
+    public static string HashPassword(string password)
     {
         byte[] hashedBytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
 
@@ -370,7 +370,7 @@ static class Authentication
 
 
     // checks if email is a valid adress
-    private static bool IsValidEmail(string email)
+    public static bool IsValidEmail(string email)
     {
         try
         {
@@ -418,7 +418,8 @@ static class Authentication
         List<Account> AccountList = GetSavedAccounts();
         return AccountList?.Find(account => account.Email.ToLower() == email.ToLower());
     }
-    static bool IsValidFirstName(string firstName)
+
+    public static bool IsValidFirstName(string firstName)
     {
         return firstName.All(char.IsLetter);
     }
