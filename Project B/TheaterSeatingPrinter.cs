@@ -76,12 +76,19 @@ public class TheaterSeatingPrinter
 
     public static void PrintGridGroteZaal(int rows, int columns, List<Seat> seats)
     {
-        Console.WriteLine("_____________________________________________________");
-        Console.WriteLine("|                                                    |");
+        // Calculate the total width needed for the seating grid
+        int totalWidth = columns * 4 + 5; // Each seat takes up 4 spaces "[O] " and 5 for the borders and row label
+
+        // Generate the top and bottom border lines based on the total width
+        string topBorder = " " + new string('_', totalWidth - 2) + " ";
+        string emptyBorder = "|" + new string(' ', totalWidth - 2) + "|";
+
+        Console.WriteLine(topBorder);
+        Console.WriteLine(emptyBorder);
 
         for (int i = 1; i <= rows; i++)
         {
-            Console.Write("|  " + (char)(i + 64) + "");
+            Console.Write("| " + (char)(i + 64) + " "); // Row label
 
             for (int j = 1; j <= columns; j++)
             {
@@ -94,7 +101,7 @@ public class TheaterSeatingPrinter
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.Write("@");
                     Console.ResetColor();
-                    Console.Write("] ");
+                    Console.Write("]");
                 }
                 else if (userPositions.Contains((j, i)))
                 {
@@ -102,7 +109,7 @@ public class TheaterSeatingPrinter
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.Write("O");
                     Console.ResetColor();
-                    Console.Write("] ");
+                    Console.Write("]");
                 }
                 else if (seat != null && seat.IsAvailable)
                 {
@@ -110,7 +117,7 @@ public class TheaterSeatingPrinter
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("O");
                     Console.ResetColor();
-                    Console.Write("] ");
+                    Console.Write("]");
                 }
                 else
                 {
@@ -118,20 +125,40 @@ public class TheaterSeatingPrinter
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("X");
                     Console.ResetColor();
-                    Console.Write("] ");
+                    Console.Write("]");
+                }
+
+                // Ensure no extra space is added after the last column
+                if (j < columns)
+                {
+                    Console.Write(" ");
                 }
             }
 
-            Console.WriteLine();
+            Console.WriteLine(" |");
         }
 
-        Console.WriteLine("|                                                    |");
-        Console.WriteLine("|                   filmdoek                         |");
-        Console.WriteLine("|____________________________________________________|");
+        Console.WriteLine(emptyBorder);
+
+        int padding = (totalWidth - 12) / 2;
+        string filmdoekLine = "|" + new string(' ', padding) + "filmdoek" + new string(' ', totalWidth - 12 - padding) + "  |";
+        double totalAmount = userPositions.Sum(pos => (pos.x == 1 || pos.x == columns) ? 6.99 : 8.99);
+
+        Console.WriteLine(filmdoekLine);
+        Console.WriteLine("|" + new string('_', totalWidth - 2) + "|");
         Console.WriteLine("Klik op Backspace om stoelen te deselecteren");
         Console.WriteLine("Klik op Q om naar het hoofdmenu terug te gaan");
-        Console.WriteLine("Klik op E om te stoelen te bevestigen");
+        Console.WriteLine($"Klik op E om de stoelen te bevestigen (Totaalbedrag: {totalAmount:C})");
+
+        Console.WriteLine(new string('_', totalWidth));
+        Console.WriteLine("Prijzen van de stoelen:");
+        Console.WriteLine("Zitplaatsen aan de zijkanten: € 6.99");
+        Console.WriteLine("Zitplaatsen in het midden: € 8.99");
+
     }
+
+
+
 
     private static bool HandleUserInput(int rows, int columns, List<Schedule> schedules, int scheduleSerialNumber, TheaterSeatingPrinter printer)
     {
@@ -182,7 +209,7 @@ public class TheaterSeatingPrinter
                 double seatPrice = printer.ZettenVanTuppleInListNaarJson(schedules, scheduleSerialNumber);
                 Console.Clear();
                 Payment.AddSeatPrice(seatPrice);
-                Payment.AddSelectedSeats(userPositions); // Toegevoegd
+                Payment.AddSelectedSeats(userPositions);
                 Payment.scheduleSerialNumber = scheduleSerialNumber;
                 Payment.BestelMenu();
                 break;
