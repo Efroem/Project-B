@@ -118,6 +118,8 @@ public class AdminFunctions
                 Console.WriteLine();
                 ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
                 Console.ReadKey();
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
             }
         }
     }
@@ -134,6 +136,8 @@ public class AdminFunctions
             }
             else if (choice == "2")
             {
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
                 return false;
             }
             else
@@ -241,8 +245,8 @@ public class AdminFunctions
                 Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld: '3'):");
                 if (!TryAgain()) return;
                 Console.Clear();
-                AsciiArtPrinter.PrintAsciiZaalverwijderen();
                 Console.WriteLine("\x1b[3J");
+                AsciiArtPrinter.PrintAsciiZaalverwijderen();
                 FormatCinemaHalls(cinemaHalls);
                 Console.WriteLine("\nWelke zaal wilt u verwijderen? Voer het serienummer in:");
             }
@@ -255,8 +259,8 @@ public class AdminFunctions
                 Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld: '3'):");
                 if (!TryAgain()) return;
                 Console.Clear();
-                AsciiArtPrinter.PrintAsciiZaalverwijderen();
                 Console.WriteLine("\x1b[3J");
+                AsciiArtPrinter.PrintAsciiZaalverwijderen();
                 FormatCinemaHalls(cinemaHalls);
                 Console.WriteLine("\nWelke zaal wilt u verwijderen? Voer het serienummer in:");
             }
@@ -293,6 +297,8 @@ public class AdminFunctions
                 Console.WriteLine($"Er is een error ontstaan met het verwijderen van de bioscoopzaal: {ex.Message}");
             }
         }
+        Console.Clear();
+        Console.WriteLine("\x1b[3J");
     }
 
 

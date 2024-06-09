@@ -295,7 +295,7 @@
     "seats": [
       {
         "id": "1-1",
-        "isAvailable": true,
+        "isAvailable": false,
         "price": 6.99
       },
       {

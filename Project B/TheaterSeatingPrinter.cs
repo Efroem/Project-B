@@ -45,7 +45,7 @@ public class TheaterSeatingPrinter
             while (running)
             {
                 Console.Clear();
-                PrintGridGroteZaal(rows, columns, seats);
+                PrintGridHall(rows, columns, seats);
                 running = HandleUserInput(rows, columns, schedules, scheduleSerialNumber, this);
             }
         }
@@ -74,7 +74,7 @@ public class TheaterSeatingPrinter
         });
     }
 
-    public static void PrintGridGroteZaal(int rows, int columns, List<Seat> seats)
+    public static void PrintGridHall(int rows, int columns, List<Seat> seats)
     {
         int totalWidth = columns * 4 + 5;
         string topBorder = " " + new string('_', totalWidth - 2) + " ";
@@ -206,14 +206,15 @@ public class TheaterSeatingPrinter
             case ConsoleKey.E:
                 if (userPositions.Count == 0 || !userPositions.Any(pos => schedule.Seats.Any(s => s.ID == $"{pos.y}-{pos.x}" && s.IsAvailable)))
                 {
-                    Console.WriteLine("No seats selected or all selected seats are not available.");
-                    Console.WriteLine("Please select available seats before proceeding to payment.");
-                    Console.WriteLine("Press any key to continue");
+                    ProgramFunctions.PrintTextCentered("Geen stoelen geselecteerd of geselecteerde stoelen zijn niet beschikbaar.\nSelecteer beschikbare stoelen voordat u door kunt gaan naar de betaling"); Console.WriteLine("");
+                    ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
                     Console.ReadKey();
+                    Console.Clear();
+                    Console.WriteLine("\x1b[3J");
                     break;
                 }
 
-                double seatPrice = printer.ZettenVanTuppleInListNaarJson(schedules, scheduleSerialNumber);
+                double seatPrice = printer.ConvertTupleListToJson(schedules, scheduleSerialNumber);
                 Console.Clear();
                 Payment.AddSeatPrice(seatPrice);
                 Payment.AddSelectedSeats(userPositions);
@@ -222,13 +223,15 @@ public class TheaterSeatingPrinter
                 break;
 
             case ConsoleKey.Q:
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
                 return false;
         }
 
         return true;
     }
 
-    public double ZettenVanTuppleInListNaarJson(List<Schedule> schedules, int scheduleSerialNumber)
+    public double ConvertTupleListToJson(List<Schedule> schedules, int scheduleSerialNumber)
     {
         var schedule = schedules.FirstOrDefault(s => s.SerialNumber == scheduleSerialNumber);
         if (schedule == null)
