@@ -80,6 +80,7 @@ public class TheaterSeatingPrinter
         string topBorder = " " + new string('_', totalWidth - 2) + " ";
         string emptyBorder = "|" + new string(' ', totalWidth - 2) + "|";
 
+        AsciiArtPrinter.AsciiArtPrinterSelecteren();
         Console.WriteLine(topBorder);
         Console.WriteLine(emptyBorder);
 
@@ -160,6 +161,7 @@ public class TheaterSeatingPrinter
     private static bool HandleUserInput(int rows, int columns, List<Schedule> schedules, int scheduleSerialNumber, TheaterSeatingPrinter printer)
     {
         var keyInfo = Console.ReadKey(true);
+        var schedule = schedules.FirstOrDefault(s => s.SerialNumber == scheduleSerialNumber);
 
         switch (keyInfo.Key)
         {
@@ -183,7 +185,6 @@ public class TheaterSeatingPrinter
                 var userPosition = (userXPosition, userYPosition);
                 if (!userPositions.Contains(userPosition))
                 {
-                    var schedule = schedules.FirstOrDefault(s => s.SerialNumber == scheduleSerialNumber);
                     if (schedule != null)
                     {
                         var seat = schedule.Seats.FirstOrDefault(s => s.ID == $"{userYPosition}-{userXPosition}");
@@ -203,6 +204,15 @@ public class TheaterSeatingPrinter
                 break;
 
             case ConsoleKey.E:
+                if (userPositions.Count == 0 || !userPositions.Any(pos => schedule.Seats.Any(s => s.ID == $"{pos.y}-{pos.x}" && s.IsAvailable)))
+                {
+                    Console.WriteLine("No seats selected or all selected seats are not available.");
+                    Console.WriteLine("Please select available seats before proceeding to payment.");
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadKey();
+                    break;
+                }
+
                 double seatPrice = printer.ZettenVanTuppleInListNaarJson(schedules, scheduleSerialNumber);
                 Console.Clear();
                 Payment.AddSeatPrice(seatPrice);
