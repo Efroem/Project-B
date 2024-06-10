@@ -3809,12 +3809,12 @@
       },
       {
         "id": "4-3",
-        "isAvailable": false,
+        "isAvailable": true,
         "price": 8.99
       },
       {
         "id": "4-4",
-        "isAvailable": false,
+        "isAvailable": true,
         "price": 8.99
       },
       {
