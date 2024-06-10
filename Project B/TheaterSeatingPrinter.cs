@@ -143,8 +143,10 @@ public class TheaterSeatingPrinter
 
         Console.WriteLine(filmdoekLine);
         Console.WriteLine("|" + new string('_', totalWidth - 2) + "|");
-        Console.WriteLine($"Klik op Enter om een stoel te selecteren\nKlik op Backspace om een stoel te deselecteren\nKlik op E om de stoel(en) te bevestigen (Totaalbedrag: {totalAmount:C})");
-        Console.WriteLine("Klik op Q om naar het hoofdmenu terug te gaan");
+        ProgramFunctions.PrintColoredText("Klik op ", ConsoleColor.White, "Enter", ConsoleColor.Magenta, " om een stoel te selecteren", ConsoleColor.White);
+        ProgramFunctions.PrintColoredText("Klik op ", ConsoleColor.White, "Backspace", ConsoleColor.Magenta, " om een stoel te deselecteren", ConsoleColor.White);
+        ProgramFunctions.PrintColoredText("Klik op ", ConsoleColor.White, "E", ConsoleColor.Magenta, $" om de stoel(en) te bevestigen (Totaalbedrag: {totalAmount:C})", ConsoleColor.White);
+        ProgramFunctions.PrintColoredText("Klik op ", ConsoleColor.White, "Q", ConsoleColor.Magenta, " om naar het hoofdmenu terug te gaan", ConsoleColor.White);
 
         Console.WriteLine(new string('_', totalWidth));
         Console.WriteLine("Prijzen van de stoelen:");
