@@ -18,7 +18,7 @@ public static class ProgramFunctions
         }
     }
 
-    public static void PrintColoredText4colors(string textPart1, ConsoleColor color1, string textPart2, ConsoleColor color2, string textPart3, ConsoleColor color3, string textPart4, ConsoleColor color4)
+    public static void PrintColoredText(string textPart1, ConsoleColor color1, string textPart2, ConsoleColor color2, string textPart3, ConsoleColor color3, string textPart4, ConsoleColor color4)
     {
         Console.ForegroundColor = color1;
         Console.Write(textPart1);
@@ -31,7 +31,7 @@ public static class ProgramFunctions
         Console.ResetColor();
         Console.WriteLine();
     }
-    public static void PrintColoredText3colors(string textPart1, ConsoleColor color1, string textPart2, ConsoleColor color2, string textPart3, ConsoleColor color3)
+    public static void PrintColoredText(string textPart1, ConsoleColor color1, string textPart2, ConsoleColor color2, string textPart3, ConsoleColor color3)
     {
         Console.ForegroundColor = color1;
         Console.Write(textPart1);
