@@ -143,9 +143,8 @@ public class TheaterSeatingPrinter
 
         Console.WriteLine(filmdoekLine);
         Console.WriteLine("|" + new string('_', totalWidth - 2) + "|");
-        Console.WriteLine("Klik op Backspace om stoelen te deselecteren");
+        Console.WriteLine($"Klik op Enter om een stoel te selecteren\nKlik op Backspace om een stoel te deselecteren\nKlik op E om de stoel(en) te bevestigen (Totaalbedrag: {totalAmount:C})");
         Console.WriteLine("Klik op Q om naar het hoofdmenu terug te gaan");
-        Console.WriteLine($"Klik op E om de stoelen te bevestigen (Totaalbedrag: {totalAmount:C})");
 
         Console.WriteLine(new string('_', totalWidth));
         Console.WriteLine("Prijzen van de stoelen:");
@@ -224,6 +223,7 @@ public class TheaterSeatingPrinter
             case ConsoleKey.Q:
                 Console.Clear();
                 Console.WriteLine("\x1b[3J");
+
                 return false;
         }
 
