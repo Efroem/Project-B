@@ -15,6 +15,8 @@ class Program
 
         while (true)
         {
+            Console.Clear();
+            Console.WriteLine("\x1b[3J");
             string[] options;
             if (Authentication.User == null)
             {
@@ -30,7 +32,7 @@ class Program
                 Console.ResetColor();
                 if (!Authentication.User.IsAdmin)
                 {
-                    options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina"};
+                    options = new string[] { "1.Profiel Bekijken", "2.Bekijk Films", "3.Bekijk Filmrooster", "4.Bekijk Reserveringen", "5.Verlaat Pagina" };
                 }
                 else
                 {
