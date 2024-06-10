@@ -38,5 +38,13 @@
     "LastName": "Markovic",
     "BirthDate": "20-10-2017",
     "IsAdmin": false
+  },
+  {
+    "Email": "test@gmail.com",
+    "Password": "6f15184eb209bc814d01fe50fec3e772d1d2ae30bf74bf881b1f8dd7367ee1f1",
+    "FirstName": "",
+    "LastName": "testtwee",
+    "BirthDate": "20-10-1998",
+    "IsAdmin": false
   }
 ]

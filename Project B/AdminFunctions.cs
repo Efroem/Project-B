@@ -437,6 +437,8 @@ public class AdminFunctions
         {
             Console.WriteLine($"Er is een error ontstaan met het wijzigen van de bioscoopzaal: {ex.Message}");
         }
+        Console.Clear();
+        Console.WriteLine("\x1b[3J");
     }
 
 
