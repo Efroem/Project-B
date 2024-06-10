@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Drawing;
 
 // Authentication class
-static class Authentication
+public static class Authentication
 {
     public static Account? User { get; private set; }
 
@@ -74,7 +74,7 @@ static class Authentication
         // checks the password hash on the found account
         if (!foundAccount.TestPassword(HashPassword(password)))
         {
-            throw new Exception ("Aanmeldgegevens niet gevonden");
+            throw new Exception("Aanmeldgegevens niet gevonden");
         }
 
         // sets User property and returns User
@@ -102,6 +102,13 @@ static class Authentication
         string firstName = Console.ReadLine() ?? "";
         Console.Clear();
 
+        while (!IsValidFirstName(firstName))
+        {
+            Console.WriteLine("Ongeldige voornaam. Voer een geldige voornaam in die alleen letters bevat:");
+            firstName = Console.ReadLine() ?? "";
+            Console.Clear();
+        }
+
         Console.ForegroundColor = ConsoleColor.Yellow;
         AsciiArtPrinter.PrintAsciiRegister();
         Console.ResetColor();
@@ -117,7 +124,7 @@ static class Authentication
         Console.ResetColor();
 
         bool admin = false;
-        if (email.Contains("@admin.com"))
+        if (email.Contains("@admin"))
         {
             string adminCode = "admin123";
             Console.WriteLine("Geef een admin code in indien van toepassing:");
@@ -321,7 +328,7 @@ static class Authentication
     }
 
     // returns hash of string
-    private static string HashPassword(string password)
+    public static string HashPassword(string password)
     {
         byte[] hashedBytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
 
@@ -363,7 +370,7 @@ static class Authentication
 
 
     // checks if email is a valid adress
-    private static bool IsValidEmail(string email)
+    public static bool IsValidEmail(string email)
     {
         try
         {
@@ -410,6 +417,11 @@ static class Authentication
     {
         List<Account> AccountList = GetSavedAccounts();
         return AccountList?.Find(account => account.Email.ToLower() == email.ToLower());
+    }
+
+    public static bool IsValidFirstName(string firstName)
+    {
+        return firstName.All(char.IsLetter);
     }
     private static void EditProfile()
     {

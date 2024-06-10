@@ -231,7 +231,7 @@ public class Schedule
                 if (Authentication.User is not null)
                 {
                     TheaterSeatingPrinter seatingPrinter = new TheaterSeatingPrinter();
-                    seatingPrinter.PrintTheaterSeating(schedules, pickedSchedule.SerialNumber);
+                    seatingPrinter.PrintTheaterSeating(ReadScheduleJson(), pickedSchedule.SerialNumber);
                     return;
                 }
                 else if (Authentication.User is null)
@@ -255,7 +255,7 @@ public class Schedule
                 if (Authentication.User is not null)
                 {
                     TheaterSeatingPrinter seatingPrinter = new TheaterSeatingPrinter();
-                    seatingPrinter.PrintTheaterSeating(schedules, pickedSchedule.SerialNumber);
+                    seatingPrinter.PrintTheaterSeating(ReadScheduleJson(), pickedSchedule.SerialNumber);
                     return;
                 }
                 else if (Authentication.User is null)
@@ -360,6 +360,4 @@ public class Schedule
             Console.WriteLine($"│ {textArray[i]}" + new string(' ', longestLongestLineLength + 3 - textArray[i].Length - 1) + "│");
         }
     }
-
-
 }

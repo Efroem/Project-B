@@ -1,4 +1,4 @@
-class Account
+public class Account
 {
     public string Email { get; set; }
     private string? _password;

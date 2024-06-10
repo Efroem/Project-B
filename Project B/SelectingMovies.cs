@@ -187,9 +187,6 @@ public class SelectingMovies
         return selectedOption;
     }
 
-
-
-
     private static void LoadMovies()
     {
         try

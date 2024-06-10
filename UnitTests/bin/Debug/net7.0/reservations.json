@@ -13,19 +13,5 @@
       }
     ],
     "totalPrice": 18.98
-  },
-  {
-    "userEmail": "test",
-    "seats": [
-      "1-1"
-    ],
-    "scheduleSerialNumber": 7,
-    "Food": [
-      {
-        "Naam": "Klein - \u20AC3.50 Popcorn Zoet",
-        "Prijs": 3.5
-      }
-    ],
-    "totalPrice": 10.49
   }
 ]

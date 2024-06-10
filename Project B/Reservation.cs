@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Globalization;
-class Reservation
+public class Reservation
 {
     [JsonPropertyName("userEmail")]
     public string Email { get; set; }
@@ -10,10 +10,14 @@ class Reservation
     public List<string> Seats { get; set; }
 
     [JsonPropertyName("scheduleSerialNumber")]
-    public int ScheduleSerialNumber {get => _scheduleSerialNumber; set {
-        _scheduleSerialNumber = value;
-        _schedule = Schedule.ReadScheduleJson().Find(x => x.SerialNumber == value);
-    }}
+    public int ScheduleSerialNumber
+    {
+        get => _scheduleSerialNumber; set
+        {
+            _scheduleSerialNumber = value;
+            _schedule = Schedule.ReadScheduleJson().Find(x => x.SerialNumber == value);
+        }
+    }
 
     private int _scheduleSerialNumber;
 
@@ -21,7 +25,7 @@ class Reservation
     public List<Product> Food { get; set; }
 
     [JsonPropertyName("totalPrice")]
-    public double TotalPrice {get; set;}
+    public double TotalPrice { get; set; }
 
     public Reservation(int scheduleSerialNumber, List<string> seats, List<Product> food, double totalPrice)
     {
@@ -36,14 +40,16 @@ class Reservation
 
     public override string ToString()
     {
-        return $"Film: {_schedule.MovieTitle} \nZaal: {_schedule.CinemaHallSerialNumber}\nDatum: {_schedule}\nStoelen: {ListToString(Seats, 5)}\nExtra: {ListToString(Food.Select(x => x.Naam).ToList(), 3)}";
+        return $"Film: {_schedule.MovieTitle} \nZaal: {_schedule.CinemaHallSerialNumber}\nDatum: {_schedule.Date}\nStoelen: {ListToString(Seats, 5)}\nExtra: {ListToString(Food.Select(x => x.Naam).ToList(), 3)}";
     }
 
-    private string ListToString(List<string> list, int maxLength) {
+    private string ListToString(List<string> list, int maxLength)
+    {
         string returnString = "";
         for (int i = 0; i < list.Count; i++)
         {
-            if (i != 0 && i % maxLength == 0) {
+            if (i != 0 && i % maxLength == 0)
+            {
                 returnString += "\n";
             }
             returnString += list[i];
@@ -60,12 +66,15 @@ class Reservation
         reservations = reservations.Where(x => x.Email == currentUser.Email).Where(x => x._schedule.Date > DateTime.Now).OrderBy(x => x._schedule.Date).ToList();
 
         int longestLineLength = 0;
-        if (reservations.Count == 0) {
+        if (reservations.Count == 0)
+        {
             const string noReservations = "U heeft geen reserveringen";
             ProgramFunctions.PrintTextCentered("┌" + new string('─', noReservations.Length + 3) + "┐");
             PrintTextCentered(noReservations, noReservations.Length);
             ProgramFunctions.PrintTextCentered("└" + new string('─', noReservations.Length + 3) + "┘");
-        } else {
+        }
+        else
+        {
             foreach (Reservation reservation in reservations)
             {
 
@@ -78,7 +87,8 @@ class Reservation
             for (int i = 0; i < reservations.Count; i++)
             {
                 PrintTextCentered($"{reservations[i]}", longestLineLength);
-                if (i != reservations.Count - 1) {
+                if (i != reservations.Count - 1)
+                {
                     PrintTextCentered("├" + new string('─', longestLineLength + 3) + "┤", longestLineLength + 3, true);
                 }
             }
@@ -109,7 +119,7 @@ class Reservation
         for (int i = 0; i < textArray.Length; i++)
         {
             windowWidth = Console.WindowWidth;
-            leftPadding = (windowWidth - longestLineLength + longestLineLength - longestLongestLineLength) / 2 - 3;
+            leftPadding = (windowWidth - longestLineLength + longestLineLength - longestLongestLineLength) / 2 - 2;
             Console.CursorLeft = leftPadding;
 
             Console.SetCursorPosition(leftPadding, Console.CursorTop);
@@ -127,7 +137,8 @@ class Reservation
         return JsonSerializer.Deserialize<List<Reservation>>(jsonString) ?? new();
     }
 
-    public static void CreateReservation(int scheduleSerialNumber, HashSet<(int x, int y)> seats, List<Product> products, double totalPrice) {
+    public static void CreateReservation(int scheduleSerialNumber, HashSet<(int x, int y)> seats, List<Product> products, double totalPrice)
+    {
         List<string> seatStrings = seats.Select(seat => $"{seat.x}-{seat.y}").ToList();
         Reservation reservation = new(scheduleSerialNumber, seatStrings, products, totalPrice);
         // Retrieves existing reservations

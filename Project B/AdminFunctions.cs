@@ -118,6 +118,8 @@ public class AdminFunctions
                 Console.WriteLine();
                 ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
                 Console.ReadKey();
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
             }
         }
     }
@@ -134,6 +136,8 @@ public class AdminFunctions
             }
             else if (choice == "2")
             {
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
                 return false;
             }
             else
@@ -150,8 +154,10 @@ public class AdminFunctions
         List<AdminFunctions>? cinemaHalls = ReadFromCinemaHall();
         string? name = null;
 
+        AsciiArtPrinter.PrintAsciizaaltoevoegen();
         if (cinemaHalls == null)
         {
+            AsciiArtPrinter.PrintAsciizaaltoevoegen();
             Console.WriteLine("Gefaald lezen van de data.");
             return;
         }
@@ -166,6 +172,7 @@ public class AdminFunctions
                 Console.WriteLine("Verkeerde naam. Voer een juiste naam in.");
                 if (!TryAgain()) return;
                 Console.Clear();
+                AsciiArtPrinter.PrintAsciizaaltoevoegen();
                 Console.WriteLine("\x1b[3J");
             }
             else
@@ -181,8 +188,10 @@ public class AdminFunctions
             Console.Write($"\nKies de grootte van de nieuwe bioscoopzaal\n1 - klein: (55 mensen)\n2 - medium: (86 mensen)\n3 - groot(100 mensen):");
             if (!int.TryParse(Console.ReadLine(), out size) || (size < 1 || size > 3))
             {
+                Console.WriteLine("Verkeerde input. Kies tussen 1, 2 of 3");
                 if (!TryAgain()) return;
                 Console.Clear();
+                AsciiArtPrinter.PrintAsciizaaltoevoegen();
                 Console.WriteLine("\x1b[3J");
             }
             else
@@ -217,7 +226,7 @@ public class AdminFunctions
     public static void RemoveCinemaHall()
     {
         List<AdminFunctions>? cinemaHalls = ReadFromCinemaHall();
-
+        AsciiArtPrinter.PrintAsciiZaalverwijderen();
         if (cinemaHalls == null)
         {
             Console.WriteLine("Gefaald lezen van de data.");
@@ -237,6 +246,7 @@ public class AdminFunctions
                 if (!TryAgain()) return;
                 Console.Clear();
                 Console.WriteLine("\x1b[3J");
+                AsciiArtPrinter.PrintAsciiZaalverwijderen();
                 FormatCinemaHalls(cinemaHalls);
                 Console.WriteLine("\nWelke zaal wilt u verwijderen? Voer het serienummer in:");
             }
@@ -250,6 +260,7 @@ public class AdminFunctions
                 if (!TryAgain()) return;
                 Console.Clear();
                 Console.WriteLine("\x1b[3J");
+                AsciiArtPrinter.PrintAsciiZaalverwijderen();
                 FormatCinemaHalls(cinemaHalls);
                 Console.WriteLine("\nWelke zaal wilt u verwijderen? Voer het serienummer in:");
             }
@@ -275,6 +286,7 @@ public class AdminFunctions
                 string jsonString = JsonSerializer.Serialize(cinemaHalls, new JsonSerializerOptions { WriteIndented = true });
                 File.WriteAllText("cinemaHall.json", jsonString);
                 Console.Clear();
+                AsciiArtPrinter.PrintAsciiZaalverwijderen();
                 Console.WriteLine();
                 ProgramFunctions.PrintTextCentered($"Bioscoopzaal met serienummer {serialNumber} succesvol verwijderd.");
                 ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
@@ -285,6 +297,8 @@ public class AdminFunctions
                 Console.WriteLine($"Er is een error ontstaan met het verwijderen van de bioscoopzaal: {ex.Message}");
             }
         }
+        Console.Clear();
+        Console.WriteLine("\x1b[3J");
     }
 
 
@@ -292,7 +306,7 @@ public class AdminFunctions
     public static void ChangeCinemaHall()
     {
         List<AdminFunctions>? cinemaHalls = ReadFromCinemaHall();
-
+        AsciiArtPrinter.PrintAsciizaalveranderen();
         if (cinemaHalls == null)
         {
             Console.WriteLine("Gefaald lezen van de data.");
@@ -311,6 +325,7 @@ public class AdminFunctions
                 Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld '3'):");
                 if (!TryAgain()) return;
                 Console.Clear();
+                AsciiArtPrinter.PrintAsciizaalveranderen();
                 Console.WriteLine("\x1b[3J");
                 FormatCinemaHalls(cinemaHalls);
                 Console.WriteLine("\nWelke zaal wilt u wijzigen? Voer het serienummer in:");
@@ -324,6 +339,7 @@ public class AdminFunctions
                 Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld '3'):");
                 if (!TryAgain()) return;
                 Console.Clear();
+                AsciiArtPrinter.PrintAsciizaalveranderen();
                 Console.WriteLine("\x1b[3J");
                 FormatCinemaHalls(cinemaHalls);
                 Console.WriteLine("\nWelke zaal wilt u wijzigen? Voer het serienummer in:");
@@ -352,6 +368,7 @@ public class AdminFunctions
                 Console.WriteLine($"Ongeldige invoer. Voer 1 ('naam') of 2 ('grootte') in voor uw keuze.");
                 if (!TryAgain()) return;
                 Console.Clear();
+                AsciiArtPrinter.PrintAsciizaalveranderen();
                 Console.WriteLine("\x1b[3J");
                 FormatCinemaHalls(cinemaHalls);
                 Console.WriteLine("\nWat wilt u wijzigen?\n1. Naam\n2. Grootte");
@@ -392,6 +409,7 @@ public class AdminFunctions
                         Console.WriteLine("Verkeerde input. Kies tussen 1, 2 of 3.");
                         if (!TryAgain()) return;
                         Console.Clear();
+                        AsciiArtPrinter.PrintAsciifilmtoevoegen();
                         Console.WriteLine("\x1b[3J");
                         FormatCinemaHalls(cinemaHalls);
                     }
@@ -408,6 +426,9 @@ public class AdminFunctions
         {
             string jsonString = JsonSerializer.Serialize(cinemaHalls, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText("cinemaHall.json", jsonString);
+            Console.Clear();
+            AsciiArtPrinter.PrintAsciizaalveranderen();
+            Console.WriteLine();
             ProgramFunctions.PrintTextCentered($"Wijziging van bioscoopzaal met serienummer {serialNumber} succesvol doorgevoerd.");
             ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
             Console.ReadKey();
@@ -416,6 +437,8 @@ public class AdminFunctions
         {
             Console.WriteLine($"Er is een error ontstaan met het wijzigen van de bioscoopzaal: {ex.Message}");
         }
+        Console.Clear();
+        Console.WriteLine("\x1b[3J");
     }
 
 
@@ -423,7 +446,7 @@ public class AdminFunctions
     {
         List<Schedule> schedules = Schedule.ReadScheduleJson();
         List<AdminFunctions>? cinemaHalls = ReadFromCinemaHall();
-
+        AsciiArtPrinter.PrintAsciifilmtoevoegen();
         if (cinemaHalls == null || cinemaHalls.Count == 0)
         {
             Console.WriteLine("Geen zalen beschikbaar om een film toe te voegen.");
@@ -440,6 +463,7 @@ public class AdminFunctions
                 Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in.");
                 if (!TryAgain()) return;
                 Console.Clear();
+                AsciiArtPrinter.PrintAsciifilmtoevoegen();
                 Console.WriteLine("\x1b[3J");
                 FormatCinemaHalls(cinemaHalls);
                 Console.WriteLine("\nWelke zaal wilt u selecteren? Voer het serienummer in:");
@@ -462,6 +486,7 @@ public class AdminFunctions
         }
 
         Console.Clear();
+        AsciiArtPrinter.PrintAsciifilmtoevoegen();
         Console.WriteLine("\x1b[3J");
 
         for (int i = 0; i < movies.Count; i++)
@@ -479,6 +504,7 @@ public class AdminFunctions
                 Console.WriteLine("Ongeldige invoer. Voer een geldig nummer in.");
                 if (!TryAgain()) return;
                 Console.Clear();
+                AsciiArtPrinter.PrintAsciifilmtoevoegen();
                 Console.WriteLine("\x1b[3J");
                 for (int i = 0; i < movies.Count; i++)
                 {
@@ -509,16 +535,17 @@ public class AdminFunctions
                 Console.WriteLine("Verkeerde format. Voer een geldige datum in en op de juiste manier: (dd/MM/yyyy)");
                 if (!TryAgain()) return;
                 Console.Clear();
+                AsciiArtPrinter.PrintAsciifilmtoevoegen();
                 Console.WriteLine("\x1b[3J");
                 Console.Write($"\nVoer de datum van de film in (dd/MM/yyyy): ");
             }
         }
 
-        Console.Write($"\nVoer het uur in (0-23): ");
         int hour;
         while (true)
         {
-            if (int.TryParse(Console.ReadLine(), out hour) || hour < 0 || hour > 23)
+            Console.WriteLine("Please enter an hour between 0 and 23:");
+            if (int.TryParse(Console.ReadLine(), out hour) && hour >= 0 && hour <= 23)
             {
                 break;
             }
@@ -527,17 +554,18 @@ public class AdminFunctions
                 Console.WriteLine("Verkeerde input. Voer het uur binnen 0 en 23 in");
                 if (!TryAgain()) return;
                 Console.Clear();
+                AsciiArtPrinter.PrintAsciifilmtoevoegen();
                 Console.WriteLine("\x1b[3J");
                 Console.Write($"\nVoer het uur in (0-23): ");
             }
 
         }
 
-        Console.Write($"\nVoer de minuut in (0-59): ");
         int minute;
         while (true)
         {
-            if (int.TryParse(Console.ReadLine(), out minute) || minute < 0 || minute > 59)
+            Console.Write($"\nVoer de minuut in (0-59): ");
+            if (int.TryParse(Console.ReadLine(), out minute) && minute >= 0 && minute <= 59)
             {
                 break;
             }
@@ -546,8 +574,8 @@ public class AdminFunctions
                 Console.WriteLine("Verkeerde input. Voer de minuut tussen 0 en 59 in");
                 if (!TryAgain()) return;
                 Console.Clear();
+                AsciiArtPrinter.PrintAsciifilmtoevoegen();
                 Console.WriteLine("\x1b[3J");
-                Console.Write($"\nVoer de minuut in (0-59): ");
             }
         }
 
@@ -560,6 +588,8 @@ public class AdminFunctions
 
         Console.Clear();
         Console.WriteLine("\x1b[3J");
+        AsciiArtPrinter.PrintAsciifilmtoevoegen();
+        Console.WriteLine();
         ProgramFunctions.PrintTextCentered("Film succesvol aan het rooster toegevoegd");
         ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
         Console.ReadKey();

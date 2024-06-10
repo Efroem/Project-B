@@ -45,12 +45,9 @@ public class TheaterSeatingPrinter
             while (running)
             {
                 Console.Clear();
-                PrintGridGroteZaal(rows, columns, seats);
+                PrintGridHall(rows, columns, seats);
                 running = HandleUserInput(rows, columns, schedules, scheduleSerialNumber, this);
             }
-
-            Console.WriteLine("Back to menu");
-            Console.ReadKey();
         }
         catch (Exception ex)
         {
@@ -77,14 +74,19 @@ public class TheaterSeatingPrinter
         });
     }
 
-    public static void PrintGridGroteZaal(int rows, int columns, List<Seat> seats)
+    public static void PrintGridHall(int rows, int columns, List<Seat> seats)
     {
-        Console.WriteLine("_____________________________________________________");
-        Console.WriteLine("|                                                    |");
+        int totalWidth = columns * 4 + 5;
+        string topBorder = " " + new string('_', totalWidth - 2) + " ";
+        string emptyBorder = "|" + new string(' ', totalWidth - 2) + "|";
+
+        AsciiArtPrinter.AsciiArtPrinterSelecteren();
+        Console.WriteLine(topBorder);
+        Console.WriteLine(emptyBorder);
 
         for (int i = 1; i <= rows; i++)
         {
-            Console.Write("|  " + (char)(i + 64) + "");
+            Console.Write("| " + (char)(i + 64) + " ");
 
             for (int j = 1; j <= columns; j++)
             {
@@ -97,7 +99,7 @@ public class TheaterSeatingPrinter
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.Write("@");
                     Console.ResetColor();
-                    Console.Write("] ");
+                    Console.Write("]");
                 }
                 else if (userPositions.Contains((j, i)))
                 {
@@ -105,7 +107,7 @@ public class TheaterSeatingPrinter
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.Write("O");
                     Console.ResetColor();
-                    Console.Write("] ");
+                    Console.Write("]");
                 }
                 else if (seat != null && seat.IsAvailable)
                 {
@@ -113,7 +115,7 @@ public class TheaterSeatingPrinter
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("O");
                     Console.ResetColor();
-                    Console.Write("] ");
+                    Console.Write("]");
                 }
                 else
                 {
@@ -121,24 +123,45 @@ public class TheaterSeatingPrinter
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("X");
                     Console.ResetColor();
-                    Console.Write("] ");
+                    Console.Write("]");
+                }
+
+                if (j < columns)
+                {
+                    Console.Write(" ");
                 }
             }
 
-            Console.WriteLine();
+            Console.WriteLine(" |");
         }
 
-        Console.WriteLine("|                                                    |");
-        Console.WriteLine("|                   filmdoek                         |");
-        Console.WriteLine("|____________________________________________________|");
-        Console.WriteLine("Klik op Backspace om stoelen te deselecteren");
-        Console.WriteLine("Klik op Q om naar het hoofdmenu terug te gaan");
-        Console.WriteLine("Klik op E om te stoelen te bevestigen");
+        Console.WriteLine(emptyBorder);
+
+        int padding = (totalWidth - 12) / 2;
+        string filmdoekLine = "|" + new string(' ', padding) + "filmdoek" + new string(' ', totalWidth - 12 - padding) + "  |";
+        double totalAmount = userPositions.Sum(pos => (pos.x == 1 || pos.x == columns) ? 6.99 : 8.99);
+
+        Console.WriteLine(filmdoekLine);
+        Console.WriteLine("|" + new string('_', totalWidth - 2) + "|");
+        ProgramFunctions.PrintColoredText("Klik op ", ConsoleColor.White, "Enter", ConsoleColor.Magenta, " om een stoel te selecteren", ConsoleColor.White);
+        ProgramFunctions.PrintColoredText("Klik op ", ConsoleColor.White, "Backspace", ConsoleColor.Magenta, " om een stoel te deselecteren", ConsoleColor.White);
+        ProgramFunctions.PrintColoredText("Klik op ", ConsoleColor.White, "E", ConsoleColor.Magenta, $" om de stoel(en) te bevestigen (Totaalbedrag: {totalAmount:C})", ConsoleColor.White);
+        ProgramFunctions.PrintColoredText("Klik op ", ConsoleColor.White, "Q", ConsoleColor.Magenta, " om naar het hoofdmenu terug te gaan", ConsoleColor.White);
+
+        Console.WriteLine(new string('_', totalWidth));
+        Console.WriteLine("Prijzen van de stoelen:");
+        Console.WriteLine("Zitplaatsen aan de zijkanten: € 6.99");
+        Console.WriteLine("Zitplaatsen in het midden: € 8.99");
+
     }
+
+
+
 
     private static bool HandleUserInput(int rows, int columns, List<Schedule> schedules, int scheduleSerialNumber, TheaterSeatingPrinter printer)
     {
         var keyInfo = Console.ReadKey(true);
+        var schedule = schedules.FirstOrDefault(s => s.SerialNumber == scheduleSerialNumber);
 
         switch (keyInfo.Key)
         {
@@ -162,7 +185,6 @@ public class TheaterSeatingPrinter
                 var userPosition = (userXPosition, userYPosition);
                 if (!userPositions.Contains(userPosition))
                 {
-                    var schedule = schedules.FirstOrDefault(s => s.SerialNumber == scheduleSerialNumber);
                     if (schedule != null)
                     {
                         var seat = schedule.Seats.FirstOrDefault(s => s.ID == $"{userYPosition}-{userXPosition}");
@@ -182,22 +204,35 @@ public class TheaterSeatingPrinter
                 break;
 
             case ConsoleKey.E:
-                double seatPrice = printer.ZettenVanTuppleInListNaarJson(schedules, scheduleSerialNumber);
+                if (userPositions.Count == 0 || !userPositions.Any(pos => schedule.Seats.Any(s => s.ID == $"{pos.y}-{pos.x}" && s.IsAvailable)))
+                {
+                    ProgramFunctions.PrintTextCentered("Geen stoelen geselecteerd of geselecteerde stoelen zijn niet beschikbaar\nSelecteer beschikbare stoelen voordat u door kunt gaan naar de betaling"); Console.WriteLine("");
+                    ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+                    Console.ReadKey();
+                    Console.Clear();
+                    Console.WriteLine("\x1b[3J");
+                    break;
+                }
+
+                double seatPrice = printer.ConvertTupleListToJson(schedules, scheduleSerialNumber);
                 Console.Clear();
                 Payment.AddSeatPrice(seatPrice);
-                Payment.AddSelectedSeats(userPositions); // Toegevoegd
+                Payment.AddSelectedSeats(userPositions);
                 Payment.scheduleSerialNumber = scheduleSerialNumber;
                 Payment.BestelMenu();
                 break;
 
             case ConsoleKey.Q:
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
+
                 return false;
         }
 
         return true;
     }
 
-    public double ZettenVanTuppleInListNaarJson(List<Schedule> schedules, int scheduleSerialNumber)
+    public double ConvertTupleListToJson(List<Schedule> schedules, int scheduleSerialNumber)
     {
         var schedule = schedules.FirstOrDefault(s => s.SerialNumber == scheduleSerialNumber);
         if (schedule == null)
