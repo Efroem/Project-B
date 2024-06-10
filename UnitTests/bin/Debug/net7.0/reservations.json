@@ -1,0 +1,17 @@
+[
+  {
+    "userEmail": "test",
+    "seats": [
+      "1-2",
+      "2-2"
+    ],
+    "scheduleSerialNumber": 14,
+    "Food": [
+      {
+        "Naam": "Earl grey - \u20AC3.00",
+        "Prijs": 3
+      }
+    ],
+    "totalPrice": 18.98
+  }
+]
