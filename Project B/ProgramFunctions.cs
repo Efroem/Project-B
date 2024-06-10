@@ -18,6 +18,20 @@ public static class ProgramFunctions
         }
     }
 
+    public static void PrintColoredText(string textPart1, ConsoleColor color1, string textPart2, ConsoleColor color2, string textPart3, ConsoleColor color3, string textPart4, ConsoleColor color4)
+    {
+        Console.ForegroundColor = color1;
+        Console.Write(textPart1);
+        Console.ForegroundColor = color2;
+        Console.Write(textPart2);
+        Console.ForegroundColor = color3;
+        Console.Write(textPart3);
+        Console.ForegroundColor = color4;
+        Console.Write(textPart4);
+        Console.ResetColor();
+        Console.WriteLine();
+    }
+
     public static void PrintColoredTextCentered(string textPart1, ConsoleColor color1, string textPart2, ConsoleColor color2, string textPart3, ConsoleColor color3)
     {
         int windowWidth = Console.WindowWidth;
