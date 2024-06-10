@@ -185,7 +185,7 @@ public class AdminFunctions
         int size;
         while (true)
         {
-            Console.Write($"\nKies de grootte van de nieuwe bioscoopzaal\n1 - klein: (55 mensen)\n2 - medium: (86 mensen)\n3 - groot(100 mensen):");
+            Console.WriteLine($"\nKies de grootte van de nieuwe bioscoopzaal\n1 - klein: (55 mensen)\n2 - medium: (86 mensen)\n3 - groot(100 mensen)");
             if (!int.TryParse(Console.ReadLine(), out size) || (size < 1 || size > 3))
             {
                 Console.WriteLine("Verkeerde input. Kies tussen 1, 2 of 3");
@@ -235,20 +235,20 @@ public class AdminFunctions
 
         FormatCinemaHalls(cinemaHalls);
 
-        Console.WriteLine("\nWelke zaal wilt u verwijderen? Voer het serienummer in:");
+        Console.Write("\nWelke zaal wilt u verwijderen? Voer het serienummer in: ");
 
         int serialNumber;
         while (true)
         {
             if (!int.TryParse(Console.ReadLine(), out serialNumber))
             {
-                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld: '3'):");
+                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld: '3')");
                 if (!TryAgain()) return;
                 Console.Clear();
                 Console.WriteLine("\x1b[3J");
                 AsciiArtPrinter.PrintAsciiZaalverwijderen();
                 FormatCinemaHalls(cinemaHalls);
-                Console.WriteLine("\nWelke zaal wilt u verwijderen? Voer het serienummer in:");
+                Console.Write("\nWelke zaal wilt u verwijderen? Voer het serienummer in: ");
             }
             else if (cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
             {
@@ -256,13 +256,13 @@ public class AdminFunctions
             }
             else
             {
-                Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld: '3'):");
+                Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld: '3')");
                 if (!TryAgain()) return;
                 Console.Clear();
                 Console.WriteLine("\x1b[3J");
                 AsciiArtPrinter.PrintAsciiZaalverwijderen();
                 FormatCinemaHalls(cinemaHalls);
-                Console.WriteLine("\nWelke zaal wilt u verwijderen? Voer het serienummer in:");
+                Console.Write("\nWelke zaal wilt u verwijderen? Voer het serienummer in: ");
             }
         }
 
@@ -275,7 +275,7 @@ public class AdminFunctions
             Console.Clear();
             Console.WriteLine("\x1b[3J");
             FormatCinemaHalls(cinemaHalls);
-            Console.WriteLine("\nWelke zaal wilt u verwijderen? Voer het serienummer in:");
+            Console.Write("\nWelke zaal wilt u verwijderen? Voer het serienummer in: ");
         }
         else
         {
@@ -315,20 +315,20 @@ public class AdminFunctions
 
         FormatCinemaHalls(cinemaHalls);
 
-        Console.WriteLine("\nWelke zaal wilt u wijzigen? Voer het serienummer in:");
+        Console.Write("\nWelke zaal wilt u wijzigen? Voer het serienummer in: ");
 
         int serialNumber;
         while (true)
         {
             if (!int.TryParse(Console.ReadLine(), out serialNumber))
             {
-                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld '3'):");
+                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in (Voorbeeld '3')");
                 if (!TryAgain()) return;
                 Console.Clear();
                 AsciiArtPrinter.PrintAsciizaalveranderen();
                 Console.WriteLine("\x1b[3J");
                 FormatCinemaHalls(cinemaHalls);
-                Console.WriteLine("\nWelke zaal wilt u wijzigen? Voer het serienummer in:");
+                Console.Write("\nWelke zaal wilt u wijzigen? Voer het serienummer in: ");
             }
             else if (cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
             {
@@ -336,13 +336,13 @@ public class AdminFunctions
             }
             else
             {
-                Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld '3'):");
+                Console.WriteLine("Bioscoopzaal met het serienummer bestaat niet. Voer een geldig serienummer in (Voorbeeld '3')");
                 if (!TryAgain()) return;
                 Console.Clear();
                 AsciiArtPrinter.PrintAsciizaalveranderen();
                 Console.WriteLine("\x1b[3J");
                 FormatCinemaHalls(cinemaHalls);
-                Console.WriteLine("\nWelke zaal wilt u wijzigen? Voer het serienummer in:");
+                Console.Write("\nWelke zaal wilt u wijzigen? Voer het serienummer in: ");
             }
         }
 
@@ -365,7 +365,7 @@ public class AdminFunctions
             }
             else
             {
-                Console.WriteLine($"Ongeldige invoer. Voer 1 ('naam') of 2 ('grootte') in voor uw keuze.");
+                Console.WriteLine($"Ongeldige invoer. Voer 1 ('naam') of 2 ('grootte') in voor uw keuze");
                 if (!TryAgain()) return;
                 Console.Clear();
                 AsciiArtPrinter.PrintAsciizaalveranderen();
@@ -386,7 +386,7 @@ public class AdminFunctions
                     string? newName = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(newName))
                     {
-                        Console.WriteLine("Verkeerde input. Voer een geldige naam in.");
+                        Console.WriteLine("Verkeerde input. Voer een geldige naam in");
                         if (!TryAgain()) return;
                         Console.Clear();
                         Console.WriteLine("\x1b[3J");
@@ -403,7 +403,7 @@ public class AdminFunctions
                 int newSize;
                 while (true)
                 {
-                    Console.WriteLine($"Kies de nieuwe grootte van de bioscoopzaal\n1 - klein: (55 mensen)\n2 - medium: (86 mensen)\n3 - groot(100 mensen):");
+                    Console.WriteLine($"Kies de nieuwe grootte van de bioscoopzaal\n1 - klein: (55 mensen)\n2 - medium: (86 mensen)\n3 - groot(100 mensen)");
                     if (!int.TryParse(Console.ReadLine(), out newSize) || (newSize < 1 || newSize > 3))
                     {
                         Console.WriteLine("Verkeerde input. Kies tussen 1, 2 of 3.");
@@ -457,16 +457,16 @@ public class AdminFunctions
         while (true)
         {
             FormatCinemaHalls(cinemaHalls);
-            Console.WriteLine("\nWelke zaal wilt u selecteren? Voer het serienummer in:");
+            Console.Write("\nWelke zaal wilt u selecteren? Voer het serienummer in: ");
             if (!int.TryParse(Console.ReadLine(), out serialNumber) || !cinemaHalls.Exists(hall => hall.SerialNumber == serialNumber))
             {
-                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in.");
+                Console.WriteLine("Ongeldige invoer. Voer een geldig serienummer in");
                 if (!TryAgain()) return;
                 Console.Clear();
                 AsciiArtPrinter.PrintAsciifilmtoevoegen();
                 Console.WriteLine("\x1b[3J");
                 FormatCinemaHalls(cinemaHalls);
-                Console.WriteLine("\nWelke zaal wilt u selecteren? Voer het serienummer in:");
+                Console.Write("\nWelke zaal wilt u selecteren? Voer het serienummer in: ");
             }
             else
             {
@@ -501,7 +501,7 @@ public class AdminFunctions
             Console.Write($"\nVoer het nummer van de film in: ");
             if (!int.TryParse(Console.ReadLine(), out selectedMovieIndex) || selectedMovieIndex < 1 || selectedMovieIndex > movies.Count)
             {
-                Console.WriteLine("Ongeldige invoer. Voer een geldig nummer in.");
+                Console.WriteLine("Ongeldige invoer. Voer een geldig nummer in");
                 if (!TryAgain()) return;
                 Console.Clear();
                 AsciiArtPrinter.PrintAsciifilmtoevoegen();
@@ -544,7 +544,7 @@ public class AdminFunctions
         int hour;
         while (true)
         {
-            Console.WriteLine("Please enter an hour between 0 and 23:");
+            Console.Write($"\nVoer het uur in (0-23): ");
             if (int.TryParse(Console.ReadLine(), out hour) && hour >= 0 && hour <= 23)
             {
                 break;
