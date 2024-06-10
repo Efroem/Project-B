@@ -74,16 +74,16 @@ class Reservation
                     longestLineLength = longestLineLength < line.Length ? line.Length : longestLineLength;
                 }
             }
-            ProgramFunctions.PrintTextCentered("┌" + new string('─', longestLineLength + 3) + "┐");
+            PrintTextCentered("┌" + new string('─', longestLineLength + 3) + "┐", longestLineLength + 3, true);
             for (int i = 0; i < reservations.Count; i++)
             {
                 PrintTextCentered($"{reservations[i]}", longestLineLength);
                 if (i != reservations.Count - 1) {
-                    ProgramFunctions.PrintTextCentered("├" + new string('─', longestLineLength + 3) + "┤");
+                    PrintTextCentered("├" + new string('─', longestLineLength + 3) + "┤", longestLineLength + 3, true);
                 }
             }
 
-            ProgramFunctions.PrintTextCentered("└" + new string('─', longestLineLength + 3) + "┘");
+            PrintTextCentered("└" + new string('─', longestLineLength + 3) + "┘", longestLineLength + 3, true);
         }
 
         
@@ -95,7 +95,7 @@ class Reservation
     }
 
     // Modified PrintTextCentered for multiline options
-    private static void PrintTextCentered(string text, int longestLongestLineLength)
+    private static void PrintTextCentered(string text, int longestLongestLineLength, bool hideOuterLines = false)
     {
         string[] textArray = text.Split('\n');
         int windowWidth;
@@ -113,7 +113,10 @@ class Reservation
             Console.CursorLeft = leftPadding;
 
             Console.SetCursorPosition(leftPadding, Console.CursorTop);
-            Console.WriteLine($"│ {textArray[i]}" + new string(' ', longestLongestLineLength + 3 - textArray[i].Length - 1) + "│");
+            if (!hideOuterLines)
+                Console.WriteLine($"│ {textArray[i]}" + new string(' ', longestLongestLineLength + 3 - textArray[i].Length - 1) + "│");
+            else
+                Console.WriteLine($" {textArray[i]}" + new string(' ', longestLongestLineLength + 3 - textArray[i].Length - 1));
         }
     }
 
