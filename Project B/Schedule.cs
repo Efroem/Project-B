@@ -42,9 +42,6 @@ public class Schedule : ProgramFunctions
     [JsonPropertyName("seats")]
     public List<Seat> Seats { get; set; }
 
-    private double _cheapSeatPrice = 6.99;
-    private double _seatPrice = 8.99;
-
     public Schedule(string movieTitle, string cinemaHallSerialNumber, string date) : this(movieTitle, Convert.ToInt32(cinemaHallSerialNumber), DateTime.Parse(date))
     {
 
@@ -93,8 +90,8 @@ public class Schedule : ProgramFunctions
                     for (int j = 0; j < rowLength; j++)
                     {
                         Seat seat = j == 0 || j == rowLength - 1
-                            ? new Seat($"{i + 1}-{j + 1}", _cheapSeatPrice)
-                            : new Seat($"{i + 1}-{j + 1}", _seatPrice);
+                            ? new CheapSeat($"{i + 1}-{j + 1}")
+                            : new Seat($"{i + 1}-{j + 1}");
                         Seats.Add(seat);
                     }
                 }
@@ -106,8 +103,8 @@ public class Schedule : ProgramFunctions
                     for (int j = 0; j < rowLength; j++)
                     {
                         Seat seat = j == 0 || j == rowLength - 1
-                            ? new Seat($"{i + 1}-{j + 1}", _cheapSeatPrice)
-                            : new Seat($"{i + 1}-{j + 1}", _seatPrice);
+                            ? new CheapSeat($"{i + 1}-{j + 1}")
+                            : new Seat($"{i + 1}-{j + 1}");
                         Seats.Add(seat);
                     }
                 }
@@ -119,8 +116,8 @@ public class Schedule : ProgramFunctions
                     for (int j = 0; j < rowLength; j++)
                     {
                         Seat seat = j == 0 || j == rowLength - 1
-                            ? new Seat($"{i + 1}-{j + 1}", _cheapSeatPrice)
-                            : new Seat($"{i + 1}-{j + 1}", _seatPrice);
+                            ? new CheapSeat($"{i + 1}-{j + 1}")
+                            : new Seat($"{i + 1}-{j + 1}");
                         Seats.Add(seat);
                     }
                 }
