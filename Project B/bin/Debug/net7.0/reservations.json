@@ -9,7 +9,7 @@
     "Food": [
       {
         "Naam": "Earl grey - \u20AC3.00",
-        "Prijs": 3
+        "Price": 3
       }
     ],
     "totalPrice": 18.98
