@@ -140,7 +140,8 @@ public class Schedule
         List<Schedule> schedules = ReadScheduleJson();
         schedules = schedules.Where(x => x.Date > DateTime.Now).OrderBy(x => x.Date).ToList();
 
-        if (Authentication.User is not null && schedules.Count != 0) {
+        if (Authentication.User is not null && schedules.Count != 0)
+        {
             List<Movie> movies = JsonSerializer.Deserialize<List<Movie>>(File.ReadAllText("movies.json"));
 
             DateTime birthDate = DateTime.ParseExact(Authentication.User.BirthDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
@@ -152,16 +153,13 @@ public class Schedule
         OpenScheduleMenu(schedules);
     }
 
-    public static void OpenSpecificMenu(string movieTitle)
+    public static void OpenSpecificMenu<T>(T movie)
     {
+        string movieTitle = (movie is Movie) ? (movie as Movie).Title : movie as string;
+
         List<Schedule> schedules = ReadScheduleJson();
         schedules = schedules.Where(x => x.MovieTitle == movieTitle).Where(x => x.Date > DateTime.Now).OrderBy(x => x.Date).ToList();
         OpenScheduleMenu(schedules);
-    }
-
-    public static void OpenSpecificMenu(Movie movie)
-    {
-        OpenSpecificMenu(movie.Title);
     }
 
     private static void OpenScheduleMenu(List<Schedule> schedules)
