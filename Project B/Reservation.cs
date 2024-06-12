@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Globalization;
-public class Reservation
+public class Reservation : ProgramFunctions
 {
     [JsonPropertyName("userEmail")]
     public string Email { get; set; }
@@ -69,9 +69,9 @@ public class Reservation
         if (reservations.Count == 0)
         {
             const string noReservations = "U heeft geen reserveringen";
-            ProgramFunctions.PrintTextCentered("┌" + new string('─', noReservations.Length + 3) + "┐");
+            PrintTextCentered("┌" + new string('─', noReservations.Length + 3) + "┐");
             PrintTextCentered(noReservations, noReservations.Length);
-            ProgramFunctions.PrintTextCentered("└" + new string('─', noReservations.Length + 3) + "┘");
+            PrintTextCentered("└" + new string('─', noReservations.Length + 3) + "┘");
         }
         else
         {
@@ -99,7 +99,7 @@ public class Reservation
         
 
         Console.WriteLine();
-        ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om terug te gaan", ConsoleColor.White);
+        PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om terug te gaan", ConsoleColor.White);
         Console.ReadKey();
         return;
     }

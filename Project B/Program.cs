@@ -2,14 +2,14 @@
 using System.IO;
 using System.Text.Json;
 
-class Program
+class Program : ProgramFunctions
 {
     private static bool showIntro = false;
     public static void Main()
     {
         if (!showIntro)
         {
-            ProgramFunctions.ShowIntro();
+            ShowIntro();
             showIntro = true;
         }
 
@@ -41,9 +41,9 @@ class Program
             }
 
             Console.WriteLine();
-            ProgramFunctions.PrintColoredTextCentered("Gebruik de ", ConsoleColor.White, "pijltjestoetsen", ConsoleColor.Magenta, " om een optie te selecteren en druk op ", ConsoleColor.White, "Enter\n", ConsoleColor.Magenta);
+            PrintColoredTextCentered("Gebruik de ", ConsoleColor.White, "pijltjestoetsen", ConsoleColor.Magenta, " om een optie te selecteren en druk op ", ConsoleColor.White, "Enter\n", ConsoleColor.Magenta);
 
-            int selectedOption = ProgramFunctions.ShowMenuInline(options);
+            int selectedOption = ShowMenuInline(options);
 
             switch (selectedOption)
             {

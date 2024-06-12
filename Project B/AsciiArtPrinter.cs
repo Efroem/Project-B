@@ -3,7 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Text.Json;
 
-public class AsciiArtPrinter
+public class AsciiArtPrinter : ProgramFunctions
 {
     public static void PrintCentered(string text)
     {
@@ -295,7 +295,7 @@ public class AsciiArtPrinter
         ";
         PrintCentered(prijzen);
         Console.WriteLine();
-        ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+        PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
         Console.ReadKey();
         Console.Clear();
         Payment.BestelMenu();
@@ -317,7 +317,7 @@ public class AsciiArtPrinter
         ";
         PrintCentered(prijzen);
         Console.WriteLine();
-        ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+        PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
         Console.ReadKey();
         Console.Clear();
         Payment.BestelMenu();
@@ -361,7 +361,7 @@ public class AsciiArtPrinter
         ";
         PrintCentered(prijzen);
         Console.WriteLine();
-        ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+        PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
         Console.ReadKey();
         Console.Clear();
         Payment.BestelMenu();

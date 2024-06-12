@@ -18,7 +18,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-public class TheaterSeatingPrinter
+public class TheaterSeatingPrinter : ProgramFunctions
 {
     public static bool navigateGridBool;
     private static int userXPosition = 1;
@@ -144,10 +144,10 @@ public class TheaterSeatingPrinter
 
         Console.WriteLine(filmdoekLine);
         Console.WriteLine("|" + new string('_', totalWidth - 2) + "|");
-        ProgramFunctions.PrintColoredText("Klik op ", ConsoleColor.White, "Enter", ConsoleColor.Magenta, " om een stoel te selecteren", ConsoleColor.White);
-        ProgramFunctions.PrintColoredText("Klik op ", ConsoleColor.White, "Backspace", ConsoleColor.Magenta, " om een stoel te deselecteren", ConsoleColor.White);
-        ProgramFunctions.PrintColoredText("Klik op ", ConsoleColor.White, "E", ConsoleColor.Magenta, $" om de stoel(en) te bevestigen (Totaalbedrag: {totalAmount:C})", ConsoleColor.White);
-        ProgramFunctions.PrintColoredText("Klik op ", ConsoleColor.White, "Q", ConsoleColor.Magenta, " om naar het hoofdmenu terug te gaan", ConsoleColor.White);
+        PrintColoredText("Klik op ", ConsoleColor.White, "Enter", ConsoleColor.Magenta, " om een stoel te selecteren", ConsoleColor.White);
+        PrintColoredText("Klik op ", ConsoleColor.White, "Backspace", ConsoleColor.Magenta, " om een stoel te deselecteren", ConsoleColor.White);
+        PrintColoredText("Klik op ", ConsoleColor.White, "E", ConsoleColor.Magenta, $" om de stoel(en) te bevestigen (Totaalbedrag: {totalAmount:C})", ConsoleColor.White);
+        PrintColoredText("Klik op ", ConsoleColor.White, "Q", ConsoleColor.Magenta, " om naar het hoofdmenu terug te gaan", ConsoleColor.White);
 
         Console.WriteLine(new string('_', totalWidth));
         Console.WriteLine("Prijzen van de stoelen:");
@@ -207,8 +207,8 @@ public class TheaterSeatingPrinter
             case ConsoleKey.E:
                 if (userPositions.Count == 0 || !userPositions.Any(pos => schedule.Seats.Any(s => s.ID == $"{pos.y}-{pos.x}" && s.IsAvailable)))
                 {
-                    ProgramFunctions.PrintTextCentered("Geen stoelen geselecteerd of geselecteerde stoelen zijn niet beschikbaar\nSelecteer beschikbare stoelen voordat u door kunt gaan naar de betaling"); Console.WriteLine("");
-                    ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+                    PrintTextCentered("Geen stoelen geselecteerd of geselecteerde stoelen zijn niet beschikbaar\nSelecteer beschikbare stoelen voordat u door kunt gaan naar de betaling"); Console.WriteLine("");
+                    PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
                     Console.ReadKey();
                     Console.Clear();
                     Console.WriteLine("\x1b[3J");

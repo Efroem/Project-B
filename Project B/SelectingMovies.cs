@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.IO;
 
-public class SelectingMovies
+public class SelectingMovies : ProgramFunctions
 {
     private static List<Movie> movies = new List<Movie>();
     public static void MoviesSelect()
@@ -22,7 +22,7 @@ public class SelectingMovies
             AsciiArtPrinter.PrintAsciifilms();
             Console.ResetColor();
             Console.WriteLine();
-            ProgramFunctions.PrintColoredTextCentered("Gebruik de ", ConsoleColor.White, "pijltjestoetsen", ConsoleColor.Magenta, " om een optie te selecteren en druk op ", ConsoleColor.White, "Enter\n", ConsoleColor.Magenta);
+            PrintColoredTextCentered("Gebruik de ", ConsoleColor.White, "pijltjestoetsen", ConsoleColor.Magenta, " om een optie te selecteren en druk op ", ConsoleColor.White, "Enter\n", ConsoleColor.Magenta);
 
             // Calculate the length of the longest movie title for box width
             int boxWidth = 0;
@@ -127,7 +127,7 @@ public class SelectingMovies
 
             string[] options = { "Bekijk schema van deze film", "Terug naar film beschrijvingen" };
             Console.WriteLine();
-            ProgramFunctions.PrintColoredTextCentered("Gebruik de ", ConsoleColor.White, "pijltjestoetsen", ConsoleColor.Magenta, " om een optie te selecteren en druk op ", ConsoleColor.White, "Enter\n", ConsoleColor.Magenta);
+            PrintColoredTextCentered("Gebruik de ", ConsoleColor.White, "pijltjestoetsen", ConsoleColor.Magenta, " om een optie te selecteren en druk op ", ConsoleColor.White, "Enter\n", ConsoleColor.Magenta);
 
             int selectedOption = ShowMenuInline(options);
 

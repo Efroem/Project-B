@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Globalization;
-public class Schedule
+public class Schedule : ProgramFunctions
 {
     [JsonPropertyName("movieTitle")]
     public string JsonMovieTitle { set => MovieTitle = value; }
@@ -236,12 +236,12 @@ public class Schedule
                 {
                     AsciiArtPrinter.PrintAsciiInlog();
                     Console.WriteLine();
-                    ProgramFunctions.PrintTextCentered("U bent nog niet ingelogd");
+                    PrintTextCentered("U bent nog niet ingelogd");
                     Authentication.Start();
                 }
                 else if (Authentication.User.IsAdmin)
                 {
-                    ProgramFunctions.PrintTextCentered("U bent admin");
+                    PrintTextCentered("U bent admin");
                     Program.Main();
                 }
             }
@@ -258,7 +258,7 @@ public class Schedule
                 }
                 else if (Authentication.User is null)
                 {
-                    ProgramFunctions.PrintTextCentered("U bent nog niet ingelogd");
+                    PrintTextCentered("U bent nog niet ingelogd");
                     Authentication.Start();
 
                 }
@@ -294,7 +294,7 @@ public class Schedule
                 longestLineLength = longestLineLength < line.Length ? line.Length : longestLineLength;
             }
         }
-        ProgramFunctions.PrintTextCentered("     ┌" + new string('─', longestLineLength + 3) + "┐");
+        PrintTextCentered("     ┌" + new string('─', longestLineLength + 3) + "┐");
 
         do
         {
@@ -313,7 +313,7 @@ public class Schedule
                 }
             }
 
-            ProgramFunctions.PrintTextCentered("     └" + new string('─', longestLineLength + 3) + "┘");
+            PrintTextCentered("     └" + new string('─', longestLineLength + 3) + "┘");
 
             var key = Console.ReadKey(true);
             if (key.Key == ConsoleKey.UpArrow && selectedOption > 0)

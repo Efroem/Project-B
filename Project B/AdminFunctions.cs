@@ -5,7 +5,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Text;
 
-public class AdminFunctions
+public class AdminFunctions : ProgramFunctions
 {
     [JsonPropertyName("name")]
     public string Name { get; set; }
@@ -116,7 +116,7 @@ public class AdminFunctions
             if (i == cinemaHalls.Count - 1)
             {
                 Console.WriteLine();
-                ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+                PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
                 Console.ReadKey();
                 Console.Clear();
                 Console.WriteLine("\x1b[3J");
@@ -212,8 +212,8 @@ public class AdminFunctions
             File.WriteAllText("cinemaHall.json", jsonString);
             Console.Clear();
             Console.WriteLine();
-            ProgramFunctions.PrintTextCentered($"Nieuwe bioscoopzaal {name} succesvol toegevoegd");
-            ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+            PrintTextCentered($"Nieuwe bioscoopzaal {name} succesvol toegevoegd");
+            PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
             Console.ReadKey();
         }
         catch (Exception ex)
@@ -288,8 +288,8 @@ public class AdminFunctions
                 Console.Clear();
                 AsciiArtPrinter.PrintAsciiZaalverwijderen();
                 Console.WriteLine();
-                ProgramFunctions.PrintTextCentered($"Bioscoopzaal met serienummer {serialNumber} succesvol verwijderd.");
-                ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+                PrintTextCentered($"Bioscoopzaal met serienummer {serialNumber} succesvol verwijderd.");
+                PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
                 Console.ReadKey();
             }
             catch (Exception ex)
@@ -429,8 +429,8 @@ public class AdminFunctions
             Console.Clear();
             AsciiArtPrinter.PrintAsciizaalveranderen();
             Console.WriteLine();
-            ProgramFunctions.PrintTextCentered($"Wijziging van bioscoopzaal met serienummer {serialNumber} succesvol doorgevoerd.");
-            ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+            PrintTextCentered($"Wijziging van bioscoopzaal met serienummer {serialNumber} succesvol doorgevoerd.");
+            PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
             Console.ReadKey();
         }
         catch (Exception ex)
@@ -590,8 +590,8 @@ public class AdminFunctions
         Console.WriteLine("\x1b[3J");
         AsciiArtPrinter.PrintAsciifilmtoevoegen();
         Console.WriteLine();
-        ProgramFunctions.PrintTextCentered("Film succesvol aan het rooster toegevoegd");
-        ProgramFunctions.PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
+        PrintTextCentered("Film succesvol aan het rooster toegevoegd");
+        PrintColoredTextCentered("Druk op een ", ConsoleColor.White, "knop", ConsoleColor.Magenta, " om verder te gaan", ConsoleColor.White);
         Console.ReadKey();
     }
 }

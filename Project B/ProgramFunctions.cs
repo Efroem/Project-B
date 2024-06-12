@@ -1,7 +1,4 @@
-using System;
-
-public static class ProgramFunctions
-{
+public abstract class ProgramFunctions {
     public static void PrintTextCentered(string text)
     {
         string[] lines = text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
